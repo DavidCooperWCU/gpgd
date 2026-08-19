@@ -8,9 +8,9 @@
     <target name="web" format="html">
       <!-- Point to the subfolder relative to your project root -->
       <stringparams author.tools="yes" html.css.extra="external/css/custom-godot.css"
-                    godot.version="4.6.3" 
-                    godot.shell="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/godot-shell-" 
-       /> 
+                    godot.version="4.6.3"
+                    godot.shell="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/godot-shell-"
+       />
     </target>
     <target name="print" format="pdf" />
     <target

@@ -5,8 +5,8 @@
 html.dark-mode .remark-like:not(.knowl__content, .born-hidden-knowl) {
   /* 1. Make the accent border thicker (6px) and brighter */
   --remark-like-border-color: #FF4A75 !important;
-  border-left: 4px solid #FF4A75 !important; 
-  
+  border-left: 4px solid #FF4A75 !important;
+
   /* 2. Give the box a subtle frame on the other sides so it doesn't blend into the void */
   border-top: 1px solid #3D2E36 !important;
   border-right: 1px solid #3D2E36 !important;

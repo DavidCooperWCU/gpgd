@@ -80,24 +80,24 @@
     <subsection xml:id="getting-started-first-2d-game-04-creating-the-enemy-enemy-script">
       <title>Enemy script</title>
       <p>Add a script to the <c>Mob</c> like this:</p>
-      
+
         <program language="gdscript">
           <code>class_name Mob
 extends RigidBody2D</code>
           </program>
-        
-        
+
+
       <p>Now let's look at the rest of the script. In <c>_ready()</c> we play the animation
                 and randomly choose one of the three animation types:</p>
-      
+
         <program language="gdscript">
           <code>func _ready() -> void:
     var mob_types: Array = Array($AnimatedSprite2D.sprite_frames.get_animation_names())
     $AnimatedSprite2D.animation = mob_types.pick_random()
     $AnimatedSprite2D.play()</code>
           </program>
-        
-        
+
+
       <p>First, we get the list of animation names from the AnimatedSprite2D's <c>sprite_frames</c>
                 property. This returns an Array containing all three animation names: <c>["walk",
 "swim", "fly"]</c>.</p>
@@ -107,13 +107,13 @@ extends RigidBody2D</code>
       <p>The last piece is to make the mobs delete themselves when they leave the screen.
                 Connect the <c>screen_exited()</c> signal of the <c>VisibleOnScreenNotifier2D</c> node
                 to the <c>Mob</c> and add this code:</p>
-      
+
         <program language="gdscript">
           <code>func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
     queue_free()</code>
           </program>
-        
-        
+
+
       <p>
         <c>queue_free()</c> is a function that essentially 'frees', or deletes, the node at the end of the frame.</p>
       <p>This completes the Mob scene.</p>

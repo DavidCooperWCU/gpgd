@@ -45,7 +45,7 @@
       <p>Code-wise, we're going to do two things: emit a signal we'll later use
                 to end the game and destroy the player. We can wrap these operations in
                 a <c>die()</c> function that helps us put a descriptive label on the code.</p>
-      
+
         <program language="gdscript">
           <code># Emitted when the player was hit by a mob.
 # Put this at the top of the script.
@@ -61,8 +61,8 @@ func die() -> void:
 func _on_mob_detector_body_entered(body: Node3D) -> void:
     die()</code>
           </program>
-        
-        
+
+
       </subsection>
     <subsection xml:id="getting-started-first-3d-game-07-killing-player-ending-the-game">
       <title>Ending the game</title>
@@ -73,13 +73,13 @@ func _on_mob_detector_body_entered(body: Node3D) -> void:
                 connect its <c>hit</c> signal to the <c>Main</c> node.</p>
       <p />
       <p>Get the timer, and stop it, in the <c>_on_player_hit()</c> function.</p>
-      
+
         <program language="gdscript">
           <code>func _on_player_hit() -> void:
     $MobTimer.stop()</code>
           </program>
-        
-        
+
+
       <p>If you try the game now, the monsters will stop spawning when you die,
                 and the remaining ones will leave the screen.</p>
       <p>Notice also that the game no longer crashes or displays an error when the player dies. Because
@@ -98,7 +98,7 @@ func _on_mob_detector_body_entered(body: Node3D) -> void:
       <p>Here are the complete scripts for the <c>Main</c>, <c>Mob</c>, and <c>Player</c> nodes,
                 for reference. You can use them to compare and check your code.</p>
       <p>Starting with <c>main.gd</c>.</p>
-      
+
         <program language="gdscript">
           <code>extends Node
 
@@ -124,10 +124,10 @@ func _on_mob_timer_timeout() -> void:
 func _on_player_hit() -> void:
     $MobTimer.stop()</code>
           </program>
-        
-        
+
+
       <p>Next is <c>mob.gd</c>.</p>
-      
+
         <program language="gdscript">
           <code>class_name Mob
 extends CharacterBody3D
@@ -167,10 +167,10 @@ func squash() -> void:
     squashed.emit()
     queue_free() # Destroy this node</code>
           </program>
-        
-        
+
+
       <p>Finally, the longest script, <c>player.gd</c>:</p>
-      
+
         <program language="gdscript">
           <code>extends CharacterBody3D
 
@@ -256,9 +256,8 @@ func die() -> void:
 func _on_mob_detector_body_entered(body: Node3D) -> void:
     die()</code>
           </program>
-        
-        
+
+
       <p>See you in the next lesson to add the score and the retry option.</p>
       </subsection>
     </section>
-  

@@ -255,7 +255,7 @@
 
       <activity xml:id="getting-started-hello-world" label="getting-started-hello-world">
             <title>Adding the Label Programmatically</title>
-            <statement><p>You don't have to use the UI, if you don't want to. In this book, 
+            <statement><p>You don't have to use the UI, if you don't want to. In this book,
             some scenes will be fully implemented, and others you'll need to add to programmatically.
             Here is the code to add the "Hello, World!" `Label` programmatically as a child
             of the scene in the <c>_init()</c> function.</p>
@@ -275,9 +275,9 @@ func _init() -> void:
     add_child(label)
 
                 </code>
-                
+
             </program>
-            
+
             </statement>
             <program xml:id="gs-hello-label" interactive='activecode' language="gdscript" label="gs-hello-prog"
                      pck="gdpractice/L1.P1.nodes_hello_label"
@@ -289,7 +289,7 @@ extends Node2D
 func _init() -> void:
 
     # instantiate the label
-    var label: Label = Label.new() 
+    var label: Label = Label.new()
 </preamble>
 <code>
     # set the text
@@ -299,7 +299,7 @@ func _init() -> void:
 </code>
 <postamble>
     # add the label as a child
-    add_child(label) 
+    add_child(label)
 </postamble>
 
 <tests>
@@ -353,10 +353,10 @@ func _find_label(node: Node) -> Label:
             return child
     return null
 </tests>
-                
+
             </program>
-        </activity>  
-        
+        </activity>
+
       <p>In the next part, we will discuss another key concept in games and in Godot:
                 creating instances of a scene.</p>
       </subsection>

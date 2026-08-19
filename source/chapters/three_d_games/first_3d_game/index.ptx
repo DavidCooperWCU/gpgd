@@ -33,7 +33,7 @@
       <li>
         <url href="https://github.com/godotengine/godot-demo-projects/tree/master/3d/squash_the_creeps">Squash the Creeps source code (GDScript)</url>
         </li>
-      
+
       </ul>
     </p>
     <note>
@@ -48,7 +48,7 @@
             add the monsters that we'll spawn randomly around the screen. After that, we'll
             implement the jump and squashing mechanic before refining the game with some
             nice animation. We'll wrap up with the score and the retry screen.</p>
-    
+
   </introduction>
   <xi:include href="01.game_setup.ptx" />
   <xi:include href="02.player_input.ptx" />

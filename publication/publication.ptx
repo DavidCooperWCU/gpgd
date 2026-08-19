@@ -41,32 +41,32 @@
   </common>
 
   <html>
-        <!-- 
+        <!--
           ======================================================================
           GODOT DOCS / SALEM THEME PALETTE CONFIGURATION
           ======================================================================
-          
+
           * theme: "salem" is built for wide layouts and interactive widgets.
-          * palette: "slate" provides a neutral dark/light base that pairs well 
+          * palette: "slate" provides a neutral dark/light base that pairs well
             with Godot's design.
-          
-          * color-main (#20252C - Godot Charcoal): 
+
+          * color-main (#20252C - Godot Charcoal):
             Changes the top navbar, layout header blocks, and main structural boundaries.
-            
-          * color-do (not #478CBF - Godot Blue, instead #356D96 - High Contrast Godot-like Blue): 
-            Changes active/hands-on blocks. This applies directly to your <exercise> 
+
+          * color-do (not #478CBF - Godot Blue, instead #356D96 - High Contrast Godot-like Blue):
+            Changes active/hands-on blocks. This applies directly to your <exercise>
             tags, <activity> fields, ActiveCode boxes, and Parsons puzzles.
-            
-          * color-fact (#41B883 - Godot Green, instead #2C7D59 - High Contrast Godot-like Green): 
-            Changes foundational reference blocks. This colors your <definition>, 
+
+          * color-fact (#41B883 - Godot Green, instead #2C7D59 - High Contrast Godot-like Green):
+            Changes foundational reference blocks. This colors your <definition>,
             <theorem>, and <lemma> boxes.
-            
-          * color-meta (#E11D48 - Salmon Rose/Accent): 
-            Changes supplementary guide text blocks, including <note>, <warning>, 
+
+          * color-meta (#E11D48 - Salmon Rose/Accent):
+            Changes supplementary guide text blocks, including <note>, <warning>,
             <remark>, and <objectives>.
-            
+
           * provide-dark-mode: Adds the native contrast switch toggle in the header.
-          * primary-color-dark (#90cdf4): The primary text/link color used when 
+          * primary-color-dark (#90cdf4): The primary text/link color used when
             the reader flips to dark mode.
           ======================================================================
         -->

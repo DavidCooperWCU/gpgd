@@ -7,7 +7,7 @@
     <p>In the following pages, we will introduce the engine's most
             essential concepts, run you through the editor's interface, and give you tips to
             make the most of your time learning it.</p>
-   
+
     </introduction>
   <xi:include href="first_look_at_the_editor.ptx" />
   <xi:include href="learning_new_features.ptx" />

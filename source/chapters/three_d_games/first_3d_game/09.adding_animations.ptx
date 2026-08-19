@@ -139,7 +139,7 @@
         <p />
         <p>In <c>_physics_process()</c>, after the line where we check the <c>direction</c>
                     vector, add the following code.</p>
-        
+
           <program language="gdscript">
             <code>func _physics_process(delta: float) -> void:
     #...
@@ -149,21 +149,21 @@
     else:
         $AnimationPlayer.speed_scale = 1</code>
             </program>
-          
-          
+
+
         <p>This code makes it so when the player moves, we multiply the playback speed by
                     <c>4</c>. When they stop, we reset it to normal.</p>
         <p>We mentioned that the <c>Pivot</c> could layer transforms on top of the animation. We
                     can make the character arc when jumping using the following line of code. Add it
                     at the end of <c>_physics_process()</c>.</p>
-        
+
           <program language="gdscript">
             <code>func _physics_process(delta: float) -> void:
     #...
     $Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse</code>
             </program>
-          
-          
+
+
         </subsubsection>
       </subsection>
     <subsection xml:id="getting-started-first-3d-game-09-adding-animations-animating-the-mobs">
@@ -185,14 +185,14 @@
                 That's it; all monsters will now play the float animation.</p>
       <p>We can change the playback speed based on the creature's <c>random_speed</c>. Open
                 the <em>Mob</em>'s script and at the end of the <c>initialize()</c> function, add the following line.</p>
-      
+
         <program language="gdscript">
           <code>func initialize(start_position: Vector3, player_position: Vector3) -> void:
     #...
     $AnimationPlayer.speed_scale = random_speed / min_speed</code>
           </program>
-        
-        
+
+
       <p>And with that, you finished coding your first complete 3D game.</p>
       <p>
         <term>Congratulations</term>!</p>
@@ -200,7 +200,7 @@
                 to keep learning more. But for now, here are the complete <c>player.gd</c> and
                 <c>mob.gd</c> so you can check your code against them.</p>
       <p>Here's the <em>Player</em> script.</p>
-      
+
         <program language="gdscript">
           <code>extends CharacterBody3D
 
@@ -291,10 +291,10 @@ func die() -> void:
 func _on_mob_detector_body_entered(body: Node3D) -> void:
     die()</code>
           </program>
-        
-        
+
+
       <p>And the <em>Mob</em>'s script.</p>
-      
+
         <program language="gdscript">
           <code>class_name Mob
 extends CharacterBody3D
@@ -336,7 +336,7 @@ func squash() -> void:
     squashed.emit()
     queue_free() # Destroy this node</code>
           </program>
-        
-        
+
+
       </subsection>
     </section>

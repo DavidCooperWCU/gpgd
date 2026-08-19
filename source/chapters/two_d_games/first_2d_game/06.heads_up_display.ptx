@@ -106,28 +106,28 @@
       <p>On the <c>MessageTimer</c>, set the <c>Wait Time</c> to <c>2</c> and set the <c>One Shot</c>
                 property to "On".</p>
       <p>Now add this script to <c>HUD</c>:</p>
-      
+
         <program language="gdscript">
           <code>extends CanvasLayer
 
 # Notifies `Main` node that the button has been pressed
 signal start_game</code>
           </program>
-        
-        
+
+
       <p>We now want to display a message temporarily,
                 such as "Get Ready", so we add the following code</p>
-      
+
         <program language="gdscript">
           <code>func show_message(text: String) -> void:
     $Message.text = text
     $Message.show()
     $MessageTimer.start()</code>
           </program>
-        
-        
+
+
       <p>We also need to process what happens when the player loses. The code below will show "Game Over" for 2 seconds, then return to the title screen and, after a brief pause, show the "Start" button.</p>
-      
+
         <program language="gdscript">
           <code>func show_game_over() -> void:
     show_message("Game Over")
@@ -140,8 +140,8 @@ signal start_game</code>
     await get_tree().create_timer(1.0).timeout
     $StartButton.show()</code>
           </program>
-        
-        
+
+
       <note>
         <title>Note</title>
         <p>When you need to pause for a brief time, an alternative to using a
@@ -150,16 +150,16 @@ signal start_game</code>
                     want to wait some time before showing the "Start" button.</p>
         </note>
       <p>Add the code below to <c>HUD</c> to update the score</p>
-      
+
         <program language="gdscript">
           <code>func update_score(score: int) -> void:
     $ScoreLabel.text = str(score)</code>
           </program>
-        
-        
+
+
       <p>Connect the <c>pressed()</c> signal of <c>StartButton</c> and the <c>timeout()</c>
                 signal of <c>MessageTimer</c> to the <c>HUD</c> node, and add the following code to the new functions:</p>
-      
+
         <program language="gdscript">
           <code>func _on_start_button_pressed() -> void:
     $StartButton.hide()
@@ -168,8 +168,8 @@ signal start_game</code>
 func _on_message_timer_timeout() -> void:
     $Message.hide()</code>
           </program>
-        
-        
+
+
       </subsection>
     <subsection xml:id="getting-started-first-2d-game-06-heads-up-display-connecting-hud-to-main">
       <title>Connecting HUD to Main</title>
@@ -190,28 +190,28 @@ func _on_message_timer_timeout() -> void:
                 in the window. Verify that the green connection icon now appears next to
                 <c>func new_game()</c> in the script.</p>
       <p>In <c>new_game()</c>, update the score display and show the "Get Ready" message:</p>
-      
+
         <program language="gdscript">
           <code>$HUD.update_score(score)
 $HUD.show_message("Get Ready")</code>
           </program>
-        
-        
+
+
       <p>In <c>game_over()</c> we need to call the corresponding <c>HUD</c> function:</p>
-      
+
         <program language="gdscript">
           <code>$HUD.show_game_over()</code>
           </program>
-        
-        
+
+
       <p>Finally, add this to <c>_on_score_timer_timeout()</c> to keep the display in sync
                 with the changing score:</p>
-      
+
         <program language="gdscript">
           <code>$HUD.update_score(score)</code>
           </program>
-        
-        
+
+
       <warning>
         <title>Warning</title>
         <p>Remember to remove the call to <c>new_game()</c> from
@@ -249,12 +249,12 @@ $HUD.show_message("Get Ready")</code>
      </image>
         </figure>
       <p>We can then add the following line to the <c>new_game()</c> function in <c>Main</c>:</p>
-      
+
         <program language="gdscript">
           <code>get_tree().call_group("mobs", "queue_free")</code>
           </program>
-        
-        
+
+
       <p>The <c>call_group()</c> function calls the named function on every node in a
                 group - in this case we are telling every mob to delete itself.</p>
       <p>The game's mostly done at this point. In the next and last part, we'll polish it

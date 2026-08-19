@@ -4,4 +4,4 @@ var speed = 400
 var angular_speed = PI
 
 func _process(delta):
-	pass
+    pass

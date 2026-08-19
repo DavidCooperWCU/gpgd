@@ -83,7 +83,7 @@
         <p />
         <p>Here's the movement code to start with. We define two properties, <c>min_speed</c>
                     and <c>max_speed</c>, to define a random speed range, which we will later use to define <c>CharacterBody3D.velocity</c>.</p>
-        
+
           <program language="gdscript">
             <code>class_name Mob
 extends CharacterBody3D
@@ -97,8 +97,8 @@ extends CharacterBody3D
 func _physics_process(_delta: float) -> void:
     move_and_slide()</code>
             </program>
-          
-          
+
+
         <p>Similarly to the player, we move the mob every frame by calling the function
                     <c>CharacterBody3D.move_and_slide()</c>. This time, we don't update
                     the <c>velocity</c> every frame; we want the monster to move at a constant speed
@@ -112,7 +112,7 @@ func _physics_process(_delta: float) -> void:
                     the <c>look_at_from_position()</c> method, and randomize the angle by rotating a
                     random amount around the Y axis. Below, <c>randf_range()</c> outputs a random value
                     between <c>-PI / 4</c> radians and <c>PI / 4</c> radians.</p>
-        
+
           <program language="gdscript">
             <code># This function will be called from the Main scene.
 func initialize(start_position: Vector3, player_position: Vector3) -> void:
@@ -123,11 +123,11 @@ func initialize(start_position: Vector3, player_position: Vector3) -> void:
     # so that it doesn't move directly towards the player.
     rotate_y(randf_range(-PI / 4, PI / 4))</code>
             </program>
-          
-          
+
+
         <p>We got a random position, now we need a <c>random_speed</c>. <c>randi_range()</c> will be useful as it gives random int values, and we will use <c>min_speed</c> and <c>max_speed</c>.
                     <c>random_speed</c> is just an integer, and we just use it to multiply our <c>CharacterBody3D.velocity</c>. After <c>random_speed</c> is applied, we rotate <c>CharacterBody3D.velocity</c> Vector3 towards the player.</p>
-        
+
           <program language="gdscript">
             <code>func initialize(start_position: Vector3, player_position: Vector3) -> void:
     # ...
@@ -140,8 +140,8 @@ func initialize(start_position: Vector3, player_position: Vector3) -> void:
     # in order to move in the direction the mob is looking.
     velocity = velocity.rotated(Vector3.UP, rotation.y)</code>
             </program>
-          
-          
+
+
         </subsubsection>
       <subsubsection xml:id="getting-started-first-3d-game-04-mob-scene-leaving-the-screen">
         <title>Leaving the screen</title>
@@ -156,17 +156,17 @@ func initialize(start_position: Vector3, player_position: Vector3) -> void:
         <p>This will add a new function for you in your mob script,
                     <c>_on_visible_on_screen_notifier_3d_screen_exited()</c>. From it, call the <c>queue_free()</c>
                     method. This function destroys the instance it's called on.</p>
-        
+
           <program language="gdscript">
             <code>func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
     queue_free()</code>
             </program>
-          
-          
+
+
         <p>Our monster is ready to enter the game! In the next part, you will spawn
                     monsters in the game level.</p>
         <p>Here is the complete <c>mob.gd</c> script for reference.</p>
-        
+
           <program language="gdscript">
             <code>class_name Mob
 extends CharacterBody3D
@@ -199,9 +199,8 @@ func initialize(start_position: Vector3, player_position: Vector3) -> void:
 func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
     queue_free()</code>
             </program>
-          
-          
+
+
         </subsubsection>
       </subsection>
     </section>
-  

@@ -34,7 +34,7 @@
           <term>GDScript</term>: Classes (nodes) use PascalCase, variables and
                         functions use snake_case, and constants use ALL_CAPS (See
                         <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide#doc-gdscript-styleguide">GDScript style guide</url>).</li>
-        
+
         </ul>
       </p>
       </note>
@@ -135,9 +135,9 @@ var speed = 400
 var angular_speed = PI
 
 func _process(delta):
-    rotation += angular_speed * delta 
-    var velocity = Vector2.UP.rotated(rotation) * speed 
-    position += velocity * delta 
+    rotation += angular_speed * delta
+    var velocity = Vector2.UP.rotated(rotation) * speed
+    position += velocity * delta
 
 
 func _on_button_pressed() -> void:
@@ -169,15 +169,15 @@ func _build_requirements() -> void:
             return "_on_button_pressed is missing. Did you remove it from the script?"
         else:
             return ""
-        
+
 
     _add_callable_requirement(tr("Missing _on_button_pressed"), check_on_button_pressed)
-    
-    
+
+
 # Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
 # solution before sampling begins.
 func _setup_state() -> void:
-    _practice.position = _solution.position 
+    _practice.position = _solution.position
     _practice.rotation = _solution.rotation
     _solution.angular_speed = _practice.angular_speed
     _solution.speed = _practice.speed
@@ -185,7 +185,7 @@ func _setup_state() -> void:
 # Simulate move_right being held for SAMPLE_DURATION seconds while sampling.
 func _setup_populate_test_space() -> void:
     await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, _sample_test_space)
-    
+
 
 func _sample_test_space() -> void:
     _test_space.append({
@@ -198,7 +198,7 @@ func _sample_test_space() -> void:
 
 
 func _build_checks() -> void:
-    
+
     _add_simple_check(
         "clicking toggles processing",
         func() -> String:
@@ -210,7 +210,7 @@ func _build_checks() -> void:
                 return ""
             else:
                 return "_on_button_pressed() should toggle is_processing()"
-            
+
     )
     var method_check := _add_simple_check(
         "has _on_timer_timeout() callback",
@@ -222,8 +222,8 @@ func _build_checks() -> void:
             return ""
     )
 
-    
-    
+
+
     var timer_toggles = _add_simple_check(
         "_on_timer_timeout toggles visibility",
         func() -> String:
@@ -249,7 +249,7 @@ func _build_checks() -> void:
                 return ""
             return "the timeout emiting should toggle visibility. Did you connect the timer's timeout to the callback?"
     )
-    
+
 
 
 </tests>
@@ -335,29 +335,29 @@ func _build_checks() -> void:
                 a method to toggle processing on and off: <url href="https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-method-set-process">Node.set_process()</url>. Another method of the Node class,
                 <c>is_processing()</c>, returns <c>true</c> if idle processing is active. We can use
                 the <c>not</c> keyword to invert the value.</p>
-      
+
         <program language="gdscript">
           <code>func _on_button_pressed() -> void:
     set_process(not is_processing())</code>
           </program>
-        
-        
+
+
       <p>This function will toggle processing and, in turn, the icon's motion on and off
                 upon pressing the button.</p>
       <p>Before trying the game, we need to simplify our <c>_process()</c> function to move
                 the node automatically and not wait for user input. Replace it with the
                 following code, which we saw two lessons ago:</p>
-      
+
         <program language="gdscript">
           <code>func _process(delta: float) -> void:
     rotation += angular_speed * delta
     var velocity: Vector2 = Vector2.UP.rotated(rotation) * speed
     position += velocity * delta</code>
           </program>
-        
-        
+
+
       <p>Your complete <c>sprite_2d.gd</c> code should look like the following.</p>
-      
+
         <program language="gdscript">
           <code>extends Sprite2D
 
@@ -374,8 +374,8 @@ func _process(delta: float) -> void:
 func _on_button_pressed() -> void:
     set_process(not is_processing())</code>
           </program>
-        
-        
+
+
       <p>Run the current scene by pressing <c>F6</c> (<c>Cmd</c>
         <c />+<c />
         <c>R</c> on macOS),
@@ -438,25 +438,25 @@ func _on_button_pressed() -> void:
       <p>To get a reference to a node relative to the current one, we use the method
                 <url href="https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-method-get-node">Node.get_node()</url>. We can store the reference
                 in a variable.</p>
-      
+
         <program language="gdscript">
           <code>func _ready() -> void:
     var timer: Timer = get_node("Timer")</code>
           </program>
-        
-        
+
+
       <p>The function <c>get_node()</c> looks at the Sprite2D's children and gets nodes by
                 their name. For example, if you renamed the Timer node to "BlinkingTimer" in the
                 editor, you would have to change the call to <c>get_node("BlinkingTimer")</c>.</p>
       <p>We can now connect the Timer to the Sprite2D in the <c>_ready()</c> function.</p>
-      
+
         <program language="gdscript">
           <code>func _ready() -> void:
     var timer: Timer = get_node("Timer")
     timer.timeout.connect(_on_timer_timeout)</code>
           </program>
-        
-        
+
+
       <p>The line reads like so: we connect the Timer's "timeout" signal to the node to
                 which the script is attached. When the Timer emits <c>timeout</c>, we want to call
                 the function <c>_on_timer_timeout()</c>, that we need to define. Let's add it at the
@@ -467,13 +467,13 @@ func _on_button_pressed() -> void:
                     "_on_node_name_signal_name".
                     Here, it'll be "_on_timer_timeout" for GDScript.</p>
         </note>
-      
+
         <program language="gdscript">
           <code>func _on_timer_timeout() -> void:
     visible = not visible</code>
           </program>
-        
-        
+
+
       <p>The <c>visible</c> property is a boolean that controls the visibility of our node.
                 The line <c>visible = not visible</c> toggles the value. If <c>visible</c> is
                 <c>true</c>, it becomes <c>false</c>, and vice-versa.</p>
@@ -484,7 +484,7 @@ func _on_button_pressed() -> void:
       <title>Complete script</title>
       <p>That's it for our little moving and blinking Godot icon demo!
                 Here is the complete <c>sprite_2d.gd</c> file for reference.</p>
-      
+
         <program language="gdscript">
           <code>extends Sprite2D
 
@@ -510,8 +510,8 @@ func _on_button_pressed() -> void:
 func _on_timer_timeout() -> void:
     visible = not visible</code>
           </program>
-        
-        
+
+
       </subsection>
     <subsection xml:id="getting-started-step-by-step-signals-custom-signals">
       <title>Custom signals</title>
@@ -524,7 +524,7 @@ func _on_timer_timeout() -> void:
                 show a game over screen when the player's health reaches zero. To do so, you
                 could define a signal named "died" or "health_depleted" when their health
                 reaches 0.</p>
-      
+
         <program language="gdscript">
           <code>extends Node2D
 
@@ -532,8 +532,8 @@ signal health_depleted
 
 var health: int = 10</code>
           </program>
-        
-        
+
+
       <note>
         <title>Note</title>
         <p>As signals represent events that just occurred, we generally use an
@@ -548,18 +548,18 @@ var health: int = 10</code>
      </image>
         </figure>
       <p>To emit a signal in your scripts, call <c>emit()</c> on the signal.</p>
-      
+
         <program language="gdscript">
           <code>func take_damage(amount: int) -> void:
     health -= amount
     if health &lt;= 0:
         health_depleted.emit()</code>
           </program>
-        
-        
+
+
       <p>A signal can optionally declare one or more arguments. Specify the argument
                 names between parentheses:</p>
-      
+
         <program language="gdscript">
           <code>extends Node2D
 
@@ -567,8 +567,8 @@ signal health_changed(old_value, new_value)
 
 var health: int = 10</code>
           </program>
-        
-        
+
+
       <note>
         <title>Note</title>
         <p>The signal arguments show up in the editor's Signals dock, and Godot can use
@@ -578,15 +578,15 @@ var health: int = 10</code>
         </note>
       <p>To emit values along with the signal, add them as extra arguments to the
                 <c>emit()</c> function:</p>
-      
+
         <program language="gdscript">
           <code>func take_damage(amount: int) -> void:
     var old_health: int = health
     health -= amount
     health_changed.emit(old_health, health)</code>
           </program>
-        
-        
+
+
       </subsection>
     <subsection xml:id="getting-started-step-by-step-signals-summary">
       <title>Summary</title>
@@ -603,4 +603,3 @@ var health: int = 10</code>
                 game and put everything you learned so far into practice.</p>
       </subsection>
     </section>
- 

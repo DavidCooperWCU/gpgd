@@ -15,7 +15,7 @@
       </figure>
     <p>In the script settings window, you can leave the default settings alone. Just
             click "Create":</p>
-   
+
     <figure>
       <caption>Attach Script Dialog</caption>
       <image source="attach_node_window.webp" width="50%">
@@ -28,22 +28,22 @@
                 <xref ref="getting-started-step-by-step-scripting-first-script-creating-your-first-script">Your First Script</xref> before continuing.</p>
       </note>
     <p>Start by declaring the member variables this object will need:</p>
-    
+
       <program language="gdscript">
         <code>extends Area2D
 
 @export var speed: float = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.</code>
         </program>
-      
-      
+
+
     <p>Using the <c>export</c> keyword on the first variable <c>speed</c> allows us to set
             its value in the Inspector. This can be handy for values that you want to be
             able to adjust just like a node's built-in properties. Click on the <c>Player</c>
             node and you'll see the property now appears in the Inspector in a new section
             with the name of the script. Remember, if you change the value here, it will
             override the default value specified in the script (the script won't be modified).</p>
-    
+
     <figure>
       <caption>Exported Variable in Inspector</caption>
       <image source="export_variable.webp" width="25%">
@@ -56,13 +56,13 @@ var screen_size # Size of the game window.</code>
             create these functions while following the lesson.</p>
     <p>The <c>_ready()</c> function is called when a node enters the scene tree, which is
             a good time to find the size of the game window:</p>
-    
+
       <program language="gdscript">
         <code>func _ready() -> void:
     screen_size = get_viewport_rect().size</code>
         </program>
-      
-      
+
+
     <p>Now we can use the <c>_process()</c> function to define what the player will do.
             <c>_process()</c> is called every frame, so we'll use it to update elements of our
             game, which we expect will change often. For the player, we need to do the
@@ -130,7 +130,7 @@ var screen_size # Size of the game window.</code>
       </note>
     <p>You can detect whether a key is pressed using <c>Input.is_action_pressed()</c>,
             which returns <c>true</c> if it's pressed or <c>false</c> if it isn't.</p>
-    
+
       <program language="gdscript">
         <code>func _process(delta: float) -> void:
     var velocity: Vector2 = Vector2.ZERO # The player's movement vector.
@@ -149,8 +149,8 @@ var screen_size # Size of the game window.</code>
     else:
         $AnimatedSprite2D.stop()</code>
         </program>
-      
-      
+
+
     <p>We start by setting the <c>velocity</c> to <c>(0, 0)</c> - by default, the player
             should not be moving. Then we check each input and add/subtract from the
             <c>velocity</c> to obtain a total direction. For example, if you hold <c>right</c> and
@@ -183,13 +183,13 @@ var screen_size # Size of the game window.</code>
             can also use <c>clamp()</c> to prevent it from leaving the screen. <em>Clamping</em> a
             value means restricting it to a given range. Add the following to the bottom of
             the <c>_process</c> function (make sure it's not indented under the else):</p>
-    
+
       <program language="gdscript">
         <code>position += velocity * delta
 position = position.clamp(Vector2.ZERO, screen_size)</code>
         </program>
-      
-      
+
+
     <note>
       <title>Tip</title>
       <p>The delta parameter in the _process() function refers to the <em>frame
@@ -211,14 +211,14 @@ position = position.clamp(Vector2.ZERO, screen_size)</code>
 <code>
 extends Area2D
 
-@export var speed: float = 400 
-var screen_size: Vector2 
+@export var speed: float = 400
+var screen_size: Vector2
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
-    
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -243,7 +243,7 @@ func _init() -> void: #
     add_key_action("move_left",KEY_A) #
     add_key_action("move_down",KEY_S) #
     add_key_action("move_up",KEY_W) #
-    
+
 # How long to sample for, in seconds.
 const SAMPLE_DURATION := 1.0
 
@@ -254,7 +254,7 @@ const SIMULATED_ACTIONS := ["move_right","move_down","move_left","move_up"]
 # Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
 # solution before sampling begins.
 func _setup_state() -> void:
-    _practice.position = _solution.position 
+    _practice.position = _solution.position
     _solution.speed = _practice.speed
 
 # Simulate rotate_right being held for SAMPLE_DURATION seconds while sampling.
@@ -266,7 +266,7 @@ func _setup_populate_test_space() -> void:
         await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, call_me)
         # Release the action so input state is clean after the test.
         Input.action_release(action)
-    
+
 func _sample_test_space(dir_key: String) -> void:
     _test_space.append({
         "practice_position" : _practice.position,
@@ -286,9 +286,9 @@ func _on_signal_hit_fires():
     hit_fired = true
 
 func _build_checks() -> void:
-    
+
     _solution.start(Vector2.ZERO)
-    
+
     var method_start_check := _add_simple_check(
         "has start() method",
         func() -> String:
@@ -298,7 +298,7 @@ func _build_checks() -> void:
                 )
             return ""
     )
-    
+
     var method_body_check := _add_simple_check(
         "has _on_body_entered() callback",
         func() -> String:
@@ -308,7 +308,7 @@ func _build_checks() -> void:
                 )
             return ""
     )
-    
+
     var signal_hit_check := _add_simple_check(
         "check for hit signal",
         func() -> String:
@@ -318,7 +318,7 @@ func _build_checks() -> void:
                 )
             return ""
     )
-    
+
     _add_simple_check(
         "Pressing move_right should move right",
         func() -> String:
@@ -327,11 +327,11 @@ func _build_checks() -> void:
             var last_pos: Vector2 = right_test[-1]["practice_position"]
             if first_pos.x &lt; last_pos.x:
                 return ""
-            else: 
+            else:
                 return "location didn't move right %f >= %f" % [first_pos.x,last_pos.x]
-            
+
     )
-    
+
     _add_simple_check(
         "Pressing move_left should move left",
         func() -> String:
@@ -340,11 +340,11 @@ func _build_checks() -> void:
             var last_pos: Vector2 = test[-1]["practice_position"]
             if first_pos.x > last_pos.x:
                 return ""
-            else: 
+            else:
                 return "location didn't move left %f &lt;= %f" % [first_pos.x,last_pos.x]
-            
+
     )
-    
+
     _add_simple_check(
         "Pressing move_up should move up",
         func() -> String:
@@ -353,11 +353,11 @@ func _build_checks() -> void:
             var last_pos: Vector2 = test[-1]["practice_position"]
             if first_pos.y > last_pos.y:
                 return ""
-            else: 
+            else:
                 return "location didn't move up %f &lt;= %f" % [first_pos.y,last_pos.y]
-            
+
     )
-    
+
     _add_simple_check(
         "Pressing move_down should move down",
         func() -> String:
@@ -366,11 +366,11 @@ func _build_checks() -> void:
             var last_pos: Vector2 = test[-1]["practice_position"]
             if first_pos.y &lt; last_pos.y:
                 return ""
-            else: 
+            else:
                 return "location didn't move down %f >= %f" % [first_pos.y,last_pos.y]
-            
+
     )
-    
+
     var hit_fires = _add_simple_check(
         "hit fires on body entered",
         func() -> String:
@@ -383,9 +383,9 @@ func _build_checks() -> void:
                 else "hit didn't fire on body entered"
             )
     )
-    
+
     hit_fires.dependencies.append_array([method_body_check,signal_hit_check])
-    
+
     var body_hide = _add_simple_check(
         "hide() on body entered",
         func() -> String:
@@ -399,9 +399,9 @@ func _build_checks() -> void:
                 else "not hidden after body entered."
             )
     )
-    
+
     body_hide.dependencies.append(method_body_check)
-    
+
     var start_show = _add_simple_check(
         "show() on start()",
         func() -> String:
@@ -415,12 +415,12 @@ func _build_checks() -> void:
                 else "still hidden after show()."
             )
     )
-    
+
     start_show.dependencies.append(method_start_check)
 
 </tests>
 </program>
-</activity>      
+</activity>
 
 
 
@@ -449,7 +449,7 @@ instance</c>
                 horizontally using the <c>flip_h</c> property for left movement. We also have the
                 "up" animation, which should be flipped vertically with <c>flip_v</c> for downward
                 movement. Let's place this code at the end of the <c>_process()</c> function:</p>
-      
+
         <program language="gdscript">
           <code>if velocity.x != 0:
     $AnimatedSprite2D.animation = "walk"
@@ -460,23 +460,23 @@ elif velocity.y != 0:
     $AnimatedSprite2D.animation = "up"
     $AnimatedSprite2D.flip_v = velocity.y &gt; 0</code>
           </program>
-        
-        
+
+
       <note>
         <title>Note</title>
         <p>The boolean assignments in the code above are a common shorthand for
                     programmers. Since we're doing a comparison test (boolean) and also
                     <em>assigning</em> a boolean value, we can do both at the same time. Consider
                     this code versus the one-line boolean assignment above:</p>
-        
+
           <program language="gdscript">
             <code>if velocity.x &lt; 0:
     $AnimatedSprite2D.flip_h = true
 else:
     $AnimatedSprite2D.flip_h = false</code>
             </program>
-          
-          
+
+
         </note>
       <p>Play the scene again and check that the animations are correct in each of the
                 directions.</p>
@@ -489,12 +489,12 @@ else:
         </note>
       <p>When you're sure the movement is working correctly, add this line to
                 <c>_ready()</c>, so the player will be hidden when the game starts:</p>
-      
+
         <program language="gdscript">
           <code>hide()</code>
           </program>
-        
-        
+
+
       </subsection>
     <subsection xml:id="getting-started-first-2d-game-03-coding-the-player-preparing-for-collisions">
       <title>Preparing for collisions</title>
@@ -503,12 +503,12 @@ else:
                 functionality to make it work.</p>
       <p>Add the following at the top of the script. Add it after
                 <c>extends Area2D</c>.:</p>
-      
+
         <program language="gdscript">
           <code>signal hit</code>
           </program>
-        
-        
+
+
       <p>This defines a custom signal called "hit" that we will have our player emit
                 (send out) when it collides with an enemy. We will use <c>Area2D</c> to detect the
                 collision. Select the <c>Player</c> node and click the <c>Signals</c> tab next to the
@@ -543,7 +543,7 @@ else:
                 not mean the function exists, only that the signal will attempt to connect to a function
                 with that name, so double-check that the spelling of the function matches exactly!</p>
       <p>Next, add this code to the function:</p>
-      
+
         <program language="gdscript">
           <code>func _on_body_entered(_body: Node2D) -> void:
     hide() # Player disappears after being hit.
@@ -551,8 +551,8 @@ else:
     # Must be deferred as we can't change physics properties on a physics callback.
     $CollisionShape2D.set_deferred("disabled", true)</code>
           </program>
-        
-        
+
+
       <p>Each time an enemy hits the player, the signal is going to be emitted. We need
                 to disable the player's collision so that we don't trigger the <c>hit</c> signal
                 more than once.</p>
@@ -565,15 +565,15 @@ else:
         </note>
       <p>The last piece is to add a function we can call to reset the player when
                 starting a new game.</p>
-      
+
         <program language="gdscript">
           <code>func start(pos: Vector2) -> void:
     position = pos
     show()
     $CollisionShape2D.disabled = false</code>
           </program>
-        
-        
+
+
       <p>With the player working, we'll work on the enemy in the next lesson.</p>
       </subsection>
     </section>

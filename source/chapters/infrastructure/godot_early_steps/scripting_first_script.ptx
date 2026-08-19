@@ -3,7 +3,7 @@
     <title>Creating your first script</title>
     <introduction>
     <p>In this lesson, you will code your first script to make the Godot icon turn in
-            circles. 
+            circles.
       <term>Scripts attach to a node and extend its behavior</term>. This means that scripts
             inherit all functions and properties of the node they attach to.</p>
     <p>For example, take a game where a Camera2D node follows a ship. The Camera2D node
@@ -107,15 +107,15 @@
          <shortdescription>TODO</shortdescription>
      </image>
         </figure>
-      
+
       <p>The <c>Script</c> workspace should appear with your new <c>sprite_2d.gd</c> file open and
                 the following line of code:</p>
-      
+
         <program language="gdscript">
           <code>extends Sprite2D</code>
           </program>
-        
-        
+
+
       <p>Every GDScript file is implicitly a class. The <c>extends</c> keyword defines the
                 class this script inherits or extends. In this case, it's <c>Sprite2D</c>, meaning
                 our script will get access to all the properties and functions of the Sprite2D
@@ -143,13 +143,13 @@
       <p>Our script currently doesn't do anything. Let's make it print the text "Hello,
                 world!" to the Output bottom panel to get started.</p>
       <p>Add the following code to your script:</p>
-      
+
         <program language="gdscript">
           <code>func _init() -> void:
     print("Hello, world!")</code>
           </program>
-        
-        
+
+
       <p>Let's break it down. The <c>func</c> keyword defines a new function named
                 <c>_init</c>. This is a special name for our class's constructor. The engine calls
                 <c>_init()</c> on every object or node upon creating it in memory, if you define
@@ -175,7 +175,7 @@
 extends Sprite2D
 
 func _init() -> void:
-	pass
+    pass
 
 </code>
 
@@ -185,7 +185,7 @@ extends "res://addons/gdpractice/tester/test.gd"
 
 func _build_checks() -> void:
 
-   # 
+   #
    var check_pattern := _add_simple_check(
       "Program should print 'Hello, world!",
       func() -> String:
@@ -195,7 +195,7 @@ func _build_checks() -> void:
             else "couldn't find a print('Hello, world!') call "
          )
    )
-   
+
 </tests>
 </program>
 </activity>
@@ -220,13 +220,13 @@ Sprite2D</c>.</p>
       <p>It's time to make our node move and rotate. To do so, we're going to add two
                 member variables to our script: the movement speed in pixels per second and the
                 angular speed in radians per second. Add the following after the <c>extends Sprite2D</c> line.</p>
-      
+
         <program language="gdscript">
           <code>var speed: float = 400
 var angular_speed: float = PI</code>
           </program>
-        
-        
+
+
       <p>Member variables sit near the top of the script, after any "extends" lines,
                 but before functions. Every node
                 instance with this script attached to it will have its own copy of the <c>speed</c>
@@ -255,13 +255,13 @@ var angular_speed: float = PI</code>
                     this delta time value, making our motion independent of our framerate.</p>
         </note>
       <p>At the bottom of the script, define the function:</p>
-      
+
         <program language="gdscript">
           <code>func _process(delta: float) -> void:
     rotation += angular_speed * delta</code>
           </program>
-        
-        
+
+
       <p>The <c>func</c> keyword defines a new function. After it, we have to write the
                 function's name and arguments it takes in parentheses. A colon ends the
                 definition, and the indented blocks that follow are the function's content or
@@ -321,7 +321,7 @@ extends "res://addons/gdpractice/tester/test.gd"
 #
 # A "graphical" GDPractice example: motion, compared frame by
 # frame between practice and solution via _test_space. The SplitLayout shows
-# both the student's icon and the solution's icon rotatating 
+# both the student's icon and the solution's icon rotatating
 # the same icon simultaneously.
 #
 
@@ -342,7 +342,7 @@ func _build_requirements() -> void:
 # Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
 # solution before sampling begins.
 func _setup_state() -> void:
-  _practice.position = _solution.position 
+  _practice.position = _solution.position
   _practice.rotation = _solution.rotation
   _solution.angular_speed = _practice.angular_speed
 
@@ -350,7 +350,7 @@ func _setup_state() -> void:
 # Simulate move_right being held for SAMPLE_DURATION seconds while sampling.
 func _setup_populate_test_space() -> void:
   await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, _sample_test_space)
-	
+
 
 func _sample_test_space() -> void:
   _test_space.append({
@@ -402,13 +402,13 @@ func _build_checks() -> void:
         <p>Let's now make the node move. Add the following two lines inside of the <c>_process()</c>
                     function, ensuring the new lines are indented the same way as the <c>rotation += angular_speed * delta</c> line before
                     them.</p>
-        
+
           <program language="gdscript">
             <code>var velocity: Vector2 = Vector2.UP.rotated(rotation) * speed
 
 position += velocity * delta</code>
             </program>
-          
+
              <activity xml:id="first-script-move" label="first-script-move">
             <title>Move</title>
             <statement><p>Add Rotation and move code here.
@@ -418,7 +418,7 @@ position += velocity * delta</code>
                      scene="res://practices/L1.P5.sprite2d_move/practice.tscn">
 
 <code>
-extends Sprite2D  
+extends Sprite2D
 var speed: float = 400
 var angular_speed: float = PI
 
@@ -435,7 +435,7 @@ extends "res://addons/gdpractice/tester/test.gd"
 #
 # A "graphical" GDPractice example: motion, compared frame by
 # frame between practice and solution via _test_space. The SplitLayout shows
-# both the student's icon and the solution's icon rotatating 
+# both the student's icon and the solution's icon rotatating
 # the same icon simultaneously.
 #
 
@@ -457,7 +457,7 @@ func _build_requirements() -> void:
 # Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
 # solution before sampling begins.
 func _setup_state() -> void:
-  _practice.position = _solution.position 
+  _practice.position = _solution.position
   _practice.rotation = _solution.rotation
   _solution.angular_speed = _practice.angular_speed
   _solution.speed = _practice.speed
@@ -465,7 +465,7 @@ func _setup_state() -> void:
 # Simulate move_right being held for SAMPLE_DURATION seconds while sampling.
 func _setup_populate_test_space() -> void:
   await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, _sample_test_space)
-	
+
 
 func _sample_test_space() -> void:
   _test_space.append({
@@ -542,7 +542,7 @@ func _build_checks() -> void:
 
 </tests>
 </program>
-</activity>  
+</activity>
         <p>As we already saw, the <c>var</c> keyword defines a new variable. If you put it at
                     the top of the script, it defines a property of the class. Inside a function, it
                     defines a local variable: it only exists within the function's scope.</p>
@@ -575,7 +575,7 @@ func _build_checks() -> void:
     <subsection xml:id="getting-started-step-by-step-scripting-first-script-complete-script">
       <title>Complete script</title>
       <p>Here is the complete <c>sprite_2d.gd</c> file for reference.</p>
-      
+
         <program language="gdscript">
           <code>extends Sprite2D
 
@@ -590,8 +590,7 @@ func _process(delta: float) -> void:
 
     position += velocity * delta</code>
           </program>
-        
-        
+
+
       </subsection>
     </section>
-  

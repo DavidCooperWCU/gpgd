@@ -35,7 +35,7 @@
             recommend you to start with this one, though.</p>
     <question>
       <title>Why start with 2D?</title>
-      
+
     <p>If you are new to game development or unfamiliar with Godot, we recommend
             starting with 2D games. This will allow you to become comfortable with both
             before tackling 3D games, which tend to be more complicated.</p>
@@ -45,7 +45,7 @@
       <li>
         <url href="https://github.com/godotengine/godot-demo-projects/tree/master/2d/dodge_the_creeps">Dodge the Creeps source code (GDScript)</url>
         </li>
-      
+
       </ul>
     </p>
   </question>
@@ -61,9 +61,9 @@
       <p>.<url href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/dodge_the_creeps_2d_assets.zip">dodge_the_creeps_2d_assets.zip</url>
         </p>
       </observation>
-    
+
       </introduction>
-    
+
   <xi:include href="01.project_setup.ptx" />
   <xi:include href="02.player_scene.ptx" />
   <xi:include href="03.coding_the_player.ptx" />

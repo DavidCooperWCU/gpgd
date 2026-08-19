@@ -101,15 +101,15 @@
       <p>Add a script to <c>Main</c>. At the top of the script, we use
                 <c>@export var mob_scene: PackedScene</c> to allow us to choose the Mob scene we want
                 to instance.</p>
-      
+
         <program language="gdscript">
           <code>extends Node
 
 @export var mob_scene: PackedScene
 var score</code>
           </program>
-        
-        
+
+
       <p>Click the <c>Main</c> node and you will see the <c>Mob Scene</c> property in the Inspector
                 under "Main.gd".</p>
       <p>You can assign this property's value in two ways:</p>
@@ -131,7 +131,7 @@ var score</code>
                 emitted from <c>Player</c> and handled in the <c>Main</c> script. Add the following code
                 to the new function, as well as a <c>new_game</c> function that will set
                 everything up for a new game:</p>
-      
+
         <program language="gdscript">
           <code>func game_over() -> void:
     $ScoreTimer.stop()
@@ -142,8 +142,8 @@ func new_game() -> void:
     $Player.start($StartPosition.position)
     $StartTimer.start()</code>
           </program>
-        
-        
+
+
       <p>Now we'll connect the <c>timeout()</c> signal of each Timer node (<c>StartTimer</c>,
                 <c>ScoreTimer</c>, and <c>MobTimer</c>) to the main script. For each of the three
                 timers, select the timer in the Scene dock, open the Signals tab of the Node
@@ -166,7 +166,7 @@ func new_game() -> void:
       <p>Now we define how each of these timers operate by adding the code below. Notice
                 that <c>StartTimer</c> will start the other two timers, and that <c>ScoreTimer</c>
                 will increment the score by 1.</p>
-      
+
         <program language="gdscript">
           <code>func _on_score_timer_timeout() -> void:
     score += 1
@@ -175,8 +175,8 @@ func _on_start_timer_timeout() -> void:
     $MobTimer.start()
     $ScoreTimer.start()</code>
           </program>
-        
-        
+
+
       <p>In <c>_on_mob_timer_timeout()</c>, we will create a mob instance, pick a random
                 starting location along the <c>Path2D</c>, and set the mob in motion. The
                 <c>PathFollow2D</c> node will automatically rotate as it follows the path, so we
@@ -185,7 +185,7 @@ func _on_start_timer_timeout() -> void:
                 <c>250.0</c> for how fast each mob will move (it would be boring if they were
                 all moving at the same speed).</p>
       <p>Note that a new instance must be added to the scene using <c>add_child()</c>.</p>
-      
+
         <program language="gdscript">
           <code>func _on_mob_timer_timeout() -> void:
     # Create a new instance of the Mob scene.
@@ -212,8 +212,8 @@ func _on_start_timer_timeout() -> void:
     # Spawn the mob by adding it to the Main scene.
     add_child(mob)</code>
           </program>
-        
-        
+
+
       <note>
         <title>Important</title>
         <p>Why <c>PI</c>? In functions requiring angles, Godot uses <em>radians</em>,
@@ -228,13 +228,13 @@ func _on_start_timer_timeout() -> void:
       <title>Testing the scene</title>
       <p>Let's test the scene to make sure everything is working. Add this <c>new_game</c>
                 call to <c>_ready()</c>:</p>
-      
+
         <program language="gdscript">
           <code>func _ready() -> void:
     new_game()</code>
           </program>
-        
-        
+
+
       <p>Let's also assign <c>Main</c> as our "Main Scene" - the one that runs automatically
                 when the game launches. Press the "Play" button and select <c>main.tscn</c> when
                 prompted.</p>

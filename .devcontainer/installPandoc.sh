@@ -19,6 +19,6 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
     sleep 15
 done
 # Install pandoc
-apt-get install -y --no-install-recommends ./pandoc.deb 
+apt-get install -y --no-install-recommends ./pandoc.deb
 
 rm pandoc.deb

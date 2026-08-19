@@ -121,14 +121,14 @@
       <p>Right-click on the <c>Main</c> node and attach a new script to it.</p>
       <p>We first export a variable to the <em>Inspector</em> so that we can assign <c>mob.tscn</c>
                 or any other monster to it.</p>
-      
+
         <program language="gdscript">
           <code>extends Node
 
 @export var mob_scene: PackedScene</code>
           </program>
-        
-        
+
+
       <p>We want to spawn mobs at regular time intervals. To do this, we need to go back
                 to the scene and add a timer. Before that, though, we need to assign the
                 <c>mob.tscn</c> file to the <c>mob_scene</c> property above (otherwise it's null!)</p>
@@ -162,7 +162,7 @@
         <li>Add the mob as a child of the <em>Main</em> node.</li>
         </ol>
       </p>
-      
+
         <program language="gdscript">
           <code>func _on_mob_timer_timeout() -> void:
     # Create a new instance of the Mob scene.
@@ -180,23 +180,23 @@
     # Spawn the mob by adding it to the Main scene.
     add_child(mob)</code>
           </program>
-        
-        
+
+
       <p>Above, <c>randf()</c> produces a random value between <c>0</c> and <c>1</c>, which is
                 what the <em>PathFollow</em> node's <c>progress_ratio</c> expects:
                 0 is the start of the path, 1 is the end of the path.
                 The path we have set is around the camera's viewport, so any random value between 0 and 1
                 is a random position alongside the edges of the viewport!</p>
       <p>Note that if you remove the <c>Player</c> from the main scene, the following line</p>
-      
+
         <program language="gdscript">
           <code>var player_position: Vector3 = $Player.position</code>
           </program>
-        
-        
+
+
       <p>gives an error because there is no $Player!</p>
       <p>Here is the complete <c>main.gd</c> script so far, for reference.</p>
-      
+
         <program language="gdscript">
           <code>extends Node
 
@@ -219,8 +219,8 @@ func _on_mob_timer_timeout() -> void:
     # Spawn the mob by adding it to the Main scene.
     add_child(mob)</code>
           </program>
-        
-        
+
+
       <p>You can test the scene by pressing <c>F6</c> (<c>Cmd</c>
         <c />+<c />
         <c>R</c> on macOS). You should see
@@ -230,4 +230,3 @@ func _on_mob_timer_timeout() -> void:
                 address this in the next part.</p>
       </subsection>
     </section>
-  

@@ -38,7 +38,7 @@
       <p>To play the music, add <c>$Music.play()</c> in the <c>new_game()</c>
                 function and <c>$Music.stop()</c> in the <c>game_over()</c> function.</p>
       <p>Finally, add <c>$DeathSound.play()</c> in the <c>game_over()</c> function.</p>
-      
+
         <program language="gdscript">
           <code>func game_over() -> void:
     ...
@@ -49,8 +49,8 @@ func new_game() -> void:
     ...
     $Music.play()</code>
           </program>
-        
-        
+
+
       </subsection>
     <subsection xml:id="getting-started-first-2d-game-07-finishing-up-keyboard-shortcut">
       <title>Keyboard shortcut</title>

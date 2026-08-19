@@ -64,24 +64,24 @@
                 Your goal is for your code to act the same way as the reference code.
             </p>
                 <p> This activity has multiple parts. For the first part look at the <c>Main.gd</c>
-                    file from the <c>instancing_starter</c> code you downloaded. You can copy 
+                    file from the <c>instancing_starter</c> code you downloaded. You can copy
                     the code as is, or you can use the <c>clicked</c> variable that is already
                     in the code by making a minor modification.
                 </p>
-                
-                <p>The second part can be done after reading the next few sections up to 
+
+                <p>The second part can be done after reading the next few sections up to
                     <xref ref="getting-started-step-by-step-scripting-player-input-moving-when-pressing-up"/>
                     and then completing the activity after it.
                 You'll need to add checks for up and down input to change the bounce value by <c>0.1</c>
                 at a time. The maximum bounce value should be <c>0.9</c>, and the minimum should be <c>0.0</c>
                 </p>
-                <p> The <c>bounce</c> property is on the <c>PhysicsMaterial</c> of the Ball. Once you 
-              have an instance of a Ball, you can get it's <c>physics_material_override</c> and then 
+                <p> The <c>bounce</c> property is on the <c>PhysicsMaterial</c> of the Ball. Once you
+              have an instance of a Ball (with type <c>RigidBody2D</c>), you can access it's <c>physics_material_override</c> property and then
               change the <c>bounce</c> property using assignment(<c>=</c>). This will change the bounce for
               all balls in the scene.
             </p>
-            
-            
+
+
             <program xml:id="gs-bounce-property" interactive='activecode' language="gdscript" label="gs-bounce-property"
                      pck="gdpractice/L1.P2.creating_instances"
                      scene="res://practices/L1.P2.creating_instances/practice.tscn">
@@ -107,9 +107,9 @@ func _build_checks() -> void:
         func() -> String:
             return ""
     )
-    
+
 </tests>
-                
+
             </program>
         </statement>
         <hint><p>Are you sure you need a hint? The next hint is only necessary if
@@ -117,27 +117,34 @@ func _build_checks() -> void:
                     The third hint will help you with the <c>if-elif-else</c> structure.
                 </p>
                 </hint>
-                <hint><p>If after adding the ball instantiation code, the program fails but there is 
+                <hint><p>If after adding the ball instantiation code, the program fails but there is
                     no clear error, then you'll need to add the following function to your node:
                 </p><program language="gdscript">
 func _ready() -> void:
     Ball = load("res://practices/L1.P2.creating_instances/Ball.tscn")
                     </program>
-                </hint><hint><p>If you are not sure how to write the decision code here is an example:
+                </hint>
+                <hint><p>If you are not sure how to write the decision code here is an example:
                 </p><program language="gdscript">
 if event.is_action_pressed("click"):
-	#do click actions
+    #do click actions
     pass
 elif event.is_action_pressed("ui_up"):
     #do up action (increase bounce)
-    pass            
+    pass
 elif event.is_action_pressed("ui_down"):
     #do down action (decrease bounce)
     pass
     </program>
                 </hint>
-            
-        </activity> 
+                <hint>
+                    <p>
+                    You can save the first instance of a ball by making a var of
+                    type <c>RigidBody2D</c> and setting it to <c>null</c> to start
+                    so that you know if you can modify the <c>physics_material_override.bounce</c> property.
+                    </p>
+                </hint>
+        </activity>
       <p>Extract the archive on your computer. To import it, you need the Project Manager.
                 The Project Manager is accessed by opening Godot, or if you already have Godot
                 opened, click on <c>Project &gt; Quit to Project List</c> (<c>Ctrl</c>

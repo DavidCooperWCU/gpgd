@@ -54,14 +54,14 @@
       <title>Keeping track of the score</title>
       <p>Let's work on the score next. Attach a new script to the <c>ScoreLabel</c> and define
                 the <c>score</c> variable.</p>
-      
+
         <program language="gdscript">
           <code>extends Label
 
 var score: int = 0</code>
           </program>
-        
-        
+
+
       <p>The score should increase by <c>1</c> every time we squash a monster. We can use
                 their <c>squashed</c> signal to know when that happens. However, because we instantiate
                 monsters from the code, we cannot connect the mob signal to the <c>ScoreLabel</c> via the editor.</p>
@@ -74,28 +74,28 @@ var score: int = 0</code>
                 dock.</p>
       <p>At the bottom of the <c>_on_mob_timer_timeout()</c> function, add the following
                 line:</p>
-      
+
         <program language="gdscript">
           <code>func _on_mob_timer_timeout() -> void:
     #...
     # We connect the mob to the score label to update the score upon squashing one.
     mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())</code>
           </program>
-        
-        
+
+
       <p>This line means that when the mob emits the <c>squashed</c> signal, the
                 <c>ScoreLabel</c> node will receive it and call the function <c>_on_mob_squashed()</c>.</p>
       <p>Head back to the <c>score_label.gd</c> script to define the <c>_on_mob_squashed()</c>
                 callback function.</p>
       <p>There, we increment the score and update the displayed text.</p>
-      
+
         <program language="gdscript">
           <code>func _on_mob_squashed() -> void:
     score += 1
     text = "Score: %s" % score</code>
           </program>
-        
-        
+
+
       <p>The second line uses the value of the <c>score</c> variable to replace the
                 placeholder <c>%s</c>. When using this feature, Godot automatically converts values
                 to string text, which is convenient when outputting text in labels or
@@ -156,36 +156,36 @@ var score: int = 0</code>
                     dies and plays again.</p>
         <p>Open the script <c>main.gd</c>. First, we want to hide the overlay at the start of
                     the game. Add this line to the <c>_ready()</c> function.</p>
-        
+
           <program language="gdscript">
             <code>func _ready() -> void:
     $UserInterface/Retry.hide()</code>
             </program>
-          
-          
+
+
         <p>Then, when the player gets hit, we show the overlay.</p>
-        
+
           <program language="gdscript">
             <code>func _on_player_hit() -> void:
     #...
     $UserInterface/Retry.show()</code>
             </program>
-          
-          
+
+
         <p>Finally, when the <c>Retry</c> node is visible, we need to listen to the player's
                     input and restart the game if they press enter. To do this, we use the built-in
                     <c>_unhandled_input()</c> callback, which is triggered on any input.</p>
         <p>If the player pressed the predefined <c>ui_accept</c> input action and <c>Retry</c> is
                     visible, we reload the current scene.</p>
-        
+
           <program language="gdscript">
             <code>func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
         # This restarts the current scene.
         get_tree().reload_current_scene()</code>
             </program>
-          
-          
+
+
         <p>The function <c>get_tree()</c> gives us access to the global <url href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#class-scenetree">SceneTree</url> object, which allows us to reload and restart the current
                     scene.</p>
         </subsubsection>
@@ -235,7 +235,7 @@ Loop.ogg</c>. Click and drag it onto the <em>Stream</em> property in the <em>Ins
       <p>And that does it for this lesson. In the next part, we'll add an animation to
                 make the game both look and feel much nicer.</p>
       <p>Here is the complete <c>main.gd</c> script for reference.</p>
-      
+
         <program language="gdscript">
           <code>extends Node
 
@@ -273,7 +273,7 @@ func _unhandled_input(event: InputEvent) -> void:
         # This restarts the current scene.
         get_tree().reload_current_scene()</code>
           </program>
-        
-        
+
+
       </subsection>
     </section>

@@ -70,7 +70,7 @@
             <term>GDScript</term>: Classes (nodes) use PascalCase, variables and
                             functions use snake_case, and constants use ALL_CAPS (See
                             <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#doc-gdscript-styleguide">GDScript style guide</url>).</li>
-          
+
           </ul>
         </p>
         </note>
@@ -157,4 +157,3 @@
                 something.</p>
       </subsection>
     </section>
-  

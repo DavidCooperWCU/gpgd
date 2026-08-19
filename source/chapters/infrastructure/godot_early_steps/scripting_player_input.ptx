@@ -29,7 +29,7 @@
     <p>For turning, we should use a new variable: <c>direction</c>. In our <c>_process()</c>
             function, replace the <c>rotation += angular_speed * delta</c> line with the
             code below.</p>
-    
+
       <program language="gdscript">
         <code>var direction: int = 0
 if Input.is_action_pressed("ui_left"):
@@ -39,8 +39,8 @@ if Input.is_action_pressed("ui_right"):
 
 rotation += angular_speed * direction * delta</code>
         </program>
-      
-      
+
+
     <p>Our <c>direction</c> local variable is a multiplier representing the direction in
             which the player wants to turn. A value of <c>0</c> means the player isn't pressing
             the left or the right arrow key. A value of <c>1</c> means the player wants to turn
@@ -63,14 +63,14 @@ rotation += angular_speed * direction * delta</code>
     <p>Finally, we use the <c>direction</c> as a multiplier when we update the node's
             <c>rotation</c>: <c>rotation += angular_speed * direction * delta</c>.</p>
     <p>Comment out the lines <c>var velocity = Vector2.UP.rotated(rotation) * speed</c> and <c>position += velocity * delta</c> like this:</p>
-    
+
       <program language="gdscript">
         <code>#var velocity: Vector2 = Vector2.UP.rotated(rotation) * speed
 
 #position += velocity * delta</code>
         </program>
-      
-      
+
+
     <p>This will ignore the code that moved the icon's position in a circle without user input from the previous exercise.</p>
     <p>If you run the scene with this code, the icon should rotate when you press
             <c>Left</c> and <c>Right</c>.</p>
@@ -100,7 +100,7 @@ extends "res://addons/gdpractice/tester/test.gd"
 
 func _init() -> void:
     side_by_side = true
-    
+
 
 # How long to sample for, in seconds.
 const SAMPLE_DURATION := 1.0
@@ -119,10 +119,10 @@ func _build_requirements() -> void:
 # Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
 # solution before sampling begins.
 func _setup_state() -> void:
-    _practice.position = _solution.position 
+    _practice.position = _solution.position
     _practice.rotation = _solution.rotation
     _solution.angular_speed = _practice.angular_speed
-    
+
 
 # Simulate rotate_right being held for SAMPLE_DURATION seconds while sampling.
 func _setup_populate_test_space() -> void:
@@ -144,7 +144,7 @@ func _sample_test_space() -> void:
 
 
 func _build_checks() -> void:
-    
+
     _add_simple_check(
         "pressing ui_right should rotate",
         func() -> String:
@@ -160,7 +160,7 @@ func _build_checks() -> void:
                 else "rotation did not change after simulating ui_right"
             )
     )
-    
+
     _add_simple_check(
         "pressing ui_left should rotate",
         func() -> String:
@@ -183,7 +183,7 @@ func _build_checks() -> void:
             var delta_predicate := func(x: Dictionary, y: Dictionary) -> bool:
                 var displacement: float = y.practice_rotation - x.practice_rotation
                 var expected: float = y.solution_rotation - x.solution_rotation
-                
+
                 return is_equal_approx(displacement,expected)
             if not _is_sliding_window_pass(delta_predicate):
                 return (
@@ -207,8 +207,8 @@ func _build_checks() -> void:
                         )
             return ""
     )
-    
-    
+
+
 
 </tests>
 </program>
@@ -219,14 +219,14 @@ func _build_checks() -> void:
       <title>Moving when pressing "up"</title>
       <p>To only move when pressing a key, we need to modify the code that calculates the
                 velocity. Uncomment the code and replace the line starting with <c>var velocity</c> with the code below.</p>
-      
+
         <program language="gdscript">
           <code>var velocity: Vector2 = Vector2.ZERO
 if Input.is_action_pressed("ui_up"):
     velocity = Vector2.UP.rotated(rotation) * speed</code>
           </program>
-        
-        
+
+
       <p>We initialize the <c>velocity</c> with a value of <c>Vector2.ZERO</c>, another
                 constant of the built-in <c>Vector</c> type representing a 2D vector of length 0.</p>
       <p>If the player presses the "ui_up" action, we then update the velocity's value,
@@ -274,7 +274,7 @@ func _build_requirements() -> void:
 # Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
 # solution before sampling begins.
 func _setup_state() -> void:
-    _practice.position = _solution.position 
+    _practice.position = _solution.position
     _practice.rotation = _solution.rotation
     _solution.angular_speed = _practice.angular_speed
     _solution.speed = _practice.speed
@@ -288,7 +288,7 @@ func _setup_populate_test_space() -> void:
     # Release the action so input state is clean after the test.
     Input.action_release(SIMULATED_ACTIONS[0])
     Input.action_release(SIMULATED_ACTIONS[2])
-    
+
 func _sample_test_space() -> void:
     _test_space.append({
         practice_rotation = _practice.rotation,
@@ -300,8 +300,8 @@ func _sample_test_space() -> void:
 
 
 func _build_checks() -> void:
-    
-    
+
+
     _add_simple_check(
         "Pressing ui_right should rotate",
         func() -> String:
@@ -317,7 +317,7 @@ func _build_checks() -> void:
                 else "rotation did not change after simulating ui_right"
             )
     )
-    
+
     _add_simple_check(
         "Pressing ui_left should rotate",
         func() -> String:
@@ -333,7 +333,7 @@ func _build_checks() -> void:
                 else "rotation did not change after simulating ui_left"
             )
     )
-    
+
     _add_simple_check(
         "Pressing ui_up should move",
         func() -> String:
@@ -351,7 +351,7 @@ func _build_checks() -> void:
                 else "position did not change after simulating ui_up"
             )
     )
-    
+
     _add_simple_check(
         "Rotation takes delta into account",
         func() -> String:
@@ -381,7 +381,7 @@ func _build_checks() -> void:
                         )
             return ""
     )
-    
+
     _add_simple_check(
         "Movement takes delta into account",
         func() -> String:
@@ -411,21 +411,21 @@ func _build_checks() -> void:
                         )
             return ""
     )
-    
-    
-    
-    
+
+
+
+
 
 </tests>
 </program>
-</activity>                
+</activity>
       </subsection>
     <subsection xml:id="getting-started-step-by-step-scripting-player-input-complete-script">
       <title>Complete script</title>
       <example>
         <title>Do you want to see the complete script?</title>
         <statement>
-      <p>Below is the complete <c>sprite_2d.gd</c> file for reference. 
+      <p>Below is the complete <c>sprite_2d.gd</c> file for reference.
     Please, try to create this on your own first before looking here.</p>
       </statement>
         <answer>
@@ -453,7 +453,7 @@ func _process(delta: float) -> void:
           </program>
         </answer>
     </example>
-        
+
       <p>If you run the scene, you should now be able to rotate with the left and right
                 arrow keys and move forward by pressing <c>Up</c>.</p>
       <figure>

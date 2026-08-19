@@ -5,7 +5,7 @@
 
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
   <bibinfo>
-  
+
     <author>
       <personname>David G. Cooper</personname>
       <department>Department of Computer Science</department>
@@ -26,20 +26,20 @@
       <shortlicense> This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <url href="http://creativecommons.org/licenses/by-sa/4.0/" visual="creativecommons.org/licenses/by-sa/4.0"> CreativeCommons.org</url>
       </shortlicense>
     </copyright>
-  
+
   </bibinfo>
 
-  
+
   <titlepage>
     <titlepage-items/>
   </titlepage>
-  
-  
-  
+
+
+
   <acknowledgement xml:id="acknowledgement">
 
         <p>This book would not be possible without the maintainers of PreTeXt and Runestone Academy.
-          They guided me through creating the necessary changes and pull requests to the <c>pretext</c>, 
+          They guided me through creating the necessary changes and pull requests to the <c>pretext</c>,
           <c>rs</c>, and <c>pretext-cli</c> repositories
           <ul>
             <li><p>Robert Beezer, University of Puget Sound</p></li>
@@ -53,7 +53,7 @@
           The authors include Juan Linietsky, Ariel Manzur and the Godot community.
         </p>
 
-        
+
   </acknowledgement>
 
   <xi:include href="front/preface.ptx" />
