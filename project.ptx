@@ -19,9 +19,7 @@
             publication="publication-runestone.ptx"
             platform="runestone">
             <!-- Point to the subfolder relative to your project root -->
-            <stringparams author.tools="yes" html.css.extra="external/css/custom-godot.css"
-                    godot.version="4.6.3" 
-                    godot.shell="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/godot-shell-" />
+            <stringparams  html.css.extra="external/css/custom-godot.css" />
     </target>
   </targets>
 </project>
