@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-02-player-scene-creating-the-player-scene">
+    <title>Creating the player scene</title>
+    <introduction>
+    <p>With the project settings in place, we can start working on the
+            player-controlled character.</p>
+    <p>The first scene will define the <c>Player</c> object. One of the benefits of
+            creating a separate Player scene is that we can test it separately, even before
+            we've created other parts of the game.</p>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-02-player-scene-node-structure">
+      <title>Node structure</title>
+      <p>To begin, we need to choose a root node for the player object. As a general
+                rule, a scene's root node should reflect the object's desired functionality -
+                what the object <em>is</em>. In the upper-left corner, in the "Scene" tab, click the
+                "Other Node" button and add an <url href="https://docs.godotengine.org/en/stable/classes/class_area2d.html#class-area2d">Area2D</url> node to the scene.</p>
+      <note>
+        <title>Note</title>
+        <p>Godot also provides the <url href="https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html#class-characterbody2d">CharacterBody2D</url> node,
+                    specifically designed for 2D characters, which includes built-in support for some
+                    of the processes explained in this tutorial. In many real world projects, CharacterBody2D
+                    would be a better choice for players and enemies. However, this tutorial focuses on
+                    core concepts that apply to a wider range of nodes and use cases.</p>
+        </note>
+      <figure>
+        <caption>Add Node Button</caption>
+      <image source="add_node.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>When you add the <c>Area2D</c> node, Godot will display the following <term>warning icon</term>
+                next to it in the scene tree:</p>
+      <figure>
+        <caption>Shape Missing Warning</caption>
+      <image source="no_shape_warning.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>This warning tells us that the <c>Area2D</c> node requires a shape to detect collisions or overlaps.
+                We can <term>ignore the warning temporarily</term> because we will first set up the player's visuals
+                (using an animated sprite). Once the visuals are ready, we will add a collision shape as a child
+                node. This will allow us to accurately size and position the shape based on the sprite's appearance.</p>
+      <p>With <c>Area2D</c> we can detect objects that overlap or run into the player.
+                Change the node's name to <c>Player</c> by double-clicking on it. Now that we've
+                set the scene's root node, we can add additional nodes to give it more
+                functionality.</p>
+      <p>Before we add any children to the <c>Player</c> node, we want to make sure we don't
+                accidentally move or resize them by clicking on them. Select the node and click
+                the icon to the right of the lock. Its tooltip says "Groups the selected node
+                with its children. This causes the parent to be selected when any child
+                node is clicked in 2D and 3D view."</p>
+      <figure>
+        <caption>Group Children Button</caption>
+      <image source="lock_children.webp" width="60%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Save the scene as <c>player.tscn</c>. Click <term>Scene &gt; Save</term>, or press <c>Ctrl</c>
+        <c />+<c />
+        <c>S</c>
+                on Windows/Linux or <c>Cmd</c>
+        <c />+<c />
+        <c>S</c> on macOS.</p>
+      <note>
+        <title>Note</title>
+        <p>For this project, we will be following the Godot naming conventions.</p>
+        <p>
+          <ul>
+          <li>
+            <term>GDScript</term>: Classes (nodes) use PascalCase, variables and
+                            functions use snake_case, and constants use ALL_CAPS (See
+                            <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#doc-gdscript-styleguide">GDScript style guide</url>).</li>
+          
+          </ul>
+        </p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-02-player-scene-sprite-animation">
+      <title>Sprite animation</title>
+      <p>Click on the <c>Player</c> node and add (<c>Ctrl</c>
+        <c />+<c />
+        <c>A</c> on Windows/Linux or
+                <c>Cmd</c>
+        <c />+<c />
+        <c>A</c> on macOS) a child node <url href="https://docs.godotengine.org/en/stable/classes/class_animatedsprite2d.html#class-animatedsprite2d">AnimatedSprite2D</url>. The <c>AnimatedSprite2D</c> will handle the
+                appearance and animations for our player. Notice that there is a warning symbol
+                next to the node. An <c>AnimatedSprite2D</c> requires a <url href="https://docs.godotengine.org/en/stable/classes/class_spriteframes.html#class-spriteframes">SpriteFrames</url> resource, which is a list of the animations it can
+                display. Make sure <c>AnimatedSprite2D</c> is selected and then find the <c>Sprite Frames</c> property under
+                the <c>Animation</c> section in the Inspector and click "[empty]" -&gt; "New SpriteFrames":</p>
+      <figure>
+        <caption>Adding New SpriteFrames</caption>
+      <image source="new_spriteframes.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Click on the <c>SpriteFrames</c> you just created to open the "SpriteFrames" panel:</p>
+      <figure>
+        <caption>The SpriteFrames Panel</caption>
+      <image source="spriteframes_panel.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>On the left is a list of animations. Click the <c>default</c> one and rename it to
+                <c>walk</c>. Then click the <term>Add Animation</term> button to create a second animation
+                named <c>up</c>.</p>
+      <p>Find the player images in the FileSystem dock - they're in the <c>art</c> folder
+                you unzipped earlier. Drag the two images for each animation, into the
+                <term>Animation Frames</term> side of the panel for the corresponding animation:</p>
+      <p>
+        <ul>
+        <li>
+          <c>playerGrey_walk1</c> and <c>playerGrey_walk2</c> for the <c>walk</c> animation</li>
+        <li>
+          <c>playerGrey_up1</c> and <c>playerGrey_up2</c> for the <c>up</c> animation</li>
+        </ul>
+      </p>
+      <figure>
+        <caption>Adding Animation Frames</caption>
+      <image source="spriteframes_panel2.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The player images are a bit too large for the game window, so we need to scale
+                them down. Click on the <c>AnimatedSprite2D</c> node and set the <c>Scale</c> property
+                to <c>(0.5, 0.5)</c>. You can find it in the Inspector under the <c>Node2D</c>
+                heading.</p>
+      <figure>
+        <caption>Node Inspector Scale</caption>
+      <image source="player_scale.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Finally, add a <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape2d.html#class-collisionshape2d">CollisionShape2D</url> as a child of
+                <c>Player</c>. This will determine the player's "hitbox", or the bounds of its
+                collision area. For this character, a <c>CapsuleShape2D</c> node gives the best
+                fit, so next to "Shape" in the Inspector, click "[empty]" -&gt; "New
+                CapsuleShape2D". Using the two size handles, resize the shape to cover the
+                sprite:</p>
+      <figure>
+        <caption>Sizing the CaptureShape2D</caption>
+      <image source="player_coll_shape-2.webp" width="30%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>When you're finished, your <c>Player</c> scene should look like this:</p>
+      <figure>
+        <caption>Scene Tree</caption>
+      <image source="player_scene_nodes.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Once this is done, the warning on the <c>Area2D</c> node will disappear, as it now has
+                a shape assigned and can interact with other objects.</p>
+      <p>Make sure to save the scene again after these changes.</p>
+      <p>In the next part, we'll add a script to the player node to move and animate it.
+                Then, we'll set up collision detection to know when the player got hit by
+                something.</p>
+      </subsection>
+    </section>
+  

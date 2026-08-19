@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dsaere0lceefl"]
+
+[ext_resource type="Script" uid="uid://bbv5js8miv646" path="res://practice_solutions/L1.P1.nodes_hello_label/practice.gd" id="1_dt33a"]
+
+[node name="NodesHelloLabel" type="Node2D" unique_id=1681431428]
+script = ExtResource("1_dt33a")

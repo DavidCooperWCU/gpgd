@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='utf-8'?>
+<section xml:id="getting-started-introduction-first-look-at-the-editor">
+  <title>First look at Godot's interface</title>
+  <introduction>
+  <p>This page will give you a brief overview of Godot's interface. We're going to
+            look at the different main screens and docks to help you situate yourself.</p>
+    <note>
+      <title>See Also</title>
+      <p>For a comprehensive breakdown of the editor's interface and how to
+                use it, see the <url href="https://docs.godotengine.org/en/stable/tutorials/editor/index.html#doc-editor-introduction">Editor manual</url>.</p>
+      </note>
+    </introduction>
+    <subsection xml:id="getting-started-introduction-first-look-at-the-editor-the-project-manager">
+      <title>The Project Manager</title>
+      <p>When you launch Godot, the first window you see is the Project Manager. In the
+                default tab <term>Projects</term>, you can manage existing projects, import or create new
+                ones, and more.</p>
+      <figure>
+        <caption>Projects Tab</caption>
+        <image source="editor_intro_project_manager.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>At the top of the window, there is another tab named <term>Asset Library</term>. The first
+                time you go to this tab you'll see a "Go Online" button. For privacy reasons, the Godot
+                project manager does not access the internet by default. To change this click
+                the "Go Online" button. You can change this option later in the settings.</p>
+      <p>Once your network mode is set to "online", you can search for demo projects in the open
+                source asset library, which includes many projects developed by the community:</p>
+      <figure>
+        <caption>Asset Library Tab</caption>
+        <image source="editor_intro_project_templates.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The Project Manager's settings can be opened using the <term>Settings</term> menu:</p>
+      <figure>
+        <caption>Settings Menu</caption>
+        <image source="editor_intro_settings.webp" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>From here, you can change the editor's language (default is the system language), interface theme, display
+                scale, network mode, and also the directory naming convention.</p>
+      <note>
+        <title>See Also</title>
+        <p>To learn the Project Manager's ins and outs, read
+                    <url href="https://docs.godotengine.org/en/stable/tutorials/editor/project_manager.html#doc-project-manager">Using the Project Manager</url>.</p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-introduction-first-look-at-the-editor-first-look-at-godot-s-editor">
+      <title>First look at Godot's editor</title>
+      <p>When you open a new or an existing project, the editor's interface appears.
+                Let's look at its main areas:</p>
+      <figure>
+        <caption>Default Editor View</caption>
+        <image source="editor_intro_editor_empty.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>By default, along the window's top edge, it features <term>main menu</term> on the left, <term>workspace</term> switching
+                buttons in the center (active workspace is highlighted), and <term>playtest</term> buttons and the
+                <term>Movie Maker Mode</term> toggle on the right:</p>
+      <figure>
+        <caption>Editor Top Edge</caption>
+        <image source="editor_intro_top_menus.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Just below the workspace buttons, the opened <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html#doc-key-concepts-overview-scenes">scenes</url>
+                as tabs are seen. The plus (+) button right next to the tabs will add a new scene to the project.
+                With the button on the far right, distraction-free mode can be toggled, which maximizes or restores
+                the <term>viewport</term>'s size by hiding <term>docks</term> in the interface:</p>
+      <figure>
+        <caption>Open Scenes Tabs</caption>
+        <image source="editor_intro_scene_selector.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>In the center, below the scene selector is the <term>viewport</term> with its <term>toolbar</term> at the top, where you'll
+                find different tools to move, scale, or lock the scene's nodes (currently the 3D workspace is active):</p>
+      <figure>
+        <caption>Scene 3D Viewport</caption>
+        <image source="editor_intro_3d_viewport.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>This toolbar changes based on the context and selected node. Here is the 2D toolbar:</p>
+      <figure>
+        <caption>2D Toolbar</caption>
+        <image source="editor_intro_toolbar_2d.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Below is the 3D one:</p>
+      <figure>
+        <caption>3D Toolbar</caption>
+        <image source="editor_intro_toolbar_3d.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>See Also</title>
+        <p>To learn more on workspaces, read <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/first_look_at_the_editor.html#the-five-main-screens">The five main screens</url>.</p>
+        </note>
+      <note>
+        <title>See Also</title>
+        <p>To learn more on the 3D viewport and 3D in general, read <url href="https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#doc-introduction-to-3d">Introduction to 3D</url>.</p>
+        </note>
+      <p>On either side of the viewport sit the <term>docks</term>. And at the bottom of the
+                window lies the <term>bottom panel</term>.</p>
+      <p>Let's look at the docks. The <term>FileSystem</term> dock lists your project files, including
+                scripts, images, audio samples, and more:</p>
+      <figure>
+        <caption>Filesystem Dock</caption>
+        <image source="editor_intro_filesystem_dock.webp"  width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The <term>Scene</term> dock lists the active scene's nodes:</p>
+      <figure>
+        <caption>Scene Dock</caption>
+        <image source="editor_intro_scene_dock.webp"  width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The <term>Inspector</term> allows you to edit the properties of a selected node:</p>
+      <figure>
+        <caption>Inspector Dock</caption>
+        <image source="editor_intro_inspector_dock.webp"  width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>See Also</title>
+        <p>To read more on inspector, see <url href="https://docs.godotengine.org/en/stable/tutorials/editor/inspector_dock.html#doc-editor-inspector-dock">Inspector Dock</url>.</p>
+         <p>Docks can be customized. Read more on <url href="https://docs.godotengine.org/en/stable/tutorials/editor/customizing_editor.html#doc-customizing-editor-moving-docks">Moving and resizing docks</url>.</p>
+        </note>
+      <p>The <term>bottom panel</term>, situated below the viewport, is the host for the debug
+                console, the animation editor, the audio mixer, and more. They can take precious
+                space, that's why they're folded by default:</p>
+      <figure>
+        <caption>Bottom Panels Tabs</caption>
+        <image source="editor_intro_bottom_panels.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>When you click on one, it expands vertically. Below, you can see the animation editor opened:</p>
+      <figure>
+        <caption>Animation Panel (Bottom)</caption>
+        <image source="editor_intro_bottom_panel_animation.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Bottom panels can also be shown or hidden using the shortcuts defined in
+                <term>Editor Settings &gt; Shortcuts</term>, under the <term>Bottom Panels</term> category.</p>
+      </subsection>
+    <subsection xml:id="getting-started-introduction-first-look-at-the-editor-the-five-main-screens">
+      <title>The five main screens</title>
+      <p>There are five main screen buttons centered at the top of the editor:
+                2D, 3D, Script, Game and Asset Library.</p>
+      <p>You'll use the <term>2D screen</term> for all types of games. In addition to 2D games,
+                the 2D screen is where you'll build your interfaces.</p>
+      <figure>
+        <caption>Example 2D Workspace</caption>
+        <image source="editor_intro_workspace_2d.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>In the <term>3D screen</term>, you can work with meshes, lights, and design levels for
+                3D games.</p>
+      <figure>
+        <caption>Example 3D Workspace</caption>
+        <image source="editor_intro_workspace_3d.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>Note</title>
+        <p>Read <url href="https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#doc-introduction-to-3d">Introduction to 3D</url> for more detail about the <term>3D
+                    main screen</term>.</p>
+        </note>
+      <p>The <term>Game screen</term> is where your project will appear when running it from
+                the editor. You can go through your project to test it, and pause it and
+                adjust it in real time. Note that this is for testing how adjustments would
+                work, any changes made here are not saved when the game stops running.</p>
+      <figure>
+        <caption>Game Screen</caption>
+        <image source="editor_intro_workspace_game.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The <term>Script screen</term> is a complete code editor with a debugger, rich
+                auto-completion, and built-in code reference.</p>
+      <figure>
+        <caption>Script Screen</caption>
+        <image source="editor_intro_workspace_script.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Finally, the <term>Asset Library</term> is a library of free and open source add-ons, scripts,
+                and assets to use in your projects.</p>
+      <figure>
+        <caption>Asset Library</caption>
+        <image source="editor_intro_workspace_assetlib.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>See Also</title>
+        <p>You can learn more about the asset library in
+                    <url href="https://docs.godotengine.org/en/stable/community/asset_library/what_is_assetlib.html#doc-what-is-assetlib">About the Asset Library</url>.</p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-introduction-first-look-at-the-editor-integrated-class-reference">
+      <title>Integrated class reference</title>
+      <p>Godot comes with a built-in class reference.</p>
+      <p>You can search for information about a class, method, property, constant, or
+                signal by any one of the following methods:</p>
+      <p>
+        <ul>
+        <li>Pressing <c>F1</c> (or <c>Opt</c>
+          <c />+<c />
+          <c>Space</c> on macOS, or <c>Fn</c>
+          <c />+<c />
+          <c>F1</c> for laptops
+                        with a <c>Fn</c> key) anywhere in the editor.</li>
+        <li>Clicking the "Search Help" button in the top-right of the Script main screen.</li>
+        <li>Clicking on the Help menu and Search Help.</li>
+        <li>
+          <c>Ctrl</c>
+          <c />+<c />
+          <c>Click</c> (<c>Cmd</c>
+          <c />+<c />
+          <c>Click</c> on macOS) on a class name, function name,
+                        or built-in variable in the script editor.</li>
+        </ul>
+      </p>
+      <figure>
+        <caption>Search Help Button</caption>
+        <image source="editor_intro_search_help_button.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>When you do any of these, a window pops up. Type to search for any item. You can
+                also use it to browse available objects and methods.</p>
+      <figure>
+        <caption>"animated" search</caption>
+        <image source="editor_intro_search_help.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Double-click on an item to open the corresponding page in the script main screen.</p>
+      <figure>
+        <caption>AnimatedSprite2D help doc</caption>
+        <image source="editor_intro_help_class_animated_sprite.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Alternatively,</p>
+      <p>
+      <ul>
+        <li>Clicking while pressing <c>Ctrl</c> (<c>Cmd</c> on macOS) on a class name, function name,
+                        or built-in variable in the script editor.</li>
+        <li>Right-clicking on nodes and choosing <term>Open Documentation</term> or choosing <term>Lookup Symbol</term>
+                        for elements in script editor will directly open their documentation.</li>
+        </ul>
+      </p>
+      </subsection>
+    </section>

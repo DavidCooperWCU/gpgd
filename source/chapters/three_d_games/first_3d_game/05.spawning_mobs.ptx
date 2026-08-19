@@ -1,0 +1,233 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-3d-game-05-spawning-mobs-spawning-monsters">
+    <title>Spawning monsters</title>
+    <introduction>
+    <p>In this part, we're going to spawn monsters along a path randomly. By the end,
+            you will have monsters roaming the game board.</p>
+    <p />
+    <p>Double-click on <c>main.tscn</c> in the <em>FileSystem</em> dock to open the <c>Main</c> scene.</p>
+    <p>Before drawing the path, we're going to change the game resolution. Our game has
+            a default window size of <c>1152x648</c>. We're going to set it to <c>720x540</c>, a
+            nice little box.</p>
+    <p>Go to <em>Project -&gt; Project Settings</em>.</p>
+    <p />
+    <p>If you still have <em>Input Map</em> open, switch to the <em>General</em> tab.</p>
+    <p>In the left menu, navigate down to <em>Display -&gt; Window</em>. On the right, set the
+            <em>Viewport Width</em> to <c>720</c> and the <em>Viewport Height</em> to <c>540</c>.</p>
+    <p />
+    </introduction>
+    <subsection xml:id="getting-started-first-3d-game-05-spawning-mobs-creating-the-spawn-path">
+      <title>Creating the spawn path</title>
+      <introduction>
+      <p>Like you did in the 2D game tutorial, you're going to design a path and use a
+                <url href="https://docs.godotengine.org/en/stable/classes/class_pathfollow3d.html#class-pathfollow3d">PathFollow3D</url> node to sample random locations on it.</p>
+      <p>In 3D though, it's a bit more complicated to draw the path. We want it to be
+                around the game view so monsters appear right outside the screen. But if we draw
+                a path, we won't see it from the camera preview.</p>
+      <p>To find the view's limits, we can use some placeholder meshes. Your viewport
+                should still be split into two parts, with the camera preview at the bottom. If
+                that isn't the case, press <c>Ctrl</c>
+        <c />+<c />
+        <c>2</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>2</c> on macOS) to split the view into two.
+                Select the <url href="https://docs.godotengine.org/en/stable/classes/class_camera3d.html#class-camera3d">Camera3D</url> node and click the <em>Preview</em> checkbox in the bottom
+                viewport.</p>
+      <p />
+      </introduction>
+      <subsubsection xml:id="getting-started-first-3d-game-05-spawning-mobs-adding-placeholder-cylinders">
+        <title>Adding placeholder cylinders</title>
+        <p>Let's add the placeholder meshes. Add a new <url href="https://docs.godotengine.org/en/stable/classes/class_node3d.html#class-node3d">Node3D</url> as a child of the
+                    <c>Main</c> node and name it <c>Cylinders</c>. We'll use it to group the cylinders. Select <c>Cylinders</c> and add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_meshinstance3d.html#class-meshinstance3d">MeshInstance3D</url>
+          </p>
+        <p />
+        <p>In the <em>Inspector</em>, assign a <em>CylinderMesh</em> to the <em>Mesh</em> property.</p>
+        <p />
+        <p>Set the top viewport to the top orthogonal view using the menu in the viewport's
+                    top-left corner. Alternatively, you can press the keypad's 7 key.</p>
+        <p />
+        <p>The grid may be distracting. You can toggle it by going to the <em>View</em>
+                    menu in the toolbar and clicking <em>View Grid</em>.</p>
+        <p />
+        <p>You now want to move the cylinder along the ground plane, looking at the camera
+                    preview in the bottom viewport. I recommend using grid snap to do so. You can
+                    toggle it by clicking the magnet icon in the toolbar or pressing Y.</p>
+        <p />
+        <p>Move the cylinder so it's right outside the camera's view in the top-left
+                    corner.</p>
+        <p />
+        <p>We're going to create copies of the mesh and place them around the game area.
+                    Press <c>Ctrl</c>
+          <c />+<c />
+          <c>D</c> (<c>Cmd</c>
+          <c />+<c />
+          <c>D</c> on macOS) to duplicate the node. You can also right-click
+                    the node in the <em>Scene</em> dock and select <em>Duplicate</em>. Move the copy down along
+                    the blue Z axis until it's right outside the camera's preview.</p>
+        <p>Select both cylinders by pressing the <c>Shift</c> key and clicking on the unselected
+                    one and duplicate them.</p>
+        <p />
+        <p>Move them to the right by dragging the red X axis.</p>
+        <p />
+        <p>They're a bit hard to see in white, aren't they? Let's make them stand out by
+                    giving them a new material.</p>
+        <p>In 3D, materials define a surface's visual properties like its color, how it
+                    reflects light, and more. We can use them to change the color of a mesh.</p>
+        <p>We can update all four cylinders at once. Select all the mesh instances in the
+                    <em>Scene</em> dock. To do so, you can click on the first one and Shift click on the
+                    last one.</p>
+        <p />
+        <p>In the <em>Inspector</em>, expand the <em>Material</em> section and assign a <url href="https://docs.godotengine.org/en/stable/classes/class_standardmaterial3d.html#class-standardmaterial3d">StandardMaterial3D</url> to slot <em>0</em>.</p>
+        <p />
+        <p>Click the sphere icon to open the material resource. You get a preview of the
+                    material and a long list of sections filled with properties. You can use these
+                    to create all sorts of surfaces, from metal to rock or water.</p>
+        <p>Expand the <em>Albedo</em> section.</p>
+        <figure>
+          <caption>Edit the Albedo</caption>
+          <image source="albedo_section.webp" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+          </figure>
+        <p>Set the color to something that contrasts with
+                    the background, like a bright orange.</p>
+        <p />
+        <p>We can now use the cylinders as guides. Fold them in the <em>Scene</em> dock by
+                    clicking the grey arrow next to them. Moving forward, you can also toggle their
+                    visibility by clicking the eye icon next to <em>Cylinders</em>.</p>
+        <p />
+        <p>Add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_path3d.html#class-path3d">Path3D</url> to <c>Main</c> node. In the toolbar, four icons appear. Click
+                    the <em>Add Point</em> tool, the icon with the green "+" sign.</p>
+        <p />
+        <note>
+          <title>Note</title>
+          <p>You can hover any icon to see a tooltip describing the tool.</p>
+          </note>
+        <p>Click in the center of each cylinder to create a point. Then, click the <em>Close
+                    Curve</em> icon in the toolbar to close the path. If any point is a bit off, you can
+                    click and drag on it to reposition it.</p>
+        <p />
+        <p>Your path should look like this.</p>
+        <p />
+        <p>To sample random positions on it, we need a <url href="https://docs.godotengine.org/en/stable/classes/class_pathfollow3d.html#class-pathfollow3d">PathFollow3D</url> node. Add a
+                    <url href="https://docs.godotengine.org/en/stable/classes/class_pathfollow3d.html#class-pathfollow3d">PathFollow3D</url> as a child of the <c>Path3D</c>. Rename the two nodes to <c>SpawnLocation</c> and
+                    <c>SpawnPath</c>, respectively. It's more descriptive of what we'll use them for.</p>
+        <p />
+        <p>With that, we're ready to code the spawn mechanism.</p>
+        </subsubsection>
+      </subsection>
+    <subsection xml:id="getting-started-first-3d-game-05-spawning-mobs-spawning-monsters-randomly">
+      <title>Spawning monsters randomly</title>
+      <p>Right-click on the <c>Main</c> node and attach a new script to it.</p>
+      <p>We first export a variable to the <em>Inspector</em> so that we can assign <c>mob.tscn</c>
+                or any other monster to it.</p>
+      
+        <program language="gdscript">
+          <code>extends Node
+
+@export var mob_scene: PackedScene</code>
+          </program>
+        
+        
+      <p>We want to spawn mobs at regular time intervals. To do this, we need to go back
+                to the scene and add a timer. Before that, though, we need to assign the
+                <c>mob.tscn</c> file to the <c>mob_scene</c> property above (otherwise it's null!)</p>
+      <p>Head back to the 3D screen and select the <c>Main</c> node. Drag <c>mob.tscn</c> from
+                the <em>FileSystem</em> dock to the <em>Mob Scene</em> slot in the <em>Inspector</em>.</p>
+      <p />
+      <p>Add a new <url href="https://docs.godotengine.org/en/stable/classes/class_timer.html#class-timer">Timer</url> node as a child of <c>Main</c>. Name it <c>MobTimer</c>.</p>
+      <p />
+      <p>In the <em>Inspector</em>, set its <em>Wait Time</em> to <c>0.5</c> seconds and turn on
+                <em>Autostart</em> so it automatically starts when we run the game.</p>
+      <p />
+      <p>Timers emit a <c>timeout</c> signal every time they reach the end of their <em>Wait
+                Time</em>. By default, they restart automatically, emitting the signal in a cycle.
+                We can connect to this signal from the <em>Main</em> node to spawn monsters every
+                <c>0.5</c> seconds.</p>
+      <p>With the <em>MobTimer</em> still selected, head to the <em>Signals</em> dock on the right, and
+                double-click the <c>timeout</c> signal.</p>
+      <p />
+      <p>Connect it to the <em>Main</em> node.</p>
+      <p />
+      <p>This will take you back to the script, with a new empty
+                <c>_on_mob_timer_timeout()</c> function.</p>
+      <p>Let's code the mob spawning logic. We're going to:</p>
+      <p>
+        <ol>
+        <li>Instantiate the mob scene.</li>
+        <li>Sample a random position on the spawn path.</li>
+        <li>Get the player's position.</li>
+        <li>Call the mob's <c>initialize()</c> method, passing it the random position and
+                        the player's position.</li>
+        <li>Add the mob as a child of the <em>Main</em> node.</li>
+        </ol>
+      </p>
+      
+        <program language="gdscript">
+          <code>func _on_mob_timer_timeout() -> void:
+    # Create a new instance of the Mob scene.
+    var mob: Mob = mob_scene.instantiate()
+
+    # Choose a random location on the SpawnPath.
+    # We store the reference to the SpawnLocation node.
+    var mob_spawn_location: PathFollow2D = get_node("SpawnPath/SpawnLocation")
+    # And give it a random offset.
+    mob_spawn_location.progress_ratio = randf()
+
+    var player_position: Vector3 = $Player.position
+    mob.initialize(mob_spawn_location.position, player_position)
+
+    # Spawn the mob by adding it to the Main scene.
+    add_child(mob)</code>
+          </program>
+        
+        
+      <p>Above, <c>randf()</c> produces a random value between <c>0</c> and <c>1</c>, which is
+                what the <em>PathFollow</em> node's <c>progress_ratio</c> expects:
+                0 is the start of the path, 1 is the end of the path.
+                The path we have set is around the camera's viewport, so any random value between 0 and 1
+                is a random position alongside the edges of the viewport!</p>
+      <p>Note that if you remove the <c>Player</c> from the main scene, the following line</p>
+      
+        <program language="gdscript">
+          <code>var player_position: Vector3 = $Player.position</code>
+          </program>
+        
+        
+      <p>gives an error because there is no $Player!</p>
+      <p>Here is the complete <c>main.gd</c> script so far, for reference.</p>
+      
+        <program language="gdscript">
+          <code>extends Node
+
+@export var mob_scene: PackedScene
+
+
+func _on_mob_timer_timeout() -> void:
+    # Create a new instance of the Mob scene.
+    var mob: CharacterBody3D = mob_scene.instantiate()
+
+    # Choose a random location on the SpawnPath.
+    # We store the reference to the SpawnLocation node.
+    var mob_spawn_location: PathFollow3D = get_node("SpawnPath/SpawnLocation")
+    # And give it a random offset.
+    mob_spawn_location.progress_ratio = randf()
+
+    var player_position: Vector3 = $Player.position
+    mob.initialize(mob_spawn_location.position, player_position)
+
+    # Spawn the mob by adding it to the Main scene.
+    add_child(mob)</code>
+          </program>
+        
+        
+      <p>You can test the scene by pressing <c>F6</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>R</c> on macOS). You should see
+                the monsters spawn and move in a straight line.</p>
+      <p />
+      <p>For now, they bump and slide against one another when their paths cross. We'll
+                address this in the next part.</p>
+      </subsection>
+    </section>
+  

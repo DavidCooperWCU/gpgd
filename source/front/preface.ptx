@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<preface>
+    <p>
+This book is designed as a text for a semester long game development course.
+The text is written in PreTeXt, and the exercises are written in GDScript with 
+the help of the GDPractice addon, originally created by GDQuest, and modified
+by the author to make <c>ActiveCode</c> programs that can be run in the textbook.
+    </p>
+    <p>
+The course is meant to cover basic game development concepts for both 2D and 3D games 
+and game networking capabilities for either 2D or 3D games. The method for learning is 
+to copy the process of building a game that already exists, and then to remix the game
+in order to either stregthen your knowledge of game development tasks or to learn a few
+new game development tasks in the process of remixing. This method gives students the 
+constraints of building particular game types that already exist, while also giving students
+agency to pursue the parts of game development that are most interesting or that the student 
+needs the most practice with.
+    </p>
+    <p>
+    This book has activities that can be done inside this book that involve writing GDScript code.
+    In addition, there are descriptions with images of the Godot Game Engine editor that walk the 
+    student through building parts of a game in the editor.
+    </p>
+    <p>
+    The student is expected to read this book alongside the Godot Editor and to follow along the book
+    as it describes the steps. In addition, all of the non-networked games that the student builds
+    can be published to GitHub using the <url href="https://github.com/WCU-CS-CooperLab/GamePublish/">GamePublish</url>
+    template repository as a template. If you are a student in a class, then this template will be distributed
+    to you using the <url href="https://classroom50.org">Classroom50</url> assignment system.
+    </p>
+
+</preface>

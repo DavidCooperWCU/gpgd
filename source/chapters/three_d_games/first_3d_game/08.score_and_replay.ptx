@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-3d-game-08-score-and-replay-score-and-replay">
+    <title>Score and replay</title>
+    <introduction>
+    <p>In this part, we'll add the score, music playback, and the ability to restart
+            the game.</p>
+    <p>We have to keep track of the current score in a variable and display it on
+            screen using a minimal interface. We will use a text label to do that.</p>
+    <p>In the main scene, add a new child node <url href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</url> to <c>Main</c> and name it
+            <c>UserInterface</c>. Ensure you are on the 2D screen, where you can edit your User Interface (UI).</p>
+    <p>Add a <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> node and name it <c>ScoreLabel</c>
+      </p>
+    <p />
+    <p>In the <em>Inspector</em>, set the <em>Label</em>'s <em>Text</em> to a placeholder like "Score: 0".</p>
+    <p />
+    <p>Also, the text is white by default, like our game's background. We need to
+            change its color to see it at runtime.</p>
+    <p>Scroll down to <em>Theme Overrides</em>, and expand <em>Colors</em>
+            and enable <em>Font Color</em> in order to tint the text to black
+            (which contrasts well with the white 3D scene)</p>
+    <p />
+    <p>Finally, click and drag on the text in the viewport to move it away from the
+            top-left corner.</p>
+    <p />
+    <p>The <c>UserInterface</c> node allows us to group our UI in a branch of the scene tree
+            and use a theme resource that will propagate to all its children. We'll use it
+            to set our game's font.</p>
+    </introduction>
+    <subsection xml:id="getting-started-first-3d-game-08-score-and-replay-creating-a-ui-theme">
+      <title>Creating a UI theme</title>
+      <p>Once again, select the <c>UserInterface</c> node. In the <em>Inspector</em>, create a new
+                theme resource in <em>Theme -&gt; Theme</em>.</p>
+      <p />
+      <p>Click on it to open the theme editor In the bottom panel. It gives you a preview
+                of how all the built-in UI widgets will look with your theme resource.</p>
+      <p />
+      <p>By default, a theme only has a few properties: <em>Default Base Scale</em>, <em>Default Font</em>
+                and <em>Default Font Size</em>.</p>
+      <note>
+        <title>Seealso</title>
+        <p>You can add more properties to the theme resource to design complex user
+                    interfaces, but that is beyond the scope of this series. To learn more about
+                    creating and editing themes, see <url href="https://docs.godotengine.org/en/stable/tutorials/ui/gui_skinning.html#doc-gui-skinning">Introduction to GUI skinning</url>.</p>
+        </note>
+      <p>The <em>Default Font</em> expects a font file like the ones you have on your computer.
+                Two common font file formats are TrueType Font (TTF) and OpenType Font (OTF).</p>
+      <p>In the <em>FileSystem</em> dock, expand the <c>fonts</c> directory and click and drag the
+                <c>Montserrat-Medium.ttf</c> file we included in the project onto the <em>Default Font</em>.
+                The text will reappear in the theme preview.</p>
+      <p>The text is a bit small. Set the <em>Default Font Size</em> to <c>22</c> pixels to increase the text's size.</p>
+      <p />
+      </subsection>
+    <subsection xml:id="getting-started-first-3d-game-08-score-and-replay-keeping-track-of-the-score">
+      <title>Keeping track of the score</title>
+      <p>Let's work on the score next. Attach a new script to the <c>ScoreLabel</c> and define
+                the <c>score</c> variable.</p>
+      
+        <program language="gdscript">
+          <code>extends Label
+
+var score: int = 0</code>
+          </program>
+        
+        
+      <p>The score should increase by <c>1</c> every time we squash a monster. We can use
+                their <c>squashed</c> signal to know when that happens. However, because we instantiate
+                monsters from the code, we cannot connect the mob signal to the <c>ScoreLabel</c> via the editor.</p>
+      <p>Instead, we have to make the connection from the code every time we spawn a
+                monster.</p>
+      <p>Open the script <c>main.gd</c>. If it's still open, you can click on its name in
+                the script editor's left column.</p>
+      <p />
+      <p>Alternatively, you can double-click the <c>main.gd</c> file in the <em>FileSystem</em>
+                dock.</p>
+      <p>At the bottom of the <c>_on_mob_timer_timeout()</c> function, add the following
+                line:</p>
+      
+        <program language="gdscript">
+          <code>func _on_mob_timer_timeout() -> void:
+    #...
+    # We connect the mob to the score label to update the score upon squashing one.
+    mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())</code>
+          </program>
+        
+        
+      <p>This line means that when the mob emits the <c>squashed</c> signal, the
+                <c>ScoreLabel</c> node will receive it and call the function <c>_on_mob_squashed()</c>.</p>
+      <p>Head back to the <c>score_label.gd</c> script to define the <c>_on_mob_squashed()</c>
+                callback function.</p>
+      <p>There, we increment the score and update the displayed text.</p>
+      
+        <program language="gdscript">
+          <code>func _on_mob_squashed() -> void:
+    score += 1
+    text = "Score: %s" % score</code>
+          </program>
+        
+        
+      <p>The second line uses the value of the <c>score</c> variable to replace the
+                placeholder <c>%s</c>. When using this feature, Godot automatically converts values
+                to string text, which is convenient when outputting text in labels or
+                when using the <c>print()</c> function.</p>
+      <note>
+        <title>Seealso</title>
+        <p>You can learn more about string formatting here: <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_format_string.html#doc-gdscript-printf">GDScript format strings</url>.
+                   </p>
+        </note>
+      <p>You can now play the game and squash a few enemies to see the score
+                increase.</p>
+      <p />
+      <note>
+        <title>Note</title>
+        <p>In a complex game, you may want to completely separate your user interface
+                    from the game world. In that case, you would not keep track of the score on
+                    the label. Instead, you may want to store it in a separate, dedicated
+                    object. But when prototyping or when your project is simple, it is fine to
+                    keep your code simple. Programming is always a balancing act.</p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-first-3d-game-08-score-and-replay-retrying-the-game">
+      <title>Retrying the game</title>
+      <introduction>
+      <p>We'll now add the ability to play again after dying. When the player dies, we'll
+                display a message on the screen and wait for input.</p>
+      <p>Head back to the <c>main.tscn</c> scene, select the <c>UserInterface</c> node, add a
+                child node <url href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#class-colorrect">ColorRect</url>, and name it <c>Retry</c>. This node fills a
+                rectangle with a uniform color and will serve as an overlay to darken the
+                screen.</p>
+      <p>To make it span over the whole viewport, you can use the <em>Anchor Preset</em> menu in the
+                toolbar.</p>
+      <p />
+      <p>Open it and apply the <em>Full Rect</em> command.</p>
+      <p />
+      <p>Nothing happens. Well, almost nothing; only the four green pins move to the
+                corners of the selection box.</p>
+      <p />
+      <p>This is because UI nodes (all the ones with a green icon) work with anchors and
+                margins relative to their parent's bounding box. Here, the <c>UserInterface</c> node
+                has a small size and the <c>Retry</c> one is limited by it.</p>
+      <p>Select the <c>UserInterface</c> and apply <em>Anchor Preset -&gt; Full Rect</em> to it as well. The
+                <c>Retry</c> node should now span the whole viewport.</p>
+      <p>Let's change its color so it darkens the game area. Select <c>Retry</c> and in the
+                <em>Inspector</em>, set its <em>Color</em> to something both dark and transparent. To do so,
+                in the color picker, drag the <em>A</em> slider to the left. It controls the color's
+                Alpha channel, that is to say, its opacity/transparency.</p>
+      <p />
+      <p>Next, add a <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> as a child of <c>Retry</c> and give it the <em>Text</em>
+                "Press Enter to retry."
+                To move it and anchor it in the center of the screen, apply <em>Anchor Preset -&gt; Center</em>
+                to it.</p>
+      <p />
+      </introduction>
+      <subsubsection xml:id="getting-started-first-3d-game-08-score-and-replay-coding-the-retry-option">
+        <title>Coding the retry option</title>
+        <p>We can now head to the code to show and hide the <c>Retry</c> node when the player
+                    dies and plays again.</p>
+        <p>Open the script <c>main.gd</c>. First, we want to hide the overlay at the start of
+                    the game. Add this line to the <c>_ready()</c> function.</p>
+        
+          <program language="gdscript">
+            <code>func _ready() -> void:
+    $UserInterface/Retry.hide()</code>
+            </program>
+          
+          
+        <p>Then, when the player gets hit, we show the overlay.</p>
+        
+          <program language="gdscript">
+            <code>func _on_player_hit() -> void:
+    #...
+    $UserInterface/Retry.show()</code>
+            </program>
+          
+          
+        <p>Finally, when the <c>Retry</c> node is visible, we need to listen to the player's
+                    input and restart the game if they press enter. To do this, we use the built-in
+                    <c>_unhandled_input()</c> callback, which is triggered on any input.</p>
+        <p>If the player pressed the predefined <c>ui_accept</c> input action and <c>Retry</c> is
+                    visible, we reload the current scene.</p>
+        
+          <program language="gdscript">
+            <code>func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
+        # This restarts the current scene.
+        get_tree().reload_current_scene()</code>
+            </program>
+          
+          
+        <p>The function <c>get_tree()</c> gives us access to the global <url href="https://docs.godotengine.org/en/stable/classes/class_scenetree.html#class-scenetree">SceneTree</url> object, which allows us to reload and restart the current
+                    scene.</p>
+        </subsubsection>
+      </subsection>
+    <subsection xml:id="getting-started-first-3d-game-08-score-and-replay-adding-music">
+      <title>Adding music</title>
+      <p>To add music that plays continuously in the background, we're going to use
+                another feature in Godot: <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html#doc-singletons-autoload">autoloads</url>.</p>
+      <p>To play audio, all you need to do is add an <url href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#class-audiostreamplayer">AudioStreamPlayer</url> node to your
+                scene and attach an audio file to it. When you start the scene, it can play
+                automatically. However, when you reload the scene, like we do to play again, the
+                audio nodes are also reset, and the music starts back from the beginning.</p>
+      <p>You can use the autoload feature to have Godot load a node or a scene
+                automatically at the start of the game, outside the current scene. You can also
+                use it to create globally accessible objects.</p>
+      <p>Create a new scene by going to the <em>Scene</em> menu and clicking <em>New Scene</em>
+                or by using the <em>+</em> icon next to your currently opened scene.</p>
+      <p />
+      <p>Click the <em>Other Node</em> button to create an <url href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#class-audiostreamplayer">AudioStreamPlayer</url> and rename it to
+                <c>MusicPlayer</c>.</p>
+      <p />
+      <p>We included a music soundtrack in the <c>art/</c> directory, <c>House In a Forest
+Loop.ogg</c>. Click and drag it onto the <em>Stream</em> property in the <em>Inspector</em>.
+                Also, turn on <em>Autoplay</em> so the music plays automatically at the start of the
+                game.</p>
+      <p />
+      <p>Save the scene as <c>music_player.tscn</c>.</p>
+      <p>We have to register it as an autoload. Head to the <em>Project -&gt; Project
+                Settings…</em> menu and click on the <em>Globals -&gt; Autoload</em> tab.</p>
+      <p>In the <em>Path</em> field, you want to enter the path to your scene. Click the folder
+                icon to open the file browser and double-click on <c>music_player.tscn</c>. Then,
+                click the <em>Add</em> button on the right to register the node.</p>
+      <p />
+      <p>
+        <c>music_player.tscn</c> now loads into any scene you open or play.
+                So if you run the game now, the music will play automatically in any scene.</p>
+      <p>Before we wrap up this lesson, here's a quick look at how it works under the
+                hood. When you run the game, your <em>Scene</em> dock changes to give you two tabs:
+                <em>Remote</em> and <em>Local</em>.</p>
+      <p />
+      <p>The <em>Remote</em> tab allows you to visualize the node tree of your running game.
+                There, you will see the <em>Main</em> node and everything the scene contains and the
+                instantiated mobs at the bottom.</p>
+      <p />
+      <p>At the top are the autoloaded <c>MusicPlayer</c> and a <em>root</em> node, which is your
+                game's viewport.</p>
+      <p>And that does it for this lesson. In the next part, we'll add an animation to
+                make the game both look and feel much nicer.</p>
+      <p>Here is the complete <c>main.gd</c> script for reference.</p>
+      
+        <program language="gdscript">
+          <code>extends Node
+
+@export var mob_scene: PackedScene
+
+func _ready() -> void:
+    $UserInterface/Retry.hide()
+
+
+func _on_mob_timer_timeout() -> void:
+    # Create a new instance of the Mob scene.
+    var mob: Mob = mob_scene.instantiate()
+
+    # Choose a random location on the SpawnPath.
+    # We store the reference to the SpawnLocation node.
+    var mob_spawn_location: PathFollow3D = get_node("SpawnPath/SpawnLocation")
+    # And give it a random offset.
+    mob_spawn_location.progress_ratio = randf()
+
+    var player_position: Vector3 = $Player.position
+    mob.initialize(mob_spawn_location.position, player_position)
+
+    # Spawn the mob by adding it to the Main scene.
+    add_child(mob)
+
+    # We connect the mob to the score label to update the score upon squashing one.
+    mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
+
+func _on_player_hit() -> void:
+    $MobTimer.stop()
+    $UserInterface/Retry.show()
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
+        # This restarts the current scene.
+        get_tree().reload_current_scene()</code>
+          </program>
+        
+        
+      </subsection>
+    </section>

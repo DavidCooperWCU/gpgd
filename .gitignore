@@ -1,0 +1,48 @@
+# Godot 4+ specific ignores
+.godot/
+.nomedia
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# PreTeXt Build Artifacts and Caches
+/_build/
+/output/
+/.cache/
+/cli.log
+.error_schema.log
+/logs/
+
+# CSS Builder Outputs
+css/dist/*.map
+
+# WebWork/Interactive Examples
+examples/webwork/Makefile.paths
+examples/webwork/sample-chapter/my-generated/*
+examples/webwork/minimal/generated/*
+
+# Node.js and Package Manager files (often used for PreTeXt utilities)
+node_modules/
+package-lock.json
+
+# Operating System and Editor files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+.vscode/
+.idea/
+
+# Custom local PreTeXt CLI managed file rules
+user/*

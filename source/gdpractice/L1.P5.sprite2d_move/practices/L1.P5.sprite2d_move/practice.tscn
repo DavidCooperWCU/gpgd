@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://icon.svg" id="1_nbgy2"]
+[ext_resource type="Script" path="res://practices/L1.P5.sprite2d_move/practice.gd" id="2_nagxo"]
+
+[node name="Practice" type="Sprite2D" unique_id=463663439]
+position = Vector2(253, 207)
+texture = ExtResource("1_nbgy2")
+script = ExtResource("2_nagxo")

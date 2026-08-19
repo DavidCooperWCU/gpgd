@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<part xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="part-infrastructure">
+  <title>Game Development Infrastructure</title>
+  <xi:include href="infrastructure/godot_resources/index.ptx" />
+  <xi:include href="infrastructure/godot_early_steps/index.ptx" />
+  </part>

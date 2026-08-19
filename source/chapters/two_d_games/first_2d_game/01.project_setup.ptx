@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-01-project-setup-setting-up-the-project">
+    <title>Setting up the project</title>
+    <introduction>
+    <p>In this short first part, we'll set up and organize the project.</p>
+    <p>Launch Godot and create a new project.</p>
+    <figure>
+      <caption>Create New Project Button</caption>
+      <image source="new-project-button.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>When creating the new project, you only need to choose a valid <em>Project Path</em>. You can leave the other default settings alone.</p>
+    <p>Your project folder should look like this.</p>
+    <figure>
+      <caption>Project Folder View</caption>
+      <image source="folder-content.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>This game is designed for portrait mode, so we need to adjust the size of the
+            game window. Click on <em>Project -&gt; Project Settings</em> to open the project settings
+            window, in the left column open the <em>Display -&gt; Window</em> tab. There, set
+            "Viewport Width" to <c>480</c> and "Viewport Height" to <c>720</c>. You can see the
+            "Project" menu on the upper left corner.</p>
+    <figure>
+      <caption>Setting the Width and Height of the Game</caption>
+      <image source="setting-project-width-and-height.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>Also, under the <term>Stretch</term> options, set <term>Mode</term> to <c>canvas_items</c> and <term>Aspect</term> to <c>keep</c>.
+            This ensures that the game scales consistently on different sized screens.</p>
+    <figure>
+      <caption>Setting the Stretch Mode</caption>
+      <image source="setting-stretch-mode.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-01-project-setup-organizing-the-project">
+      <title>Organizing the project</title>
+      <p>In this project, we will make 3 independent scenes: <c>Player</c>, <c>Mob</c>, and
+                <c>HUD</c>, which we will combine into the game's <c>Main</c> scene.</p>
+      <p>In a larger project, it might be useful to create folders to hold the various
+                scenes and their scripts, but for this relatively small game, you can save your
+                scenes and scripts in the project's root folder, identified by <c>res://</c>. You
+                can see your project folders in the FileSystem dock in the lower left corner:</p>
+      <figure>
+        <caption>Filesystem Dock</caption>
+      <image source="filesystem_dock.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>With the project in place, we're ready to design the player scene in the next lesson.</p>
+      </subsection>
+    </section>
+  

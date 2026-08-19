@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='utf-8'?>
+<section xml:id="getting-started-step-by-step-nodes-and-scenes-doc-getting-started-step-by-step-nodes-and-scenes">
+  <title>Nodes and Scenes</title>
+  <introduction>
+    <p>In <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html">Overview of Godot's key concepts</url>, we saw that a Godot game is a tree of
+            scenes and that each scene is a tree of nodes. In this lesson, we explain a bit
+            more about them. You will also create your first scene.</p>
+  </introduction>
+  <subsection xml:id="getting-started-step-by-step-nodes-and-scenes-nodes">
+      <title>Nodes</title>
+      <p>
+        <term>Nodes are the fundamental building blocks of your game</term>. They are like the
+                ingredients in a recipe. There are dozens of kinds that can display an image,
+                play a sound, represent a camera, and much more.</p>
+      <figure>
+        <caption>Nodes</caption>
+        <image source="nodes_and_scenes_nodes.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>All nodes have the following characteristics:</p>
+      <p>
+      <ul>
+        <li>A name.</li>
+        <li>Editable properties.</li>
+        <li>They receive callbacks to update every frame.</li>
+        <li>You can extend them with new properties and functions.</li>
+        <li>You can add them to another node as a child.</li>
+        </ul>
+      </p>
+      <p>The last characteristic is important. <term>Together, nodes form a tree</term>, which is a powerful
+                feature to organize projects. Since different nodes have different functions,
+                combining them produces more complex behavior. As we saw before, you can build a
+                playable character that the camera follows using a <url href="https://docs.godotengine.org/en/stable/classes/class_characterbody2d.html#class-characterbody2d">CharacterBody2D</url>
+                node, a <url href="https://docs.godotengine.org/en/stable/classes/class_sprite2d.html#class-sprite2d">Sprite2D</url> node,
+                a <url href="https://docs.godotengine.org/en/stable/classes/class_camera2d.html#class-camera2d">Camera2D</url> node, and a <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape2d.html#class-collisionshape2d">CollisionShape2D</url> node.</p>
+      <figure>
+        <caption>Character Nodes</caption>
+        <image source="nodes_and_scenes_character_nodes.webp" width="60%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-nodes-and-scenes-scenes">
+      <title>Scenes</title>
+      <p>When you organize nodes in a tree, like our character, we call this construct a
+                scene. Once saved, scenes work like new node types in the editor, where you can
+                add them as a child of an existing node. In that case, the instance of the scene
+                appears as a single node with its internals hidden.</p>
+      <p>Scenes allow you to structure your game's code however you want. You can
+                <term>compose nodes</term> to create custom and complex node types, like a game character
+                that runs and jumps, a life bar, a chest with which you can interact, and more.</p>
+      <figure>
+        <caption>3D Scene</caption>
+        <image source="nodes_and_scenes_3d_scene_example.webp" width="60%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The Godot editor essentially is a <term>scene editor</term>. It has plenty of tools for
+                editing 2D and 3D scenes, as well as user interfaces. A Godot project can
+                contain as many of these scenes as you need. The engine only requires one as
+                your application's <term>main scene</term>. This is the scene Godot will first load when
+                you or a player runs the game.</p>
+      <p>On top of acting like nodes, scenes have the following characteristics:</p>
+      <p>
+      <ol>
+        <li>They always have one root node, like the "Player" in our example.</li>
+        <li>You can save them to your local drive and load them later.</li>
+        <li>You can create as many instances of a scene as you'd like. You could have
+                        five or ten characters in your game, created from your Character scene.</li>
+        </ol>
+      </p>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-nodes-and-scenes-creating-your-first-scene">
+      <title>Creating your first scene</title>
+      <p>Let's create our first scene with a single node. To do so, you will need to
+                <url href="https://docs.godotengine.org/en/stable/tutorials/editor/project_manager.html#doc-creating-and-importing-projects">create a new project</url> first. After
+                opening the project, you should see an empty editor.</p>
+      <figure>
+        <caption>Empty Project</caption>
+        <image source="nodes_and_scenes_01_empty_editor.webp"  width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>In an empty scene, the <c>Scene</c> dock on the left shows several options to add a
+                root node quickly. <c>2D Scene</c> adds a <url href="https://docs.godotengine.org/en/stable/classes/class_node2d.html#class-node2d">Node2D</url> node,
+                <c>3D Scene</c> adds a <url href="https://docs.godotengine.org/en/stable/classes/class_node3d.html#class-node3d">Node3D</url> node,
+                and <c>User Interface</c> adds a <url href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</url> node.
+                These presets are here for convenience; they are not mandatory.
+                <c>Other Node</c> lets you select any node to be the root node.
+                In an empty scene, <c>Other Node</c> is equivalent to pressing the <c>Add Child Node</c>
+                button at the top-left of the Scene dock, which usually adds
+                a new node as a child of the currently selected node.</p>
+      <p>We're going to add a single <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> node to our scene. Its function is to draw
+                text on the screen.</p>
+      <p>Press the <c>Add Child Node</c> button or <c>Other Node</c> to create a
+                root node.</p>
+      <figure>
+        <caption>Scene Dock</caption>
+        <image source="nodes_and_scenes_02_scene_dock.webp"  width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The <c>Create New Node</c> dialog opens, showing the long list of available nodes.</p>
+      <figure>
+        <caption>Create Node</caption>
+        <image source="nodes_and_scenes_03_create_node_window.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Select the Label node. You can type its name to filter down the list.</p>
+      <figure>
+        <caption>Create Label</caption>
+        <image source="nodes_and_scenes_04_create_label_window.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Click on the Label node to select it and click the <c>Create</c> button at
+                the bottom of the window.</p>
+      <figure>
+        <caption>Label in Editor</caption>
+        <image source="nodes_and_scenes_05_editor_with_label.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>A lot happens when you add a scene's first node. The scene changes to the 2D
+                workspace because Label is a 2D node type. The Label appears, selected, in the
+                top-left corner of the viewport. The node appears in the Scene dock on the left,
+                and the node's properties appear in the Inspector dock on the right.</p>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-nodes-and-scenes-changing-a-node-s-properties">
+      <title>Changing a node's properties</title>
+      <p>The next step is to change the Label's <c>Text</c> property. Let's change
+                it to "Hello World".</p>
+      <p>Head to the Inspector dock on the right of the viewport. Click inside the field
+                below the <c>Text</c> property and type "Hello World".</p>
+      <figure>
+        <caption>Inspector for Label (Adding Text)</caption>
+        <image source="nodes_and_scenes_06_label_text.webp"  width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>You will see the text draw in the viewport as you type.</p>
+      <note>
+        <title>See Also</title>
+        <p>You can edit any property listed in the Inspector as we did with
+                    the Text. For a complete reference of the Inspector dock, see
+                    <url href="https://docs.godotengine.org/en/stable/tutorials/editor/inspector_dock.html#doc-editor-inspector-dock">Inspector Dock</url>.</p>
+        </note>
+      <p>You can move your Label node in the viewport by selecting the move tool in the
+                toolbar.</p>
+      <figure>
+        <caption>The Move Tool</caption>
+        <image source="nodes_and_scenes_07_move_tool.webp"  width="70%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>With the Label selected, click and drag anywhere in the viewport to
+                move it to the center of the view delimited by the rectangle.</p>
+      <figure>
+        <caption>Hello World Label</caption>
+        <image source="nodes_and_scenes_08_hello_world_text.webp"  width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-nodes-and-scenes-running-the-scene">
+      <title>Running the scene</title>
+      <p>Everything's ready to run the scene! Press the <c>Run Current Scene</c>
+                button in the top-right of the screen or press <c>F6</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>R</c> on
+                macOS).</p>
+      <figure>
+        <caption>Play Scene Button</caption>
+        <image source="nodes_and_scenes_09_play_scene_button.webp"  width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>A popup invites you to save the scene, which is required to run it. Click the
+                <c>Save</c> button in the file browser to save it as <c>label.tscn</c>.</p>
+      <figure>
+        <caption>Save Scene As... Window</caption>
+        <image source="nodes_and_scenes_10_save_scene_as.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>Note</title>
+        <p>The <c>Save Scene As</c> dialog, like other file dialogs in the editor, only
+                    allows you to save files inside the project. The <c>res://</c> path at
+                    the top of the window represents the project's root directory and
+                    stands for "resource path". For more information about file paths in
+                    Godot, see <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/filesystem.html#doc-filesystem">File system</url>.</p>
+        </note>
+      <p>The application should open in a new window and display the text "Hello World".</p>
+      <figure>
+        <caption>Running Scene Window</caption>
+        <image source="nodes_and_scenes_11_final_result.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Close the window or press <c>F8</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>.</c> on macOS) to quit the running scene.</p>
+      <note>
+        <title>See Also</title>
+        <p>See <url href="https://docs.godotengine.org/en/stable/tutorials/editor/game_embedding.html#doc-game-embedding">Game embedding</url> for more information about the Game window that appears
+                    when running the project.</p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-nodes-and-scenes-setting-the-main-scene">
+      <title>Setting the main scene</title>
+      <p>To run our test scene, we used the <c>Run Current Scene</c> button. Another button
+                next to it, <c>Run Project</c>, allows you to set and run the project's
+                <term>main scene</term>. You can also press <c>F5</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>B</c> on macOS) to do so.</p>
+      <figure>
+        <caption>Play Button</caption>
+        <image source="nodes_and_scenes_12_play_button.webp"  width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>Note</title>
+        <p>Running the project's <em>main scene</em> is distinct from running the
+                    <em>current scene</em>. If you encounter unexpected behavior, check
+                    to ensure you are running the correct scene.</p>
+        </note>
+      <p>A popup window appears and invites you to select the main scene.</p>
+      <figure>
+        <caption>Select Main Scene Popup</caption>
+        <image source="nodes_and_scenes_13_main_scene_popup.webp"  width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Click the <c>Select</c> button, and in the file dialog that appears, double
+                click on <c>label.tscn</c>.</p>
+      <figure>
+        <caption>Main Scene Selection</caption>
+        <image source="nodes_and_scenes_14_select_main_scene.webp"  width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The demo should run again. Moving forward, every time you run the project, Godot
+                will use this scene as a starting point.</p>
+      <note>
+        <title>Note</title>
+        <p>The editor saves the main scene's path in a project.godot file in your
+                    project's directory. While you can edit this text file directly to
+                    change project settings, you can also use the <c>Project &gt; Project Settings</c>
+                    window to do so. For more information, see <url href="https://docs.godotengine.org/en/stable/tutorials/editor/project_settings.html#doc-project-settings">Project Settings</url>.</p>
+        </note>
+
+      <activity xml:id="getting-started-hello-world" label="getting-started-hello-world">
+            <title>Adding the Label Programmatically</title>
+            <statement><p>You don't have to use the UI, if you don't want to. In this book, 
+            some scenes will be fully implemented, and others you'll need to add to programmatically.
+            Here is the code to add the "Hello, World!" `Label` programmatically as a child
+            of the scene in the <c>_init()</c> function.</p>
+            <program language="gdscript">
+                <code>
+func _init() -> void:
+    var label: Label = Label.new()
+    # set the text
+    label.text = "Hello, World!"
+    # set the x position, positive is right
+    label.position.x = 40
+    # set the y position, positive is down
+    label.position.y = 40
+    # set the font size
+    label.add_theme_font_size_override("font_size", 64)
+
+    add_child(label)
+
+                </code>
+                
+            </program>
+            
+            </statement>
+            <program xml:id="gs-hello-label" interactive='activecode' language="gdscript" label="gs-hello-prog"
+                     pck="gdpractice/L1.P1.nodes_hello_label"
+                     scene="res://practices/L1.P1.nodes_hello_label/practice.tscn">
+<preamble>
+extends Node2D
+
+
+func _init() -> void:
+
+    # instantiate the label
+    var label: Label = Label.new() 
+</preamble>
+<code>
+    # set the text
+    # set the x position, positive is right
+    # set the y position, positive is down
+    # set the font size
+</code>
+<postamble>
+    # add the label as a child
+    add_child(label) 
+</postamble>
+
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+func _init() -> void:
+    side_by_side = true
+    pass
+func _build_checks() -> void:
+    var practice_label := _find_label(_practice)
+    var solution_label := _find_label(_solution)
+    var check_label_exists := _add_simple_check(
+        tr("Add a Label node as a child of the scene"),
+        func() -> String:
+            return (
+                ""
+                if practice_label != null
+                else tr("No Label node was found as a child of the scene root.")
+            )
+    )
+    var check_text := _add_simple_check(
+        tr("Label text matches"),
+        func() -> String:
+            if practice_label.text != solution_label.text:
+                return tr("The Label's text should be \"%s\".") % solution_label.text
+            return ""
+    )
+    check_text.dependencies.append(check_label_exists)
+    var check_position := _add_simple_check(
+        tr("Label position matches"),
+        func() -> String:
+            if not practice_label.position.is_equal_approx(solution_label.position):
+                return tr("The Label's position should be %s.") % solution_label.position
+            return ""
+    )
+    check_position.dependencies.append(check_label_exists)
+    var check_font_size := _add_simple_check(
+        tr("Label font size matches"),
+        func() -> String:
+            var practice_font_size := practice_label.get_theme_font_size("font_size")
+            var solution_font_size := solution_label.get_theme_font_size("font_size")
+            if practice_font_size != solution_font_size:
+                return tr("The Label's font size should be %s.") % solution_font_size
+            return ""
+    )
+    check_font_size.dependencies.append(check_label_exists)
+#Returns the first direct child of [param node] that is a [Label], or [code]null[/code]
+#if none is found. Matches by type only, not by node name.
+func _find_label(node: Node) -> Label:
+    for child in node.get_children():
+        if child is Label:
+            return child
+    return null
+</tests>
+                
+            </program>
+        </activity>  
+        
+      <p>In the next part, we will discuss another key concept in games and in Godot:
+                creating instances of a scene.</p>
+      </subsection>
+
+  </section>

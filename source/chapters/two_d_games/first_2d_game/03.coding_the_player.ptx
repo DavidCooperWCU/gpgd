@@ -1,0 +1,579 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-03-coding-the-player-coding-the-player">
+    <title>Coding the player</title>
+    <introduction>
+    <p>In this lesson, we'll add player movement, animation, and set it up to detect
+            collisions.</p>
+    <p>To do so, we need to add some functionality that we can't get from a built-in
+            node, so we'll add a script. Click the <c>Player</c> node and click the "Attach
+            Script" button:</p>
+    <figure>
+      <caption>Script Button in Scene Tree</caption>
+      <image source="add_script_button.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>In the script settings window, you can leave the default settings alone. Just
+            click "Create":</p>
+   
+    <figure>
+      <caption>Attach Script Dialog</caption>
+      <image source="attach_node_window.webp" width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <note>
+      <title>Note</title>
+      <p>If this is your first time encountering GDScript, please read
+                <xref ref="getting-started-step-by-step-scripting-first-script-creating-your-first-script">Your First Script</xref> before continuing.</p>
+      </note>
+    <p>Start by declaring the member variables this object will need:</p>
+    
+      <program language="gdscript">
+        <code>extends Area2D
+
+@export var speed: float = 400 # How fast the player will move (pixels/sec).
+var screen_size # Size of the game window.</code>
+        </program>
+      
+      
+    <p>Using the <c>export</c> keyword on the first variable <c>speed</c> allows us to set
+            its value in the Inspector. This can be handy for values that you want to be
+            able to adjust just like a node's built-in properties. Click on the <c>Player</c>
+            node and you'll see the property now appears in the Inspector in a new section
+            with the name of the script. Remember, if you change the value here, it will
+            override the default value specified in the script (the script won't be modified).</p>
+    
+    <figure>
+      <caption>Exported Variable in Inspector</caption>
+      <image source="export_variable.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>Your <c>player.gd</c> script should already contain
+            a <c>_ready()</c> and a <c>_process()</c> function.
+            If you didn't select the default template shown above,
+            create these functions while following the lesson.</p>
+    <p>The <c>_ready()</c> function is called when a node enters the scene tree, which is
+            a good time to find the size of the game window:</p>
+    
+      <program language="gdscript">
+        <code>func _ready() -> void:
+    screen_size = get_viewport_rect().size</code>
+        </program>
+      
+      
+    <p>Now we can use the <c>_process()</c> function to define what the player will do.
+            <c>_process()</c> is called every frame, so we'll use it to update elements of our
+            game, which we expect will change often. For the player, we need to do the
+            following:</p>
+    <p>
+      <ul>
+      <li>Check for input.</li>
+      <li>Move in the given direction.</li>
+      <li>Play the appropriate animation.</li>
+      </ul>
+    </p>
+    <p>First, we need to check for input - is the player pressing a key? For this game,
+            we have 4 direction inputs to check. Input actions are defined in the Project
+            Settings under "Input Map". Here, you can define custom events and assign
+            different keys, mouse events, or other inputs to them. For this game, we will
+            map the arrow keys to the four directions.</p>
+    <p>Click on <em>Project -&gt; Project Settings</em> to open the project settings window and
+            click on the <em>Input Map</em> tab at the top. Type "move_right" in the top bar and
+            click the "Add" button to add the <c>move_right</c> action.</p>
+    <figure>
+      <caption>Input Map Add Action</caption>
+      <image source="input-mapping-add-action.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>We need to assign a key to this action. Click the "+" icon on the right, to
+            open the event manager window.</p>
+    <figure>
+      <caption>Action Add Key</caption>
+      <image source="input-mapping-add-key.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>The "Listening for Input..." field should automatically be selected.
+            Press the "right" key on your keyboard, and the menu should look like this now.</p>
+    <figure>
+      <caption>Pressing the Key for the Action</caption>
+      <image source="input-mapping-event-configuration.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>Select the "ok" button. The "right" key is now associated with the <c>move_right</c> action.</p>
+    <p>Repeat these steps to add three more mappings:</p>
+    <p>
+      <ol>
+      <li>
+        <c>move_left</c> mapped to the left arrow key.</li>
+      <li>
+        <c>move_up</c> mapped to the up arrow key.</li>
+      <li>And <c>move_down</c> mapped to the down arrow key.</li>
+      </ol>
+    </p>
+    <p>Your input map tab should look like this:</p>
+    <figure>
+      <caption>Finished Input Mapping</caption>
+      <image source="input-mapping-completed.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>Click the "Close" button to close the project settings.</p>
+    <note>
+      <title>Note</title>
+      <p>We only mapped one key to each input action, but you can map multiple keys,
+                joystick buttons, or mouse buttons to the same input action.</p>
+      </note>
+    <p>You can detect whether a key is pressed using <c>Input.is_action_pressed()</c>,
+            which returns <c>true</c> if it's pressed or <c>false</c> if it isn't.</p>
+    
+      <program language="gdscript">
+        <code>func _process(delta: float) -> void:
+    var velocity: Vector2 = Vector2.ZERO # The player's movement vector.
+    if Input.is_action_pressed("move_right"):
+        velocity.x += 1
+    if Input.is_action_pressed("move_left"):
+        velocity.x -= 1
+    if Input.is_action_pressed("move_down"):
+        velocity.y += 1
+    if Input.is_action_pressed("move_up"):
+        velocity.y -= 1
+
+    if velocity.length() &gt; 0:
+        velocity = velocity.normalized() * speed
+        $AnimatedSprite2D.play()
+    else:
+        $AnimatedSprite2D.stop()</code>
+        </program>
+      
+      
+    <p>We start by setting the <c>velocity</c> to <c>(0, 0)</c> - by default, the player
+            should not be moving. Then we check each input and add/subtract from the
+            <c>velocity</c> to obtain a total direction. For example, if you hold <c>right</c> and
+            <c>down</c> at the same time, the resulting <c>velocity</c> vector will be <c>(1, 1)</c>.
+            In this case, since we're adding a horizontal and a vertical movement, the
+            player would move <em>faster</em> diagonally than if it just moved horizontally.</p>
+    <p>We can prevent that if we <em>normalize</em> the velocity, which means we set its
+            <em>length</em> to <c>1</c>, then multiply by the desired speed. This means no more fast
+            diagonal movement.</p>
+    <note>
+      <title>Tip</title>
+      <p>If you've never used vector math before, or need a refresher, you can
+                see an explanation of vector usage in Godot at <url href="https://docs.godotengine.org/en/stable/tutorials/math/vector_math.html#doc-vector-math">Vector math</url>.
+                It's good to know but won't be necessary for the rest of this tutorial.</p>
+      </note>
+    <p>We also check whether the player is moving so we can call <c>play()</c> or
+            <c>stop()</c> on the AnimatedSprite2D.</p>
+    <note>
+      <title>Tip</title>
+      <p>
+        <c>$</c> is shorthand for <c>get_node()</c>. So in the code above,
+                <c>$AnimatedSprite2D.play()</c> is the same as
+                <c>get_node("AnimatedSprite2D").play()</c>.</p>
+      <p>In GDScript, <c>$</c> returns the node at the relative path from the
+                current node, or returns <c>null</c> if the node is not found. Since
+                AnimatedSprite2D is a child of the current node, we can use
+                <c>$AnimatedSprite2D</c>.</p>
+      </note>
+    <p>Now that we have a movement direction, we can update the player's position. We
+            can also use <c>clamp()</c> to prevent it from leaving the screen. <em>Clamping</em> a
+            value means restricting it to a given range. Add the following to the bottom of
+            the <c>_process</c> function (make sure it's not indented under the else):</p>
+    
+      <program language="gdscript">
+        <code>position += velocity * delta
+position = position.clamp(Vector2.ZERO, screen_size)</code>
+        </program>
+      
+      
+    <note>
+      <title>Tip</title>
+      <p>The delta parameter in the _process() function refers to the <em>frame
+                length</em> - the amount of time that the previous frame took to complete.
+                Using this value ensures that your movement will remain consistent even
+                if the frame rate changes.</p>
+      </note>
+
+<activity xml:id="first2d-game-player-activity" label="first2d-game-player-activity">
+            <title>The Player Script</title>
+            <statement><p>This is a place to test your Player script. You may add code here from
+              the decriptions on this page and compare to the reference
+              and look at the test results to get feedback about what is working or missing.
+            </p></statement>
+            <program xml:id="gs-first2d-player" interactive='activecode' language="gdscript" label="gs-first2d-player"
+                     pck="gdpractice/L2.P1.first2d_player"
+                     scene="res://practices/L2.P1.first2d_player/player.tscn">
+
+<code>
+extends Area2D
+
+@export var speed: float = 400 
+var screen_size: Vector2 
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    pass
+    
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+    pass
+
+</code>
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+func add_key_action(action_name: String, keycode: Key): #
+    if not InputMap.has_action(action_name): #
+        InputMap.add_action(action_name) #
+    var event := InputEventKey.new() #
+    event.keycode = keycode #
+    if not InputMap.action_has_event(action_name,event): #
+        InputMap.action_add_event(action_name,event) #
+
+func _init() -> void: #
+    side_by_side = true #
+    add_key_action("move_right",KEY_D) #
+    add_key_action("move_left",KEY_A) #
+    add_key_action("move_down",KEY_S) #
+    add_key_action("move_up",KEY_W) #
+    
+# How long to sample for, in seconds.
+const SAMPLE_DURATION := 1.0
+
+# The input action to simulate during the sample window.
+# Using move_right gives a clear non-zero displacement to check against.
+const SIMULATED_ACTIONS := ["move_right","move_down","move_left","move_up"]
+
+# Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
+# solution before sampling begins.
+func _setup_state() -> void:
+    _practice.position = _solution.position 
+    _solution.speed = _practice.speed
+
+# Simulate rotate_right being held for SAMPLE_DURATION seconds while sampling.
+func _setup_populate_test_space() -> void:
+    for action: String in SIMULATED_ACTIONS:
+        # Press action during the sample window.
+        Input.action_press(action)
+        var call_me: Callable = _sample_test_space.bind(action)
+        await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, call_me)
+        # Release the action so input state is clean after the test.
+        Input.action_release(action)
+    
+func _sample_test_space(dir_key: String) -> void:
+    _test_space.append({
+        "practice_position" : _practice.position,
+        "solution_position" : _solution.position,
+        (dir_key): true,
+    })
+
+
+
+func _build_requirements() -> void:
+    super()
+
+
+var hit_fired: bool = false
+
+func _on_signal_hit_fires():
+    hit_fired = true
+
+func _build_checks() -> void:
+    
+    _solution.start(Vector2.ZERO)
+    
+    var method_start_check := _add_simple_check(
+        "has start() method",
+        func() -> String:
+            if not _practice.has_method("start"):
+                return (
+                    "missing method start"
+                )
+            return ""
+    )
+    
+    var method_body_check := _add_simple_check(
+        "has _on_body_entered() callback",
+        func() -> String:
+            if not _practice.has_method("_on_body_entered"):
+                return (
+                    "missing method _on_body_entered"
+                )
+            return ""
+    )
+    
+    var signal_hit_check := _add_simple_check(
+        "check for hit signal",
+        func() -> String:
+            if not _practice.has_signal("hit"):
+                return (
+                    "missing signal hit"
+                )
+            return ""
+    )
+    
+    _add_simple_check(
+        "Pressing move_right should move right",
+        func() -> String:
+            var right_test: Array = _test_space.filter(func(dict: Dictionary): return dict.has("move_right"))
+            var first_pos: Vector2 = right_test[0]["practice_position"]
+            var last_pos: Vector2 = right_test[-1]["practice_position"]
+            if first_pos.x &lt; last_pos.x:
+                return ""
+            else: 
+                return "location didn't move right %f >= %f" % [first_pos.x,last_pos.x]
+            
+    )
+    
+    _add_simple_check(
+        "Pressing move_left should move left",
+        func() -> String:
+            var test: Array = _test_space.filter(func(dict: Dictionary): return dict.has("move_left"))
+            var first_pos: Vector2 = test[0]["practice_position"]
+            var last_pos: Vector2 = test[-1]["practice_position"]
+            if first_pos.x > last_pos.x:
+                return ""
+            else: 
+                return "location didn't move left %f &lt;= %f" % [first_pos.x,last_pos.x]
+            
+    )
+    
+    _add_simple_check(
+        "Pressing move_up should move up",
+        func() -> String:
+            var test: Array = _test_space.filter(func(dict: Dictionary): return dict.has("move_up"))
+            var first_pos: Vector2 = test[0]["practice_position"]
+            var last_pos: Vector2 = test[-1]["practice_position"]
+            if first_pos.y > last_pos.y:
+                return ""
+            else: 
+                return "location didn't move up %f &lt;= %f" % [first_pos.y,last_pos.y]
+            
+    )
+    
+    _add_simple_check(
+        "Pressing move_down should move down",
+        func() -> String:
+            var test: Array = _test_space.filter(func(dict: Dictionary): return dict.has("move_down"))
+            var first_pos: Vector2 = test[0]["practice_position"]
+            var last_pos: Vector2 = test[-1]["practice_position"]
+            if first_pos.y &lt; last_pos.y:
+                return ""
+            else: 
+                return "location didn't move down %f >= %f" % [first_pos.y,last_pos.y]
+            
+    )
+    
+    var hit_fires = _add_simple_check(
+        "hit fires on body entered",
+        func() -> String:
+            _practice.connect("hit",_on_signal_hit_fires)
+            _practice._on_body_entered(null)
+            _practice.disconnect("hit",_on_signal_hit_fires)
+            return (
+                ""
+                if hit_fired
+                else "hit didn't fire on body entered"
+            )
+    )
+    
+    hit_fires.dependencies.append_array([method_body_check,signal_hit_check])
+    
+    var body_hide = _add_simple_check(
+        "hide() on body entered",
+        func() -> String:
+            _practice.show()
+            _practice._on_body_entered(null)
+            var hidden: bool = not _practice.is_visible()
+            _practice.show()
+            return (
+                ""
+                if hidden
+                else "not hidden after body entered."
+            )
+    )
+    
+    body_hide.dependencies.append(method_body_check)
+    
+    var start_show = _add_simple_check(
+        "show() on start()",
+        func() -> String:
+            _practice.hide()
+            _practice.start(Vector2.ZERO)
+            var hidden: bool = not _practice.is_visible()
+            _practice.show()
+            return (
+                ""
+                if not hidden
+                else "still hidden after show()."
+            )
+    )
+    
+    start_show.dependencies.append(method_start_check)
+
+</tests>
+</program>
+</activity>      
+
+
+
+
+    <p>Click "Run Current Scene" (<c>F6</c>, <c>Cmd</c>
+      <c />+<c />
+      <c>R</c> on macOS) and confirm you can move
+            the player around the screen in all directions.</p>
+    <warning>
+      <title>Warning</title>
+      <p>If you get an error in the "Debugger" panel that says</p>
+      <p>
+        <c>Attempt to call function 'play' in base 'null instance' on a null
+instance</c>
+        </p>
+      <p>this likely means you spelled the name of the AnimatedSprite2D node
+                wrong. Node names are case-sensitive and <c>$NodeName</c> must match
+                the name you see in the scene tree.</p>
+      </warning>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-03-coding-the-player-choosing-animations">
+      <title>Choosing animations</title>
+      <p>Now that the player can move, we need to change which animation the
+                AnimatedSprite2D is playing based on its direction. We have the "walk" animation,
+                which shows the player walking to the right. This animation should be flipped
+                horizontally using the <c>flip_h</c> property for left movement. We also have the
+                "up" animation, which should be flipped vertically with <c>flip_v</c> for downward
+                movement. Let's place this code at the end of the <c>_process()</c> function:</p>
+      
+        <program language="gdscript">
+          <code>if velocity.x != 0:
+    $AnimatedSprite2D.animation = "walk"
+    $AnimatedSprite2D.flip_v = false
+    # See the note below about the following boolean assignment.
+    $AnimatedSprite2D.flip_h = velocity.x &lt; 0
+elif velocity.y != 0:
+    $AnimatedSprite2D.animation = "up"
+    $AnimatedSprite2D.flip_v = velocity.y &gt; 0</code>
+          </program>
+        
+        
+      <note>
+        <title>Note</title>
+        <p>The boolean assignments in the code above are a common shorthand for
+                    programmers. Since we're doing a comparison test (boolean) and also
+                    <em>assigning</em> a boolean value, we can do both at the same time. Consider
+                    this code versus the one-line boolean assignment above:</p>
+        
+          <program language="gdscript">
+            <code>if velocity.x &lt; 0:
+    $AnimatedSprite2D.flip_h = true
+else:
+    $AnimatedSprite2D.flip_h = false</code>
+            </program>
+          
+          
+        </note>
+      <p>Play the scene again and check that the animations are correct in each of the
+                directions.</p>
+      <note>
+        <title>Tip</title>
+        <p>A common mistake here is to type the names of the animations wrong. The
+                    animation names in the SpriteFrames panel must match what you type in
+                    the code. If you named the animation <c>"Walk"</c>, you must also use a
+                    capital "W" in the code.</p>
+        </note>
+      <p>When you're sure the movement is working correctly, add this line to
+                <c>_ready()</c>, so the player will be hidden when the game starts:</p>
+      
+        <program language="gdscript">
+          <code>hide()</code>
+          </program>
+        
+        
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-03-coding-the-player-preparing-for-collisions">
+      <title>Preparing for collisions</title>
+      <p>We want <c>Player</c> to detect when it's hit by an enemy, but we haven't made any
+                enemies yet! That's OK, because we're going to use Godot's <em>signal</em>
+                functionality to make it work.</p>
+      <p>Add the following at the top of the script. Add it after
+                <c>extends Area2D</c>.:</p>
+      
+        <program language="gdscript">
+          <code>signal hit</code>
+          </program>
+        
+        
+      <p>This defines a custom signal called "hit" that we will have our player emit
+                (send out) when it collides with an enemy. We will use <c>Area2D</c> to detect the
+                collision. Select the <c>Player</c> node and click the <c>Signals</c> tab next to the
+                Inspector tab to see the list of signals the player can emit:</p>
+      <figure>
+        <caption>Player Signals</caption>
+      <image source="player_signals.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Notice our custom "hit" signal is there as well! Since our enemies are going to
+                be <c>RigidBody2D</c> nodes, we want the <c>body_entered(body: Node2D)</c> signal. This
+                signal will be emitted when a body contacts the player. Click "Connect.." and
+                the "Connect a Signal" window appears.</p>
+      <p>Godot will create a function with that exact name directly in script
+                for you. You don't need to change the default settings right now.</p>
+      <warning>
+        <title>Warning</title>
+        <p>If you're using an external text editor (for example, Visual Studio Code),
+                    a bug currently prevents Godot from doing so. You'll be sent to your external
+                    editor, but the new function won't be there.</p>
+        <p>In this case, you'll need to write the function yourself into the Player's
+                    script file.</p>
+        </warning>
+      <figure>
+        <caption>On Body Entered Signal Connection</caption>
+      <image source="player_signal_connection.webp" width="30%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Note the green icon indicating that a signal is connected to this function; this does
+                not mean the function exists, only that the signal will attempt to connect to a function
+                with that name, so double-check that the spelling of the function matches exactly!</p>
+      <p>Next, add this code to the function:</p>
+      
+        <program language="gdscript">
+          <code>func _on_body_entered(_body: Node2D) -> void:
+    hide() # Player disappears after being hit.
+    hit.emit()
+    # Must be deferred as we can't change physics properties on a physics callback.
+    $CollisionShape2D.set_deferred("disabled", true)</code>
+          </program>
+        
+        
+      <p>Each time an enemy hits the player, the signal is going to be emitted. We need
+                to disable the player's collision so that we don't trigger the <c>hit</c> signal
+                more than once.</p>
+      <note>
+        <title>Note</title>
+        <p>Disabling the area's collision shape can cause an error if it happens
+                    in the middle of the engine's collision processing. Using
+                    <c>set_deferred()</c> tells Godot to wait to disable the shape until it's
+                    safe to do so.</p>
+        </note>
+      <p>The last piece is to add a function we can call to reset the player when
+                starting a new game.</p>
+      
+        <program language="gdscript">
+          <code>func start(pos: Vector2) -> void:
+    position = pos
+    show()
+    $CollisionShape2D.disabled = false</code>
+          </program>
+        
+        
+      <p>With the player working, we'll work on the enemy in the next lesson.</p>
+      </subsection>
+    </section>

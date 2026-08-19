@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://p10x2dx417o7"]
+
+[ext_resource type="Texture2D" uid="uid://cavmh8kmg5eug" path="res://icon.svg" id="1_hetes"]
+[ext_resource type="Script" uid="uid://4tsykxf80v3n" path="res://practice_solutions/L1.P6.sprite2d_input_rotate/practice.gd" id="2_1ymfj"]
+
+[node name="Practice" type="Sprite2D" unique_id=463663439]
+position = Vector2(253, 207)
+texture = ExtResource("1_hetes")
+script = ExtResource("2_1ymfj")

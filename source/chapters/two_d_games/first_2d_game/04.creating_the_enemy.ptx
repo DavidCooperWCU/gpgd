@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-04-creating-the-enemy-creating-the-enemy">
+    <title>Creating the enemy</title>
+    <introduction>
+    <p>Now it's time to make the enemies our player will have to dodge. Their behavior
+            will not be very complex: mobs will spawn randomly at the edges of the screen,
+            choose a random direction, and move in a straight line.</p>
+    <p>We'll create a <c>Mob</c> scene, which we can then <em>instance</em> to create any number
+            of independent mobs in the game.</p>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-04-creating-the-enemy-node-setup">
+      <title>Node setup</title>
+      <p>Click Scene -&gt; New Scene from the top menu and add the following nodes:</p>
+      <p>
+        <ul>
+        <li>
+          <p>
+            <url href="https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html#class-rigidbody2d">RigidBody2D</url> (named <c>Mob</c>)</p>
+          <blockquote>
+            <p>
+            <ul>
+              <li>
+                <url href="https://docs.godotengine.org/en/stable/classes/class_animatedsprite2d.html#class-animatedsprite2d">AnimatedSprite2D</url>
+                </li>
+              <li>
+                <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape2d.html#class-collisionshape2d">CollisionShape2D</url>
+                </li>
+              <li>
+                <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier2d.html#class-visibleonscreennotifier2d">VisibleOnScreenNotifier2D</url>
+                </li>
+              </ul>
+            </p>
+            </blockquote>
+          </li>
+        </ul>
+      </p>
+      <p>Don't forget to set the children so they can't be selected, like you did with
+                the Player scene. This is done by selecting the parent node (<c>RigidBody2D</c>) in the
+                Scene tree dock, then using the <c>Group</c> button at the top of the 2D editor
+                (<c>Ctrl</c>
+        <c />+<c />
+        <c>G</c> or <c>Cmd</c>
+        <c />+<c />
+        <c>G</c> on macOS).</p>
+      <p>Select the <c>Mob</c> node and set its <c>Gravity Scale</c>
+                property in the <url href="https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html#class-rigidbody2d">RigidBody2D</url>
+                section of the inspector to <c>0</c>.
+                This will prevent the mob from falling downwards.</p>
+      <p>In addition, in the <c>Mob</c> node inspector,
+                under the <url href="https://docs.godotengine.org/en/stable/classes/class_collisionobject2d.html#class-collisionobject2d">CollisionObject2D</url>
+                section, expand the <term>Collision</term> group and
+                uncheck the <c>1</c> inside the <c>Mask</c> property.
+                This will ensure the mobs do not collide with each other.</p>
+      <figure>
+        <caption>Setting the Collision Mask</caption>
+      <image source="set_collision_mask.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Set up the <url href="https://docs.godotengine.org/en/stable/classes/class_animatedsprite2d.html#class-animatedsprite2d">AnimatedSprite2D</url> like you did for the
+                player. This time, we have 3 animations: <c>fly</c>, <c>swim</c>, and <c>walk</c>. There
+                are two images for each animation in the art folder.</p>
+      <p>The <c>Animation Speed</c> property has to be set for each individual animation. Adjust it to <c>3</c> for all 3 animations.</p>
+      <figure>
+        <caption>Adding Mob Animations</caption>
+      <image source="mob_animations.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>You can use the "Play Animation" buttons on the right of the <c>Animation Speed</c> input field to preview your animations.</p>
+      <p>We'll select one of these animations randomly so that the mobs will have some
+                variety.</p>
+      <p>Like the player images, these mob images need to be scaled down. Set the
+                <c>AnimatedSprite2D</c>'s <c>Scale</c> property to <c>(0.75, 0.75)</c>.</p>
+      <p>As in the <c>Player</c> scene, add a <c>CapsuleShape2D</c> for the collision. To align
+                the shape with the image, you'll need to set the <c>Rotation</c> property
+                to <c>90</c> (under "Transform" in the Inspector).</p>
+      <p>Save the scene.</p>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-04-creating-the-enemy-enemy-script">
+      <title>Enemy script</title>
+      <p>Add a script to the <c>Mob</c> like this:</p>
+      
+        <program language="gdscript">
+          <code>class_name Mob
+extends RigidBody2D</code>
+          </program>
+        
+        
+      <p>Now let's look at the rest of the script. In <c>_ready()</c> we play the animation
+                and randomly choose one of the three animation types:</p>
+      
+        <program language="gdscript">
+          <code>func _ready() -> void:
+    var mob_types: Array = Array($AnimatedSprite2D.sprite_frames.get_animation_names())
+    $AnimatedSprite2D.animation = mob_types.pick_random()
+    $AnimatedSprite2D.play()</code>
+          </program>
+        
+        
+      <p>First, we get the list of animation names from the AnimatedSprite2D's <c>sprite_frames</c>
+                property. This returns an Array containing all three animation names: <c>["walk",
+"swim", "fly"]</c>.</p>
+      <p>We use the <url href="https://docs.godotengine.org/en/stable/classes/class_array.html#class-array-method-pick-random">Array.pick_random</url> method
+                to select one of these animation names at random. </p>
+      <p>Finally, we call <c>play()</c> to start playing the chosen animation.</p>
+      <p>The last piece is to make the mobs delete themselves when they leave the screen.
+                Connect the <c>screen_exited()</c> signal of the <c>VisibleOnScreenNotifier2D</c> node
+                to the <c>Mob</c> and add this code:</p>
+      
+        <program language="gdscript">
+          <code>func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+    queue_free()</code>
+          </program>
+        
+        
+      <p>
+        <c>queue_free()</c> is a function that essentially 'frees', or deletes, the node at the end of the frame.</p>
+      <p>This completes the Mob scene.</p>
+      <p>With the player and enemies ready, in the next part, we'll bring them together
+                in a new scene. We'll make enemies spawn randomly around the game board and move
+                forward, turning our project into a playable game.</p>
+      </subsection>
+    </section>

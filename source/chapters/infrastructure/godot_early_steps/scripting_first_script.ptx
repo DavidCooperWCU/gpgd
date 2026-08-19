@@ -1,0 +1,597 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-step-by-step-scripting-first-script-creating-your-first-script">
+    <title>Creating your first script</title>
+    <introduction>
+    <p>In this lesson, you will code your first script to make the Godot icon turn in
+            circles. 
+      <term>Scripts attach to a node and extend its behavior</term>. This means that scripts
+            inherit all functions and properties of the node they attach to.</p>
+    <p>For example, take a game where a Camera2D node follows a ship. The Camera2D node
+            follows its parent by default. Imagine you want the camera to shake when the player
+            takes damage. As this feature is not built into Godot, you would attach a script
+            to the Camera2D node and code the shake.</p>
+    <figure>
+      <caption>Shaking a Planet</caption>
+        <image source="scripting_camera_shake.gif" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+    </figure>
+    <p>This tutorial is written for GDScript.</p>
+    <figure>
+      <caption>Tutorial's Desired Outcome</caption>
+        <image source="scripting_first_script_rotating_godot.gif" width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <note>
+      <title>Seealso</title>
+      <p>To learn more about GDScript, its keywords, and its syntax, head to
+                the <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/index#doc-gdscript">GDScript</url> section. </p>
+      </note>
+    </introduction>
+    <subsection xml:id="getting-started-step-by-step-scripting-first-script-project-setup">
+      <title>Project setup</title>
+      <p>Please <url href="https://docs.godotengine.org/en/stable/tutorials/editor/project_manager#doc-creating-and-importing-projects">create a new project</url> to
+                start with a clean slate. Your project should contain one picture: the Godot
+                icon, which we often use for prototyping in the community.</p>
+      <figure>
+        <caption>Godot Icon</caption>
+        <image source="scripting_first_script_icon.svg" width="15%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>We need to create a Sprite2D node to display it in the game. In the <c>Scene</c> dock,
+                click the <c>Other Node</c> button.</p>
+      <figure>
+        <caption>Other Node Button</caption>
+        <image source="scripting_first_script_click_other_node.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Type "Sprite2D" in the search bar to filter nodes and double-click on Sprite2D
+                to create the node.</p>
+      <figure>
+        <caption>New Node Dialog: Sprite2D</caption>
+        <image source="scripting_first_script_add_sprite_node.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Your <c>Scene</c> tab should now only have a Sprite2D node.</p>
+      <figure>
+        <caption>Scene Tree (One Node)</caption>
+        <image source="scripting_first_script_scene_tree.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>A Sprite2D node needs a texture to display. In the <c>Inspector</c> on the right, you
+                can see that the <c>Texture</c> property says <c>&lt;empty&gt;</c>. To display the
+                Godot icon, click and drag the file <c>icon.svg</c> from the FileSystem dock onto the
+                Texture slot.</p>
+      <figure>
+        <caption>Inspector: Setting Texture to Icon</caption>
+        <image source="scripting_first_script_setting_texture.webp" width="30%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <note>
+        <title>Note</title>
+        <p>You can create Sprite2D nodes automatically by dragging and dropping images
+                    on the viewport.</p>
+        </note>
+      <p>Then, click and drag the icon in the viewport to center it in the game view.</p>
+      <figure>
+        <caption>Centering The Sprite with Your Mouse</caption>
+        <image source="scripting_first_script_centering_sprite.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-scripting-first-script-creating-a-new-script">
+      <title>Creating a new script</title>
+      <p>To create and attach a new script to our node, right-click on Sprite2D in the
+                Scene dock and select <c>Attach Script</c>.</p>
+      <figure>
+        <caption>Attaching Script to Node</caption>
+        <image source="scripting_first_script_attach_script.webp" width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The <c>Attach Node Script</c> window appears. It allows you to select the script's
+                language and file path, among other options.</p>
+      <p>Change the <c>Template</c> field from <c>Node: Default</c> to <c>Object: Empty</c> to
+                start with a clean file. Leave the other options set to their default values and
+                click the <c>Create</c> button to create the script.</p>
+      <figure>
+        <caption>Object Script Template</caption>
+        <image source="scripting_first_script_attach_node_script.webp" width="55%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      
+      <p>The <c>Script</c> workspace should appear with your new <c>sprite_2d.gd</c> file open and
+                the following line of code:</p>
+      
+        <program language="gdscript">
+          <code>extends Sprite2D</code>
+          </program>
+        
+        
+      <p>Every GDScript file is implicitly a class. The <c>extends</c> keyword defines the
+                class this script inherits or extends. In this case, it's <c>Sprite2D</c>, meaning
+                our script will get access to all the properties and functions of the Sprite2D
+                node, including classes it extends, like <c>Node2D</c>, <c>CanvasItem</c>, and
+                <c>Node</c>.</p>
+      <note>
+        <title>Note</title>
+        <p>In GDScript, if you omit the line with the <c>extends</c> keyword, your
+                    class will implicitly extend <url href="https://docs.godotengine.org/en/stable/classes/class_refcounted.html#class-refcounted">RefCounted</url>, which
+                    Godot uses to manage your application's memory.</p>
+        </note>
+      <p>Inherited properties include the ones you can see in the <c>Inspector</c> dock, like
+                our node's <c>texture</c>.</p>
+      <note>
+        <title>Note</title>
+        <p>By default, the <c>Inspector</c> displays a node's properties in "Title Case", with
+                    capitalized words separated by a space. In GDScript code, these properties
+                    are in "snake_case", which is lowercase with each word separated by an underscore.</p>
+        <p>You can hover over any property's name in the <c>Inspector</c> to see a description and
+                    its identifier in code.</p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-scripting-first-script-hello-world">
+      <title>Hello, world!</title>
+      <p>Our script currently doesn't do anything. Let's make it print the text "Hello,
+                world!" to the Output bottom panel to get started.</p>
+      <p>Add the following code to your script:</p>
+      
+        <program language="gdscript">
+          <code>func _init() -> void:
+    print("Hello, world!")</code>
+          </program>
+        
+        
+      <p>Let's break it down. The <c>func</c> keyword defines a new function named
+                <c>_init</c>. This is a special name for our class's constructor. The engine calls
+                <c>_init()</c> on every object or node upon creating it in memory, if you define
+                this function.</p>
+      <note>
+        <title>Note</title>
+        <p>GDScript is an indent-based language. The tab at the start of the line
+                    that says <c>print()</c> is necessary for the code to work. If you omit
+                    it or don't indent a line correctly, the editor will highlight it in
+                    red and display the following error message: "Indented block expected".</p>
+        </note>
+
+
+        <activity xml:id="first-script-hello-world" label="first-script-hello-world">
+            <title>Simple Print</title>
+            <statement><p>Print Hello, world! here.
+            </p></statement>
+            <program xml:id="gs-hello-world" interactive='activecode' language="gdscript" label="gs-hello-world"
+                     pck="gdpractice/L1.P3.sprite2d_hello_world"
+                     scene="res://practices/L1.P3.sprite2d_hello_world/practice.tscn">
+
+<code>
+extends Sprite2D
+
+func _init() -> void:
+	pass
+
+</code>
+
+
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+func _build_checks() -> void:
+
+   # 
+   var check_pattern := _add_simple_check(
+      "Program should print 'Hello, world!",
+      func() -> String:
+         return (
+            ""
+            if _is_code_line_match(["print(?Hello,world!?)","print(?Hello,World!?)"])
+            else "couldn't find a print('Hello, world!') call "
+         )
+   )
+   
+</tests>
+</program>
+</activity>
+
+      <p>Save the scene as <c>sprite_2d.tscn</c> if you haven't already, then press <c>F6</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>R</c> on macOS)
+                to run it. Look at the <c>Output</c> bottom panel that expands.
+                It should display "Hello, world!".</p>
+      <figure>
+        <caption>Output Bottom Panel</caption>
+        <image source="scripting_first_script_print_hello_world.webp" width="40%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Delete the <c>_init()</c> function, so you're only left with the line <c>extends
+Sprite2D</c>.</p>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-scripting-first-script-turning-around">
+      <title>Turning around</title>
+  <introduction>
+      <p>It's time to make our node move and rotate. To do so, we're going to add two
+                member variables to our script: the movement speed in pixels per second and the
+                angular speed in radians per second. Add the following after the <c>extends Sprite2D</c> line.</p>
+      
+        <program language="gdscript">
+          <code>var speed: float = 400
+var angular_speed: float = PI</code>
+          </program>
+        
+        
+      <p>Member variables sit near the top of the script, after any "extends" lines,
+                but before functions. Every node
+                instance with this script attached to it will have its own copy of the <c>speed</c>
+                and <c>angular_speed</c> properties.</p>
+      <note>
+        <title>Note</title>
+        <p>Angles in Godot work in radians by default,
+                    but you have built-in functions and properties available if you prefer
+                    to calculate angles in degrees instead.</p>
+        </note>
+      <p>To move our icon, we need to update its position and rotation every frame in the
+                game loop. We can use the <c>_process()</c> virtual function of the <c>Node</c> class.
+                If you define it in any class that extends the Node class, like Sprite2D, Godot
+                will call the function every frame and pass it an argument named <c>delta</c>, the
+                time elapsed since the last frame.</p>
+      <note>
+        <title>Note</title>
+        <p>Games work by rendering many images per second, each called a frame, and
+                    they do so in a loop. We measure the rate at which a game produces images in
+                    Frames Per Second (FPS). Most games aim for 60 FPS, although you might find
+                    figures like 30 FPS on slower mobile devices or 90 to 240 for virtual
+                    reality games.</p>
+        <p>The engine and game developers do their best to update the game world and
+                    render images at a constant time interval, but there are always small
+                    variations in frame render times. That's why the engine provides us with
+                    this delta time value, making our motion independent of our framerate.</p>
+        </note>
+      <p>At the bottom of the script, define the function:</p>
+      
+        <program language="gdscript">
+          <code>func _process(delta: float) -> void:
+    rotation += angular_speed * delta</code>
+          </program>
+        
+        
+      <p>The <c>func</c> keyword defines a new function. After it, we have to write the
+                function's name and arguments it takes in parentheses. A colon ends the
+                definition, and the indented blocks that follow are the function's content or
+                instructions.</p>
+      <note>
+        <title>Note</title>
+        <p>Notice how <c>_process()</c>, like <c>_init()</c>, starts with a leading
+                    underscore. By convention, Godot's virtual functions, that is to say,
+                    built-in functions you can override to communicate with the engine,
+                    start with an underscore.</p>
+        </note>
+      <p>The line inside the function, <c>rotation += angular_speed * delta</c>, increments
+                our sprite's rotation every frame. Here, <c>rotation</c> is a property inherited
+                from the class <c>Node2D</c>, which <c>Sprite2D</c> extends. It controls the rotation
+                of our node and works with radians.</p>
+      <note>
+        <title>Tip</title>
+        <p>In the code editor, you can <c>Ctrl</c>
+          <c />+<c />
+          <c>Click</c> (<c>Cmd</c>
+          <c />+<c />
+          <c>Click</c> on
+                    macOS) on any built-in property or function like <c>position</c>,
+                    <c>rotation</c>, or <c>_process</c> to open the corresponding documentation
+                    in a new tab.</p>
+        </note>
+      <p>Run the scene to see the Godot icon turn in-place.</p>
+      <figure>
+        <caption>Icon Turning In Place</caption>
+        <image source="scripting_first_script_godot_turning_in_place.gif" width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+     <activity xml:id="first-script-rotate" label="first-script-rotate">
+            <title>Rotate</title>
+            <statement><p>Add Rotation code here.
+            </p></statement>
+            <program xml:id="gs-sprite2d-rotate" interactive='activecode' language="gdscript" label="gs-sprite2d-rotate"
+                     pck="gdpractice/L1.P4.sprite2d_rotate"
+                     scene="res://practices/L1.P4.sprite2d_rotate/practice.tscn">
+
+<code>
+extends Sprite2D
+
+var angular_speed: float = PI
+
+func _process(delta: float) -> void:
+    pass
+
+</code>
+
+
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+# L1.P4 - rotate comparison
+#
+# A "graphical" GDPractice example: motion, compared frame by
+# frame between practice and solution via _test_space. The SplitLayout shows
+# both the student's icon and the solution's icon rotatating 
+# the same icon simultaneously.
+#
+
+func _init() -> void:
+  side_by_side = true
+
+
+# How long to sample for, in seconds.
+const SAMPLE_DURATION := 1.0
+
+
+
+func _build_requirements() -> void:
+  super()
+  _add_properties_requirement(["angular_speed"])
+
+
+# Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
+# solution before sampling begins.
+func _setup_state() -> void:
+  _practice.position = _solution.position 
+  _practice.rotation = _solution.rotation
+  _solution.angular_speed = _practice.angular_speed
+
+
+# Simulate move_right being held for SAMPLE_DURATION seconds while sampling.
+func _setup_populate_test_space() -> void:
+  await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, _sample_test_space)
+	
+
+func _sample_test_space() -> void:
+  _test_space.append({
+    practice_rotation = _practice.rotation,
+    solution_rotation = _solution.rotation,
+    delta = get_physics_process_delta_time(),
+  })
+
+
+func _build_checks() -> void:
+
+
+  _add_simple_check(
+    "Rotation takes delta into account",
+    func() -> String:
+      var delta_predicate := func(x: Dictionary, y: Dictionary) -> bool:
+        var displacement: float = y.practice_rotation - x.practice_rotation
+        var expected: float = y.solution_rotation - x.solution_rotation
+        return is_equal_approx(displacement,expected)
+      if not _is_sliding_window_pass(delta_predicate):
+        return (
+          "Each frame's rotation should match the solution's. "
+          + "Make sure you multiply angular_speed by delta."
+        )
+      return ""
+  )
+
+  _add_simple_check(
+    "Rotation matches the solution every frame",
+    func() -> String:
+      var match_predicate := func(sample: Dictionary) -> bool:
+        return is_equal_approx(sample.practice_rotation,sample.solution_rotation)
+      if not _test_space.all(match_predicate):
+        for sample: Dictionary in _test_space:
+          if not is_equal_approx(sample.practice_rotation,sample.solution_rotation):
+            return (
+              "practice rotation %s doesn't match solution rotation %s."
+              % [sample.practice_rotation, sample.solution_rotation]
+            )
+      return ""
+  )
+
+</tests>
+</program>
+</activity>
+</introduction>
+      <subsubsection xml:id="getting-started-step-by-step-scripting-first-script-moving-forward">
+        <title>Moving forward</title>
+        <p>Let's now make the node move. Add the following two lines inside of the <c>_process()</c>
+                    function, ensuring the new lines are indented the same way as the <c>rotation += angular_speed * delta</c> line before
+                    them.</p>
+        
+          <program language="gdscript">
+            <code>var velocity: Vector2 = Vector2.UP.rotated(rotation) * speed
+
+position += velocity * delta</code>
+            </program>
+          
+             <activity xml:id="first-script-move" label="first-script-move">
+            <title>Move</title>
+            <statement><p>Add Rotation and move code here.
+            </p></statement>
+            <program xml:id="gs-sprite2d-move" interactive='activecode' language="gdscript" label="gs-sprite2d-move"
+                     pck="gdpractice/L1.P5.sprite2d_move"
+                     scene="res://practices/L1.P5.sprite2d_move/practice.tscn">
+
+<code>
+extends Sprite2D  
+var speed: float = 400
+var angular_speed: float = PI
+
+func _process(delta: float) -> void:
+    pass
+
+</code>
+
+
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+# L1.P5 - move comparison
+#
+# A "graphical" GDPractice example: motion, compared frame by
+# frame between practice and solution via _test_space. The SplitLayout shows
+# both the student's icon and the solution's icon rotatating 
+# the same icon simultaneously.
+#
+
+func _init() -> void:
+  side_by_side = true
+
+
+# How long to sample for, in seconds.
+const SAMPLE_DURATION := 1.0
+
+
+
+func _build_requirements() -> void:
+  super()
+  _add_properties_requirement(["angular_speed"])
+  _add_properties_requirement(["speed"])
+
+
+# Reset both nodes to Vector2.ZERO and mirror the practice's speed onto the
+# solution before sampling begins.
+func _setup_state() -> void:
+  _practice.position = _solution.position 
+  _practice.rotation = _solution.rotation
+  _solution.angular_speed = _practice.angular_speed
+  _solution.speed = _practice.speed
+
+# Simulate move_right being held for SAMPLE_DURATION seconds while sampling.
+func _setup_populate_test_space() -> void:
+  await _connect_timed(SAMPLE_DURATION, get_tree().physics_frame, _sample_test_space)
+	
+
+func _sample_test_space() -> void:
+  _test_space.append({
+    practice_rotation = _practice.rotation,
+    solution_rotation = _solution.rotation,
+    practice_position = _practice.position,
+    solution_position = _solution.position,
+    delta = get_physics_process_delta_time(),
+  })
+
+
+func _build_checks() -> void:
+
+
+  _add_simple_check(
+    "Rotation takes delta into account",
+    func() -> String:
+      var delta_predicate := func(x: Dictionary, y: Dictionary) -> bool:
+        var displacement: float = y.practice_rotation - x.practice_rotation
+        var expected: float = y.solution_rotation - x.solution_rotation
+        return is_equal_approx(displacement,expected)
+      if not _is_sliding_window_pass(delta_predicate):
+        return (
+          "Each frame's rotation should match the solution's. "
+          + "Make sure you multiply angular_speed by delta."
+        )
+      return ""
+  )
+
+  _add_simple_check(
+    "Rotation matches the solution every frame",
+    func() -> String:
+      var match_predicate := func(sample: Dictionary) -> bool:
+        return is_equal_approx(sample.practice_rotation,sample.solution_rotation)
+      if not _test_space.all(match_predicate):
+        for sample: Dictionary in _test_space:
+          if not is_equal_approx(sample.practice_rotation,sample.solution_rotation):
+            return (
+              "practice rotation %s doesn't match solution rotation %s."
+              % [sample.practice_rotation, sample.solution_rotation]
+            )
+      return ""
+  )
+
+  _add_simple_check(
+    "Movement takes delta into account",
+    func() -> String:
+      var delta_predicate := func(x: Dictionary, y: Dictionary) -> bool:
+        var displacement: Vector2 = y.practice_position - x.practice_position
+        var expected: Vector2 = y.solution_position - x.solution_position
+        return displacement.is_equal_approx(expected)
+      if not _is_sliding_window_pass(delta_predicate):
+        return (
+          "Each frame's displacement should match the solution's. "
+          + "Make sure you multiply velocity by delta."
+        )
+      return ""
+  )
+
+  _add_simple_check(
+    "Position matches the solution every frame",
+    func() -> String:
+      var match_predicate := func(sample: Dictionary) -> bool:
+        return sample.practice_position.is_equal_approx(sample.solution_position)
+      if not _test_space.all(match_predicate):
+        for sample: Dictionary in _test_space:
+          if not sample.practice_position.is_equal_approx(sample.solution_position):
+            return (
+              "practice position %s doesn't match solution position %s."
+              % [sample.practice_position, sample.solution_position]
+            )
+      return ""
+  )
+
+</tests>
+</program>
+</activity>  
+        <p>As we already saw, the <c>var</c> keyword defines a new variable. If you put it at
+                    the top of the script, it defines a property of the class. Inside a function, it
+                    defines a local variable: it only exists within the function's scope.</p>
+        <p>We define a local variable named <c>velocity</c>, a 2D vector representing both a
+                    direction and a speed. To make the node move forward, we start from the Vector2
+                    class's constant <c>Vector2.UP</c>, a vector pointing up, and rotate it by calling the
+                    Vector2 method <c>rotated()</c>. This expression, <c>Vector2.UP.rotated(rotation)</c>,
+                    is a vector pointing forward relative to our icon. Multiplied by our <c>speed</c>
+                    property, it gives us a velocity we can use to move the node forward.</p>
+        <p>We add <c>velocity * delta</c> to the node's <c>position</c> to move it. The position
+                    itself is of type <url href="https://docs.godotengine.org/en/stable/classes/class_vector2.html#class-vector2">Vector2</url>, a built-in type in Godot
+                    representing a 2D vector.</p>
+        <p>Run the scene to see the Godot head run in circles.</p>
+        <figure>
+          <caption>Rotate and Move</caption>
+        <image source="scripting_first_script_rotating_godot.gif" width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+          </figure>
+        <note>
+          <title>Note</title>
+          <p>Moving a node like that does not take into account colliding with
+                        walls or the floor. In <xref ref="getting-started-first-2d-game-index-your-first-2d-game" text="custom">Your first 2D game</xref>, you will learn
+                        another approach to moving objects while detecting collisions.</p>
+          </note>
+        <p>Our node currently moves by itself. In the next part,
+                    <xref ref="getting-started-step-by-step-scripting-player-input-listening-to-player-input" text="custom">Listening to player input</xref>, we'll use player input to control it.</p>
+        </subsubsection>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-scripting-first-script-complete-script">
+      <title>Complete script</title>
+      <p>Here is the complete <c>sprite_2d.gd</c> file for reference.</p>
+      
+        <program language="gdscript">
+          <code>extends Sprite2D
+
+var speed: float = 400
+var angular_speed: float = PI
+
+
+func _process(delta: float) -> void:
+    rotation += angular_speed * delta
+
+    var velocity: Vector2 = Vector2.UP.rotated(rotation) * speed
+
+    position += velocity * delta</code>
+          </program>
+        
+        
+      </subsection>
+    </section>
+  

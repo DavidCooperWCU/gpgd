@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bpum35w1e102r"]
+
+[ext_resource type="Script" uid="uid://c7sr5rm8ne8q6" path="res://practice_solutions/L1.P3.sprite2d_hello_world/practice.gd" id="1_bv1fw"]
+[ext_resource type="Texture2D" uid="uid://cavmh8kmg5eug" path="res://icon.svg" id="1_wr4vj"]
+
+[node name="Practice" type="Sprite2D" unique_id=463663439]
+position = Vector2(253, 207)
+texture = ExtResource("1_wr4vj")
+script = ExtResource("1_bv1fw")

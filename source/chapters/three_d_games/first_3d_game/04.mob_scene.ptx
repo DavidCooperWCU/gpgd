@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-3d-game-04-mob-scene-designing-the-mob-scene">
+    <title>Designing the mob scene</title>
+    <introduction>
+    <p>In this part, you're going to code the monsters, which we'll call mobs. In the
+            next lesson, we'll spawn them randomly around the playable area.</p>
+    <p>Let's design the monsters themselves in a new scene. The node structure is going
+            to be similar to the <c>player.tscn</c> scene.</p>
+    <p>Create a scene with, once again, a <url href="https://docs.godotengine.org/en/stable/classes/class_characterbody3d.html#class-characterbody3d">CharacterBody3D</url> node as its root. Name it
+            <c>Mob</c>. Add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_node3d.html#class-node3d">Node3D</url>, name it <c>Pivot</c>. And drag and drop
+            the file <c>mob.glb</c> from the <em>FileSystem</em> dock onto the <c>Pivot</c> to add the
+            monster's 3D model to the scene.</p>
+    <figure>
+      <caption>Dragging the Mob Asset</caption>
+      <image source="drag_drop_mob.webp" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>You can rename the newly created <c>mob</c> node
+            into <c>Character</c>.</p>
+    <p />
+    <p>We need a collision shape for our body to work. Right-click on the <c>Mob</c> node,
+            the scene's root, and click <em>Add Child Node</em>.</p>
+    <p />
+    <p>Add a <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape3d.html#class-collisionshape3d">CollisionShape3D</url>.</p>
+    <p />
+    <p>In the <em>Inspector</em>, assign a <em>BoxShape3D</em> to the <em>Shape</em> property.</p>
+    <figure>
+      <caption>Adding Box Shape</caption>
+      <image source="08.create_box_shape3D.webp" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>We should change its size to fit the 3D model better. You can do so
+            interactively by clicking and dragging on the orange dots.</p>
+    <p>The box should touch the floor and be a little thinner than the model. Physics
+            engines work in such a way that if the player's sphere touches even the box's
+            corner, a collision will occur. If the box is a little too big compared to the
+            3D model, you may die at a distance from the monster, and the game will feel
+            unfair to the players.</p>
+    <p />
+    <p>Notice that my box is taller than the monster. It is okay in this game because
+            we're looking at the scene from above and using a fixed perspective. Collision
+            shapes don't have to match the model exactly. It's the way the game feels when
+            you test it that should dictate their form and size.</p>
+    </introduction>
+    <subsection xml:id="getting-started-first-3d-game-04-mob-scene-removing-monsters-off-screen">
+      <title>Removing monsters off-screen</title>
+      <introduction>
+      <p>We're going to spawn monsters at regular time intervals in the game level. If
+                we're not careful, their count could increase to infinity, and we don't want
+                that. Each mob instance has both a memory and a processing cost, and we don't
+                want to pay for it when the mob is outside the screen.</p>
+      <p>Once a monster leaves the screen, we don't need it anymore, so we should delete it.
+                Godot has a node that detects when objects leave the screen,
+                <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url>, and we're going to use it to destroy our mobs.</p>
+      <note>
+        <title>Note</title>
+        <p>When you keep instancing an object, there's a technique you can
+                    use to avoid the cost of creating and destroying instances all the time
+                    called pooling. It consists of pre-creating an array of objects and reusing
+                    them over and over.</p>
+        <p>When working with GDScript, this usually isn't needed. The main
+                    reason to use pools is to avoid freezes with garbage-collected languages
+                    like C# or Lua. GDScript uses a different technique to manage memory,
+                    reference counting, which doesn't have that caveat. You can learn more
+                    about that here: <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#doc-gdscript-basics-memory-management">Memory management</url>.</p>
+        </note>
+      <p>Select the <c>Mob</c> node and add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url>. Another
+                box, pink this time, appears. When this box completely leaves the screen, the
+                node will emit a signal.</p>
+      <p />
+      <p>Resize it using the orange dots until it covers the entire 3D model.</p>
+      <p />
+      </introduction>
+      <subsubsection xml:id="getting-started-first-3d-game-04-mob-scene-coding-the-mob-s-movement">
+        <title>Coding the mob's movement</title>
+        <p>Let's implement the monster's motion. We're going to do this in two steps.
+                    First, we'll write a script on the <c>Mob</c> that defines a function to initialize
+                    the monster. We'll then code the randomized spawn mechanism in the <c>main.tscn</c> scene
+                    and call the function from there.</p>
+        <p>Attach a script to the <c>Mob</c>.</p>
+        <p />
+        <p>Here's the movement code to start with. We define two properties, <c>min_speed</c>
+                    and <c>max_speed</c>, to define a random speed range, which we will later use to define <c>CharacterBody3D.velocity</c>.</p>
+        
+          <program language="gdscript">
+            <code>class_name Mob
+extends CharacterBody3D
+
+# Minimum speed of the mob in meters per second.
+@export var min_speed: int = 10
+# Maximum speed of the mob in meters per second.
+@export var max_speed: int = 18
+
+
+func _physics_process(_delta: float) -> void:
+    move_and_slide()</code>
+            </program>
+          
+          
+        <p>Similarly to the player, we move the mob every frame by calling the function
+                    <c>CharacterBody3D.move_and_slide()</c>. This time, we don't update
+                    the <c>velocity</c> every frame; we want the monster to move at a constant speed
+                    and leave the screen, even if it were to hit an obstacle.</p>
+        <p>We need to define another function to calculate the <c>CharacterBody3D.velocity</c>. This
+                    function will turn the monster towards the player and randomize both its angle
+                    of motion and its velocity.</p>
+        <p>The function will take a <c>start_position</c>,the mob's spawn position, and the
+                    <c>player_position</c> as its arguments.</p>
+        <p>We position the mob at <c>start_position</c> and turn it towards the player using
+                    the <c>look_at_from_position()</c> method, and randomize the angle by rotating a
+                    random amount around the Y axis. Below, <c>randf_range()</c> outputs a random value
+                    between <c>-PI / 4</c> radians and <c>PI / 4</c> radians.</p>
+        
+          <program language="gdscript">
+            <code># This function will be called from the Main scene.
+func initialize(start_position: Vector3, player_position: Vector3) -> void:
+    # We position the mob by placing it at start_position
+    # and rotate it towards player_position, so it looks at the player.
+    look_at_from_position(start_position, player_position, Vector3.UP)
+    # Rotate this mob randomly within range of -45 and +45 degrees,
+    # so that it doesn't move directly towards the player.
+    rotate_y(randf_range(-PI / 4, PI / 4))</code>
+            </program>
+          
+          
+        <p>We got a random position, now we need a <c>random_speed</c>. <c>randi_range()</c> will be useful as it gives random int values, and we will use <c>min_speed</c> and <c>max_speed</c>.
+                    <c>random_speed</c> is just an integer, and we just use it to multiply our <c>CharacterBody3D.velocity</c>. After <c>random_speed</c> is applied, we rotate <c>CharacterBody3D.velocity</c> Vector3 towards the player.</p>
+        
+          <program language="gdscript">
+            <code>func initialize(start_position: Vector3, player_position: Vector3) -> void:
+    # ...
+
+    # We calculate a random speed (integer)
+    var random_speed = randi_range(min_speed, max_speed)
+    # We calculate a forward velocity that represents the speed.
+    velocity = Vector3.FORWARD * random_speed
+    # We then rotate the velocity vector based on the mob's Y rotation
+    # in order to move in the direction the mob is looking.
+    velocity = velocity.rotated(Vector3.UP, rotation.y)</code>
+            </program>
+          
+          
+        </subsubsection>
+      <subsubsection xml:id="getting-started-first-3d-game-04-mob-scene-leaving-the-screen">
+        <title>Leaving the screen</title>
+        <p>We still have to destroy the mobs when they leave the screen. To do so, we'll
+                    connect our <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url> node's <c>screen_exited</c> signal to the <c>Mob</c>.</p>
+        <p>Select the <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url> node and on the right side of the interface,
+                    navigate to the <em>Signals</em> dock. Double-click the <c>screen_exited()</c> signal.</p>
+        <p />
+        <p>Connect the signal to the <c>Mob</c>
+          </p>
+        <p />
+        <p>This will add a new function for you in your mob script,
+                    <c>_on_visible_on_screen_notifier_3d_screen_exited()</c>. From it, call the <c>queue_free()</c>
+                    method. This function destroys the instance it's called on.</p>
+        
+          <program language="gdscript">
+            <code>func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+    queue_free()</code>
+            </program>
+          
+          
+        <p>Our monster is ready to enter the game! In the next part, you will spawn
+                    monsters in the game level.</p>
+        <p>Here is the complete <c>mob.gd</c> script for reference.</p>
+        
+          <program language="gdscript">
+            <code>class_name Mob
+extends CharacterBody3D
+
+# Minimum speed of the mob in meters per second.
+@export var min_speed:int = 10
+# Maximum speed of the mob in meters per second.
+@export var max_speed: int = 18
+
+func _physics_process(_delta: float) -> void:
+    move_and_slide()
+
+# This function will be called from the Main scene.
+func initialize(start_position: Vector3, player_position: Vector3) -> void:
+    # We position the mob by placing it at start_position
+    # and rotate it towards player_position, so it looks at the player.
+    look_at_from_position(start_position, player_position, Vector3.UP)
+    # Rotate this mob randomly within range of -45 and +45 degrees,
+    # so that it doesn't move directly towards the player.
+    rotate_y(randf_range(-PI / 4, PI / 4))
+
+    # We calculate a random speed (integer)
+    var random_speed: int = randi_range(min_speed, max_speed)
+    # We calculate a forward velocity that represents the speed.
+    velocity = Vector3.FORWARD * random_speed
+    # We then rotate the velocity vector based on the mob's Y rotation
+    # in order to move in the direction the mob is looking.
+    velocity = velocity.rotated(Vector3.UP, rotation.y)
+
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+    queue_free()</code>
+            </program>
+          
+          
+        </subsubsection>
+      </subsection>
+    </section>
+  

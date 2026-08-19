@@ -1,0 +1,395 @@
+<?xml version='1.0' encoding='utf-8'?>
+ <section xml:id="getting-started-step-by-step-instancing-creating-instances">
+    <title>Creating instances</title>
+    <introduction>
+    <note>
+      <title>Note</title>
+      <p>This tutorial refers to instancing scenes in the editor. To learn how
+                to instance scenes from code, see <url href="https://docs.godotengine.org/en/stable/tutorials/scripting/nodes_and_scene_instances#doc-nodes-and-scene-instances">Nodes and scene instances</url>.</p>
+      <p>Godot's approach to <em>instancing</em> described below should not be confused with
+                hardware instancing that can be used to render large amounts of similar
+                objects quickly. See <url href="https://docs.godotengine.org/en/stable/tutorials/performance/using_multimesh#doc-using-multimesh">Optimization using MultiMeshes</url> instead.</p>
+      </note>
+    <p>In the previous part, we saw that a scene is a collection of nodes organized in
+            a tree structure, with a single node as its root. You can split your project
+            into any number of scenes. This feature helps you break down and organize your
+            game's different components.</p>
+    <p>You can create as many scenes as you'd like and save them as files with the
+            <c>.tscn</c> extension, which stands for "text scene". The <c>label.tscn</c> file from
+            the previous lesson was an example. We call those files "Packed Scenes" as they
+            pack information about your scene's content.</p>
+    <p>Here's an example of a ball. It's composed of a <url href="https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html#class-rigidbody2d">RigidBody2D</url> node as its root named Ball, which allows the ball to fall
+            and bounce on walls, a <url href="https://docs.godotengine.org/en/stable/classes/class_sprite2d.html#class-sprite2d">Sprite2D</url> node, and a
+            <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape2d.html#class-collisionshape2d">CollisionShape2D</url>.</p>
+    <figure>
+      <caption>Ball Example</caption>
+        <image source="instancing_ball_scene.webp" width="50%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>Once you have saved a scene, it works as a blueprint: you can reproduce it in other
+            scenes as many times as you'd like. Replicating an object from a template like
+            this is called <term>instancing</term>.</p>
+    <figure>
+      <caption>Ball Intances Example</caption>
+        <image source="instancing_ball_instances_example.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>As we mentioned in the previous part, instanced scenes behave like a node: the
+            editor hides their content by default. When you instance the Ball, you only see
+            the Ball node. Notice also how each duplicate has a unique name.</p>
+    <p>Every instance of the Ball scene starts with the same structure and properties
+            as <c>ball.tscn</c>. However, you can modify each independently, such as changing
+            how they bounce, how heavy they are, or any property exposed by the source
+            scene.</p>
+    </introduction>
+    <subsection xml:id="getting-started-step-by-step-instancing-in-practice">
+      <title>In practice</title>
+      <p>Let's use instancing in practice to see how it works in Godot. We invite
+                you to download the ball's sample project we prepared for you:
+                <url href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip">instancing_starter.zip</url>.</p>
+
+
+      <activity xml:id="getting-started-instancing_activity" label="getting-started-instancing_activity">
+            <title>Changing the Bounce Property Programmatically</title>
+            <statement>
+                <p>
+                Before writing any code of your own, run the code, and click on the right size
+                where the reference code is running. You'll see the ball drop from where you click.
+                Then you can use the up arrow to change the bounce property. Then you can click again.
+                Notice the balls start bouncing more the more you press the up arrow. You can also
+                press the down arrow to reduce the amount of bouncing. Notice also, that when you click
+                on the left side for your code, you'll just see the location of where you clicked.
+                Your goal is for your code to act the same way as the reference code.
+            </p>
+                <p> This activity has multiple parts. For the first part look at the <c>Main.gd</c>
+                    file from the <c>instancing_starter</c> code you downloaded. You can copy 
+                    the code as is, or you can use the <c>clicked</c> variable that is already
+                    in the code by making a minor modification.
+                </p>
+                
+                <p>The second part can be done after reading the next few sections up to 
+                    <xref ref="getting-started-step-by-step-scripting-player-input-moving-when-pressing-up"/>
+                    and then completing the activity after it.
+                You'll need to add checks for up and down input to change the bounce value by <c>0.1</c>
+                at a time. The maximum bounce value should be <c>0.9</c>, and the minimum should be <c>0.0</c>
+                </p>
+                <p> The <c>bounce</c> property is on the <c>PhysicsMaterial</c> of the Ball. Once you 
+              have an instance of a Ball, you can get it's <c>physics_material_override</c> and then 
+              change the <c>bounce</c> property using assignment(<c>=</c>). This will change the bounce for
+              all balls in the scene.
+            </p>
+            
+            
+            <program xml:id="gs-bounce-property" interactive='activecode' language="gdscript" label="gs-bounce-property"
+                     pck="gdpractice/L1.P2.creating_instances"
+                     scene="res://practices/L1.P2.creating_instances/practice.tscn">
+
+<code>
+extends Node
+
+@export var Ball: PackedScene
+
+func _input(event: InputEvent) -> void:
+    if event.is_action_pressed("click"):
+        var clicked: Vector2 = get_viewport().get_mouse_position()
+        print("clicked at: ", clicked)
+</code>
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+func _init() -> void:
+    side_by_side = true
+    pass
+func _build_checks() -> void:
+    var ran_scene := _add_simple_check(
+        tr("Ran the scene"),
+        func() -> String:
+            return ""
+    )
+    
+</tests>
+                
+            </program>
+        </statement>
+        <hint><p>Are you sure you need a hint? The next hint is only necessary if
+                    you are getting an error from the <c>instantiate()</c> method on <c>Ball</c>.
+                    The third hint will help you with the <c>if-elif-else</c> structure.
+                </p>
+                </hint>
+                <hint><p>If after adding the ball instantiation code, the program fails but there is 
+                    no clear error, then you'll need to add the following function to your node:
+                </p><program language="gdscript">
+func _ready() -> void:
+    Ball = load("res://practices/L1.P2.creating_instances/Ball.tscn")
+                    </program>
+                </hint><hint><p>If you are not sure how to write the decision code here is an example:
+                </p><program language="gdscript">
+if event.is_action_pressed("click"):
+	#do click actions
+    pass
+elif event.is_action_pressed("ui_up"):
+    #do up action (increase bounce)
+    pass            
+elif event.is_action_pressed("ui_down"):
+    #do down action (decrease bounce)
+    pass
+    </program>
+                </hint>
+            
+        </activity> 
+      <p>Extract the archive on your computer. To import it, you need the Project Manager.
+                The Project Manager is accessed by opening Godot, or if you already have Godot
+                opened, click on <c>Project &gt; Quit to Project List</c> (<c>Ctrl</c>
+        <c />+<c />
+        <c>Shift</c>
+        <c />+<c />
+        <c>Q</c>, <c>Ctrl</c>
+        <c />+<c />
+        <c>Option</c>
+        <c />+<c />
+        <c>Cmd</c>
+        <c />+<c />
+        <c>Q</c> on macOS)</p>
+      <p>In the Project Manager, click the <c>Import</c> button to import the project.</p>
+      <figure>
+        <caption>Import Button</caption>
+        <image source="instancing_import_button.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>In the pop-up that appears navigate to the folder you extracted.
+                Double-click the <c>project.godot</c> file to open it.</p>
+      <figure>
+        <caption>Selecting Project to Import</caption>
+        <image source="instancing_import_project_file.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Finally, click the <c>Import</c> button.</p>
+      <figure>
+        <caption>Import Dialog</caption>
+        <image source="instancing_import_and_edit_button.webp" width="50%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>A window notifying you that the project was last opened in an older Godot version
+                may appear. That's not an issue. Click <c>OK</c> to open the project.</p>
+      <p>The project contains two packed scenes: <c>main.tscn</c>, containing walls against
+                which the ball collides, and <c>ball.tscn</c>. The Main scene should open
+                automatically. If you're seeing an empty 3D scene instead of the main scene, click the 2D button at the top of the screen.</p>
+      <figure>
+        <caption>2D Button</caption>
+        <image source="instancing_2d_scene_select.webp" width="40%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <figure>
+        <caption>Main 2D Scene</caption>
+        <image source="instancing_main_scene.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Let's add a ball as a child of the Main node. In the Scene dock, select the Main
+                node. Then, click the link icon at the top of the scene dock. This button allows
+                you to add an instance of a scene as a child of the currently selected node.</p>
+      <figure>
+        <caption>Link Button</caption>
+        <image source="instancing_scene_link_button.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Double-click the ball scene to instance it.</p>
+      <figure>
+        <caption>Selecting The Instance</caption>
+        <image source="instancing_instance_child_window.webp" width="60%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>The ball appears in the top-left corner of the viewport.</p>
+      <figure>
+        <caption>Scene with new Ball Instance</caption>
+        <image source="instancing_ball_instanced.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Click on it and drag it towards the center of the view.</p>
+      <figure>
+        <caption>The Ball is Positioned</caption>
+        <image source="instancing_ball_moved.webp" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Play the game by pressing <c>F5</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>B</c> on macOS). You should see it fall.</p>
+      <p>Now, we want to create more instances of the Ball node. With the ball still
+                selected, press <c>Ctrl</c>
+        <c />+<c />
+        <c>D</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>D</c> on macOS) to call the duplicate
+                command. Click and drag to move the new ball to a different location.</p>
+      <figure>
+        <caption>Two Balls after Duplication</caption>
+        <image source="instancing_ball_duplicated.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>You can repeat this process until you have several in the scene.</p>
+      <figure>
+        <caption>Six Balls After Duplication</caption>
+        <image source="instancing_main_scene_with_balls.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Play the game again. You should now see every ball fall independently from one
+                another. This is what instances do. Each is an independent reproduction of a
+                template scene.</p>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-instancing-editing-scenes-and-instances">
+      <title>Editing scenes and instances</title>
+      <p>There is more to instances. With this feature, you can:</p>
+      <p>
+      <ol>
+        <li>Change the properties of one ball without affecting the others using the
+                        <c>Inspector</c>.</li>
+        <li>Change the default properties of every Ball by opening the <c>ball.tscn</c> scene
+                        and making a change to the Ball node there. Upon saving, all instances of the
+                        Ball in the project will see their values update.</li>
+        </ol>
+      </p>
+      <note>
+        <title>Note</title>
+        <p>Changing a property on an instance always overrides values from the
+                    corresponding packed scene.</p>
+        </note>
+      <p>Let's try this. Double-click <c>ball.tscn</c> in the FileSystem to open it.</p>
+      <figure>
+        <caption>Selecting the Ball Scene</caption>
+        <image source="instancing_ball_scene_open.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>In the Scene dock on the left, select the Ball node. Then, in the <c>Inspector</c> on the
+                right, click on the <c>PhysicsMaterial</c> property to expand it.</p>
+      <figure>
+        <caption>Selecting Physics Material</caption>
+        <image source="instancing_physics_material_expand.webp" width="30%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Set its Bounce property to <c>0.5</c> by clicking on the number field, typing <c>0.5</c>,
+                and pressing <c>Enter</c>.</p>
+      <figure>
+        <caption>Changing the Bounce Value</caption>
+        <image source="instancing_property_bounce_updated.webp" width="27%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Play the game by pressing <c>F5</c> (<c>Cmd</c>
+        <c />+<c />
+        <c>B</c> on macOS) and notice how all balls now bounce a lot
+                more. As the Ball scene is a template for all instances, modifying it and saving
+                causes all instances to update accordingly.</p>
+      <p>Let's now adjust an individual instance. Head back to the Main scene by clicking
+                on the corresponding tab above the viewport.</p>
+      <figure>
+        <caption>Main Scene Tab</caption>
+        <image source="instancing_scene_tabs.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Select one of the instanced Ball nodes and, in the <c>Inspector</c>, set its
+                <c>Gravity Scale</c> value to <c>10</c>.</p>
+      <figure>
+        <caption>Setting Gravity Scale</caption>
+        <image source="instancing_property_gravity_scale.webp" width="30%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>A grey "revert" button appears next to the adjusted property.</p>
+      <figure>
+        <caption>Reverting Gravity Scale</caption>
+        <image source="instancing_property_revert_icon.webp" width="30%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>This icon indicates you are overriding a value from the source packed scene.
+                Even if you modify the property in the original scene, the value override will
+                be preserved in the instance. Clicking the revert icon will restore the
+                property to the value in the saved scene.</p>
+      <p>Rerun the game and notice how this ball now falls much faster than the others.</p>
+      <note>
+        <title>Note</title>
+        <p>You may notice you are unable to change the values of the <c>PhysicsMaterial</c>
+                    of the ball. This is because <c>PhysicsMaterial</c> is a <em>resource</em>, and needs
+                    to be made unique before you can edit it in a scene that is linking to its
+                    original scene. To make a resource unique for one instance, right-click on
+                    the <c>Physics Material</c> property in the <c>Inspector</c> and click <c>Make Unique</c>
+                    in the context menu.</p>
+        <p>Resources are another essential building block of Godot games we will cover
+                    in a later lesson.</p>
+        </note>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-instancing-scene-instances-as-a-design-language">
+      <title>Scene instances as a design language</title>
+      <p>Instances and scenes in Godot offer an excellent design language, setting the
+                engine apart from others out there. We designed Godot around this concept from
+                the ground up.</p>
+      <p>We recommend dismissing architectural code patterns when making games with
+                Godot, such as Model-View-Controller (MVC) or Entity-Relationship diagrams.
+                Instead, you can start by imagining the elements players will see in your game
+                and structure your code around them.</p>
+      <p>For example, you could break down a shooter game like so:</p>
+      <figure>
+        <caption>Entity Relationship Diagram for Shooter</caption>
+        <image source="instancing_diagram_shooter.png" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>You can come up with a diagram like this for almost any type of game. Each
+                rectangle represents an entity that's visible in the game from the player's
+                perspective. The arrows point towards the instantiator of each scene.</p>
+      <p>Once you have a diagram, we recommend creating a scene for each element listed
+                in it to develop your game. You'll use instancing, either by code or directly in
+                the editor, to build your tree of scenes.</p>
+      <p>Programmers tend to spend a lot of time designing abstract architectures and
+                trying to fit components into it. Designing based on scenes makes development
+                faster and more straightforward, allowing you to focus on the game logic itself.
+                Because most game components map directly to a scene, using a design based on
+                scene instantiation means you need little other architectural code.</p>
+      <p>Here's the example of a scene diagram for an open-world game with tons of assets
+                and nested elements:</p>
+      <figure>
+        <caption>Entity Relationship Diagram for Open-World Game</caption>
+        <image source="instancing_diagram_open_world.png" width="75%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Imagine we started by creating the room. We could make a couple of different
+                room scenes, with unique arrangements of furniture in them. Later, we could make
+                a house scene that uses multiple room instances for the interior. We would
+                create a citadel out of many instanced houses and a large terrain on which we
+                would place the citadel. Each of these would be a scene instancing one or more sub-scenes.</p>
+      <p>Later, we could create scenes representing guards and add them to the citadel.
+                They would be indirectly added to the overall game world.</p>
+      <p>With Godot, it's easy to iterate on your game like this, as all you need to do
+                is create and instantiate more scenes. We designed the editor to be accessible
+                to programmers, designers, and artists alike. A typical team development process
+                can involve 2D or 3D artists, level designers, game designers, and animators,
+                all working with the Godot editor.</p>
+      </subsection>
+    <subsection xml:id="getting-started-step-by-step-instancing-summary">
+      <title>Summary</title>
+      <p>Instancing, the process of producing an object from a blueprint, has many handy
+                uses. With scenes, it gives you:</p>
+      <p>
+      <ul>
+        <li>The ability to divide your game into reusable components.</li>
+        <li>A tool to structure and encapsulate complex systems.</li>
+        <li>A language to think about your game project's structure in a natural way.</li>
+        </ul>
+      </p>
+      </subsection>
+    </section>

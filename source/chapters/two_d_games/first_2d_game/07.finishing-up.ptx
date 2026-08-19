@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-07-finishing-up-finishing-up">
+    <title>Finishing up</title>
+    <introduction>
+    <p>We have now completed all the functionality for our game. Below are some
+            remaining steps to add a bit more "juice" to improve the game experience.</p>
+    <p>Feel free to expand the gameplay with your own ideas.</p>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-07-finishing-up-background">
+      <title>Background</title>
+      <p>The default gray background is not very appealing, so let's change its color.
+                One way to do this is to use a <url href="https://docs.godotengine.org/en/stable/classes/class_colorrect.html#class-colorrect">ColorRect</url> node. Make it
+                the first node under <c>Main</c> so that it will be drawn behind the other nodes.
+                <c>ColorRect</c> only has one property: <c>Color</c>. Choose a color you like and
+                select "Layout" -&gt; "Anchors Preset" -&gt; "Full Rect" either in the toolbar at the top of the viewport or in the inspector so that it covers the screen.</p>
+      <p>You could also add a background image, if you have one, by using a
+                <url href="https://docs.godotengine.org/en/stable/classes/class_texturerect.html#class-texturerect">TextureRect</url> node instead.</p>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-07-finishing-up-sound-effects">
+      <title>Sound effects</title>
+      <p>Sound and music can be the single most effective way to add appeal to the game
+                experience. In your game's <term>art</term> folder, you have two sound files: "House In a
+                Forest Loop.ogg" for background music, and "gameover.wav" for when the player
+                loses.</p>
+      <p>Add two <url href="https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer.html#class-audiostreamplayer">AudioStreamPlayer</url> nodes as children of
+                <c>Main</c>. Name one of them <c>Music</c> and the other <c>DeathSound</c>. On each one,
+                click on the <c>Stream</c> property, select "Load", and choose the corresponding
+                audio file.</p>
+      <p>All audio is automatically imported with the <c>Loop</c> setting disabled.
+                If you want the music to loop seamlessly, click on the Stream file arrow,
+                select <c>Make Unique</c>, then click on the Stream file and check the <c>Loop</c> box.</p>
+      <figure>
+        <caption>Add Unique Music</caption>
+      <image source="unique_resource_music.webp" width="30%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>To play the music, add <c>$Music.play()</c> in the <c>new_game()</c>
+                function and <c>$Music.stop()</c> in the <c>game_over()</c> function.</p>
+      <p>Finally, add <c>$DeathSound.play()</c> in the <c>game_over()</c> function.</p>
+      
+        <program language="gdscript">
+          <code>func game_over() -> void:
+    ...
+    $Music.stop()
+    $DeathSound.play()
+
+func new_game() -> void:
+    ...
+    $Music.play()</code>
+          </program>
+        
+        
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-07-finishing-up-keyboard-shortcut">
+      <title>Keyboard shortcut</title>
+      <p>Since the game is played with keyboard controls, it would be convenient if we
+                could also start the game by pressing a key on the keyboard. We can do this with
+                the "Shortcut" property of the <c>Button</c> node.</p>
+      <p>In a previous lesson, we created four input actions to move the character. We
+                will create a similar input action to map to the start button.</p>
+      <p>Select "Project" -&gt; "Project Settings" and then click on the "Input Map"
+                tab. In the same way you created the movement input actions, create a new
+                input action called <c>start_game</c> and add a key mapping for the <c>Enter</c>
+                key.</p>
+      <figure>
+        <caption>Start Game Mapping</caption>
+      <image source="input-mapping-start_game.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Now would be a good time to add controller support if you have one available.
+                Attach or pair your controller and then under each input action that you wish
+                to add controller support for, click on the "+" button and press the corresponding
+                button, d-pad, or stick direction that you want to map to the respective input action.</p>
+      <p>In the <c>HUD</c> scene, select the <c>StartButton</c> and find its <term>Shortcut</term>
+                property in the Inspector. Create a new <url href="https://docs.godotengine.org/en/stable/classes/class_shortcut.html#class-shortcut">Shortcut</url> resource
+                by clicking within the box, open the <term>Events</term> array and add a new array element
+                to it by clicking on <term>Array[InputEvent] (size 0)</term>.</p>
+      <figure>
+        <caption>Shortcut Property</caption>
+      <image source="start_button_shortcut.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Create a new <url href="https://docs.godotengine.org/en/stable/classes/class_inputeventaction.html#class-inputeventaction">InputEventAction</url> and select the <c>start_game</c> action.</p>
+      <figure>
+        <caption>Input Event Action Shortcut</caption>
+      <image source="start_button_shortcut2.webp" width="40%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Now when the start button appears, you can either click it or press <c>Enter</c>
+                to start the game.</p>
+      <p>And with that, you completed your first 2D game in Godot.</p>
+      <figure>
+        <caption>Finished Game Preview</caption>
+      <image source="dodge_preview.gif" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>You got to make a player-controlled character, enemies that spawn randomly
+                around the game board, count the score, implement a game over and replay, user
+                interface, sounds, and more. Congratulations!</p>
+      <p>There's still much to learn, but you can take a moment to appreciate what you
+                achieved.</p>
+      <p>And when you're ready, you can move on to <xref ref="getting-started-first-3d-game-index-your-first-3d-game" text="custom">Your first 3D game</xref> to learn
+                to create a complete 3D game from scratch, in Godot.</p>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-07-finishing-up-sharing-the-finished-game-with-others">
+      <title>Sharing the finished game with others</title>
+      <p>If you want people to try out your game without having to install Godot, you'll
+                need to export the project for each operating system you want the game to be
+                playable on. See <url href="https://docs.godotengine.org/en/stable/tutorials/export/exporting_projects.html#doc-exporting-projects">Exporting projects</url> for instructions.</p>
+      <p>After exporting the project, compress the exported executable and PCK file (not
+                the raw project files) to a ZIP file, then upload this ZIP file to a file
+                sharing website.</p>
+      </subsection>
+    </section>

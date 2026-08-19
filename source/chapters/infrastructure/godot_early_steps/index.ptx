@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="getting-started-step-by-step-index">
+  <title>Step by step</title>
+  <introduction>
+    <p>This series builds upon the <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html#doc-key-concepts-overview">Introduction to Godot</url> and will get you started with the editor and the
+            engine. You will learn more about nodes and scenes, code your first classes with
+            GDScript, use signals to make nodes communicate with one another, and more.</p>
+    <p>The following lessons are here to prepare you for <xref ref="getting-started-first-2d-game-index-your-first-2d-game" text="custom">Your first 2D game</xref>, a
+            step-by-step tutorial where you will code a game from scratch. By the end of it,
+            you will have the necessary foundations to explore more features in other
+            sections. We also included links to pages that cover a given topic in-depth
+            where appropriate.</p>
+     </introduction>
+  <xi:include href="nodes_and_scenes.ptx" />
+  <xi:include href="instancing.ptx" />
+  <xi:include href="scripting_first_script.ptx" />
+  <xi:include href="scripting_player_input.ptx" />
+  <xi:include href="signals.ptx" />
+  </chapter>

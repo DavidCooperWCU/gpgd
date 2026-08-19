@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="network_games_first_networked_game">
+    <title>Your first networked game</title>
+    <introduction>
+        <p>
+            Here is where we talk about your first networked game.
+        </p>
+
+    </introduction>
+    <xi:include href="01.network_setup.ptx" />
+</chapter>

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="getting-started-first-2d-game-index-your-first-2d-game">
+    <title>Your first 2D game</title>
+    <introduction>
+    <p>In this step-by-step tutorial series, you will create your first complete 2D
+            game with Godot. By the end of the series, you will have a simple yet complete
+            game of your own, like the image below.</p>
+    <figure>
+      <caption>Example Game</caption>
+        <image source="dodge_preview.gif" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+    </figure>
+    <p>You will learn how the Godot editor works, how to structure a project, and build
+            a 2D game.</p>
+    <note>
+      <p>This project is an introduction to the Godot engine. It assumes that
+                you have some programming experience already. If you're new to
+                programming entirely, you should start here: <xref ref="getting-started-step-by-step-scripting-first-script-creating-your-first-script" text="custom">Your first script</xref>.</p>
+      </note>
+    <p>The game is called "Dodge the Creeps!". Your character must move and avoid the
+            enemies for as long as possible.</p>
+    <p>You will learn to:</p>
+    <p>
+    <ul>
+      <li>Create a complete 2D game with the Godot editor.</li>
+      <li>Structure a simple game project.</li>
+      <li>Move the player character and change its sprite.</li>
+      <li>Spawn random enemies.</li>
+      <li>Count the score.</li>
+      </ul>
+    </p>
+    <p>And more.</p>
+    <p>You'll find another series where you'll create a similar game but in 3D. We
+            recommend you to start with this one, though.</p>
+    <question>
+      <title>Why start with 2D?</title>
+      
+    <p>If you are new to game development or unfamiliar with Godot, we recommend
+            starting with 2D games. This will allow you to become comfortable with both
+            before tackling 3D games, which tend to be more complicated.</p>
+    <p>You can find a completed version of this project at this location:</p>
+    <p>
+    <ul>
+      <li>
+        <url href="https://github.com/godotengine/godot-demo-projects/tree/master/2d/dodge_the_creeps">Dodge the Creeps source code (GDScript)</url>
+        </li>
+      
+      </ul>
+    </p>
+  </question>
+    <observation xml:id="getting-started-first-2d-game-index-prerequisites">
+      <title>Prerequisites</title>
+      <p>This step-by-step tutorial is intended for beginners who followed the complete
+                <xref ref="getting-started-step-by-step-index" text="custom">Step by step</xref> tutoral.</p>
+      <p>If you're an experienced programmer, you can find the complete demo's source
+                code here: <url href="https://github.com/godotengine/godot-demo-projects/tree/master/2d/dodge_the_creeps">Dodge the Creeps source code</url>.</p>
+      <p>We prepared some game assets you'll need to download so we can jump straight to
+                the code.</p>
+      <p>You can download them by clicking the link below.</p>
+      <p>.<url href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/dodge_the_creeps_2d_assets.zip">dodge_the_creeps_2d_assets.zip</url>
+        </p>
+      </observation>
+    
+      </introduction>
+    
+  <xi:include href="01.project_setup.ptx" />
+  <xi:include href="02.player_scene.ptx" />
+  <xi:include href="03.coding_the_player.ptx" />
+  <xi:include href="04.creating_the_enemy.ptx" />
+  <xi:include href="05.the_main_game_scene.ptx" />
+  <xi:include href="06.heads_up_display.ptx" />
+  <xi:include href="07.finishing-up.ptx" />
+  </chapter>

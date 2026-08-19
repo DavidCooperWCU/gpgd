@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://practices/L1.P1.nodes_hello_label/practice.gd" id="1_f68nr"]
+
+[node name="NodesHelloLabel" type="Node2D" unique_id=1681431428]
+script = ExtResource("1_f68nr")

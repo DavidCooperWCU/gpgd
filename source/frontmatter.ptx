@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This frontmatter division will contain all content before the -->
+<!-- first chapter. Fill in and comment/uncomment to see how this -->
+<!-- works. -->
+
+<frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
+  <bibinfo>
+  
+    <author>
+      <personname>David G. Cooper</personname>
+      <department>Department of Computer Science</department>
+      <institution>West Chester University</institution>
+      <email>dcooper@wcupa.edu</email>
+    </author>
+    <date>
+      <today />
+    </date>
+
+    <website>
+      <url href="https://cs.wcupa.edu/dcooper">Author Website</url>
+    </website>
+
+    <copyright>
+      <year>2026</year> <!-- <ndash />2024</year> -->
+      <holder>David G. Cooper</holder>
+      <shortlicense> This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <url href="http://creativecommons.org/licenses/by-sa/4.0/" visual="creativecommons.org/licenses/by-sa/4.0"> CreativeCommons.org</url>
+      </shortlicense>
+    </copyright>
+  
+  </bibinfo>
+
+  
+  <titlepage>
+    <titlepage-items/>
+  </titlepage>
+  
+  
+  
+  <acknowledgement xml:id="acknowledgement">
+
+        <p>This book would not be possible without the maintainers of PreTeXt and Runestone Academy.
+          They guided me through creating the necessary changes and pull requests to the <c>pretext</c>, 
+          <c>rs</c>, and <c>pretext-cli</c> repositories
+          <ul>
+            <li><p>Robert Beezer, University of Puget Sound</p></li>
+            <li><p>Oscar Levin, University of Northern Colorado</p></li>
+            <li><p>Bradley Miller, Runestone Academy</p></li>
+            <li><p>Andrew Scholer, Chemeteka Community College</p></li>
+        </ul></p>
+
+        <p>In addition, the introductory parts of the book are extensions of the Getting Started
+          chapter of the <url href="https://docs.godotengine.org/en/stable/">Godot Docs</url>.
+          The authors include Juan Linietsky, Ariel Manzur and the Godot community.
+        </p>
+
+        
+  </acknowledgement>
+
+  <xi:include href="front/preface.ptx" />
+
+</frontmatter>
+

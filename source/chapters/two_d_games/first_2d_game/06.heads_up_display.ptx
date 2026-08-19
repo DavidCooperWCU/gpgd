@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-06-heads-up-display-heads-up-display">
+    <title>Heads up display</title>
+    <introduction>
+    <p>The final piece our game needs is a User Interface (UI) to display things like
+            score, a "game over" message, and a restart button.</p>
+    <p>Create a new scene, click the "Other Node" button and add a <url href="https://docs.godotengine.org/en/stable/classes/class_canvaslayer.html#class-canvaslayer">CanvasLayer</url> node named
+            <c>HUD</c>. "HUD" stands for "heads-up display", an informational display that
+            appears as an overlay on top of the game view.</p>
+    <p>The <url href="https://docs.godotengine.org/en/stable/classes/class_canvaslayer.html#class-canvaslayer">CanvasLayer</url> node lets us draw our UI elements on
+            a layer above the rest of the game, so that the information it displays isn't
+            covered up by any game elements like the player or mobs.</p>
+    <p>The HUD needs to display the following information:</p>
+    <p>
+      <ul>
+      <li>Score, changed by <c>ScoreTimer</c>.</li>
+      <li>A message, such as "Game Over" or "Get Ready!"</li>
+      <li>A "Start" button to begin the game.</li>
+      </ul>
+    </p>
+    <p>The basic node for UI elements is <url href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</url>. To create our
+            UI, we'll use two types of <url href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</url> nodes: <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> and <url href="https://docs.godotengine.org/en/stable/classes/class_button.html#class-button">Button</url>.</p>
+    <p>Create the following as children of the <c>HUD</c> node:</p>
+    <p>
+      <ul>
+      <li>
+        <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> named <c>ScoreLabel</c>.</li>
+      <li>
+        <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> named <c>Message</c>.</li>
+      <li>
+        <url href="https://docs.godotengine.org/en/stable/classes/class_button.html#class-button">Button</url> named <c>StartButton</c>.</li>
+      <li>
+        <url href="https://docs.godotengine.org/en/stable/classes/class_timer.html#class-timer">Timer</url> named <c>MessageTimer</c>.</li>
+      </ul>
+    </p>
+    <p>Click on the <c>ScoreLabel</c> and type a number into the <c>Text</c> field in the
+            Inspector. The default font for <c>Control</c> nodes is small and doesn't scale
+            well. There is a font file included in the game assets called
+            "Xolonium-Regular.ttf". To use this font, do the following:</p>
+    <p>Under "Theme Overrides &gt; Fonts", choose "Load" and select the "Xolonium-Regular.ttf" file.</p>
+    <figure>
+      <caption>Load Custom Font Button</caption>
+      <image source="custom_font_load_font.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <p>The font size is still too small, increase it to <c>64</c> under "Theme Overrides &gt; Font Sizes".
+            Once you've done this with the <c>ScoreLabel</c>, repeat the changes for the <c>Message</c> and <c>StartButton</c> nodes.</p>
+    <figure>
+      <caption>Set Custom Font Size</caption>
+      <image source="custom_font_size.webp" width="25%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    <note>
+      <title>Note</title>
+      <p>
+        <term>Anchors:</term>
+        <c>Control</c> nodes have a position and size,
+                but they also have anchors. Anchors define the origin -
+                the reference point for the edges of the node.</p>
+      </note>
+    <p>Arrange the nodes as shown below.
+            You can drag the nodes to place them manually, or for more precise placement,
+            use "Anchor Presets".</p>
+    <figure>
+      <caption>Anchor Presets</caption>
+      <image source="ui_anchor.webp" width="75%" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+      </figure>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-06-heads-up-display-scorelabel">
+      <title>ScoreLabel</title>
+      <p>
+      <ol>
+        <li>Add the text <c>0</c>.</li>
+        <li>Set the "Horizontal Alignment" and "Vertical Alignment" to <c>Center</c>.</li>
+        <li>Choose the "Anchor Preset" <c>Center Top</c>.</li>
+        </ol>
+      </p>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-06-heads-up-display-message">
+      <title>Message</title>
+      <p>
+      <ol>
+        <li>Add the text <c>Dodge the Creeps!</c>.</li>
+        <li>Set the "Horizontal Alignment" and "Vertical Alignment" to <c>Center</c>.</li>
+        <li>Set the "Autowrap Mode" to <c>Word</c>, otherwise the label will stay on one line.</li>
+        <li>Under "Control - Layout/Transform" set "Size X"  to <c>480</c> to use the entire width of the screen.</li>
+        <li>Choose the "Anchor Preset" <c>Center</c>.</li>
+        </ol>
+      </p>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-06-heads-up-display-startbutton">
+      <title>StartButton</title>
+      <p>
+      <ol>
+        <li>Add the text <c>Start</c>.</li>
+        <li>Under "Control - Layout/Transform", set "Size X" to <c>200</c> and "Size Y" to <c>100</c>
+                        to add a little bit more padding between the border and text.</li>
+        <li>Choose the "Anchor Preset" <c>Center Bottom</c>.</li>
+        <li>Under "Control - Layout/Transform", set "Position Y" to <c>580</c>.</li>
+        </ol>
+      </p>
+      <p>On the <c>MessageTimer</c>, set the <c>Wait Time</c> to <c>2</c> and set the <c>One Shot</c>
+                property to "On".</p>
+      <p>Now add this script to <c>HUD</c>:</p>
+      
+        <program language="gdscript">
+          <code>extends CanvasLayer
+
+# Notifies `Main` node that the button has been pressed
+signal start_game</code>
+          </program>
+        
+        
+      <p>We now want to display a message temporarily,
+                such as "Get Ready", so we add the following code</p>
+      
+        <program language="gdscript">
+          <code>func show_message(text: String) -> void:
+    $Message.text = text
+    $Message.show()
+    $MessageTimer.start()</code>
+          </program>
+        
+        
+      <p>We also need to process what happens when the player loses. The code below will show "Game Over" for 2 seconds, then return to the title screen and, after a brief pause, show the "Start" button.</p>
+      
+        <program language="gdscript">
+          <code>func show_game_over() -> void:
+    show_message("Game Over")
+    # Wait until the MessageTimer has counted down.
+    await $MessageTimer.timeout
+
+    $Message.text = "Dodge the Creeps!"
+    $Message.show()
+    # Make a one-shot timer and wait for it to finish.
+    await get_tree().create_timer(1.0).timeout
+    $StartButton.show()</code>
+          </program>
+        
+        
+      <note>
+        <title>Note</title>
+        <p>When you need to pause for a brief time, an alternative to using a
+                    Timer node is to use the SceneTree's <c>create_timer()</c> function. This
+                    can be very useful to add delays such as in the above code, where we
+                    want to wait some time before showing the "Start" button.</p>
+        </note>
+      <p>Add the code below to <c>HUD</c> to update the score</p>
+      
+        <program language="gdscript">
+          <code>func update_score(score: int) -> void:
+    $ScoreLabel.text = str(score)</code>
+          </program>
+        
+        
+      <p>Connect the <c>pressed()</c> signal of <c>StartButton</c> and the <c>timeout()</c>
+                signal of <c>MessageTimer</c> to the <c>HUD</c> node, and add the following code to the new functions:</p>
+      
+        <program language="gdscript">
+          <code>func _on_start_button_pressed() -> void:
+    $StartButton.hide()
+    start_game.emit()
+
+func _on_message_timer_timeout() -> void:
+    $Message.hide()</code>
+          </program>
+        
+        
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-06-heads-up-display-connecting-hud-to-main">
+      <title>Connecting HUD to Main</title>
+      <p>Now that we're done creating the <c>HUD</c> scene, go back to <c>Main</c>. Instance
+                the <c>HUD</c> scene in <c>Main</c> like you did the <c>Player</c> scene. The scene tree
+                should look like this, so make sure you didn't miss anything:</p>
+      <figure>
+        <caption>Finished Main Scene</caption>
+      <image source="completed_main_scene.webp" width="25%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Now we need to connect the <c>HUD</c> functionality to our <c>Main</c> script. This
+                requires a few additions to the <c>Main</c> scene:</p>
+      <p>In the Signals tab, connect the HUD's <c>start_game</c> signal to the <c>new_game()</c>
+                function of the Main node by clicking the "Pick" button in the "Connect a Signal"
+                window and selecting the <c>new_game()</c> method or type "new_game" below "Receiver Method"
+                in the window. Verify that the green connection icon now appears next to
+                <c>func new_game()</c> in the script.</p>
+      <p>In <c>new_game()</c>, update the score display and show the "Get Ready" message:</p>
+      
+        <program language="gdscript">
+          <code>$HUD.update_score(score)
+$HUD.show_message("Get Ready")</code>
+          </program>
+        
+        
+      <p>In <c>game_over()</c> we need to call the corresponding <c>HUD</c> function:</p>
+      
+        <program language="gdscript">
+          <code>$HUD.show_game_over()</code>
+          </program>
+        
+        
+      <p>Finally, add this to <c>_on_score_timer_timeout()</c> to keep the display in sync
+                with the changing score:</p>
+      
+        <program language="gdscript">
+          <code>$HUD.update_score(score)</code>
+          </program>
+        
+        
+      <warning>
+        <title>Warning</title>
+        <p>Remember to remove the call to <c>new_game()</c> from
+                    <c>_ready()</c> if you haven't already, otherwise
+                    your game will start automatically.</p>
+        </warning>
+      <p>Now you're ready to play! Click the "Play the Project" button.</p>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-06-heads-up-display-removing-old-creeps">
+      <title>Removing old creeps</title>
+      <p>If you play until "Game Over" and then start a new game right away, the creeps
+                from the previous game may still be on the screen. It would be better if they
+                all disappeared at the start of a new game. We just need a way to tell <em>all</em> the
+                mobs to remove themselves. We can do this with the "group" feature.</p>
+      <p>In the <c>Mob</c> scene, select the root node and click the <c>Groups</c> tab next to the
+                <c>Signals</c> tab and the "+" button to open the "Create New Group" dialog.</p>
+      <figure>
+        <caption>Create New Group Button</caption>
+      <image source="group_tab.webp" width="30%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Name the group <c>mobs</c> and click "ok" to add a new scene group.</p>
+      <figure>
+        <caption>Add Group Dialog</caption>
+      <image source="add_group_dialog.webp" width="40%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>Now all mobs will be in the "mobs" group.</p>
+      <figure>
+        <caption>Groups Tab</caption>
+      <image source="scene_group_mobs.webp" width="30%">
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>We can then add the following line to the <c>new_game()</c> function in <c>Main</c>:</p>
+      
+        <program language="gdscript">
+          <code>get_tree().call_group("mobs", "queue_free")</code>
+          </program>
+        
+        
+      <p>The <c>call_group()</c> function calls the named function on every node in a
+                group - in this case we are telling every mob to delete itself.</p>
+      <p>The game's mostly done at this point. In the next and last part, we'll polish it
+                a bit by adding a background, looping music, and some keyboard shortcuts.</p>
+      </subsection>
+    </section>

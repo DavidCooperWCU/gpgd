@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-3d-game-09-adding-animations-character-animation">
+    <title>Character animation</title>
+  <introduction>
+    <p>In this final lesson, we'll use Godot's built-in animation tools to make our
+            characters float and flap. You'll learn to design animations in the editor and
+            use code to make your game feel alive.</p>
+    <p />
+    <p>We'll start with an introduction to using the animation editor.</p>
+    </introduction>
+    <subsection xml:id="getting-started-first-3d-game-09-adding-animations-using-the-animation-editor">
+      <title>Using the animation editor</title>
+      <p>The engine comes with tools to author animations in the editor. You can then use
+                the code to play and control them at runtime.</p>
+      <p>Open the player scene, select the <c>Player</c> node, and add an <url href="https://docs.godotengine.org/en/stable/classes/class_animationplayer.html#class-animationplayer">AnimationPlayer</url> node.</p>
+      <p>The <em>Animation</em> dock appears in the bottom panel.</p>
+      <p />
+      <p>It features a toolbar and the animation drop-down menu at the top, a track
+                editor in the middle that's currently empty, and filter, snap, and zoom options
+                at the bottom.</p>
+      <p>Let's create an animation. Click on <em>Animation -&gt; New</em>.</p>
+      <p />
+      <p>Name the animation "float".</p>
+      <p />
+      <p>Once you've created the animation, the timeline appears with numbers representing
+                time in seconds.</p>
+      <p />
+      <p>We want the animation to start playback automatically at the start of the game.
+                Also, it should loop.</p>
+      <p>To do so, you can click the autoplay button () in the animation toolbar
+                and the looping arrows, respectively.</p>
+      <p />
+      <p>You can also pin the animation editor by clicking the pin icon in the top-right.
+                This prevents it from folding when you click on the viewport and deselect the
+                nodes.</p>
+      <p />
+      <p>Set the animation duration to <c>1.2</c> seconds in the top-right of the dock.</p>
+      <p>You should see the gray ribbon widen a bit. It shows you the start and end of
+                your animation and the vertical blue line is your time cursor.</p>
+      <p />
+      <p>You can click and drag the slider in the bottom-right to zoom in and out of the
+                timeline.</p>
+      <p />
+      </subsection>
+    <subsection xml:id="getting-started-first-3d-game-09-adding-animations-the-float-animation">
+      <title>The float animation</title>
+      <introduction>
+      <p>With the animation player node, you can animate most properties on as many nodes
+                as you need. Notice the key icon next to properties in the <em>Inspector</em>. You can
+                click any of them to create a keyframe, a time and value pair for the
+                corresponding property. The keyframe gets inserted where your time cursor is in
+                the timeline.</p>
+      <p>Let's insert our first keys. Here, we will animate both the position and the
+                rotation of the <c>Character</c> node.</p>
+      <p>Select the <c>Character</c> and in the <em>Inspector</em> expand the <em>Transform</em> section. Click the key icon next to <em>Position</em>, and <em>Rotation</em>.</p>
+      <p />
+      <figure>
+        <caption>Create Reset Tracks</caption>
+      <image source="curves.webp" >
+         <shortdescription>TODO</shortdescription>
+     </image>
+        </figure>
+      <p>For this tutorial, just create RESET Track(s) which is the default choice</p>
+      <p>Two tracks appear in the editor with a diamond icon representing each keyframe.</p>
+      <p />
+      <p>You can click and drag on the diamonds to move them in time. Move the
+                position key to <c>0.3</c> seconds and the rotation key to <c>0.1</c> seconds.</p>
+      <p />
+      <p>Move the time cursor to <c>0.5</c> seconds by clicking and dragging on the gray
+                timeline, or by entering it into the input field.</p>
+      <p />
+      <p>In the <em>Inspector</em>, set the <em>Position</em>'s <em>Y</em> axis to <c>0.65</c> meters and the
+                <em>Rotation</em>' <em>X</em> axis to <c>8</c>.</p>
+      <p>If you don't see the properties in the <em>Inspector</em> panel, first click on the
+                <c>Character</c> node again in the <em>Scene</em> dock.</p>
+      <p />
+      <p>Create a keyframe for both properties</p>
+      <p />
+      <p>Now, move the position keyframe to <c>0.7</c>
+                seconds by dragging it on the timeline.</p>
+      <p />
+      <note>
+        <title>Note</title>
+        <p>A lecture on the principles of animation is beyond the scope of this
+                    tutorial. Just note that you don't want to time and space everything evenly.
+                    Instead, animators play with timing and spacing, two core animation
+                    principles. You want to offset and contrast in your character's motion to
+                    make them feel alive.</p>
+        </note>
+      <p>Move the time cursor to the end of the animation, at <c>1.2</c> seconds. Set the Y
+                position to about <c>0.35</c> and the X rotation to <c>-9</c> degrees. Once again,
+                create a key for both properties.</p>
+      <p />
+      <p>You can preview the result by clicking the play button or pressing <c>Shift</c>
+        <c />+<c />
+        <c>D</c>.
+                Click the stop button or press <c>S</c> to stop playback.</p>
+      <p />
+      <p>You can see that the engine interpolates between your keyframes to produce a
+                continuous animation. At the moment, though, the motion feels very robotic. This
+                is because the default interpolation is linear, causing constant transitions,
+                unlike how living things move in the real world.</p>
+      <p>We can control the transition between keyframes using easing curves.</p>
+      <p>Click and drag around the first two keys in the timeline to box select them.</p>
+      <p />
+      <p>You can edit the properties of both keys simultaneously in the <em>Inspector</em>,
+                where you can see an <em>Easing</em> property.</p>
+      <p />
+      <p>Click and drag on the curve, pulling it towards the left. This will make it
+                ease-out, that is to say, transition fast initially and slow down as the time
+                cursor reaches the next keyframe.</p>
+      <p />
+      <p>Play the animation again to see the difference. The first half should already
+                feel a bit bouncier.</p>
+      <p>Apply an ease-out to the second keyframe in the rotation track.</p>
+      <p />
+      <p>Do the opposite for the second position keyframe, dragging it to the right.</p>
+      <p />
+      <p>Your animation should look something like this.</p>
+      <p />
+      <note>
+        <title>Note</title>
+        <p>Animations update the properties of the animated nodes every frame,
+                    overriding initial values. If we directly animated the <em>Player</em> node, it
+                    would prevent us from moving it in code. This is where the <em>Pivot</em> node
+                    comes in handy: even though we animated the <em>Character</em>, we can still move
+                    and rotate the <em>Pivot</em> and layer changes on top of the animation in a
+                    script.</p>
+        </note>
+      <p>If you play the game, the player's creature will now float!</p>
+      <p>If the creature is a little too close to the floor, you can move the <c>Pivot</c> up
+                to offset it.</p>
+      </introduction>
+      <subsubsection xml:id="getting-started-first-3d-game-09-adding-animations-controlling-the-animation-in-code">
+        <title>Controlling the animation in code</title>
+        <p>We can use code to control the animation playback based on the player's input.
+                    Let's change the animation speed when the character is moving.</p>
+        <p>Open the <c>Player</c>'s script by clicking the script icon next to it.</p>
+        <p />
+        <p>In <c>_physics_process()</c>, after the line where we check the <c>direction</c>
+                    vector, add the following code.</p>
+        
+          <program language="gdscript">
+            <code>func _physics_process(delta: float) -> void:
+    #...
+    if direction != Vector3.ZERO:
+        #...
+        $AnimationPlayer.speed_scale = 4
+    else:
+        $AnimationPlayer.speed_scale = 1</code>
+            </program>
+          
+          
+        <p>This code makes it so when the player moves, we multiply the playback speed by
+                    <c>4</c>. When they stop, we reset it to normal.</p>
+        <p>We mentioned that the <c>Pivot</c> could layer transforms on top of the animation. We
+                    can make the character arc when jumping using the following line of code. Add it
+                    at the end of <c>_physics_process()</c>.</p>
+        
+          <program language="gdscript">
+            <code>func _physics_process(delta: float) -> void:
+    #...
+    $Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse</code>
+            </program>
+          
+          
+        </subsubsection>
+      </subsection>
+    <subsection xml:id="getting-started-first-3d-game-09-adding-animations-animating-the-mobs">
+      <title>Animating the mobs</title>
+      <p>Here's another nice trick with animations in Godot: as long as you use a similar
+                node structure, you can copy them to different scenes.</p>
+      <p>For example, both the <c>Mob</c> and the <c>Player</c> scenes have a <c>Pivot</c> and a
+                <c>Character</c> node, so we can reuse animations between them.</p>
+      <p>Open the <em>Player</em> scene, select the AnimationPlayer node and then click on
+                <term>Animation &gt; Manage Animations...</term>. Click the <em>Copy animation to clipboard</em> button
+                (two small squares) alongside the <em>float</em> animation. Click OK to close the window.</p>
+      <p>Then open <c>mob.tscn</c>, create an <url href="https://docs.godotengine.org/en/stable/classes/class_animationplayer.html#class-animationplayer">AnimationPlayer</url> child
+                node and select it. Click <term>Animation &gt; Manage Animations</term>, then <term>New Library</term>. You
+                should see the message "Global library will be created." Leave the text field blank and
+                click OK. Click the <em>Paste</em> icon (clipboard) and it should appear in the window. Click OK
+                to close the window.</p>
+      <p>Next, make sure that the autoplay button () and the looping
+                arrows (Animation looping) are also turned on in the animation editor in the bottom panel.
+                That's it; all monsters will now play the float animation.</p>
+      <p>We can change the playback speed based on the creature's <c>random_speed</c>. Open
+                the <em>Mob</em>'s script and at the end of the <c>initialize()</c> function, add the following line.</p>
+      
+        <program language="gdscript">
+          <code>func initialize(start_position: Vector3, player_position: Vector3) -> void:
+    #...
+    $AnimationPlayer.speed_scale = random_speed / min_speed</code>
+          </program>
+        
+        
+      <p>And with that, you finished coding your first complete 3D game.</p>
+      <p>
+        <term>Congratulations</term>!</p>
+      <p>In the next part, we'll quickly recap what you learned and give you some links
+                to keep learning more. But for now, here are the complete <c>player.gd</c> and
+                <c>mob.gd</c> so you can check your code against them.</p>
+      <p>Here's the <em>Player</em> script.</p>
+      
+        <program language="gdscript">
+          <code>extends CharacterBody3D
+
+signal hit
+
+# How fast the player moves in meters per second.
+@export var speed: int = 14
+# The downward acceleration while in the air, in meters per second squared.
+@export var fall_acceleration: int = 75
+# Vertical impulse applied to the character upon jumping in meters per second.
+@export var jump_impulse: int = 20
+# Vertical impulse applied to the character upon bouncing over a mob
+# in meters per second.
+@export var bounce_impulse: int = 16
+
+var target_velocity: Vector3 = Vector3.ZERO
+
+
+func _physics_process(delta: float) -> void:
+    # We create a local variable to store the input direction
+    var direction: Vector3 = Vector3.ZERO
+
+    # We check for each move input and update the direction accordingly
+    if Input.is_action_pressed("move_right"):
+        direction.x = direction.x + 1
+    if Input.is_action_pressed("move_left"):
+        direction.x = direction.x - 1
+    if Input.is_action_pressed("move_back"):
+        # Notice how we are working with the vector's x and z axes.
+        # In 3D, the XZ plane is the ground plane.
+        direction.z = direction.z + 1
+    if Input.is_action_pressed("move_forward"):
+        direction.z = direction.z - 1
+
+    # Prevent diagonal movement being very fast
+    if direction != Vector3.ZERO:
+        direction = direction.normalized()
+        # Setting the basis property will affect the rotation of the node.
+        $Pivot.basis = Basis.looking_at(direction)
+        $AnimationPlayer.speed_scale = 4
+    else:
+        $AnimationPlayer.speed_scale = 1
+
+    # Ground Velocity
+    target_velocity.x = direction.x * speed
+    target_velocity.z = direction.z * speed
+
+    # Vertical Velocity
+    if not is_on_floor(): # If in the air, fall towards the floor
+        target_velocity.y = target_velocity.y - (fall_acceleration * delta)
+
+    # Jumping.
+    if is_on_floor() and Input.is_action_just_pressed("jump"):
+        target_velocity.y = jump_impulse
+
+    # Iterate through all collisions that occurred this frame
+    # in C this would be for(int i = 0; i &lt; collisions.Count; i++)
+    for index in range(get_slide_collision_count()):
+        # We get one of the collisions with the player
+        var collision: KinematicCollision3D = get_slide_collision(index)
+
+        # If the collision is with ground
+        if collision.get_collider() == null:
+            continue
+
+        # If the collider is with a mob
+        if collision.get_collider().is_in_group("mob"):
+            var mob: Mob = collision.get_collider()
+            # we check that we are hitting it from above.
+            if Vector3.UP.dot(collision.get_normal()) &gt; 0.1:
+                # If so, we squash it and bounce.
+                mob.squash()
+                target_velocity.y = bounce_impulse
+                # Prevent further duplicate calls.
+                break
+
+    # Moving the Character
+    velocity = target_velocity
+    move_and_slide()
+
+    $Pivot.rotation.x = PI / 6 * velocity.y / jump_impulse
+
+# And this function at the bottom.
+func die() -> void:
+    hit.emit()
+    queue_free()
+
+func _on_mob_detector_body_entered(body: Node3D) -> void:
+    die()</code>
+          </program>
+        
+        
+      <p>And the <em>Mob</em>'s script.</p>
+      
+        <program language="gdscript">
+          <code>class_name Mob
+extends CharacterBody3D
+
+# Minimum speed of the mob in meters per second.
+@export var min_speed: int = 10
+# Maximum speed of the mob in meters per second.
+@export var max_speed: int = 18
+
+# Emitted when the player jumped on the mob
+signal squashed
+
+func _physics_process(_delta: float) -> void:
+    move_and_slide()
+
+# This function will be called from the Main scene.
+func initialize(start_position: Vector3, player_position: Vector3) -> void:
+    # We position the mob by placing it at start_position
+    # and rotate it towards player_position, so it looks at the player.
+    look_at_from_position(start_position, player_position, Vector3.UP)
+    # Rotate this mob randomly within range of -45 and +45 degrees,
+    # so that it doesn't move directly towards the player.
+    rotate_y(randf_range(-PI / 4, PI / 4))
+
+    # We calculate a random speed (integer)
+    var random_speed: int = randi_range(min_speed, max_speed)
+    # We calculate a forward velocity that represents the speed.
+    velocity = Vector3.FORWARD * random_speed
+    # We then rotate the velocity vector based on the mob's Y rotation
+    # in order to move in the direction the mob is looking.
+    velocity = velocity.rotated(Vector3.UP, rotation.y)
+
+    $AnimationPlayer.speed_scale = random_speed / min_speed
+
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+    queue_free()
+
+func squash() -> void:
+    squashed.emit()
+    queue_free() # Destroy this node</code>
+          </program>
+        
+        
+      </subsection>
+    </section>
