@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='utf-8'?>
+<section xml:id="infrastructure-introduction-first-gdscript">
+  <title>First look at GDScript</title>
+  <introduction>
+  <p>
+    This page will give you a brief overview of GDScript. GDScript is a domain-specific language
+    for the Godot game engine. This means that its basic functionality is tied to the functionality
+    of the Godot game engine, so if a general purpose interpreter were written that was separate from the Godot
+    engine then some of the built-in functions of the language would not work by default.
+  </p>
+  <p>The syntax of GDScript is similar to Python. However, GDScript has variable declaration, and instead
+    of type hints, specifying the type in GDScript gives the variable a static type, which allows the
+    compiler to check the type before running. This can make finding some bugs much easier, and also
+    allows the editor to make suggestions about the available methods on a named variable.
+  </p>
+  </introduction>
+  <subsection xml:id="infrastructure-introduction-first-gdscript-hello">
+    <title>Hello, GDScript!</title>
+
+    <exercise xml:id="first-gdscript-hello" label="first-gdscript-hello">
+            <title>GDScript Intro</title>
+            <statement><p>This script currently prints <c>Hello, world!</c>.
+                Change the script to print <c>Hello, GDScript!!!</c> 
+                for the test to pass. (Note the punctuation.)  
+            </p>
+            <p>You may also want to experiment with assigning the <c>rotation</c>
+                <c>position.x</c>, and <c>position.y</c> properties of the <c>Sprite2D</c>
+                to see the Godot icon move and rotate. These properties are also known
+                as fields or instance variables, and can be accessed directly using
+                the assignment <c>=</c> operator. For example to change the x position
+                of the icon set <c>position.x = 100</c>
+            </p>
+            <program xml:id="gs-hello-gdscript" interactive='activecode' language="gdscript" label="gs-hello-gdscript"
+                     pck="gdpractice/L1.P3.sprite2d_hello_world"
+                     scene="res://practices/L1.P3.sprite2d_hello_world/practice.tscn">
+
+<code>
+extends Sprite2D
+
+func _init() -> void:
+    print("Hello, world!")
+
+</code>
+
+
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+func _build_checks() -> void:
+
+   #
+   var check_pattern := _add_simple_check(
+      "Program should print 'Hello, GDScript!!!",
+      func() -> String:
+         return (
+            ""
+            if _is_code_line_match(["print(?Hello,GDScript!!!?)"])
+            else "couldn't find a print('Hello, GDScript!!!') call "
+         )
+   )
+
+</tests>
+</program>
+</statement>
+<hint> <p><c>rotation</c> is in radians. To convert from degrees to radians
+    either use the function <c>deg_to_rad(value_in_degrees)</c> or
+    multiply by <c>PI/180.0</c> since there are 2 <c>PI</c> radians
+    per 360 degrees.
+</p>
+</hint>
+</exercise>
+  </subsection>
+  <subsection xml:id="infrastructure-introduction-first-gdscript-process">
+    <title>The Game Loop</title>
+    <p>
+        Godot uses a game loop, so each Godot object, known as a <c>Node</c>
+        has functions that are called by the game loop. One of these functions 
+        is called <c>_process()</c>
+
+        Here is an example:
+    </p>
+    <program language="gdscript">
+          <code>func _process(delta: float) -> void:
+    rotation += PI/2 * delta</code>
+          </program>
+          <p>
+            The game engine does its best to process at a constant refresh rate.
+            Typically this is 30 or 60 frames per second (FPS), but it can be faster
+            or slower. The <c>delta</c> parameter passed in is the amount of time 
+            that has passed since the last time <c>_process</c> was called. So,
+            the number that is multiplied by delta is the amount you want the
+            value to change each second. In the case of <c>rotation</c> above
+            the desired amount is to change by 90 degrees (<c>PI/2</c> radians) 
+            clockwise each second.
+          </p>
+          <p>
+            Try adding the code for the <c>_process</c> function above to <xref text="type-global-title" ref="first-gdscript-hello" /> to see the logo
+            rotating continuously.
+          </p>
+  </subsection>
+  <exercises xml:id="exercises-first-gdscript">
+    <exercise xml:id="exercises-first-gdscript-flipped-icon"
+       label="exercises-first-gdscript-flipped-icon">
+       <title>Flipping the Icon</title>
+       <statement><p>
+                Which of the following would cause the icon to be rotated so that it stays upside down.
+                (Note: try the code in the <c>_process</c> function of the code in 
+                the above checkpoint. Just make sure that there is no other assignment of <c>rotation</c>
+                in the <c>_process</c> function, or else you may not see the result.)
+       </p>
+            </statement>
+        <choices  randomize="yes">
+            
+            <choice correct="yes">
+                <statement>
+                    <c>rotation = PI</c>
+                </statement>
+                <feedback><p>
+                    Yes! <c>PI</c> radians is 180 degrees.
+                </p>
+            </feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                    <c>rotation += PI</c>
+                    </p>
+                </statement>
+                <feedback>
+                    <p>
+                    Look carefully at the operator.
+                    </p>
+                </feedback>
+            </choice>
+            <choice >
+                <statement>
+                <p>
+                    <c>rotation = deg_to_rad(90)</c>
+            </p>
+                </statement>
+                <feedback>
+                <p>
+                    <c>deg_to_rad</c> will convert 90 degrees to <c>PI/2</c> radians.
+            </p>
+        </feedback>
+            </choice>
+            <choice>
+                <statement>
+                <p>
+                    <c>rotation = PI/2</c>
+                </p>
+                </statement>
+                <feedback>
+                    <p>
+                    360 degrees is 2 <c>PI</c> radians.
+                    </p>
+                </feedback>
+            </choice>
+            <choice correct="yes">
+                <statement>
+                <p>
+                    <c>rotation = deg_to_rad(180)</c>
+            </p>
+                </statement>
+                <feedback>
+                <p>
+                    Yes! <c>deg_to_rad</c> will convert 180 degrees to <c>PI</c> radians.
+            </p>
+        </feedback>
+            </choice>
+            
+        </choices>
+    </exercise>
+    <!-- TODO: add more exercises here.-->
+  </exercises>
+</section>

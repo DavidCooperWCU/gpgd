@@ -2,13 +2,54 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="getting-started-introduction-index-doc-getting-started-introduction-index">
   <title>Introduction</title>
   <introduction xml:id="getting-started-introduction-index-introduction">
-    <p>This series will introduce you to Godot and give you an overview of its
-            features.</p>
-    <p>In the following pages, we will introduce the engine's most
-            essential concepts, run you through the editor's interface, and give you tips to
-            make the most of your time learning it.</p>
-
+    <p>Programming a modern game can have a wide range of required resources.
+        You could make a simple game such as text based computer game that only 
+        requires a 
+        programming language that allows you to store, retrieve, display, 
+        and prompt for text or you could make a 3D massively multiplayer
+        online role playing game (<term>MMORPG</term>) that requires 3D graphics programs,
+        a game engine, network infrastructure, cloud based storage, and more
+        (as well as the staff that can manage and use all of the tools).
+        Or you could make a game somewhere in between those two extremes.
+    </p>
+    <p>This part of the book will discuss an infrastructure that can support
+        moderately complicated single console games intended to be distributed 
+        to a wide audience over the web. The infrastructure can also support
+        networked multiplayer games over a local area network (LAN).
+    </p>
+    <p>
+        When you decide to develop your games on your own you'll need to make
+        infrastructure decisions about the <term>game engine</term>, 
+        <term>artwork tools</term> and/or <term>artwork sources</term>, 
+        <term>version control software</term>, <term>web hosting</term>,
+        and <term>distribution</term>. Since you are using this book, either you
+        or your instructor has decided to use the Godot game engine with
+        it's domain-specific language (DSL) GDScript. Strictly speaking
+        the <term>game engine</term> is the software that puts together
+        all of the different parts of the game and runs the game on one or
+        more <term>platforms</term>. However, in order to support the game
+        engine, there is typically an <term>integrated development environment</term>
+        (<term>IDE</term>) that allows you to build the game. For a game engine this
+        includes a place to edit source code, add graphics and other assets,
+        add animation, edit physics properties, etc. Godot uses the
+        git <term>version control software</term> to keep track of revisions.
+    </p>
+    <p>
+        In addition to Godot, this book will describe GitHub as both a 
+        <term>web hosting</term> and a <term>distribution</term> solution.
+        However, there are many other options, and GitHub was chosen because
+        of it's integration with GitHub Education that provides free services
+        to active Faculty and Students with verification.
+    </p>
+    <p>
+        This chapter will briefly introduce you to the infrastructure tools
+        we'll be using in this book, while the following chapters of 
+        <xref text="type-global-title" ref="part-infrastructure" />
+        will describe more detail as well as infrastructure that will not be used
+        in the rest of the book.
+    </p>
     </introduction>
+  <xi:include href="first_look_at_gdscript.ptx" />
   <xi:include href="first_look_at_the_editor.ptx" />
   <xi:include href="learning_new_features.ptx" />
   </chapter>
