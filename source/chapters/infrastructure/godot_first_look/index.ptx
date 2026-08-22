@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="infrastructure-godot-first-look">
+  <title>Godot First Look</title>
+  <introduction xml:id="getting-started-introduction-index-introduction">
+    <p>
+        This chapter will briefly introduce you to godot's major components, 
+        the GDScript language, the Godot editor, and how to find more 
+        information about Godot.
+    </p>
+    </introduction>
+  <xi:include href="first_look_at_gdscript.ptx" />
+  <xi:include href="first_look_at_the_editor.ptx" />
+  <xi:include href="learning_new_features.ptx" />
+  </chapter>

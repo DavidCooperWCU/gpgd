@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="infrastructure-github-overview">
+  <title>GitHub: Overview</title>
+  <introduction xml:id="infrastructure-github-overview-introduction">
+    <p>
+        GitHub is one of many web based services for managing Open Source and 
+        Closed Source code bases. These services typically have a place for 
+        your code (your git repository), many touch points for collaboration
+        via Issues, Pull Requests, and a Wiki, as well as automation tools
+        often called continuous integration. One of the automation tools
+        that github provides is GitHub Pages, which allows you to have 
+        a web site where you can openly publish your work just the how 
+        you want to. While this chapter will get you started with 
+        GitHub, there is additional
+        <url href="https://docs.github.com/en/enterprise-cloud@latest/get-started">GitHub Documentation</url>
+        online.
+    </p>
+    <p>
+        GitHub was chosen for this book because it has extra support for
+        schools, instructors, and active students with a .edu email account.
+        This is through the <url href="https://github.com/education">GitHub Education</url> 
+        community branch of GitHub.
+    </p>
+    </introduction>
+  <xi:include href="github-intro.ptx" />
+  <xi:include href="github-web-hosting.ptx" />
+  <xi:include href="github-distribution.ptx" />
+  
+  </chapter>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <section xml:id="getting-started-introduction-first-look-at-the-editor">
-  <title>First look at Godot's interface</title>
+  <title>Godot: First look at Godot's interface</title>
   <introduction>
   <p>This page will give you a brief overview of Godot's interface. We're going to
             look at the different main screens and docks to help you situate yourself.</p>
@@ -18,7 +18,7 @@
       <figure>
         <caption>Projects Tab</caption>
         <image source="editor_intro_project_manager.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Godot Project Manager window is shown with no projects in the projects tab and the search bar selected.</shortdescription>
      </image>
         </figure>
       <p>At the top of the window, there is another tab named <term>Asset Library</term>. The first
@@ -30,14 +30,15 @@
       <figure>
         <caption>Asset Library Tab</caption>
         <image source="editor_intro_project_templates.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Godot Project Manager window is shown with 8 assets showing in the Asset Library tab and the search bar selected.</shortdescription>
      </image>
         </figure>
       <p>The Project Manager's settings can be opened using the <term>Settings</term> menu:</p>
       <figure>
         <caption>Settings Menu</caption>
         <image source="editor_intro_settings.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Godot Project Manager window is shown with the settings menu button in the upper right hand corner in a yellow box.</shortdescription>
+         <description><p>The Godot Project Manager window is shown with no projects in the projects tab and the search bar selected. The settings menu button in the upper right hand corner is shown in a yellow box.</p></description>
      </image>
         </figure>
       <p>From here, you can change the editor's language (default is the system language), interface theme, display
@@ -55,7 +56,7 @@
       <figure>
         <caption>Default Editor View</caption>
         <image source="editor_intro_editor_empty.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Godot's Editor view is shown with the 3D tab selected in the middle. An empty project is shown.</shortdescription>
      </image>
         </figure>
       <p>By default, along the window's top edge, it features <term>main menu</term> on the left, <term>workspace</term> switching
@@ -64,7 +65,15 @@
       <figure>
         <caption>Editor Top Edge</caption>
         <image source="editor_intro_top_menus.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The top edge of the editor window is shown with
+            the 3D Tab selected. 
+         </shortdescription>
+         <description><p>The top edge of the editor window is shown with menus Scene, Project, Debug, Editor, and Help on the left side.
+            The middle has tabs for 2D, 3D, Script, Game, and AssetLib. 
+            The 3D Tab is selected. On the right are action buttons for
+            run project, pause project, stop project, remote deploy, run current scene,
+            run specific scene, and enable movie maker mode.</p>
+         </description>
      </image>
         </figure>
       <p>Just below the workspace buttons, the opened <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html#doc-key-concepts-overview-scenes">scenes</url>
@@ -74,7 +83,7 @@
       <figure>
         <caption>Open Scenes Tabs</caption>
         <image source="editor_intro_scene_selector.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The [empty] scene tab and a button to add a new scene are shown in the bar.</shortdescription>
      </image>
         </figure>
       <p>In the center, below the scene selector is the <term>viewport</term> with its <term>toolbar</term> at the top, where you'll
@@ -82,30 +91,47 @@
       <figure>
         <caption>Scene 3D Viewport</caption>
         <image source="editor_intro_3d_viewport.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An empty 3D viewport is shown with it's toolbar in select mode directly above.
+         </shortdescription>
+         <description><p>An empty 3D viewport is shown with it's toolbar directly above.
+            Select mode is selected in the toolbar. The toolbar has the buttones
+            Select mode, move mode, rotate mode, scale mode, show list of nodes, etc.
+         </p>
+        </description>
      </image>
         </figure>
       <p>This toolbar changes based on the context and selected node. Here is the 2D toolbar:</p>
       <figure>
         <caption>2D Toolbar</caption>
         <image source="editor_intro_toolbar_2d.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A 2D toolbar is shown with
+            Select mode active in the toolbar.
+        </shortdescription>
+        <description><p>A 2D toolbar is shown.
+            Select mode is selected in the toolbar. The toolbar has the buttones
+            Select mode, move mode, rotate mode, scale mode, show list of nodes, etc.
+        </p></description>
      </image>
         </figure>
       <p>Below is the 3D one:</p>
       <figure>
         <caption>3D Toolbar</caption>
         <image source="editor_intro_toolbar_3d.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A 3D toolbar is shown with
+            Select mode selected in the toolbar. 
+        </shortdescription>
+        <description><p>A 3D toolbar is shown.
+            Select mode is selected in the toolbar. The toolbar has the buttones
+            Select mode, move mode, rotate mode, scale mode, show list of nodes, etc.
+        </p></description>
      </image>
         </figure>
       <note>
         <title>See Also</title>
-        <p>To learn more on workspaces, read <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/first_look_at_the_editor.html#the-five-main-screens">The five main screens</url>.</p>
-        </note>
-      <note>
-        <title>See Also</title>
-        <p>To learn more on the 3D viewport and 3D in general, read <url href="https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#doc-introduction-to-3d">Introduction to 3D</url>.</p>
+        <p><ul><li>To learn more on workspaces, read <url href="https://docs.godotengine.org/en/stable/getting_started/introduction/first_look_at_the_editor.html#the-five-main-screens">The five main screens</url>.</li>
+            <li>To learn more on the 3D viewport and 3D in general, read <url href="https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html#doc-introduction-to-3d">Introduction to 3D</url>.</li>
+        </ul>
+    </p>
         </note>
       <p>On either side of the viewport sit the <term>docks</term>. And at the bottom of the
                 window lies the <term>bottom panel</term>.</p>
@@ -114,21 +140,40 @@
       <figure>
         <caption>Filesystem Dock</caption>
         <image source="editor_intro_filesystem_dock.webp"  width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A view of the filesystem dock shows that res:// is selected.
+         </shortdescription>
+         <description><p>A view of the filesystem dock shows that res:// is selected
+            in the file selection text box. Beneath that, there is a filter files text box.
+            And below that is the file listing that shows one file called icon.svg in the root
+            res:// directory.
+         </p>
+         </description>
      </image>
         </figure>
       <p>The <term>Scene</term> dock lists the active scene's nodes:</p>
       <figure>
         <caption>Scene Dock</caption>
         <image source="editor_intro_scene_dock.webp"  width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The scene dock is shown without any nodes created yet.
+         </shortdescription>
+         <description><p>The scene dock is shown with an add Node button, a link button, a filter box and a button for additional selections.
+            There are four default node creation buttons,
+            2D Scene, 3D Scene, User Interface, and Other Node.
+         </p>
+         </description>
      </image>
         </figure>
       <p>The <term>Inspector</term> allows you to edit the properties of a selected node:</p>
       <figure>
         <caption>Inspector Dock</caption>
         <image source="editor_intro_inspector_dock.webp"  width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Inspector dock is shown for a Node 2D. 
+         </shortdescription>
+         <description><p>The Inspector dock is shown for a Node 2D. 
+            There is a filter properties text box followed by
+            selections for transform, visibility, ordering, etc.
+         </p>
+         </description>
      </image>
         </figure>
       <note>
@@ -142,14 +187,26 @@
       <figure>
         <caption>Bottom Panels Tabs</caption>
         <image source="editor_intro_bottom_panels.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The folded bottom panel is shown with available tabs.
+         </shortdescription>
+         <description><p>The folded bottom panel is shown with available tabs Output,
+            Debugger, Audio, Animation, and Shader Editor.
+         </p>
+        </description>
      </image>
         </figure>
       <p>When you click on one, it expands vertically. Below, you can see the animation editor opened:</p>
       <figure>
         <caption>Animation Panel (Bottom)</caption>
         <image source="editor_intro_bottom_panel_animation.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>
+            The expanded Animation Panel is shown with no animations.
+         </shortdescription>
+         <description><p>The expanded Animation Panel is shown with no animations.
+            There are buttons to control the animations a the top, and
+            buttons to change some animation settings at the bottom.
+         </p>
+        </description>
      </image>
         </figure>
       <p>Bottom panels can also be shown or hidden using the shortcuts defined in
@@ -164,7 +221,14 @@
       <figure>
         <caption>Example 2D Workspace</caption>
         <image source="editor_intro_workspace_2d.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>
+            An example of a 2D platformer game is shown.
+         </shortdescription>
+         <description><p>An example of a 2D game is shown with 
+            a scene that has more Nodes than you can see. It looks like a one
+            player platformer.
+         </p>
+         </description>
      </image>
         </figure>
       <p>In the <term>3D screen</term>, you can work with meshes, lights, and design levels for
@@ -172,7 +236,14 @@
       <figure>
         <caption>Example 3D Workspace</caption>
         <image source="editor_intro_workspace_3d.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An example of a 3D game with a glowing orange 
+            orb in the center held by metal arms.
+         </shortdescription>
+         <description><p>An example of a 3D game with a scene that has a glowing orange 
+            orb in the center held by metal arms. There are many nodes and assets shown
+            on the left side.
+         </p>
+         </description>
      </image>
         </figure>
       <note>
@@ -187,7 +258,13 @@
       <figure>
         <caption>Game Screen</caption>
         <image source="editor_intro_workspace_game.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An example of the start screen of a Game called TPS Demo.
+         </shortdescription>
+         <description><p>An example of the start screen of a Game called TPS Demo in the Game Screen.
+            There is a play, play online, settings, and quit button on the left.
+            There is a 3D image of a robot on the right.
+         </p>
+         </description>
      </image>
         </figure>
       <p>The <term>Script screen</term> is a complete code editor with a debugger, rich
@@ -195,7 +272,14 @@
       <figure>
         <caption>Script Screen</caption>
         <image source="editor_intro_workspace_script.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An image of an unsaved scene tab with a character_body_3d.gd script.
+         </shortdescription>
+         <description><p>An image of an unsaved scene tab, with a 
+            script called character_body_3d.gd as the only open script.
+            The first 21 lines of the script are shown, and a method called
+            _physics_process is shown on the bottom left.
+         </p>
+         </description>
      </image>
         </figure>
       <p>Finally, the <term>Asset Library</term> is a library of free and open source add-ons, scripts,
@@ -203,7 +287,7 @@
       <figure>
         <caption>Asset Library</caption>
         <image source="editor_intro_workspace_assetlib.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The AssetLib tab is is shown with 6 assets showing.</shortdescription>
      </image>
         </figure>
       <note>
@@ -239,7 +323,13 @@
       <figure>
         <caption>Search Help Button</caption>
         <image source="editor_intro_search_help_button.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Search Help button is shown
+            in a yellow box in the Script Tab of the Godot Editor.
+         </shortdescription>
+         <description><p>The top portion of the Godot editor is shown with the 
+            Script tab selected with both the help menu item and the Search Help button 
+            in a yellow box.</p>
+         </description>
      </image>
         </figure>
       <p>When you do any of these, a window pops up. Type to search for any item. You can
@@ -247,14 +337,18 @@
       <figure>
         <caption>"animated" search</caption>
         <image source="editor_intro_search_help.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Search help results are shown for the search animated.
+            the AnimatedSprite2D entry is selected.
+         </shortdescription>
      </image>
         </figure>
       <p>Double-click on an item to open the corresponding page in the script main screen.</p>
       <figure>
         <caption>AnimatedSprite2D help doc</caption>
         <image source="editor_intro_help_class_animated_sprite.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The help documentation for the AnimatedScript2D
+            is shown in the script tab of the godot editor.
+         </shortdescription>
      </image>
         </figure>
       <p>Alternatively,</p>

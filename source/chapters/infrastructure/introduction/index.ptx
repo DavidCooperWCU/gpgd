@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="getting-started-introduction-index-doc-getting-started-introduction-index">
-  <title>Introduction</title>
-  <introduction xml:id="getting-started-introduction-index-introduction">
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="infrastructure-introduction">
+  <title>Infrastructure</title>
+  <paragraphs xml:id="infrastructure-introduction-introduction">
+    <title>Introduction</title>
     <p>Programming a modern game can have a wide range of required resources.
         You could make a simple game such as text based computer game that only 
         requires a 
@@ -41,15 +42,6 @@
         of it's integration with GitHub Education that provides free services
         to active Faculty and Students with verification.
     </p>
-    <p>
-        This chapter will briefly introduce you to the infrastructure tools
-        we'll be using in this book, while the following chapters of 
-        <xref text="type-global-title" ref="part-infrastructure" />
-        will describe more detail as well as infrastructure that will not be used
-        in the rest of the book.
-    </p>
-    </introduction>
-  <xi:include href="first_look_at_gdscript.ptx" />
-  <xi:include href="first_look_at_the_editor.ptx" />
-  <xi:include href="learning_new_features.ptx" />
+    
+</paragraphs>
   </chapter>

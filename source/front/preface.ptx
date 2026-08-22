@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<preface>
+<preface xml:id="pggd-preface">
     <p>
 This book is designed as a text for a semester long game development course.
 The text is written in PreTeXt, and the exercises are written in GDScript with
