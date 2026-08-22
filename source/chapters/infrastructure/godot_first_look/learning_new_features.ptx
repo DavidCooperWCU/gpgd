@@ -17,7 +17,7 @@
       <figure>
         <caption>Search Bar</caption>
         <image source="manual_search.png" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A search bar</shortdescription>
      </image>
         </figure>
       <p>The manual has a companion class reference that explains each Godot class's
@@ -30,7 +30,7 @@
       <figure>
         <caption>Class Reference Search</caption>
         <image source="manual_class_reference_search.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The search help dialog with Object at the top.</shortdescription>
      </image>
         </figure>
       <p>To browse it online, head to the manual's <url href="https://docs.godotengine.org/en/stable/classes/index.html">Class Reference</url>
@@ -45,7 +45,7 @@
           <figure>
             <caption>Class Reference: Inheritance</caption>
            <image source="manual_class_reference_inheritance.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A CharacterBody2D class header with the inherited nodes shown.</shortdescription>
      </image>
             </figure>
           </li>
@@ -125,7 +125,7 @@
           <figure>
             <caption>Scene Tree</caption>
             <image source="key_concepts_scene_tree.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A scene tree for a Level with a character, a portal, coins, enemies, etc.</shortdescription>
      </image>
             </figure>
           <p>Also, please don't take a picture with your phone, the low quality and screen
