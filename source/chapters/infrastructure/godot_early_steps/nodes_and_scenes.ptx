@@ -15,7 +15,7 @@
       <figure>
         <caption>Nodes</caption>
         <image source="nodes_and_scenes_nodes.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A scene with a Player, an Enemy, and a UI in the Scene Dock.</shortdescription>
      </image>
         </figure>
       <p>All nodes have the following characteristics:</p>
@@ -37,7 +37,7 @@
       <figure>
         <caption>Character Nodes</caption>
         <image source="nodes_and_scenes_character_nodes.webp" width="60%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A Player Scene with subnodes Sprite2D, CollisionShape2D, and Camera2D in the Scene Dock.</shortdescription>
      </image>
         </figure>
       </subsection>
@@ -53,7 +53,7 @@
       <figure>
         <caption>3D Scene</caption>
         <image source="nodes_and_scenes_3d_scene_example.webp" width="60%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A Player Scene with subnodes of Mannequiny, CollisionShape2D, StateMachine, and CameraRig.</shortdescription>
      </image>
         </figure>
       <p>The Godot editor essentially is a <term>scene editor</term>. It has plenty of tools for
@@ -79,7 +79,7 @@
       <figure>
         <caption>Empty Project</caption>
         <image source="nodes_and_scenes_01_empty_editor.webp"  width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Godot Editor with the default 3D scene showing.</shortdescription>
      </image>
         </figure>
       <p>In an empty scene, the <c>Scene</c> dock on the left shows several options to add a
@@ -98,21 +98,21 @@
       <figure>
         <caption>Scene Dock</caption>
         <image source="nodes_and_scenes_02_scene_dock.webp"  width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Scene Dock with the Add Child button in a yellow box.</shortdescription>
      </image>
         </figure>
       <p>The <c>Create New Node</c> dialog opens, showing the long list of available nodes.</p>
       <figure>
         <caption>Create Node</caption>
         <image source="nodes_and_scenes_03_create_node_window.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Create New Node Window with Node selected.</shortdescription>
      </image>
         </figure>
       <p>Select the Label node. You can type its name to filter down the list.</p>
       <figure>
         <caption>Create Label</caption>
         <image source="nodes_and_scenes_04_create_label_window.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Create New Node Window with Label selected.</shortdescription>
      </image>
         </figure>
       <p>Click on the Label node to select it and click the <c>Create</c> button at
@@ -120,7 +120,7 @@
       <figure>
         <caption>Label in Editor</caption>
         <image source="nodes_and_scenes_05_editor_with_label.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The editor window showing the label as the root node and a Label in the 2D Scene.</shortdescription>
      </image>
         </figure>
       <p>A lot happens when you add a scene's first node. The scene changes to the 2D
@@ -137,7 +137,7 @@
       <figure>
         <caption>Inspector for Label (Adding Text)</caption>
         <image source="nodes_and_scenes_06_label_text.webp"  width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Inspector with Hello World in the label text.</shortdescription>
      </image>
         </figure>
       <p>You will see the text draw in the viewport as you type.</p>
@@ -152,7 +152,7 @@
       <figure>
         <caption>The Move Tool</caption>
         <image source="nodes_and_scenes_07_move_tool.webp"  width="70%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The move tool has a yellow box around it.</shortdescription>
      </image>
         </figure>
       <p>With the Label selected, click and drag anywhere in the viewport to
@@ -160,7 +160,7 @@
       <figure>
         <caption>Hello World Label</caption>
         <image source="nodes_and_scenes_08_hello_world_text.webp"  width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Hello World Label is shown centered in the 2D scene view.</shortdescription>
      </image>
         </figure>
       </subsection>
@@ -174,7 +174,7 @@
       <figure>
         <caption>Play Scene Button</caption>
         <image source="nodes_and_scenes_09_play_scene_button.webp"  width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The play scene button is surrounded in a yellow box.</shortdescription>
      </image>
         </figure>
       <p>A popup invites you to save the scene, which is required to run it. Click the
@@ -182,7 +182,7 @@
       <figure>
         <caption>Save Scene As... Window</caption>
         <image source="nodes_and_scenes_10_save_scene_as.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Save Scene As dialog has label.tscn in the file text box.</shortdescription>
      </image>
         </figure>
       <note>
@@ -197,7 +197,7 @@
       <figure>
         <caption>Running Scene Window</caption>
         <image source="nodes_and_scenes_11_final_result.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The run scen window shows Hello World in the center of the scene alone.</shortdescription>
      </image>
         </figure>
       <p>Close the window or press <c>F8</c> (<c>Cmd</c>
@@ -219,7 +219,7 @@
       <figure>
         <caption>Play Button</caption>
         <image source="nodes_and_scenes_12_play_button.webp"  width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The play button is surrounded with a yellow box.</shortdescription>
      </image>
         </figure>
       <note>
@@ -232,7 +232,7 @@
       <figure>
         <caption>Select Main Scene Popup</caption>
         <image source="nodes_and_scenes_13_main_scene_popup.webp"  width="50%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The select button is surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Click the <c>Select</c> button, and in the file dialog that appears, double
@@ -240,7 +240,7 @@
       <figure>
         <caption>Main Scene Selection</caption>
         <image source="nodes_and_scenes_14_select_main_scene.webp"  width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The level.tscn file is selected.</shortdescription>
      </image>
         </figure>
       <p>The demo should run again. Moving forward, every time you run the project, Godot

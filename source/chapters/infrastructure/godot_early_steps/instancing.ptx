@@ -24,7 +24,7 @@
     <figure>
       <caption>Ball Example</caption>
         <image source="instancing_ball_scene.webp" width="50%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Ball Scene is shown with Sprite2D and CollisionShape2D children nodes.</shortdescription>
      </image>
       </figure>
     <p>Once you have saved a scene, it works as a blueprint: you can reproduce it in other
@@ -33,7 +33,7 @@
     <figure>
       <caption>Ball Intances Example</caption>
         <image source="instancing_ball_instances_example.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The main scene is shown with 6 Ball instances.</shortdescription>
      </image>
       </figure>
     <p>As we mentioned in the previous part, instanced scenes behave like a node: the
@@ -162,7 +162,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Import Button</caption>
         <image source="instancing_import_button.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The project manager is shown with the import button surrouned by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>In the pop-up that appears navigate to the folder you extracted.
@@ -170,14 +170,14 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Selecting Project to Import</caption>
         <image source="instancing_import_project_file.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A project.godot file is selected in the file view of the project.</shortdescription>
      </image>
         </figure>
       <p>Finally, click the <c>Import</c> button.</p>
       <figure>
         <caption>Import Dialog</caption>
         <image source="instancing_import_and_edit_button.webp" width="50%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The import dialog is shown with the edit now box checked.</shortdescription>
      </image>
         </figure>
       <p>A window notifying you that the project was last opened in an older Godot version
@@ -188,13 +188,13 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>2D Button</caption>
         <image source="instancing_2d_scene_select.webp" width="40%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The 2D button of the tabs is selected.</shortdescription>
      </image>
         </figure>
       <figure>
         <caption>Main 2D Scene</caption>
         <image source="instancing_main_scene.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The 2D scene is shown with walls in the shape of a mouth and a nose.</shortdescription>
      </image>
         </figure>
       <p>Let's add a ball as a child of the Main node. In the Scene dock, select the Main
@@ -203,28 +203,28 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Link Button</caption>
         <image source="instancing_scene_link_button.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The link button in the scene dock is in a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Double-click the ball scene to instance it.</p>
       <figure>
         <caption>Selecting The Instance</caption>
         <image source="instancing_instance_child_window.webp" width="60%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Ball.tscn file is selected.</shortdescription>
      </image>
         </figure>
       <p>The ball appears in the top-left corner of the viewport.</p>
       <figure>
         <caption>Scene with new Ball Instance</caption>
         <image source="instancing_ball_instanced.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The main scene is shown with a ball above the left wall.</shortdescription>
      </image>
         </figure>
       <p>Click on it and drag it towards the center of the view.</p>
       <figure>
         <caption>The Ball is Positioned</caption>
         <image source="instancing_ball_moved.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Just the 2D view is shown with the ball just to the left of the nose.</shortdescription>
      </image>
         </figure>
       <p>Play the game by pressing <c>F5</c> (<c>Cmd</c>
@@ -240,14 +240,14 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Two Balls after Duplication</caption>
         <image source="instancing_ball_duplicated.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Just the 2D view is shown with 2 balls just to the left of the nose.</shortdescription>
      </image>
         </figure>
       <p>You can repeat this process until you have several in the scene.</p>
       <figure>
         <caption>Six Balls After Duplication</caption>
         <image source="instancing_main_scene_with_balls.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Just the 2D view is shown with 6 balls to the rigtht and left of the nose.</shortdescription>
      </image>
         </figure>
       <p>Play the game again. You should now see every ball fall independently from one
@@ -275,7 +275,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Selecting the Ball Scene</caption>
         <image source="instancing_ball_scene_open.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The FileSystem dock is shown with the Ball.tscn file in a yellow box.</shortdescription>
      </image>
         </figure>
       <p>In the Scene dock on the left, select the Ball node. Then, in the <c>Inspector</c> on the
@@ -283,7 +283,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Selecting Physics Material</caption>
         <image source="instancing_physics_material_expand.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The inspector dock is shown with the PhysicsMaterial Property in a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Set its Bounce property to <c>0.5</c> by clicking on the number field, typing <c>0.5</c>,
@@ -291,7 +291,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Changing the Bounce Value</caption>
         <image source="instancing_property_bounce_updated.webp" width="27%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Bounce property is set to 0.5.</shortdescription>
      </image>
         </figure>
       <p>Play the game by pressing <c>F5</c> (<c>Cmd</c>
@@ -304,7 +304,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Main Scene Tab</caption>
         <image source="instancing_scene_tabs.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Ball tab is shown with the Main tab surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Select one of the instanced Ball nodes and, in the <c>Inspector</c>, set its
@@ -312,14 +312,14 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Setting Gravity Scale</caption>
         <image source="instancing_property_gravity_scale.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The GravityScale is set to 10.0</shortdescription>
      </image>
         </figure>
       <p>A grey "revert" button appears next to the adjusted property.</p>
       <figure>
         <caption>Reverting Gravity Scale</caption>
         <image source="instancing_property_revert_icon.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The revert button has a yellow box around it.</shortdescription>
      </image>
         </figure>
       <p>This icon indicates you are overriding a value from the source packed scene.
@@ -352,7 +352,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Entity Relationship Diagram for Shooter</caption>
         <image source="instancing_diagram_shooter.png" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A diagram with ten interconnected nodes.</shortdescription>
      </image>
         </figure>
       <p>You can come up with a diagram like this for almost any type of game. Each
@@ -371,7 +371,7 @@ elif event.is_action_pressed("ui_down"):
       <figure>
         <caption>Entity Relationship Diagram for Open-World Game</caption>
         <image source="instancing_diagram_open_world.png" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A diagram with fourteen interconnected nodes.</shortdescription>
      </image>
         </figure>
       <p>Imagine we started by creating the room. We could make a couple of different
