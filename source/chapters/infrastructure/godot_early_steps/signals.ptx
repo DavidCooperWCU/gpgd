@@ -48,7 +48,7 @@
       <figure>
         <caption>Selecting New Scene</caption>
         <image source="signals_01_new_scene.webp" width="30%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>New Scene is in a yellow box in the Scene menu.</shortdescription>
      </image>
         </figure>
       <p>In the Scene dock, click the <c>2D Scene</c> button. This will add
@@ -56,7 +56,7 @@
       <figure>
         <caption>Selecting 2D Scene Node</caption>
         <image source="signals_02_2d_scene.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>2D Scene is in a yellow box in an empty scene dock.</shortdescription>
      </image>
         </figure>
       <p>In the FileSystem dock, click and drag the <c>sprite_2d.tscn</c> file you saved
@@ -64,7 +64,9 @@
       <figure>
         <caption>Dragging a Scene File as a Child</caption>
         <image source="signals_03_dragging_scene.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The sprite_2d.tscn file is shown floating above a 
+            a Node2D in the scene dock with the mouse cursor.
+         </shortdescription>
      </image>
         </figure>
       <p>We want to add another node as a sibling of the Sprite2D. To do so, right-click
@@ -72,14 +74,14 @@
       <figure>
         <caption>Selecting Add Child Node...</caption>
         <image source="signals_04_add_child_node.webp" width="40%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Add Child Node is in a yellow box in the context menu of the Node2D node.</shortdescription>
      </image>
         </figure>
       <p>Search for the <url href="https://docs.godotengine.org/en/stable/classes/class_button.html#class-button">Button</url> node and add it.</p>
       <figure>
         <caption>Selecting Button Node</caption>
         <image source="signals_05_add_button.webp" width="60%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Button is selected in the Create New Node dialog.</shortdescription>
      </image>
         </figure>
       <p>The node is small by default. Click and drag on the bottom-right handle of the
@@ -87,14 +89,14 @@
       <figure>
         <caption>Resizing the Button</caption>
         <image source="signals_06_drag_button.png" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The button node is shown with the lower right control point surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>If you don't see the handles, ensure the select tool is active in the toolbar.</p>
       <figure>
         <caption>Select Tool Button</caption>
         <image source="signals_07_select_tool.webp" width="20%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The select tool button has a yellow box around it.</shortdescription>
      </image>
         </figure>
       <p>Click and drag on the button itself to move it closer to the sprite.</p>
@@ -103,14 +105,14 @@
       <figure>
         <caption>Changing Button Text</caption>
         <image source="signals_08_toggle_motion_text.webp" width="30%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The inspector for the button is shown with Toggle motion as the text.</shortdescription>
      </image>
         </figure>
       <p>Your scene tree and viewport should look like this.</p>
       <figure>
         <caption>Finished Scene Tree and Viewport</caption>
         <image source="signals_09_scene_setup.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The 2D viewport is shown with the toggle button and the Godot Icon.</shortdescription>
      </image>
         </figure>
       <p>Save your newly created scene as <c>node_2d.tscn</c>, if you haven't already.
@@ -269,21 +271,23 @@ func _build_checks() -> void:
       <figure>
         <caption>Signal Tab</caption>
         <image source="signals_10_node_dock.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The inspector dock is active and the Signals tab to the right has a yellow box around it.</shortdescription>
      </image>
         </figure>
       <p>The dock displays a list of signals available on the selected node.</p>
       <figure>
         <caption>Selecting the pressed() signal</caption>
         <image source="signals_11_pressed_signals.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>the pressed() signal has a yellow box around it.</shortdescription>
      </image>
         </figure>
       <p>Double-click the "pressed" signal to open the node connection window.</p>
       <figure>
         <caption>Connect Signal Dialog</caption>
         <image source="signals_12_node_connection.webp" width="50%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Sprite2D is selected and _on_button_pressed is in 
+            the Receiver Method box.
+         </shortdescription>
      </image>
         </figure>
       <p>There, you can connect the signal to the Sprite2D node. The node needs a
@@ -298,7 +302,7 @@ func _build_checks() -> void:
         <figure>
           <caption>Advanced Connect Signal Dialog</caption>
         <image source="signals_advanced_connection_window.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The advanced switch is on and there are extra buttons shown.</shortdescription>
      </image>
           </figure>
         <p>The advanced view lets you connect to any node and any built-in
@@ -318,7 +322,7 @@ func _build_checks() -> void:
       <figure>
         <caption>Signal Connection Icon</caption>
         <image source="signals_13_signals_connection_icon.webp" width="50%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An arrow pointing to line 23 where the _on_button_pressed function starts is surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>If you click the icon, a window pops up and displays information about the
@@ -326,7 +330,7 @@ func _build_checks() -> void:
       <figure>
         <caption>Signal Connection Info Window</caption>
         <image source="signals_14_signals_connection_info.webp" width="60%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The window shows the button as source pressed as signal and Sprite2D as target.</shortdescription>
      </image>
         </figure>
       <p>Let's replace the line with the <c>pass</c> keyword with code that'll toggle the
@@ -401,7 +405,7 @@ func _on_button_pressed() -> void:
       <figure>
         <caption>Finished Scene Tree</caption>
         <image source="signals_15_scene_tree.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Node2D has children Sprite2D and Button. Sprite2D has child Timer.</shortdescription>
      </image>
         </figure>
       <p>With the Timer node selected, go to the <c>Inspector</c> and enable the <c>Autostart</c>
@@ -409,14 +413,14 @@ func _on_button_pressed() -> void:
       <figure>
         <caption>Timer Autostart</caption>
         <image source="signals_18_timer_autostart.webp" width="28%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Inspector Dock shows the Autostart On box checked.</shortdescription>
      </image>
         </figure>
       <p>Click the script icon next to Sprite2D to jump back to the scripting workspace.</p>
       <figure>
         <caption>Script Icon</caption>
         <image source="signals_16_click_script.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Script Icon is next to the Sprite2D node and has a yellow box around it.</shortdescription>
      </image>
         </figure>
       <p>We need to do two operations to connect the nodes via code:</p>
@@ -544,7 +548,7 @@ var health: int = 10</code>
       <figure>
         <caption>Custom Signals in Dock</caption>
         <image source="signals_17_custom_signal.webp" width="28%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The health_depleted custom signal is shwon in the signals dock above the CanvasItem signals.</shortdescription>
      </image>
         </figure>
       <p>To emit a signal in your scripts, call <c>emit()</c> on the signal.</p>
