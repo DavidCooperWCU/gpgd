@@ -13,7 +13,7 @@
     <figure>
       <caption>Dragging the Mob Asset</caption>
       <image source="drag_drop_mob.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The mob.glb file is dragged on top of the Pivot that is a child of Mob.</shortdescription>
      </image>
       </figure>
     <p>You can rename the newly created <c>mob</c> node
@@ -28,7 +28,7 @@
     <figure>
       <caption>Adding Box Shape</caption>
       <image source="08.create_box_shape3D.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Inspector Dock is shown with adding BoxShap3D as the Shape of the CollisionShape3D.</shortdescription>
      </image>
       </figure>
     <p>We should change its size to fit the 3D model better. You can do so

@@ -32,7 +32,7 @@
       <figure>
         <caption>Add Unique Music</caption>
       <image source="unique_resource_music.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>OggVorbis and a waveform are surrounded by a yellow box in the stream part of the AudioStreamPlayer in the Inspector Dock.</shortdescription>
      </image>
         </figure>
       <p>To play the music, add <c>$Music.play()</c> in the <c>new_game()</c>
@@ -66,7 +66,7 @@ func new_game() -> void:
       <figure>
         <caption>Start Game Mapping</caption>
       <image source="input-mapping-start_game.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The start_game input is shown to be maped to the Enter (Physical) key.</shortdescription>
      </image>
         </figure>
       <p>Now would be a good time to add controller support if you have one available.
@@ -80,14 +80,14 @@ func new_game() -> void:
       <figure>
         <caption>Shortcut Property</caption>
       <image source="start_button_shortcut.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Shortcut, Array[InputEve, and Add Element are each surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Create a new <url href="https://docs.godotengine.org/en/stable/classes/class_inputeventaction.html#class-inputeventaction">InputEventAction</url> and select the <c>start_game</c> action.</p>
       <figure>
         <caption>Input Event Action Shortcut</caption>
       <image source="start_button_shortcut2.webp" width="40%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>InputEventAction and start_game are each surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Now when the start button appears, you can either click it or press <c>Enter</c>
@@ -96,7 +96,7 @@ func new_game() -> void:
       <figure>
         <caption>Finished Game Preview</caption>
       <image source="dodge_preview.gif" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An animation of the 2D game is shown with a score from 0 to 5 until Game Over.</shortdescription>
      </image>
         </figure>
       <p>You got to make a player-controlled character, enemies that spawn randomly

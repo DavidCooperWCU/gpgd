@@ -10,7 +10,7 @@
     <figure>
       <caption>Create New Scene Button</caption>
       <image source="new_scene.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The new scene option in the Scene menu is surrounded by a yellow box.</shortdescription>
      </image>
       </figure>
     <p>Click the <term>Other Node</term> button and select the <c>CharacterBody3D</c> node type
@@ -18,7 +18,7 @@
     <figure>
       <caption>Add CharacterBody3D Node</caption>
       <image source="add_character_body3D.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The CharacterBody3D is selected in the create node dialog.</shortdescription>
      </image>
       </figure>
     <p>Rename the <url href="https://docs.godotengine.org/en/stable/classes/class_characterbody3d.html#class-characterbody3d">CharacterBody3D</url> to <c>Player</c>.
@@ -40,7 +40,7 @@
     <figure>
       <caption>Add a Pivot</caption>
       <image source="adding_node3D.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The add node button is selected when the Player of the scene is selected.</shortdescription>
      </image>
       </figure>
     <p>Then, in the FileSystem dock, expand the <c>art/</c> folder
@@ -49,7 +49,7 @@
     <figure>
       <caption>Drag Player to Instantiate the Model</caption>
       <image source="instantiating_the_model.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The player.glb file is dragged on top of the Pivot Node that is a child of the Player node in the Scene Dock.</shortdescription>
      </image>
       </figure>
     <p>This should instantiate the model as a child of <c>Pivot</c>.
@@ -57,7 +57,7 @@
     <figure>
       <caption>Naming the Child Character</caption>
       <image source="scene_structure.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The character Node is a child of the Pivot Node which is a child of the player node.</shortdescription>
      </image>
       </figure>
     <note>
@@ -74,14 +74,14 @@
     <figure>
       <caption>Setting up CollisionShape3D</caption>
       <image source="add_capsuleshape3d.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The inspector dock shows a SphereShape3D being chosen as the Shape of the CollisionShape3D</shortdescription>
      </image>
       </figure>
     <p>The sphere's wireframe appears below the character.</p>
     <figure>
       <caption>View of the Sphere</caption>
       <image source="sphere_shape.png" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The 3D character of the player is shown with the SphereShape 3D around it.</shortdescription>
      </image>
       </figure>
     <p>It will be the shape the physics engine uses to collide with the environment, so
@@ -91,7 +91,7 @@
     <figure>
       <caption>Sphere Aligned</caption>
       <image source="moving_the_sphere_up.png" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The sphere is shown with the Player invisible so that it can be aligned.</shortdescription>
      </image>
       </figure>
     <p>To make moving the shape easier, you can toggle the model's visibility by clicking
@@ -99,7 +99,7 @@
     <figure>
       <caption>Toggle Visibility</caption>
       <image source="toggling_visibility.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The eye icon for the pivot is surrounded by a yellow box.</shortdescription>
      </image>
       </figure>
     <p>Save the scene as <c>player.tscn</c>.</p>
@@ -117,7 +117,7 @@
       <figure>
         <caption>Project Settings for Input Map</caption>
       <image source="project_settings.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The project settings option of the project menu is surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>At the top, there are multiple tabs. Click on <term>Input Map</term>. This window allows
@@ -126,7 +126,7 @@
       <figure>
         <caption>Input Map Tab</caption>
       <image source="input_map_tab.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The input map tab of the project settings is shown with no inputs.</shortdescription>
      </image>
         </figure>
       <p>Godot projects come with some predefined actions designed for user interface
@@ -139,14 +139,14 @@
       <figure>
         <caption>Add Action</caption>
       <image source="adding_action.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>move_left is added to the add action text box.</shortdescription>
      </image>
         </figure>
       <p>Create the following five actions:</p>
       <figure>
         <caption>List of Actions</caption>
       <image source="actions_list_empty.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The finished list of actions, move_left, move_right, move_forward, move_back, and jump are shown.</shortdescription>
      </image>
         </figure>
       <p>To bind a key or button to an action, click the "<term>+</term>" button to its right. Do this
@@ -154,14 +154,14 @@
       <figure>
         <caption>Adding Left Action</caption>
       <image source="left_inputmap.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Left Physical key code added as an action.</shortdescription>
      </image>
         </figure>
       <p>Bind also the <c>A</c> key, onto the action <c>move_left</c>.</p>
       <figure>
         <caption>Move Left Bindings</caption>
       <image source="keyboard_keys.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The A key is shown beneath Left as actions for Move Left.</shortdescription>
      </image>
         </figure>
       <p>Let's now add support for a gamepad's left joystick. Click the "<term>+</term>" button again
@@ -170,7 +170,7 @@
       <figure>
         <caption>Adding Joypad input</caption>
       <image source="joystick_axis_input.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Joypad Axis 0 is added as an action for move_left.</shortdescription>
      </image>
         </figure>
       <p>Leave the other values as default and press <term>OK</term>.</p>
@@ -184,7 +184,7 @@
       <figure>
         <caption>Move Inputs Mapped</caption>
       <image source="move_inputs_mapped.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The list of all actions with key bindings is shown.</shortdescription>
      </image>
         </figure>
       <p>The final action to set up is the <c>jump</c> action. Bind the Space key and the gamepad's
@@ -192,14 +192,14 @@
       <figure>
         <caption>Jump button</caption>
       <image source="joy_button_option.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Joypad Button 0 is used for jump</shortdescription>
      </image>
         </figure>
       <p>Your jump input action should look like this.</p>
       <figure>
         <caption>Jump Mapping</caption>
       <image source="jump_input_action.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Space and Joypad Button are added to the jump action.</shortdescription>
      </image>
         </figure>
       <p>That's all the actions we need for this game. You can use this menu to label any

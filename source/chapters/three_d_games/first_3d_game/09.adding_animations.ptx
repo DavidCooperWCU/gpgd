@@ -57,7 +57,7 @@
       <figure>
         <caption>Create Reset Tracks</caption>
       <image source="curves.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Confirmation dialog. the create Reset Tracks is selected and the create button is surrounded with a yellow box.</shortdescription>
      </image>
         </figure>
       <p>For this tutorial, just create RESET Track(s) which is the default choice</p>

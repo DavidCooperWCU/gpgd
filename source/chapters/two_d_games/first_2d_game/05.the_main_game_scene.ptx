@@ -11,7 +11,7 @@
     <figure>
       <caption>Instance Button</caption>
       <image source="instance_scene.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The instance button (a chain link icon) is surrounded by a yellow box.</shortdescription>
      </image>
       </figure>
     <p>Now, add the following nodes as children of <c>Main</c>, and name them as shown:</p>
@@ -57,7 +57,7 @@
       <figure>
         <caption>Path2D Buttons</caption>
       <image source="path2d_buttons.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Six buttons and an Options menu are shown surrounded by a yellow box on the right of the image.</shortdescription>
      </image>
         </figure>
       <p>Select the middle one ("Add Point") and draw the path by clicking to add the
@@ -68,7 +68,7 @@
       <figure>
         <caption>Grid Snap Buttons</caption>
       <image source="grid_snap_button.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Two buttons in the center of the image are shown surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <note>
@@ -79,7 +79,7 @@
       <figure>
         <caption>Drawing the Path</caption>
       <image source="draw_path2d.gif" width="50%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An animation showing 4 control points being placed at the corners of the game area, and a 5th click to complete the path.</shortdescription>
      </image>
         </figure>
       <p>After placing point <c>4</c> in the image, click the "Close Curve" button and your
@@ -92,7 +92,7 @@
       <figure>
         <caption>Main Scene Tree</caption>
       <image source="main_scene_nodes.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The scene dock is shown with the main scene tree, Player, 3 Timers, StartPosition, and MobPath are shown.</shortdescription>
      </image>
         </figure>
       </subsection>

@@ -86,7 +86,7 @@
         <figure>
           <caption>Edit the Albedo</caption>
           <image source="albedo_section.webp" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The inspector is showing a Sphere material with a white color selected for the Albedo of the MeshInstance3D.</shortdescription>
      </image>
           </figure>
         <p>Set the color to something that contrasts with

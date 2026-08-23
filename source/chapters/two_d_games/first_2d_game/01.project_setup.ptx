@@ -7,7 +7,7 @@
     <figure>
       <caption>Create New Project Button</caption>
       <image source="new-project-button.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>An empty Project manager with the create button surrounded by a yellow box.</shortdescription>
      </image>
       </figure>
     <p>When creating the new project, you only need to choose a valid <em>Project Path</em>. You can leave the other default settings alone.</p>
@@ -15,7 +15,7 @@
     <figure>
       <caption>Project Folder View</caption>
       <image source="folder-content.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The project folder view is shown with default files.</shortdescription>
      </image>
       </figure>
     <p>This game is designed for portrait mode, so we need to adjust the size of the
@@ -26,7 +26,7 @@
     <figure>
       <caption>Setting the Width and Height of the Game</caption>
       <image source="setting-project-width-and-height.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Project Settings, General with the size updated. Viewport Width 480, Viewport Height 720.</shortdescription>
      </image>
       </figure>
     <p>Also, under the <term>Stretch</term> options, set <term>Mode</term> to <c>canvas_items</c> and <term>Aspect</term> to <c>keep</c>.
@@ -34,7 +34,7 @@
     <figure>
       <caption>Setting the Stretch Mode</caption>
       <image source="setting-stretch-mode.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Project Settings, General with the stretch updated. Mode canvas_items, aspect keep.</shortdescription>
      </image>
       </figure>
     </introduction>
@@ -49,7 +49,7 @@
       <figure>
         <caption>Filesystem Dock</caption>
       <image source="filesystem_dock.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The filesystem is shown with an art and fonts folder.</shortdescription>
      </image>
         </figure>
       <p>With the project in place, we're ready to design the player scene in the next lesson.</p>

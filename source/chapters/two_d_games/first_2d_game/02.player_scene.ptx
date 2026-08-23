@@ -25,7 +25,7 @@
       <figure>
         <caption>Add Node Button</caption>
       <image source="add_node.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Scene Dock with an empty scene and the Other Node button surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>When you add the <c>Area2D</c> node, Godot will display the following <term>warning icon</term>
@@ -33,7 +33,7 @@
       <figure>
         <caption>Shape Missing Warning</caption>
       <image source="no_shape_warning.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Warning dialog.</shortdescription>
      </image>
         </figure>
       <p>This warning tells us that the <c>Area2D</c> node requires a shape to detect collisions or overlaps.
@@ -52,7 +52,7 @@
       <figure>
         <caption>Group Children Button</caption>
       <image source="lock_children.webp" width="60%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The group children button is surround with a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Save the scene as <c>player.tscn</c>. Click <term>Scene &gt; Save</term>, or press <c>Ctrl</c>
@@ -90,14 +90,14 @@
       <figure>
         <caption>Adding New SpriteFrames</caption>
       <image source="new_spriteframes.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>SpriteFrames is being added to the Sprite Frames part of the AnimationSprite2D.</shortdescription>
      </image>
         </figure>
       <p>Click on the <c>SpriteFrames</c> you just created to open the "SpriteFrames" panel:</p>
       <figure>
         <caption>The SpriteFrames Panel</caption>
       <image source="spriteframes_panel.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The spriteframes panel is empty.</shortdescription>
      </image>
         </figure>
       <p>On the left is a list of animations. Click the <c>default</c> one and rename it to
@@ -117,7 +117,7 @@
       <figure>
         <caption>Adding Animation Frames</caption>
       <image source="spriteframes_panel2.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The walk animation is selected with 2 frames.</shortdescription>
      </image>
         </figure>
       <p>The player images are a bit too large for the game window, so we need to scale
@@ -127,7 +127,7 @@
       <figure>
         <caption>Node Inspector Scale</caption>
       <image source="player_scale.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Node2D Scale in the inspector is set to 0.5, 0.5</shortdescription>
      </image>
         </figure>
       <p>Finally, add a <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape2d.html#class-collisionshape2d">CollisionShape2D</url> as a child of
@@ -139,14 +139,14 @@
       <figure>
         <caption>Sizing the CaptureShape2D</caption>
       <image source="player_coll_shape-2.webp" width="30%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Capsule is shown to fit around the head and legs of the player image.</shortdescription>
      </image>
         </figure>
       <p>When you're finished, your <c>Player</c> scene should look like this:</p>
       <figure>
         <caption>Scene Tree</caption>
       <image source="player_scene_nodes.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Player Node has 2 childrean AnimationSprite2d and ColisionShape2D</shortdescription>
      </image>
         </figure>
       <p>Once this is done, the warning on the <c>Area2D</c> node will disappear, as it now has

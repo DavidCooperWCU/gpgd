@@ -41,7 +41,7 @@
     <figure>
       <caption>Load Custom Font Button</caption>
       <image source="custom_font_load_font.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>In the Font option of Fonts, the Load option is surrounded by a yellow box in the Theme overrides of Control inspector</shortdescription>
      </image>
       </figure>
     <p>The font size is still too small, increase it to <c>64</c> under "Theme Overrides &gt; Font Sizes".
@@ -49,7 +49,7 @@
     <figure>
       <caption>Set Custom Font Size</caption>
       <image source="custom_font_size.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Font Size is set to 64 in the Font Sizes of Theme Overrides.</shortdescription>
      </image>
       </figure>
     <note>
@@ -66,7 +66,7 @@
     <figure>
       <caption>Anchor Presets</caption>
       <image source="ui_anchor.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The 2D view is shown with the anchor presets button surrounded in a yellow box and 16 presets shown below the button.</shortdescription>
      </image>
       </figure>
     </introduction>
@@ -179,7 +179,7 @@ func _on_message_timer_timeout() -> void:
       <figure>
         <caption>Finished Main Scene</caption>
       <image source="completed_main_scene.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The HUD is the only additional node in the Main scene from the previous picture.</shortdescription>
      </image>
         </figure>
       <p>Now we need to connect the <c>HUD</c> functionality to our <c>Main</c> script. This
@@ -231,21 +231,21 @@ $HUD.show_message("Get Ready")</code>
       <figure>
         <caption>Create New Group Button</caption>
       <image source="group_tab.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The groups dock is shown with the new group button surrounded with a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Name the group <c>mobs</c> and click "ok" to add a new scene group.</p>
       <figure>
         <caption>Add Group Dialog</caption>
       <image source="add_group_dialog.webp" width="40%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Create New Group dialog is shown with mobs in the Name text box.</shortdescription>
      </image>
         </figure>
       <p>Now all mobs will be in the "mobs" group.</p>
       <figure>
         <caption>Groups Tab</caption>
       <image source="scene_group_mobs.webp" width="30%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The mobs group is shown under Scene Groups in the Groups tab.</shortdescription>
      </image>
         </figure>
       <p>We can then add the following line to the <c>new_game()</c> function in <c>Main</c>:</p>

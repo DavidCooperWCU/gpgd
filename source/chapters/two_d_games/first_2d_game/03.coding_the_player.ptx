@@ -10,7 +10,7 @@
     <figure>
       <caption>Script Button in Scene Tree</caption>
       <image source="add_script_button.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Scene Node is shown with the script button surrounded with a yellow box as the Player node is selected.</shortdescription>
      </image>
       </figure>
     <p>In the script settings window, you can leave the default settings alone. Just
@@ -19,7 +19,7 @@
     <figure>
       <caption>Attach Script Dialog</caption>
       <image source="attach_node_window.webp" width="50%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Default Attach Node Script dialog.</shortdescription>
      </image>
       </figure>
     <note>
@@ -47,7 +47,7 @@ var screen_size # Size of the game window.</code>
     <figure>
       <caption>Exported Variable in Inspector</caption>
       <image source="export_variable.webp" width="25%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The exported speed of 400 is shown in the inspector for player.gd</shortdescription>
      </image>
       </figure>
     <p>Your <c>player.gd</c> script should already contain
@@ -85,7 +85,11 @@ var screen_size # Size of the game window.</code>
     <figure>
       <caption>Input Map Add Action</caption>
       <image source="input-mapping-add-action.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The Project Settings window is in the Input Map Tab with move_right in the text box for the add button.</shortdescription>
+         <description><p>
+            The Project Settings window is in the Input Map Tab with move_right in the text box for the add button.
+            The Add button and the text box are surrounded with a yellow box.
+         </p></description>
      </image>
       </figure>
     <p>We need to assign a key to this action. Click the "+" icon on the right, to
@@ -93,7 +97,9 @@ var screen_size # Size of the game window.</code>
     <figure>
       <caption>Action Add Key</caption>
       <image source="input-mapping-add-key.webp" width="75%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>move_right is an action with deadzone of 0.2 the assign key 
+            button is surrounded with a yellow box.
+         </shortdescription>
      </image>
       </figure>
     <p>The "Listening for Input..." field should automatically be selected.
@@ -101,7 +107,7 @@ var screen_size # Size of the game window.</code>
     <figure>
       <caption>Pressing the Key for the Action</caption>
       <image source="input-mapping-event-configuration.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The event configuration has the Right (Physical) key selected.</shortdescription>
      </image>
       </figure>
     <p>Select the "ok" button. The "right" key is now associated with the <c>move_right</c> action.</p>
@@ -119,7 +125,7 @@ var screen_size # Size of the game window.</code>
     <figure>
       <caption>Finished Input Mapping</caption>
       <image source="input-mapping-completed.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The list of four movement keys is shown mapped to the arrow keys.</shortdescription>
      </image>
       </figure>
     <p>Click the "Close" button to close the project settings.</p>
@@ -516,7 +522,7 @@ else:
       <figure>
         <caption>Player Signals</caption>
       <image source="player_signals.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The signals tab is showing body_entered surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Notice our custom "hit" signal is there as well! Since our enemies are going to
@@ -536,7 +542,7 @@ else:
       <figure>
         <caption>On Body Entered Signal Connection</caption>
       <image source="player_signal_connection.webp" width="30%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>A green arrow is shown nxt to the _on_body_entered function.</shortdescription>
      </image>
         </figure>
       <p>Note the green icon indicating that a signal is connected to this function; this does

@@ -54,7 +54,7 @@
       <figure>
         <caption>Setting the Collision Mask</caption>
       <image source="set_collision_mask.webp" width="25%" >
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>Layer one of the Collision is selected and Mask 1 is surrounded with a yellow box.</shortdescription>
      </image>
         </figure>
       <p>Set up the <url href="https://docs.godotengine.org/en/stable/classes/class_animatedsprite2d.html#class-animatedsprite2d">AnimatedSprite2D</url> like you did for the
@@ -64,7 +64,7 @@
       <figure>
         <caption>Adding Mob Animations</caption>
       <image source="mob_animations.webp" width="75%">
-         <shortdescription>TODO</shortdescription>
+         <shortdescription>The fly animation is shown with 2 images for the animation and 3.0 FPS is surrounded by a yellow box.</shortdescription>
      </image>
         </figure>
       <p>You can use the "Play Animation" buttons on the right of the <c>Animation Speed</c> input field to preview your animations.</p>
