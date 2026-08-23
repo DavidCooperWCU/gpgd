@@ -3,11 +3,34 @@
   <title>GitHub: Distribution</title>
 <introduction>
   <p>
+    In a classroom setting most of your files will typically be in private
+    repositories to hold your code solutions for specific assigments for 
+    your courses. However, since part of game development is distribution,
+    you'll want a public repository where you can post versions of your games 
+    that people can play.
+  </p>
+  <p>GitHub has an option to make pages from parts of your repository.
+In addition, Godot can export your games to an html version that will
+run directly on these pages. Examples of this can be found in
+the <url href="https://wcu-cs-cooperlab.github.io/Fall2024GameDev/">
+    Fall 2024 WCU Game Dev class</url> and the <url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/">
+        Fall 2026 WCU Game Dev class</url>
   </p>
   </introduction>
   <subsection xml:id="infrastructure-introduction-github-distribution-pages">
     <title>GitHub Pages</title>
     <p>
+        The <url href="https://github.com/WCU-CS-CooperLab/GamePublish">GamePublish</url>
+        repository is a template that can be used as a starting point for publishing. If you
+        are part of a class, however, your instructor will have specific instructions
+        for how to make a copy of the template so that it's set up for your class.
+    </p>
+    <p>
+        Navigate to the GamePublish site and click on the Actions tab.
+        Then click on the latest workflow run. You'll see a chart under
+        jekyll.yml with a build block and a deploy block. Note that in the
+        deploy block there is a url that links directly to home page of
+        the published pages.
     </p>
   </subsection>
 </section>

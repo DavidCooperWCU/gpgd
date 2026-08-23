@@ -5,7 +5,7 @@
 
 
   <book xml:id="gpgd-interactive">
-    <title>Game Programming with GDScript</title>
+    <title>Programming Games with GDScript</title>
 
     <!-- Include frontmatter -->
     <xi:include href="./frontmatter.ptx" />

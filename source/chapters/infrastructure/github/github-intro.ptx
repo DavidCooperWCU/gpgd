@@ -2,12 +2,83 @@
 <section xml:id="infrastructure-introduction-github-intro">
   <title>GitHub: Getting Started</title>
 <introduction>
-  <p>
+  <p>To get started with GitHub you should know about creating an account,
+    the basics of markdown, and how to view repository and file history.
   </p>
   </introduction>
   <subsection xml:id="infrastructure-introduction-github-intro-creating-account">
     <title>Creating an Account</title>
     <p>
+        You may already have an account. If so, then if you have a .edu account, and 
+        it's not linked to your GitHub account, then you should link it to your GitHub account, 
+        and then you can go to the next section.
+    </p>
+    <p>
+        If you don't already have an account, then there a few things
+        that you may want to consider. First, is your <term>username</term>. Your
+        username is important because it is how most of your repositories 
+        are located. Select a username that you think you'll be happy with
+        even after a few years. Remember, if you end up sharing code with a 
+        potential employer, then you may want your username to be work appropriate.
+    </p>
+    <p>
+        Another thing to consider is password management. GitHub allows you to use
+        other OAuth systems, such a Google and Apple accounts, to sign up with GitHub.
+        So you don't have to store a new password, but you can create a new password.
+        Since most modern operating systems now provide automatic password creation and local 
+        storage of passwords in an encrypted area.
+        In addition, GitHub wants you to use two-factor identification, and it will guide
+        you through your options for that.
+    </p>
+    <p>
+        For two-factor identification there are many options. It's good
+        to have more than one such as a passkey and the GitHub mobile app.
     </p>
   </subsection>
+  <subsection xml:id="infrastructure-introduction-github-intro-markdown">
+    <title>Using Markdown</title>
+    <p>
+        GitHub uses Markdown as it's default web rendering language. Markdown is a plain text formatting
+        language like html. In fact Markdown has html as an option for formatting parts of a document that
+        Markdown doesn't have a formatter for. Any file with <c>.md</c> as a
+        suffix will be processed as a Markdown file, and the html version of the file will be shown 
+        instead of the raw text. 
+    </p>
+    <p> 
+        To learn about markdown you can use <url href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github">GitHub' Markdown documentation</url>.
+
+    </p>
+  </subsection>
+  <subsection xml:id="infrastructure-introduction-github-intro-file-history">
+<title> Repository and File History</title>
+<p>
+    One of the great things about version control is that you don't need to 
+    rename files with version histories in order to keep track of the changes 
+    you've made. Instead, you need to add and commit your changes that you want
+    to remember. The key is that the filename stays the same, so most of the time
+    you'll have the latest version of the file active in your repository. 
+</p>
+<p>
+    To see other versions you can browse the history logs in GitHub. 
+    Below are some examples of looking at repository history.
+    <ul>
+    <li><url href="https://github.com/godotengine/godot/commits/master/">This links to an example history log of Godot</url>
+    </li><li><url href="https://github.com/godotengine/godot/commits/master/README.md">This links to an example
+        history of just the README.md file of Godot</url>
+        </li><li><url href="https://github.com/godotengine/godot/commit/925fbbc5c4cb34ca4377b3231b2dc1b8d3a7d187#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5">This shows the diff between the 
+            latest commit of the README.md file and it's previous commit</url>
+</li></ul>
+        </p>
+        <p>If you remember the commit message that you used for the version 
+            that you want, then you can look at the history log and then click
+            that commit message and it will bring you to all of the changes for 
+            that commit, then there is a "Browse Files" button near the upper right
+            that will bring you to a web view of the files at the time of the commit.
+            Then you can browse to the file that you want to look at, and either copy
+            specific text from it or download the whole file to start again from it.
+            Then after making the changes, you can add and commit the file locally and 
+            then push the change so that everyone will have access to the corrected version.
+        </p>
+  </subsection>
+ 
 </section>

@@ -1,13 +1,110 @@
 <?xml version='1.0' encoding='utf-8'?>
 <section xml:id="infrastructure-introduction-github-web-hosting">
-  <title>GitHub: Getting Started</title>
+  <title>GitHub: Web Hosting</title>
 <introduction>
   <p>
+    When developing a game, or any important software, it's important to have
+    a backup of your work that is located separately from your original work.
+    In addition, if your game has multiple authors, then this separate location
+    can act as a place to share code with your collaborators.
+    A service that is often used for this is Cloud Network Storage. Examples are
+    Dropbox, Microsoft OneDrive, and Apple iCloud. These services automate the backup
+    process using a revision control system that is similar to git along with some
+    automation tasks so that checkpoints (a.k.a. commits) happen at regular intervals
+    or when certain events happen such as saving a file. This automated checkpointing
+    can interfere with some integrated development environments because some large 
+    files change frequently, such as compiled binaries. Many of these files are
+    derived from the source files, so they should not be continually backed up.
+    In addition, if multiple people are editing a file in different locations,
+    then the changes can sometimes overwrite each other or multiple versions of the 
+    file will be put on the server.
+  </p>
+  <p>
+    Web Hosting for version control systems such as git, mercurial, and subversion
+    give users the responsibility for when backups are created, which types of files will
+    be backed up and how to merge changes when files have been modified by multiple
+    users or in multiple locations. They do this by delegating the backup process 
+    to that of the version control system. This book describes and uses GitHub for web hosting. Other 
+    web hosting for code include BitBucket, Codeberg, GitLab, and SourceForge to 
+    name a few. Each has its own features and fee structure, and all have a free
+    to use option for public repositories.
+  </p>
+  <p>
+    GitHub uses git for repository storage. Automation is done through GitHub
+    actions which are composed using .yaml (YAML Ain't Markup Language) files.
+    GitHub also uses OAuth, which means that you can use your GitHub id to 
+    authenticate on other sites that have added GitHub as an authentication 
+    provider.
+  </p>
+  <p>
+    The rest of this section will talk about GitHub Repositories and Setting up
+    your account on GitHub, and the basics of git.
   </p>
   </introduction>
   <subsection xml:id="infrastructure-introduction-github-web-hosting-repositories">
     <title>GitHub Repositories</title>
+    <introduction>
     <p>
+        In its simplest usage, you can think of a GitHub repository as a web interface
+        to files stored online that keep track of changes to files uploaded to the 
+        same exact path. With this type of usage, you can have files locally
+        in any location, and have them organized differently on GitHub. This usage
+        will keep your code backed up, but it can make keeping your files in sync
+        more difficult than it needs to be.
     </p>
+    <p>
+        The intended usage is that after creating a GitHub repository, you clone
+        the repository to your computer on a local drive (not a mounted cloud drive)
+        in a folder that is not part of an automatic backup system, since you'll
+        be controlling the backups of the repository using git.
+    </p>
+</introduction>
+<subsubsection xml:id="infrastructure-introduction-github-web-hosting-repositories-tools">
+<title>Tools</title>
+<p>
+    There are multiple tools that can be used for syncing your local repository with the web-hosted 
+    version of the repository. <url href="https://desktop.github.com/download/">GitHub Desktop</url>
+    is a Graphical User Interface (GUI) for managing your local repositories. There is also
+    a command line option. The easiest command line option is to use the 
+    <url href="https://cli.github.com">GitHub CLI (gh)</url> along with <url href="https://git-scm.com">git</url>.
+    When you install GitHub Desktop, it will install a version of git for you, but you'll need to install
+    git and the GitHub CLI (gh) separately in order to do all of the git tasks. It is possible
+    to only use git to interface with GitHub on the command line, but authentication is much
+    simpler using gh rather than git.
+</p>
+</subsubsection>
+<subsubsection xml:id="infrastructure-introduction-github-web-hosting-repositories-work-flow">
+<title>Basic Work Flow</title>
+<p>
+    There are a few steps that are important to remember when using git for version control.
+    First, when you don't yet have a local copy of the repository, the first thing you need 
+    to do is <term>clone</term> the repository to a local folder. You only need to do this
+    step (clone) once per computer that you are working on. Once you clone a repository, 
+    there are different options you can do from inside the repository. You can <term>pull</term>
+    changes from GitHub (the remote repository). You can <term>add</term> files for commit that 
+    have been created or modified. You can <term>commit</term> the added files with a message
+    describing the changes. You can <term>push</term> the committed changes back to 
+    GitHub (the remote repository).
+</p>
+<p>
+    The typical order of working in a local repository is to 
+    <ol>
+        <li><term>pull</term> changes from GitHub before making any changes.</li>
+        <li>Modify or add any files that you are working on.</li>
+        <li>Make sure that your programs still work or are in better shape than they were.</li>
+        <li><term>add</term> files for commit that have changes that you want to keep.</li>
+        <li><term>commit</term> files with a message describing the changes.</li>
+        <li><term>push</term> the changes back to GitHub.</li>
+    </ol>
+    Any time you plan to make changes to your files, you should do all of the above steps. That
+    way when you start with step 1, there should be no conflicts in the files that you 
+    pull from GitHub.
+</p>
+<p>
+    This work flow can include more steps, because you may want to have multiple add and 
+    commit sessions before you push. But, it is often a good idea to push changes that you 
+    have committed before you take a break or stop for the day.
+</p>
+</subsubsection>
   </subsection>
 </section>

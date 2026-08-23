@@ -16,7 +16,7 @@
     <note>
       <p>This project is an introduction to the Godot engine. It assumes that
                 you have some programming experience already. If you're new to
-                programming entirely, you should start here: <xref ref="getting-started-step-by-step-scripting-first-script-creating-your-first-script" text="custom">Your first script</xref>.</p>
+                programming entirely, you should first complete <xref text="type-global-title" ref="getting-started-step-by-step-scripting-first-script-creating-your-first-script" />.</p>
       </note>
     <p>The game is called "Dodge the Creeps!". Your character must move and avoid the
             enemies for as long as possible.</p>
