@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="infrastructure-introduction">
   <title>Infrastructure</title>
-  <paragraphs xml:id="infrastructure-introduction-introduction">
+  <section xml:id="infrastructure-introduction-introduction">
     <title>Introduction</title>
     <p>Programming a modern game can have a wide range of required resources.
         You could make a simple game such as text based computer game that only 
@@ -43,5 +43,5 @@
         to active Faculty and Students with verification.
     </p>
     
-</paragraphs>
+</section>
   </chapter>
