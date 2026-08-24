@@ -17,6 +17,8 @@
     <!-- Depth for table of contents.  0 means no TOC -->
       <tableofcontents level="4" />
 
+      
+
     <!-- Visibility of exercise components where they first appear.          -->
     <!-- There are four components (statement/hint/answer/solution) for each -->
     <!-- of five exercise types (inline/divisional/worksheet/reading/        -->
@@ -59,6 +61,7 @@
   </source>
 
   <numbering>
+    
     <!-- the divisions element describes the numbering of divisions.  -->
     <!-- @part-structure should be "decorative" or "structural",      -->
     <!-- were the latter would restart numbering chapters within each -->
@@ -68,7 +71,7 @@
     <!-- numbering should appear.                                     -->
     <!-- For use with a book organized by part, you can set the -->
     <!--  @part-structure to "decorative" or "structural" -->
-    <divisions part-structure="structural" chapter-start="1" level="5"/>
+    <divisions part-structure="decorative" chapter-start="1" level="5"/>
 
     <!-- The next elements say how the levels deep to break up the    -->
     <!-- numbering of the respective elements. Can't be more than the -->
