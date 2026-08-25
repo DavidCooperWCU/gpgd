@@ -98,6 +98,69 @@ extends RigidBody2D</code>
           </program>
 
 
+<activity xml:id="first2d-game-mob-activity" label="first2d-game-mob-activity">
+            <title>The Mob Script</title>
+            <statement><p>This is a place to test your Mob script. You may add code here from
+              the decriptions on this page and compare to the reference
+              and look at the test results to get feedback about what is working or missing.
+            </p></statement>
+            <program xml:id="gs-first2d-mob" interactive='activecode' language="gdscript" label="gs-first2d-mob"
+                     pck="gdpractice/L2.P2.first2d_mob"
+                     scene="res://practices/L2.P2.first2d_mob/mob.tscn">
+
+<code>
+extends RigidBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    pass
+    
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+    pass
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+    queue_free()
+
+</code>
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+
+func _init() -> void:
+    side_by_side = true
+    pass
+
+func _build_checks() -> void:
+
+    _add_simple_check(
+            "position should match",
+            func() -> String:
+                return (
+                    ""
+                    if _practice.position.is_equal_approx(
+                                   _solution.position)
+                    else "position %v doesn't match solution position %v" % [_practice.position, _solution.position]
+                    )
+                )
+
+    _add_simple_check(
+            "animation is playing",
+            func() -> String:
+                return (
+                    ""
+                    if _practice.get_node("AnimatedSprite2D").is_playing()
+                    else "animation not playing" 
+                    )
+                )
+
+</tests>
+</program>
+</activity>
+
+
       <p>First, we get the list of animation names from the AnimatedSprite2D's <c>sprite_frames</c>
                 property. This returns an Array containing all three animation names: <c>["walk",
 "swim", "fly"]</c>.</p>
