@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="getting-started-first-2d-game-08-adding-spice">
+    <title>Adding Spice To the Game</title>
+    <introduction>
+    <p>Now that you have a working game. Let's consider different ways to
+        add additional features.
+    </p>
+    <p>First, we'll consider add other items for our player to collide with. These can
+        be negative items, such as poison that hurts the score, slows down the player, or
+        the enemies that defeat the player, or positive items 
+        such as treats that improve the score, speed up the character, or give some
+        other advantage to the player. There could also be obstacles that just keep the 
+        player from going certain places.
+    </p>
+    </introduction>
+    <subsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-nodes">
+      <title>Collision Nodes</title>
+      <p>As we saw in both the <c>Player</c> scene, and the <c>Mob</c> scene, we started with a 
+    2D Node (either an <c>Area2D</c> or a <c>RigidBody2D</c>) and added 2 children,
+a <c>Sprite2D</c> (or <c>AnimatedSprite2D</c>) along with a <c>CollisionShape2D</c>.
+This basic structure can be used for any number of scenes that construct objects
+that can interact through collision detection.</p>
+        <p>With this knowledge in mind consider making 2 Collision Scene templates.
+            A local physics template would have <c>Area2D</c> as the root node, so you, as the 
+            developer, will need to implement any physics based changes, while a 
+            global physics template would use a <c>RigidBody2</c> as the root node.
+            If you wanted, you could make an animated or static version of each for 
+            a total of 4 Collision Scene templates to choose from.
+        </p>
+    <figure>
+        <caption>4 Types of Collision Scene Templates</caption> 
+        <sidebyside>
+      <figure>
+        <caption>Local Physics Collision Animated Scene Template</caption>
+      <image source="lpcs_animated_template.webp" width="25%">
+         <shortdescription>Scene Dock with an Area2D as the root with AnimatedSprite2D and CollisionShape2D as children.</shortdescription>
+     </image>
+        </figure>
+        <figure>
+        <caption>Local Physics Collision Static Scene Template</caption>
+      <image source="lpcs_static_template.webp" width="25%">
+         <shortdescription>Scene Dock with an Area2D as the root with Sprite2D and CollisionShape2D as children.</shortdescription>
+     </image>
+        </figure>
+
+        <figure>
+        <caption>Global Physics Collision Animated Scene Template</caption>
+      <image source="gpcs_animated_template.webp" width="25%">
+         <shortdescription>Scene Dock with an RigidBody2D as the root with AnimatedSprite2D and CollisionShape2D as children.</shortdescription>
+     </image>
+        </figure>
+        <figure>
+        <caption>Global Physics Collision Static Scene Template</caption>
+      <image source="gpcs_static_template.webp" width="25%">
+         <shortdescription>Scene Dock with an RigidBody2D as the root with Sprite2D and CollisionShape2D as children.</shortdescription>
+     </image>
+        </figure>
+        </sidebyside>
+        
+    </figure>
+      <p>When you add the <c>Area2D</c> node, Godot will display the following <term>warning icon</term>
+                next to it in the scene tree:</p>
+      <figure>
+        <caption>Shape Missing Warning</caption>
+      <image source="no_shape_warning.webp" width="75%" >
+         <shortdescription>Warning dialog.</shortdescription>
+     </image>
+        </figure>
+      
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-08-adding-spice-groups">
+      <title>Grouping Scenes for Decisions</title>
+      <p>TODO - add content here.</p>
+      </subsection>
+    </section>

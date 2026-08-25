@@ -71,4 +71,5 @@
   <xi:include href="05.the_main_game_scene.ptx" />
   <xi:include href="06.heads_up_display.ptx" />
   <xi:include href="07.finishing-up.ptx" />
+  <xi:include href="08.adding_spice.ptx" />
   </chapter>
