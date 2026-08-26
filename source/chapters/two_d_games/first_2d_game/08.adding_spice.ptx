@@ -15,11 +15,16 @@
     </introduction>
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-nodes">
       <title>Collision Nodes</title>
+    <introduction>
       <p>As we saw in both the <c>Player</c> scene, and the <c>Mob</c> scene, we started with a 
     2D Node (either an <c>Area2D</c> or a <c>RigidBody2D</c>) and added 2 children,
 a <c>Sprite2D</c> (or <c>AnimatedSprite2D</c>) along with a <c>CollisionShape2D</c>.
 This basic structure can be used for any number of scenes that construct objects
 that can interact through collision detection.</p>
+      </introduction>
+<subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-nodes-templates">
+      <title>Collision Scene Templates</title>
+    
         <p>With this knowledge in mind consider making 2 Collision Scene templates.
             A local physics template would have <c>Area2D</c> as the root node, so you, as the 
             developer, will need to implement any physics based changes, while a 
@@ -58,14 +63,12 @@ that can interact through collision detection.</p>
         </sidebyside>
         
     </figure>
-      <p>When you add the <c>Area2D</c> node, Godot will display the following <term>warning icon</term>
-                next to it in the scene tree:</p>
-      <figure>
-        <caption>Shape Missing Warning</caption>
-      <image source="no_shape_warning.webp" width="75%" >
-         <shortdescription>Warning dialog.</shortdescription>
-     </image>
-        </figure>
+    <p>Using these templates, you can duplicate the scene and rename the
+        root Node to match what it's supposed to represent.
+    </p>
+
+    </subsubsection>
+      
       
       </subsection>
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-groups">
