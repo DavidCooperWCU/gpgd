@@ -177,7 +177,7 @@
                 viewport tells you how much you're translating the node.</p>
       <figure>
         <caption>Translating Label</caption>
-      <image source="15.translation_amount.png" >
+      <image source="15.translation_amount.webp" >
          <shortdescription>The image reads Translating: (0,-1,0).</shortdescription>
      </image>
         </figure>

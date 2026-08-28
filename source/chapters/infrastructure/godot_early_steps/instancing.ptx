@@ -351,7 +351,7 @@ elif event.is_action_pressed("ui_down"):
       <p>For example, you could break down a shooter game like so:</p>
       <figure>
         <caption>Entity Relationship Diagram for Shooter</caption>
-        <image source="instancing_diagram_shooter.png" width="75%">
+        <image source="instancing_diagram_shooter.webp" width="75%">
          <shortdescription>A diagram with ten interconnected nodes.</shortdescription>
      </image>
         </figure>
@@ -370,7 +370,7 @@ elif event.is_action_pressed("ui_down"):
                 and nested elements:</p>
       <figure>
         <caption>Entity Relationship Diagram for Open-World Game</caption>
-        <image source="instancing_diagram_open_world.png" width="75%">
+        <image source="instancing_diagram_open_world.webp" width="75%">
          <shortdescription>A diagram with fourteen interconnected nodes.</shortdescription>
      </image>
         </figure>

@@ -88,7 +88,7 @@
                 Button in the viewport to resize it.</p>
       <figure>
         <caption>Resizing the Button</caption>
-        <image source="signals_06_drag_button.png" width="25%">
+        <image source="signals_06_drag_button.webp" width="25%">
          <shortdescription>The button node is shown with the lower right control point surrounded by a yellow box.</shortdescription>
      </image>
         </figure>

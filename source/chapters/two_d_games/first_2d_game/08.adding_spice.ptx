@@ -12,6 +12,49 @@
         other advantage to the player. There could also be obstacles that just keep the 
         player from going certain places.
     </p>
+    <p>
+        Each of these additional scenes can have different parts to them. They'll have specific 
+        artwork for either their consistent look or their animations. They could have a sound 
+        associated with the interaction. They'll have a shape that will determine when objects interact.
+        Some artwork is shown in <xref ref="gs-adding-spice-artwork"/> to help stir your imagination
+        for ways to spice up your game.
+    </p>
+        <figure xml:id="gs-adding-spice-artwork">
+            <caption>Example Artwork</caption>
+            <sidebyside>
+               <figure xml:id="art-potions">
+                <caption>Potion</caption>
+                <image source="art_potions.webp" width="20%">
+                    <shortdescription>A potion that could be used as a power-up or power-down</shortdescription>
+                </image>
+               </figure> 
+               <figure xml:id="art-box">
+                <caption>Box Obstacle</caption>
+                <image source="art_box.webp" width="10%">
+                    <shortdescription>A box that could be used as an obstacle</shortdescription>
+                </image>
+               </figure> 
+               <figure xml:id="art-coin">
+                <caption>Coin Prize</caption>
+                <image source="art_coin.webp" width="10%">
+                    <shortdescription>A coin that could be used as a prize</shortdescription>
+                </image>
+               </figure> 
+               <figure xml:id="art-obstacles">
+                <caption>Obstacle</caption>
+                <image source="art_obstacle.webp" width="20%">
+                    <shortdescription>A tree that could be a stationary obstacle</shortdescription>
+                </image>
+               </figure>
+               <figure xml:id="art-enemy">
+                <caption>Enemy</caption>
+                <image source="art_enemy.webp" width="10%">
+                    <shortdescription>A snail Enemy</shortdescription>
+                </image>
+               </figure>  
+            </sidebyside>
+        </figure>
+
     </introduction>
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-nodes">
       <title>Collision Nodes</title>
@@ -72,7 +115,7 @@ that can interact through collision detection.</p>
       
       </subsection>
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-groups">
-      <title>Grouping Scenes for Decisions</title>
+      <title>Groups: Tagging Scenes for Decisions</title>
       <p>TODO - add content here.</p>
       </subsection>
     </section>

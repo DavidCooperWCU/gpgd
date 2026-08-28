@@ -80,7 +80,7 @@
     <p>The sphere's wireframe appears below the character.</p>
     <figure>
       <caption>View of the Sphere</caption>
-      <image source="sphere_shape.png" >
+      <image source="sphere_shape.webp" >
          <shortdescription>The 3D character of the player is shown with the SphereShape 3D around it.</shortdescription>
      </image>
       </figure>
@@ -90,7 +90,7 @@
     <p>Then, move the collision shape up so its bottom roughly aligns with the grid's plane.</p>
     <figure>
       <caption>Sphere Aligned</caption>
-      <image source="moving_the_sphere_up.png" >
+      <image source="moving_the_sphere_up.webp" >
          <shortdescription>The sphere is shown with the Player invisible so that it can be aligned.</shortdescription>
      </image>
       </figure>
