@@ -22,9 +22,9 @@
         <figure xml:id="gs-adding-spice-artwork">
             <caption>Example Artwork</caption>
             <sidebyside>
-               <figure xml:id="art-potions">
+               <figure xml:id="art-potion">
                 <caption>Potion</caption>
-                <image source="art_potions.webp" width="20%">
+                <image source="art_potion.webp" width="20%">
                     <shortdescription>A potion that could be used as a power-up or power-down</shortdescription>
                 </image>
                </figure> 
@@ -111,8 +111,48 @@ that can interact through collision detection.</p>
     </p>
 
     </subsubsection>
-      
-      
+      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-cn-artwork">
+      <title>Artwork for Sprites</title>
+    <p>
+        You have many options when deciding on art that will be part of your game.
+        Your two best options are for you to draw the art yourself or to use art that 
+        has a simple license such as the creative commons licenses CC0, which is in the 
+        public domain and needs no attribution or CC-SA, which requires that you add attribution
+        to the source of the artwork. GPL licenses have a requirement that any software that is 
+        bundled with the GPL licensed artwork will also have a GPL license, and that limits
+        the use of open licenses that allow you to ship programs without including the source code.
+        Any items with a copyright need explicit permission from the owner of the copyright in order 
+        to use it for an app. The <url href="https://opengameart.org/">open game art</url> website
+        has a lot of art you can use to start from, such as the art in <xref ref="gs-adding-spice-artwork" />, but make sure you understand and agree with the license before 
+        adding the art to your game.
+    </p>
+    <p>The open art comes in different forms. Sometimes many images are on
+        one sheet, and you'll want to copy them into their own files to be part of
+        an animation. You can also make 
+        <url href="https://docs.godotengine.org/en/stable/tutorials/2d/using_tilesets.html#introduction">tilesets</url> 
+        and <url href="https://docs.godotengine.org/en/stable/tutorials/2d/using_tilemaps.html">tilemaps</url> 
+        from these sheets to use them with regular Sprite2D nodes.
+        Free tools for image manipulation include 
+        <url href="https://gimp.org">GIMP (the GNU Image Manipulation Platform)</url>,
+        a graphical program which has features similar to Adobe Photoshop, and 
+         <url href="https://imagemagick.org">ImageMagick</url> a command line tool for converting
+         images to different formats, for composing images, and much much more. You can also 
+         have AI generate are for you, and just like art in the public domain,
+         you <url href="https://www.legalshield.com/blog/can-you-copyright-ai-generated-art-your-complete-guide">probably won't have any real claim to it when you use it as a part of your game</url>.
+    </p>
+    </subsubsection>
+      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-shapes">
+      <title>Shapes for your CollisionShape2D</title>
+    <p>
+        Every <c>CollisionShape2D</c> needs to have a shape. There are many shapes to choose from.
+        When there are many potential collisions, the simplest shapes such as circles, capsules,
+        squares and convex polygons with a low number of vertices are your best choices. Sometimes,
+        you may want the shape to fit well with an object that would require a concave polygon.
+        It's okay to have a small number of these, but collisions can get expensive to compute,
+        and there is higher potential for glitches where an object could get caught inside another 
+        object because of the concave nature of each object.
+    </p>
+    </subsubsection>
       </subsection>
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-groups">
       <title>Groups: Tagging Scenes for Decisions</title>
