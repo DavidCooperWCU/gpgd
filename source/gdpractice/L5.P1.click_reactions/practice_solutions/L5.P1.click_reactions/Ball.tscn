@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c6rm1ki2dofls"]
+
+[ext_resource type="Script" uid="uid://cl0s116df3113" path="res://practice_solutions/L5.P1.click_reactions/ball.gd" id="1_1j74v"]
+[ext_resource type="Texture2D" uid="uid://dv6rx85s1gy3i" path="res://assets/ballBlue_10.png" id="1_mc4lj"]
+[ext_resource type="AudioStream" uid="uid://bk64wi7va3sg0" path="res://sounds/pop_single.ogg" id="3_tilfp"]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 37.1452
+
+[node name="Ball" type="Area2D" unique_id=1088891529]
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+script = ExtResource("1_1j74v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=824335791]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_mc4lj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=15646837]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("2")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=54585440]
+stream = ExtResource("3_tilfp")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

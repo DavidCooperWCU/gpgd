@@ -137,10 +137,69 @@ that can interact through collision detection.</p>
         a graphical program which has features similar to Adobe Photoshop, and 
          <url href="https://imagemagick.org">ImageMagick</url> a command line tool for converting
          images to different formats, for composing images, and much much more. You can also 
-         have AI generate are for you, and just like art in the public domain,
+         have <em>AI generate art for you</em>, and just like art in the public domain,
          you <url href="https://www.legalshield.com/blog/can-you-copyright-ai-generated-art-your-complete-guide">probably won't have any real claim to it when you use it as a part of your game</url>.
     </p>
-    </subsubsection>
+</subsubsection>
+      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-sound">
+      <title>Sounds for your Collision Templates</title>
+    <p>
+
+    </p>
+    <activity xml:id="first2d-game-spice-sound-one" label="first2d-game-spice-sound-one">
+            <title>Sounds on Exit</title>
+            <statement><p>When making a sound on exit, things are a little more complicated.
+                Typically you want the sound to be played by a parent or some node that is not
+                about to disappear. In addition standard method calls won't work as expected, so 
+                you need to use <term>signals</term>. In this activity, there are a bunch of 
+                balls that are on the practice scene. Each of them has a signal called <c>ball_popped</c>
+                So, first, when the node is <c>_ready()</c> all of the child nodes with ball 
+                popped need to be connected to the
+                <c>clicked</c> method of the node. The <c>connect_child</c> method is used 
+                as a helper method to simply do the connection.
+                The <c>clicked</c> method then needs to get the <c>AudioStreamPlayer2D</c> from
+                the ball node passed in, play the stream, wait for it to finish, and then
+                call <c>queue_free()</c> on the ball. This causes the ball to make a popping sound
+                when it disappears after being clicked.
+            </p></statement>
+            <program xml:id="gs-first2d-popped" interactive='activecode' language="gdscript" label="gs-first2d-popped"
+                     pck="gdpractice/L5.P1.click_reactions"
+                     scene="res://practices/L5.P1.click_reactions/practice.tscn">
+
+<code>
+extends Node
+
+func _ready() -> void:
+	pass
+
+func connect_child(child:Node):
+	pass
+	
+func clicked(ball):
+	pass
+
+
+</code>
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+
+func _init() -> void: #
+    #side_by_side = true #
+    pass
+
+func _build_checks() -> void:
+    var ran_scene := _add_simple_check(
+        tr("Ran the scene"),
+        func() -> String:
+            return ""
+    )
+
+</tests>
+</program>
+</activity>
+        
+</subsubsection>
       <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-shapes">
       <title>Shapes for your CollisionShape2D</title>
     <p>
