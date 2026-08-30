@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://d1asgc4er18y"]
+
+[ext_resource type="Script" uid="uid://bvteb7qhmvspr" path="res://practices/L5.P3.click_signals/practice.gd" id="1_pxxps"]
+[ext_resource type="PackedScene" path="res://practices/L5.P3.click_signals/Ball.tscn" id="2_p8pfg"]
+[ext_resource type="AudioStream" uid="uid://bk64wi7va3sg0" path="res://sounds/pop_single.ogg" id="4_n41t4"]
+
+[node name="Main" type="TextureRect" unique_id=2134279191]
+script = ExtResource("1_pxxps")
+
+[node name="LevelScaler" type="Node2D" parent="." unique_id=734880466]
+scale = Vector2(0.5, 0.5)
+
+[node name="Ball" parent="." unique_id=1088891529 instance=ExtResource("2_p8pfg")]
+position = Vector2(33, 27)
+
+[node name="Ball2" parent="." unique_id=200276614 instance=ExtResource("2_p8pfg")]
+position = Vector2(32, 73)
+
+[node name="Ball3" parent="." unique_id=1641509003 instance=ExtResource("2_p8pfg")]
+position = Vector2(28.494247, 119.71671)
+
+[node name="Ball4" parent="." unique_id=682659309 instance=ExtResource("2_p8pfg")]
+position = Vector2(78, 26)
+
+[node name="Ball5" parent="." unique_id=235269539 instance=ExtResource("2_p8pfg")]
+position = Vector2(76.20274, 69.378624)
+
+[node name="Ball6" parent="." unique_id=502678085 instance=ExtResource("2_p8pfg")]
+position = Vector2(78.45668, 120.84368)
+
+[node name="Ball7" parent="." unique_id=515900788 instance=ExtResource("2_p8pfg")]
+position = Vector2(130.29741, 25.051048)
+
+[node name="Ball8" parent="." unique_id=692201477 instance=ExtResource("2_p8pfg")]
+position = Vector2(129, 71)
+
+[node name="Ball9" parent="." unique_id=2061536301 instance=ExtResource("2_p8pfg")]
+position = Vector2(129.92174, 118.58973)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1737572780]
+anchor_mode = 0
+
+[node name="BallPopped" type="AudioStreamPlayer" parent="." unique_id=287312413]
+stream = ExtResource("4_n41t4")

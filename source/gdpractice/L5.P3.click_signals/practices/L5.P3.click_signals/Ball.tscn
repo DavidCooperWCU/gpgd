@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://practices/L5.P3.click_signals/ball.gd" id="1_auark"]
+[ext_resource type="Texture2D" path="res://assets/ballBlue_10.png" id="2_74uc7"]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 37.1452
+
+[node name="Ball" type="Area2D" unique_id=1088891529]
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+script = ExtResource("1_auark")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=824335791]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_74uc7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=15646837]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("2")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

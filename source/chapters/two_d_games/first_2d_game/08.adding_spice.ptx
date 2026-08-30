@@ -111,8 +111,22 @@ that can interact through collision detection.</p>
     </p>
 
     </subsubsection>
-      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-cn-artwork">
-      <title>Artwork for Sprites</title>
+     
+      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-shapes">
+      <title>Shapes for your CollisionShape2D</title>
+    <p>
+        Every <c>CollisionShape2D</c> needs to have a shape. There are many shapes to choose from.
+        When there are many potential collisions, the simplest shapes such as circles, capsules,
+        squares and convex polygons with a low number of vertices are your best choices. Sometimes,
+        you may want the shape to fit well with an object that would require a concave polygon.
+        It's okay to have a small number of these, but collisions can get expensive to compute,
+        and there is higher potential for glitches where an object could get caught inside another 
+        object because of the concave nature of each object.
+    </p>
+    </subsubsection>
+      </subsection>
+    <subsection xml:id="getting-started-first-2d-game-08-adding-spice-artwork">
+      <title>Artwork</title>
     <p>
         You have many options when deciding on art that will be part of your game.
         Your two best options are for you to draw the art yourself or to use art that 
@@ -140,12 +154,13 @@ that can interact through collision detection.</p>
          have <em>AI generate art for you</em>, and just like art in the public domain,
          you <url href="https://www.legalshield.com/blog/can-you-copyright-ai-generated-art-your-complete-guide">probably won't have any real claim to it when you use it as a part of your game</url>.
     </p>
-</subsubsection>
-      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-sound">
+</subsection>
+      <subsection xml:id="getting-started-first-2d-game-08-adding-spice-sound">
       <title>Sounds for your Collision Templates</title>
+      <introduction>
     <p>
         <xref ref="getting-started-first-2d-game-07-finishing-up-sound-effects" text="type-global-title"/>
-        Shows you how to add global sound to your main scene. You can do this for all of your sounds,
+        shows you how to add global sound to your main scene. You can do this for all of your sounds,
         and it can simplify the process at the expense of having the sound defined separately from
         each node. This trade-off may sound undesirable at first, but if you aren't concerned with 
         localized sound then it allows you to delegate all sound behavior to one spot. The general idea
@@ -167,9 +182,125 @@ that can interact through collision detection.</p>
     <p> The sound for this chapter is the ogg version of <url href="https://opengameart.org/content/pop">pop, found here</url>.
         We'll be using the scenes from <xref ref="getting-started-step-by-step-instancing-creating-instances" text="type-global-title"/>.
         If you already made the scene with balls instantiated in the main scene, then you may
-        want to duplicate that project as a starting point. You may also refer to <xref ref="gs-instancing-practice-code-download"/> 
+        want to duplicate that project as a starting point for each of the next subsubsections. You may also refer to <xref ref="gs-instancing-practice-code-download"/> 
         to download the project again,
         rename it to something about sounds and then work from there.
+    </p>
+</introduction>
+    <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-sound-global">
+        <title>Global Sound from Signals</title>
+    <p> Recall in <xref ref="gs-instancing-six-balls-figure" text="type-global-title"/> that you have
+        six instances of balls that are already in your main scene.
+        The first thing we want to do is remove all of the code from the Main.gd script.
+        Then, if you don't have the six Ball.tscn instances in the Main.tscn as shown in
+        <xref ref="gs-instancing-six-balls-figure"/>, then you should add 6 instances now
+        as shown.
+    </p>
+    <p>
+        For the Ball scene, we want to add an empty node script to it.
+        In the script we'll add a signal called <c>ball_popped</c>, and then
+        in the Signals dock we'll click on the input_event CollisionObject2D signal
+        and attach it to a new method call _on_input_event. (This should come up 
+        as the default.) In addition, in the Inspector, search for Input and make sure 
+        the <em>Pickable</em> box is selected to On.
+
+        The code added to <c>_on_input_event():</c> should be 
+    </p>
+        <program language="gdscript">
+if (event is InputEventMouseButton and 
+    event.button_index == MOUSE_BUTTON_LEFT and 
+    event.pressed):
+    ball_popped.emit()
+    queue_free()
+        </program>
+        <p>
+            After that code is added to the ball's <c>_on_input_event()</c> method
+            and the ball is set to pickable, re-run the main scene, and you should 
+            be able to click each ball and see them soundlessly disappear.
+            Now you are ready to add the sound code.
+        </p>
+    <p> The Main scene's script then needs to register for each of the ball's signals, 
+        and write code to play the sound for popping the ball. Before changing any code,
+        though, we first need to add an <c>AudioStreamPlayer</c> to the Main scene and call
+        it <em>BallPopped</em>, that way in Main.md we'll be able to access it with
+        <c>$BallPopped</c>. Make sure that you have <c>pop_.ogg</c> downloaded and somewhere in
+        your project (possibly a <em>music</em> directory). After creating the <c>$BallPopped</c> 
+        Node, go to the inspector and add the pop sound to the stream.
+
+        The <c>_ready()</c>, <c>connect_child()</c>, and <c>clicked()</c> methods should look like so:
+    </p>
+    <program language="gdscript">
+func _ready() -> void:
+    for child in get_children(): 
+        if child.has_signal("ball_popped"): 
+            connect_child(child) 
+
+func connect_child(child: Node) -> void:
+    child.ball_popped.connect(clicked)
+
+func clicked():
+    $BallPopped.play()
+    </program>
+    <p>
+        The 
+    </p>
+
+<activity xml:id="first2d-game-spice-sound-three-signal" label="first2d-game-spice-sound-three-signal">
+            <title>Sounds on Signal</title>
+            <statement><p>This is an example of sounds happening when a 
+                signal is received. The <c>Node</c> that is here has nodes as 
+                children that emit a <c>ball_popped</c> signal when they are clicked
+                before they disappear. The Node also has a child node that is 
+                an <c>AudioStreamPlayer</c> named <c>$BallPopped</c>. So each 
+                <c>ball_popped</c> from each of the children needs to be connected
+                to a function that we'll call <c>clicked</c>, which will play the
+                <c>$BallPopped</c> Audio Stream Player. 
+                The changing the script below is equivalent to changing the Main script
+                in the description above, and the above script should correctly 
+                activate the sound when the balls on the left are clicked.
+                Without those changes, the balls on the right will make noise when
+                clicked, but the balls on the left will remain quiet.
+            </p></statement>
+            <program xml:id="gs-first2d-signal-sound" interactive='activecode' language="gdscript" label="gs-first2d-signal-sound"
+                     pck="gdpractice/L5.P3.click_signals"
+                     scene="res://practices/L5.P3.click_signals/practice.tscn">
+
+<code>
+extends Node
+
+func _ready() -> void:
+    pass
+
+func connect_child(child:Node):
+    pass
+    
+func clicked():
+    pass
+
+
+</code>
+<tests>
+extends "res://addons/gdpractice/tester/test.gd"
+
+
+func _init() -> void: #
+    side_by_side = true #
+    pass
+
+func _build_checks() -> void:
+    var ran_scene := _add_simple_check(
+        tr("Ran the scene"),
+        func() -> String:
+            return ""
+    )
+
+</tests>
+</program>
+</activity>
+</subsubsection>
+<subsubsection xml:id="geting-started-first-2d-game-08-adding-spice-collisions">
+    <title>Collisions</title>
+    <p>
     </p>
     <activity xml:id="first2d-game-spice-sound-two-collision" label="first2d-game-spice-sound-two-collision">
             <title>Sounds on Collision</title>
@@ -189,13 +320,13 @@ that can interact through collision detection.</p>
 extends Node
 
 func _ready() -> void:
-	pass
+    pass
 
 func connect_child(child:Node):
-	pass
-	
+    pass
+    
 func clicked(ball):
-	pass
+    pass
 
 
 </code>
@@ -243,13 +374,13 @@ func _build_checks() -> void:
 extends Node
 
 func _ready() -> void:
-	pass
+    pass
 
 func connect_child(child:Node):
-	pass
-	
+    pass
+    
 func clicked(ball):
-	pass
+    pass
 
 
 </code>
@@ -271,21 +402,9 @@ func _build_checks() -> void:
 </tests>
 </program>
 </activity>
-        
 </subsubsection>
-      <subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-collision-shapes">
-      <title>Shapes for your CollisionShape2D</title>
-    <p>
-        Every <c>CollisionShape2D</c> needs to have a shape. There are many shapes to choose from.
-        When there are many potential collisions, the simplest shapes such as circles, capsules,
-        squares and convex polygons with a low number of vertices are your best choices. Sometimes,
-        you may want the shape to fit well with an object that would require a concave polygon.
-        It's okay to have a small number of these, but collisions can get expensive to compute,
-        and there is higher potential for glitches where an object could get caught inside another 
-        object because of the concave nature of each object.
-    </p>
-    </subsubsection>
-      </subsection>
+        
+</subsection>   
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-groups">
       <title>Groups: Tagging Scenes for Decisions</title>
       <p>TODO - add content here.</p>
