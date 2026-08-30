@@ -46,10 +46,13 @@
     </introduction>
     <subsection xml:id="getting-started-step-by-step-instancing-in-practice">
       <title>In practice</title>
-      <p>Let's use instancing in practice to see how it works in Godot. We invite
-                you to download the ball's sample project we prepared for you:
+      <p>Let's use instancing in practice to see how it works in Godot.</p>
+      <note xml:id="gs-instancing-practice-code-download">
+      <title>Download</title>
+    <p> We invite
+                you to download the instancing sample project we prepared for you:
                 <url href="https://github.com/godotengine/godot-docs-project-starters/releases/download/latest-4.x/instancing_starter.zip">instancing_starter.zip</url>.</p>
-
+    </note>
 
       <activity xml:id="getting-started-instancing_activity" label="getting-started-instancing_activity">
             <title>Changing the Bounce Property Programmatically</title>
@@ -244,7 +247,7 @@ elif event.is_action_pressed("ui_down"):
      </image>
         </figure>
       <p>You can repeat this process until you have several in the scene.</p>
-      <figure>
+      <figure xml:id="gs-instancing-six-balls-figure">
         <caption>Six Balls After Duplication</caption>
         <image source="instancing_main_scene_with_balls.webp" width="75%" >
          <shortdescription>Just the 2D view is shown with 6 balls to the rigtht and left of the nose.</shortdescription>

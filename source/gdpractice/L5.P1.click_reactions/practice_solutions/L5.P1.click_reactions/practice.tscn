@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://blwky3voebrhx"]
 
 [ext_resource type="Script" uid="uid://cgb0fx6nqts3y" path="res://practice_solutions/L5.P1.click_reactions/practice.gd" id="1_bhe65"]
-[ext_resource type="PackedScene" uid="uid://c7u5vivo631g8" path="res://practices/L5.P1.click_reactions/Ball.tscn" id="2_jwlw8"]
+[ext_resource type="PackedScene" path="res://practice_solutions/L5.P1.click_reactions/Ball.tscn" id="2_jwlw8"]
 
 [node name="Main" type="TextureRect" unique_id=2134279191]
 script = ExtResource("1_bhe65")

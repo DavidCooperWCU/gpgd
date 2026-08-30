@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://practices/L5.P2.area_collision_sound/ball.gd" id="1_3q1ed"]
+[ext_resource type="Texture2D" path="res://assets/ballBlue_10.png" id="2_edekv"]
+[ext_resource type="AudioStream" path="res://sounds/pop_single.ogg" id="3_3diog"]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 37.1452
+
+[node name="Ball" type="RigidBody2D" unique_id=1770534984]
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_3q1ed")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=824335791]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_edekv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=15646837]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("2")
+
+[node name="SoundEffectPlayer" type="AudioStreamPlayer2D" parent="." unique_id=54585440]
+stream = ExtResource("3_3diog")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

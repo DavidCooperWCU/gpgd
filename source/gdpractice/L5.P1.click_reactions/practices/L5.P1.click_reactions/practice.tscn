@@ -1,8 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://begd6had7esss"]
 
-[ext_resource type="Script" path="res://practices/L5.P1.click_reactions/practice.gd" id="1_yw3dm"]
+[ext_resource type="Script" uid="uid://dl4sqn4251dnk" path="res://practices/L5.P1.click_reactions/practice.gd" id="1_yw3dm"]
 [ext_resource type="PackedScene" path="res://practices/L5.P1.click_reactions/Ball.tscn" id="2_d8ute"]
-[ext_resource type="Script" path="res://practices/L5.P1.click_reactions/ball.gd" id="3_k2yfy"]
 
 [node name="Main" type="TextureRect" unique_id=2134279191]
 script = ExtResource("1_yw3dm")
@@ -10,69 +9,32 @@ script = ExtResource("1_yw3dm")
 [node name="LevelScaler" type="Node2D" parent="." unique_id=734880466]
 scale = Vector2(0.5, 0.5)
 
-[node name="Ball" type="Area2D" parent="." unique_id=1088891529 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball" parent="." unique_id=1088891529 instance=ExtResource("2_d8ute")]
 position = Vector2(33, 27)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball2" type="Area2D" parent="." unique_id=200276614 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball2" parent="." unique_id=200276614 instance=ExtResource("2_d8ute")]
 position = Vector2(32, 73)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball3" type="Area2D" parent="." unique_id=1641509003 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball3" parent="." unique_id=1641509003 instance=ExtResource("2_d8ute")]
 position = Vector2(28.494247, 119.71671)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball4" type="Area2D" parent="." unique_id=682659309 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball4" parent="." unique_id=682659309 instance=ExtResource("2_d8ute")]
 position = Vector2(78, 26)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball5" type="Area2D" parent="." unique_id=235269539 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball5" parent="." unique_id=235269539 instance=ExtResource("2_d8ute")]
 position = Vector2(76.20274, 69.378624)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball6" type="Area2D" parent="." unique_id=502678085 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball6" parent="." unique_id=502678085 instance=ExtResource("2_d8ute")]
 position = Vector2(78.45668, 120.84368)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball7" type="Area2D" parent="." unique_id=515900788 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball7" parent="." unique_id=515900788 instance=ExtResource("2_d8ute")]
 position = Vector2(130.29741, 25.051048)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball8" type="Area2D" parent="." unique_id=692201477 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball8" parent="." unique_id=692201477 instance=ExtResource("2_d8ute")]
 position = Vector2(129, 71)
-script = ExtResource("3_k2yfy")
 
-[node name="Ball9" type="Area2D" parent="." unique_id=2061536301 instance=ExtResource("2_d8ute")]
-physics_interpolation_mode = 2
-auto_translate_mode = 2
+[node name="Ball9" parent="." unique_id=2061536301 instance=ExtResource("2_d8ute")]
 position = Vector2(129.92174, 118.58973)
-script = ExtResource("3_k2yfy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1737572780]
 anchor_mode = 0
-
-[connection signal="input_event" from="Ball" to="Ball" method="_on_input_event"]
-[connection signal="input_event" from="Ball2" to="Ball2" method="_on_input_event"]
-[connection signal="input_event" from="Ball3" to="Ball3" method="_on_input_event"]
-[connection signal="input_event" from="Ball4" to="Ball4" method="_on_input_event"]
-[connection signal="input_event" from="Ball5" to="Ball5" method="_on_input_event"]
-[connection signal="input_event" from="Ball6" to="Ball6" method="_on_input_event"]
-[connection signal="input_event" from="Ball7" to="Ball7" method="_on_input_event"]
-[connection signal="input_event" from="Ball8" to="Ball8" method="_on_input_event"]
-[connection signal="input_event" from="Ball9" to="Ball9" method="_on_input_event"]
