@@ -242,7 +242,8 @@ func clicked():
     $BallPopped.play()
     </program>
     <p>
-        The 
+        When you run the main scene now, you should be able to click the balls one at a time and 
+        each one will make a sound after disappearing.
     </p>
 
 <activity xml:id="first2d-game-spice-sound-three-signal" label="first2d-game-spice-sound-three-signal">
@@ -301,6 +302,57 @@ func _build_checks() -> void:
 <subsubsection xml:id="geting-started-first-2d-game-08-adding-spice-collisions">
     <title>Collisions</title>
     <p>
+        Collisions are a great time to add sound. <c>Area2D</c> has the <c>area_entered</c> signal,
+        and <c>RigidBody2D</c> has the <c>body_entered</c> signal. <c>CharacterBody2D</c> has to 
+        process collisions in the physics process, so there is no signal emitted on collision, but
+        that will be covered in a later chapter. Since the balls from the instancing demo are 
+        <c>RigidBody2D</c> we'll work with the <c>body_entered</c> signal.
+    </p>
+    <p> It's probably easiest to start with another copy of the code from 
+         <xref ref="gs-instancing-practice-code-download"/>, however if instead you make a copy of the project
+         from <xref ref="getting-started-first-2d-game-08-adding-spice-sound-global" />, 
+         then you'll need to change the Input of the CollisionObject2D to have Pickable off.
+         Make sure that there are ball instances in your Main scene, and then add a script to the
+         Ball scene or edit the Ball scene's script.
+    </p>
+    <p> 
+        With the Ball selected in the scene, add an <c>AudioStreamPlayer2D</c> to the Ball
+        and rename it <c>SoundEffectPlayer</c>. Add the pop sound to the SoundEffectPlayer,
+        then go to the Signal dock and
+        find the <c>body_entered</c> signal under <c>RigidBody2D</c>
+        connect it to <c>_on_body_entered</c> and then add the following code to 
+        <c>_on_body_entered</c>
+    </p>
+    <program language="gdscript">
+        func _on_body_entered(_body: Node) -> void:
+            play_sound()
+            ball_popped.emit(self)
+    </program>
+    <p>
+        There are two parts that are missing. <c>play_sound</c>, which we are about
+        to write, and the <c>ball_popped</c> signal, which we'll add after.
+        First the <c>play_sound</c> method:
+    </p>
+    <program language="gdscript">
+        func play_sound() -> void:
+            $SoundEffectPlayer.play()
+    </program>
+    <p>
+        Next we put the signal near the top of the file after we extend <c>RigidBody2D</c>.
+    </p>
+    <program language="gdscript">
+        signal ball_popped(source)
+    </program>
+    <p>
+        With these 3 parts of code and the <c>body_entered</c> signal connected, 
+        this will make it so that every time the ball is hit, it will make a popped sound.
+        If you don't want the sound to restart you could add a check
+        <c>if not $SoundEffectPlayer.playing:</c> before calling <c>play()</c>.
+        The <c>ball_popped</c> signal isn't strictly necessary to make the sound, but
+        if you ever want to remove the ball when a collision happens without losing the 
+        sound, then you'll need another node to receive the signal and wait for the sound
+        to stop playing before calling <c>queue_free()</c> on the Ball. This is shown in the 
+        next section using a click instead of a collision.
     </p>
     <activity xml:id="first2d-game-spice-sound-two-collision" label="first2d-game-spice-sound-two-collision">
             <title>Sounds on Collision</title>
@@ -348,7 +400,66 @@ func _build_checks() -> void:
 </tests>
 </program>
 </activity>
+</subsubsection>
+<subsubsection xml:id="getting-started-first-2d-game-08-adding-spice-sound-local">
+        <title>Local Sound from Signals</title>
 <p>
+    In this last section we'll use the local signal as a way to pass
+    a whole object that when received, a sound can be played and then
+    the object will be removed. We can again start with another copy of the code from 
+    <xref ref="gs-instancing-practice-code-download"/>.
+    When selecting the Ball scene, change the Ball to Area2D, and make sure
+    the script says <c>extends Area2D</c> at the top. Make sure the ball is pickable.
+    By making it an Area2D, the ball will stay floating. 
+    With the Ball selected in the scene, add an <c>AudioStreamPlayer2D</c> to the Ball. 
+    Add the pop sound to the AudioStreamPlayer2D.
+    Make sure you have a number of
+    Ball instances in your main scene.
+</p>
+<p>
+    Once you have Ball instances in the Main scene, go back to the Ball scene
+    and connect the <c>input_event</c> signal under <c>CollisionObject2D</c>
+    and then add the following code in the Ball.gd script file.
+</p>
+<program language="gdscript">
+    func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+        if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+            ball_popped.emit(self)
+</program>
+<p>
+    Now you are ready to add code to the main script. First you need to
+    connect each <c>ball_signal</c> of each Ball in the main scene to a method
+    in the main scene that can process the click. We'll soon call this method
+    <c>clicked</c>. 
+</p>
+<program language="gdscript">
+    func _ready() -> void:
+        for child in get_children(): 
+            if child.has_signal("ball_popped"): 
+                connect_child(child) 
+</program>
+<p>
+    Note: the connect_child method doesn't exist yet. Here it is:
+</p>
+<program language="gdscript">
+    func connect_child(child:Node):
+        child.ball_popped.connect(clicked)
+</program>
+<p>
+    Note: the clicked method doesn't exist yet. Here it is:
+</p>
+<program language="gdscript">
+    func clicked(ball):
+        var sound_player: AudioStreamPlayer2D = ball.get_node("AudioStreamPlayer2D")
+        sound_player.play() 
+        await sound_player.finished 
+        ball.queue_free() 
+</program>
+<p>
+    With these three functions, each ball is connected to the clicked method
+    on Main using the ball_popped signal. Since ball_popped is emitted
+    when a ball is clicked, the sound will play, it will wait until the sound
+    finishes playing, and then the ball will be removed from the scene.
 </p>
     <activity xml:id="first2d-game-spice-sound-one" label="first2d-game-spice-sound-one">
             <title>Sounds on Exit</title>
