@@ -225,10 +225,19 @@ if (event is InputEventMouseButton and
         it <em>BallPopped</em>, that way in Main.md we'll be able to access it with
         <c>$BallPopped</c>. Make sure that you have <c>pop_.ogg</c> downloaded and somewhere in
         your project (possibly a <em>music</em> directory). After creating the <c>$BallPopped</c> 
-        Node, go to the inspector and add the pop sound to the stream.
+        Node, go to the inspector and add the pop sound to the stream as shown in <xref ref="first-game-spice-adding-sound-figure"/>.
+    </p>
+    <figure xml:id="first-game-spice-adding-sound-figure">
+        <caption>Add the pop_.ogg file to the AudioStreamPlayer</caption>
+        <image source="pop_sound_effect.webp">
+            <shortdescription>The pop_.ogg file dialog is shown.</shortdescription>
+        </image>
+    </figure>
+    <p>
 
         The <c>_ready()</c>, <c>connect_child()</c>, and <c>clicked()</c> methods should look like so:
     </p>
+    
     <program language="gdscript">
 func _ready() -> void:
     for child in get_children(): 
@@ -518,6 +527,40 @@ func _build_checks() -> void:
 </subsection>   
     <subsection xml:id="getting-started-first-2d-game-08-adding-spice-groups">
       <title>Groups: Tagging Scenes for Decisions</title>
-      <p>TODO - add content here.</p>
+      <p>When you are colliding with different scenes that all inherit the
+        same class such as <c>Area2D</c> or <c>RigidBody2D</c> it is nice to 
+        have an easy way to determine the purpose of the scene. For instance, 
+        if you collide with an area that is an enemy, you probably want something
+        different to happen than when colliding with a power up.
+      </p>
+      <p> 
+        Godot handles this with <term>groups</term>. A group is a label of a node
+        that you can check for during a collision. For instance, the below
+        code checks for 3 groups and emits 3 different tags when emitting the <c>collect</c> 
+        signal.
+      </p>
+      <program language="gdscript">
+        func _on_body_entered(_body: Node) -> void:
+            if _body.is_in_group("prize"):
+                _body.collect()
+                collect.emit("prize")
+            if _body.is_in_group("food")
+                _body.collect()
+                collect.emit("food")
+            if _body.is_in_group("poison")
+                _budy.collect()
+                collect.emit("poison")
+    </program>
+      </subsection>
+      <subsection xml:id="first-2d-game-spice-summary">
+        <title>Summary</title>
+      <p>
+        This section is about adding spice. The building blocks described here can be used
+        to make a variety of different objects that either move or are stationary. They can 
+        be shown with a single image, use animations, or the images could changed based on a 
+        timer or based on collisions. Sound can be added in various ways either globally or locally.
+        Think about the best way to spice up your version of the game, and then 
+        try it.
+      </p>
       </subsection>
     </section>
