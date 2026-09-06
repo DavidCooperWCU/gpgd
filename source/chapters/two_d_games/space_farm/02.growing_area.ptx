@@ -111,7 +111,93 @@
             initialized and processed by default.
         </p>
     </subsubsection>
-      </subsection>
+    <subsubsection>
+        <title>Growing Area Methods</title>
+        <p>
+            The <c>_ready()</c> method sets the scale to the <c>start_scale</c>,
+            updates the <c>current_scale</c> to the <c>start_scale</c>, and
+            starts the growth.
+        </p>
+        <program language="gdscript">
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    current_scale = start_scale
+    scale = Vector2.ONE * current_scale
+    if auto_start:
+        start_growth()
+        </program>
+        <p>
+            The <c>_growing</c> parameter has 2 methods for starting and stopping growth.
+        </p>
+        <program language="gdscript">
+func start_growth() -> void:
+    _growing = true
+
+func stop_growth() -> void:
+    _growing = false
+        </program>
+        <p>
+            The <c>_process()</c> method runs the growth each step based on
+            the member variables. If <c>_growing</c> is false, then none of 
+            the code in <c>_process()</c> should happen since it's only related to the 
+            growth.
+        </p>
+        <program language="gdscript">
+func _process(delta: float) -> void:
+    if not _growing:
+        return
+</program>
+        <p>
+            A local variable <c>step</c> is used to determine how much the scale
+            will change by. The initial step size is based on the growth rate times
+            delta, and then if there is a growth curve, the curve is sampled based
+            on the ratio of current_scale to max_scale.
+        </p>
+        <program language="gdscript">
+    var step: float = growth_rate * delta
+    if growth_curve:
+        step *= growth_curve.sample(clamp(current_scale / max_scale, 0.0, 1.0))
+</program>
+        <p>
+            The <c>current_scale</c> is the increased by the step size
+            but is not allowed to go above the max_scale, and when max
+            scale is reached the growth is stopped, a signal is sent,
+            and when specified, the node is removed from the scene.
+        </p>
+        <program language="gdscript">
+    current_scale += step
+
+    if current_scale >= max_scale:
+        current_scale = max_scale
+        stop_growth()
+        emit_signal("max_size_reached",self)
+        if destroy_past_max:
+            queue_free()
+            return
+        </program>
+        <p>
+            The <c>_apply_growth()</c> method is called so that
+            the scale can be applied appropriately to the child nodes
+            of the child scenes by overriding the method. And then the
+            size changed signal is emitted so that it can be observed 
+            by the environment.
+        </p>
+<program language="gdscript">
+
+    _apply_growth()
+    emit_signal("size_changed", current_scale)
+        </program>
+        <p>
+            That ends the <c>_process()</c> method.
+            <c>_apply_growth()</c> just updates the scale
+            member variable. 
+        </p>
+        <program language="gdscript">
+func _apply_growth():
+    scale = Vector2.ONE * current_scale
+        </program>
+    </subsubsection>
+    </subsection>
       <subsection xml:id="two-d-games-space-farm-collector-scene">
       <title>Lasso: The Collector Scene</title>
       <p>
