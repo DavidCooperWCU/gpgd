@@ -35,7 +35,7 @@
         GrowingArea2D class that we make.
     </p>
     <p>The hierarchy of scenes will look like this.</p>
-    <figure>
+    <figure xml:id="space-farm-class-hierarchy">
       <caption>Scene Hierarchy</caption>
       <image source="space-farm-growing-area-hierarchy.webp" width="75%" >
          <shortdescription>The project folder view is shown with default files.</shortdescription>

@@ -5,13 +5,112 @@
     <p>
         With farming in mind, one of the major parts of farming is
         waiting for plants to grow. In addition, the longer you wait, 
-        the bigger the plants get. 
+        the bigger the plants get, and, in many cases, if you wait longer, 
+        you get more from your crop. In order to simulate the stages 
+        of plant growth, we want the growing area to have a way to change
+        its appearance after different amounts of time. We also want the 
+        score, and possibly the energy gained, to be different at the same
+        stages. To make collection a game of skill, we want the collecting 
+        tool to simulate a lasso, where the lasso will grow to the right size
+        and only collect when it is in a small range close to the ideal size.
+        For this when the ship launches the lasso, we want it to grow from a 
+        small size up to a size that is a little bigger than the ideal size 
+        before the lasso breaks apart and dissappears, but if it is able to
+        harvest a crystal, then the crystal is collected from the space.
+    </p>
+    <p>
+        Since there are 2 different elements that will grow, we look at the
+        similarities between the elements to see if we can make a common parent
+        class for them. Then the parent script can hold the common elements and
+        perform the common actions instead of needing to write the same behavior 
+        twice. We can then use the subclass to differentiate the behavior, such 
+        as how it looks, the fact that the crystals are stationary and the lassos
+        will move, and that lassos will disapear after they get to a certain size,
+        while the crystals will grow to a maximum size and only leave the space 
+        if they are collected. Lassos also are sourced from the location of the 
+        ship, while the crystals can grow anywhere.
+    </p>
+    <p>
+        The different stages of growth for crystals and the specific sizes of the
+        lasso for collection and disappearing can both be handled by a number of 
+        thresholds. Since there are multiple thresholds, this could be handled by
+        an array or multiple individual variables. For flexibility in the number
+        of thresholds, an array can prevent the creation of values that won't be 
+        used at the expense of the individual values needing an ad hoc naming scheme
+        or relying on the behavior of the code to determine what each threshold 
+        represents.  
+    </p>
+    <p> This section will go over the base growing area scene and its accompanying script
+        followed by the collector (for the lasso) and prize (for the crystal) scenes
+        along with the script changes needed for each of them.
     </p>
     </introduction>
     <subsection xml:id="two-d-games-space-farm-growing-area-scene">
       <title>The Growing Area Scene</title>
+      <introduction>
       <p>
+        To make the Growing Area Scene, all that we need is a single 
+        <c>Area2D</c> Node as we see in 
+        <xref ref="space-farm-class-hierarchy" text="type-global-title"/>.
+        Then we can attach an empty script with
       </p>
+    </introduction>
+    <subsubsection>
+        <title>Growing Area Member Variables</title>
+        <p>
+            The first set of member variables of concern are related to the
+            size of the area. When determining size, it is natural to think 
+            of changing the size values of a Node, but the <c>Node2D</c> class
+            doesn't have an intrinsic size. It just has a <c>Vector2</c> that scales
+            the size of its parts. If the aspect ratio is fixed, then the scale
+            for x and y should be the same. Since we don't have direct access to 
+            the size, the Growing Area has the benefit of abstraction where the 
+            scale can be used directly to determine growth rather than computing 
+            the size each time when applying growth.
+        </p>
+        <p>
+            So, all of the growth variables are in terms of scale, and there are 
+            three fixed values that are necessary for determining growth. The first
+            is the starting scale, the second is the maximum scale, and the third is
+            the growth rate (how much the scale changes per second). Godot has 
+            a <c>Curve</c> class for allowing a rate to change smoothly over time, 
+            so in addition to the 3 fixed parameters we will have an optional growth curve.
+            In addition to the variables related to how much to grow, there are also
+            decisions about when growth starts, and what happens when growth stops.
+            We will use the <c>auto_start</c> member variable to determine if growth 
+            starts as soon as the growing area is in the scene. We use <c>destroy_past_max</c>
+            to determinine whether the growing area should free itself when it gets
+            to the maximum size.
+        </p>
+        <p>
+            The above mentioned member variables will typically be fixed after 
+            instantiation of the member. However, there are a couple of member 
+            variables that will change over the lifetime of the <c>Node</c>. These 
+            are the current scale, and whether the area is currently growing.
+            There is already a <c>scale</c> value that reflects the current scale,
+            but since <c>scale</c> is a <c>Vector2</c>, we want to have a one diminsional
+            value that represents the overall scale where there is no room for ambiguity by
+            having 2 placeholders for the value. So, <c>current_scale</c> and all of the 
+            above fixed scale values are of type <c>float</c>, and not <c>Vector2</c>. 
+            This simplifies assignment, but requires that the <c>scale</c> value on the
+            growing area be determined by multiplying the <c>current_scale</c> by 
+            <c>Vector2.ONE</c> to convert it to a <c>Vector2</c>. 
+        </p>
+        <p>
+            There are 3 more parts of the growing area, that aren't directly used
+            by the growing area. Either they are used by potential observers of the 
+            areas or they are used by the subclasses of a growing area. The first is
+            the array of scale thresholds. This array is by default an empty array, but
+            can be overriden in a subclass to be values that make sense for its particular purpose.
+            The other 2 are signals. There is one signal to specify that growth occured and a 
+            second signal to specify that the maximum growth has been reached. These signals could
+            be used to determine sound or visual effects that originate from another source such as
+            the environment.
+        </p>
+        <p>The next section will describe how the member variables are 
+            initialized and processed by default.
+        </p>
+    </subsubsection>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-collector-scene">
       <title>Lasso: The Collector Scene</title>
