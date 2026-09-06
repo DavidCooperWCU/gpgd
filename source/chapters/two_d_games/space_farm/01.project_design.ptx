@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-  <section xml:id="2d-games-space-farm-01-project-design">
+  <section xml:id="two-d-games-space-farm-01-project-design">
     <title>Project Design</title>
     <introduction>
     <p>Before we get started, let's talk about the project design.</p>
@@ -9,11 +9,28 @@
         has 3 different growth states shown with different artwork.
     </p>
     <figure>
+        <caption>Space Farm Parts</caption>
+        <sidebyside>
+    <figure>
       <caption>Farming Spaceship</caption>
       <image source="farm-space-ship.webp" width="75%" >
          <shortdescription>A spaceship with a rocket tail.</shortdescription>
      </image>
       </figure>
+      <figure>
+      <caption>Farming Lasso</caption>
+      <image source="farm-lasso.webp" width="75%" >
+         <shortdescription>A blue ring.</shortdescription>
+     </image>
+      </figure>
+      <figure>
+      <caption>Farming Crystal</caption>
+      <image source="farm-crystal.webp" width="75%" >
+         <shortdescription>A purple crystal.</shortdescription>
+     </image>
+      </figure>
+    </sidebyside>
+</figure>
     <p>Both the lasso, and the crystal will inherit the 
         GrowingArea2D class that we make.
     </p>
@@ -39,7 +56,7 @@
 
     
     </introduction>
-    <subsection xml:id="2d-games-space-farm-scenes">
+    <subsection xml:id="two-d-games-space-farm-scenes">
       <title>Organizing the project</title>
       <p>In this project, we will make 4 independent scenes: <c>Player</c>, <c>Collector</c>, 
                 <c>Prize</c>, and <c>HUD</c>, which we will combine into the game's <c>Main</c> scene, and

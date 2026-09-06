@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="two-d-games-space-farm-03-farming-ship">
+    <title>Farming Ship - The Player</title>
+    <introduction>
+    <p>
+    </p>
+    </introduction>
+    <subsection xml:id="two-d-games-space-farm-farming-ship-scene">
+      <title>The Player Scene</title>
+      <p>
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-input">
+      <title>Player Input</title>
+      <p>
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-motion">
+      <title>Player Motion</title>
+      <p>
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-flames">
+      <title>Visual Effect: Rocket Flames</title>
+      <p>
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-playtesting">
+      <title>Play Testing</title>
+      <p>
+      </p>
+      </subsection>
+    </section>

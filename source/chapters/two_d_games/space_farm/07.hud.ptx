@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="two-d-games-space-farm-07-hud">
+    <title>Heads Up Display (HUD)</title>
+    <introduction>
+    <p>
+    </p>
+    </introduction>
+    <subsection xml:id="two-d-games-space-farm-hud-scene">
+      <title>The HUD Scene</title>
+      <p>
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-hud-script">
+      <title>HUD Script</title>
+      <p>
+      </p>
+      </subsection>
+      
+    </section>
