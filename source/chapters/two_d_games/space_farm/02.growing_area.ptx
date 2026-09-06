@@ -75,6 +75,14 @@
             the growth rate (how much the scale changes per second). Godot has 
             a <c>Curve</c> class for allowing a rate to change smoothly over time, 
             so in addition to the 3 fixed parameters we will have an optional growth curve.
+        </p>
+        <program language="gdscript">
+var start_scale: float = 0.1
+var max_scale: float = 0.9
+var growth_rate: float = 0.03          # scale units per second
+@export var growth_curve: Curve        # optional easing; sampled 0-1 by (current/max)
+        </program>
+        <p>
             In addition to the variables related to how much to grow, there are also
             decisions about when growth starts, and what happens when growth stops.
             We will use the <c>auto_start</c> member variable to determine if growth 
@@ -82,6 +90,10 @@
             to determinine whether the growing area should free itself when it gets
             to the maximum size.
         </p>
+        <program language="gdscript">
+var auto_start: bool = true
+var destroy_past_max: bool = false
+        </program>
         <p>
             The above mentioned member variables will typically be fixed after 
             instantiation of the member. However, there are a couple of member 
@@ -96,6 +108,10 @@
             growing area be determined by multiplying the <c>current_scale</c> by 
             <c>Vector2.ONE</c> to convert it to a <c>Vector2</c>. 
         </p>
+        <program language="gdscript">
+var current_scale: float
+var _growing: bool = false
+        </program>
         <p>
             There are 3 more parts of the growing area, that aren't directly used
             by the growing area. Either they are used by potential observers of the 
@@ -107,6 +123,11 @@
             be used to determine sound or visual effects that originate from another source such as
             the environment.
         </p>
+        <program language="gdscript">
+var thresholds: Array[float] = []
+signal max_size_reached(source: GrowingArea)
+signal size_changed(scale: float)
+        </program>
         <p>The next section will describe how the member variables are 
             initialized and processed by default.
         </p>
@@ -154,6 +175,10 @@ func _process(delta: float) -> void:
             on the ratio of current_scale to max_scale.
         </p>
         <program language="gdscript">
+func _process(delta: float) -> void:
+     
+    # ... after earlier code
+
     var step: float = growth_rate * delta
     if growth_curve:
         step *= growth_curve.sample(clamp(current_scale / max_scale, 0.0, 1.0))
@@ -165,6 +190,10 @@ func _process(delta: float) -> void:
             and when specified, the node is removed from the scene.
         </p>
         <program language="gdscript">
+func _process(delta: float) -> void:
+     
+    # ... after earlier code
+
     current_scale += step
 
     if current_scale >= max_scale:
@@ -183,9 +212,14 @@ func _process(delta: float) -> void:
             by the environment.
         </p>
 <program language="gdscript">
+<code>
+func _process(delta: float) -> void:
+     
+    # ... after earlier code
 
     _apply_growth()
     emit_signal("size_changed", current_scale)
+</code>
         </program>
         <p>
             That ends the <c>_process()</c> method.
@@ -193,15 +227,85 @@ func _process(delta: float) -> void:
             member variable. 
         </p>
         <program language="gdscript">
-func _apply_growth():
+func _apply_growth() -> void:
     scale = Vector2.ONE * current_scale
         </program>
+        <p>
+            That completes the <c>growing_area.gd</c> script, but a scene that uses
+            growing area is needed to see an example.
+        </p>
     </subsubsection>
     </subsection>
       <subsection xml:id="two-d-games-space-farm-collector-scene">
       <title>Lasso: The Collector Scene</title>
+      <introduction>
       <p>
+        The first <c>GrowingArea</c> that we will build is the lasso, 
+        our <c>Collector</c> scene. We call it a collector because it 
+        collects prizes. The collector will have a GrowingArea as a root
+        Node, and then a CollisionShape2D to detect collissions, and 
+        a Node2D that we'll rename to RingVisual to draw the growing 
+        lasso. <xref ref="space-farm-class-hierarchy" text="type-global-title"/>
+        has a picture of the scene structure for the collector.
       </p>
+    </introduction>
+    <subsubsection>
+        <title>Collector Script</title>
+        <p>
+            After adding the GrowingArea, and renaming it Collector,
+            make a new script to attach to it. The Collector, has four
+            member variables, a speed, a velocity, a reference to the 
+            current view_size, and a min_collection_distance, which 
+            determines how close the center of the collector needs to be 
+            from the center of the prize in order for it to be collected.
+        </p>
+        <program language="gdscript">
+extends GrowingArea
+class_name Collector
+
+var speed = 350
+var velocity: Vector2
+var view_size: Vector2i
+var min_collect_distance: float = 100.0
+        </program>
+        <p>
+            Since the default values for collectors is
+            different than the default values for growing_area
+            the initial auto_start value will be fall, and the
+            start_scale will be 0.07. 
+        </p>
+        <program language="gdscript">
+func _init() -> void:
+    auto_start = false
+    start_scale = 0.07
+        </program>
+        <p>
+            <c>_ready()</c> can set the other values such as 
+            the growth rate and the size thresholds. The first 2
+            size thresholds are the minimum and maximum collection
+            radius, and the final threshold is 0.01 less than the 
+            maximum scale. destroy past max is true because we want
+            the lasso to stop existing a little bit after it's collection
+            zone. The view size is set because we want the lasso to 
+            wrap the screen just like the player will.
+        </p>
+        <program language="gdscript">
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    super._ready()
+    growth_rate = .4
+    thresholds = [.175,.185,.195]
+    max_scale = thresholds[2] + 0.01
+    destroy_past_max = true
+    view_size = get_viewport().get_visible_rect().size
+        </program>
+        <p>
+            The lasso's location will start from the location that it's launched
+            from, and the start method will pass that location and direction so that it 
+            is launched from the front of the ship and go the direction that the 
+            ship is pointed.
+        </p>
+    </subsubsection>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-prize-scene">
       <title>Energy Crystals: The Prize Scene</title>
