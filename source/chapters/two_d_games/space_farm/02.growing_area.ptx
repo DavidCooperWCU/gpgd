@@ -250,6 +250,74 @@ func _apply_growth() -> void:
       </p>
     </introduction>
     <subsubsection>
+        <title>Scene Setup</title>
+        <p>
+            The CollectionShape2D should be set up with a CircleArea Shape
+            with a Radius of 10 pixels. The RingVisual Node2D should get it's own
+            script as described below.
+        </p>
+    </subsubsection>
+<subsubsection>
+        <title>RingVisual Scene and Script</title>
+        <p>
+            The RingVisual Scene is a Node2D that is just their so the
+            <c>_draw()</c> method can be overriden to use the canvas to 
+            draw a light blue (or a color of your choice) ring.
+        </p>
+        <p> The member variables related to the ring are
+            <c>band_width</c>, <c>band_color</c>, 
+            <c>point_count</c>, and for the size at scale 1.0,
+            <c>scale_one_radius</c>.  Here is how the script should 
+            start.
+        </p>
+        <program language="gdscript">
+extends Node2D
+class_name RingVisual
+
+var band_width: float = 4.0
+var band_color: Color = Color(0.1, 0.8, 1.0, 0.9)
+var point_count: int = 64
+
+const scale_one_radius: float = 150.0
+        </program>
+        <p> 
+            A final member variable is the radius, and when the
+            radius changed, we want to redraw, so we add a special 
+            setter method to make sure that any time the radius changes
+            the visual is updated.
+        </p>
+        <program language="gdscript">
+var radius: float = 0.0:
+    set(value):
+        radius = value
+        queue_redraw()
+        </program>
+        <p> 
+            The <c>_draw()</c> function can now use the member variables to
+            draw an arc that has a fixed width to draw the ring that represents 
+            the lasso of the collector. The following draw function should be added
+            to the RingVisual script.
+        </p>
+        <program language="gdscript">
+func _draw() -> void:
+    if radius &lt;= 0.0:
+        return
+    draw_arc(Vector2.ZERO, radius, 0.0, TAU, point_count, band_color, band_width, true)
+        </program>
+        <p> 
+            Finally, as the lasso grows, the scale of the ring needs to be
+            updated as follows:
+        </p>
+        <program language="gdscript">
+func update_scale(scale: float) -> void:
+    radius = scale_one_radius * scale
+        </program>
+        <p> 
+            Now that this script is complete, we will move on to
+            the parent node's script.
+        </p>
+    </subsubsection>
+        <subsubsection>
         <title>Collector Script</title>
         <p>
             After adding the GrowingArea, and renaming it Collector,
@@ -380,7 +448,19 @@ start((Transform2D.IDENTITY).rotated(PI/4))
       </subsection>
       <subsection xml:id="two-d-games-space-farm-prize-scene">
       <title>Energy Crystals: The Prize Scene</title>
+      <introduction>
       <p>
+        Next we'll work our our Prize, the energy crystals. The crystals 
+        are stationary, they need a collision area, and they use a Sprite2D 
+        for the visual representation. <xref ref="space-farm-class-hierarchy" text="type-global-title"/>.
+        shows the Prize scene on the lower right. The Prize is a GrowingArea, and it has two children, 
+        CollisionShape2D and Sprite2D.
       </p>
+    </introduction>
+    <subsubsection>
+        <title>Initial Testing</title>
+    <p>
+    </p>
+</subsubsection>
       </subsection>
     </section>
