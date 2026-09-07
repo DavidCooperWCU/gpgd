@@ -270,9 +270,9 @@ var min_collect_distance: float = 100.0
         </program>
         <p>
             Since the default values for collectors is
-            different than the default values for growing_area
-            the initial auto_start value will be fall, and the
-            start_scale will be 0.07. 
+            different than the default values for <c>growing_area.gd</c>
+            the initial <c>auto_start</c> value false, and the
+            <c>start_scale</c> will be 0.07. 
         </p>
         <program language="gdscript">
 func _init() -> void:
@@ -284,7 +284,7 @@ func _init() -> void:
             the growth rate and the size thresholds. The first 2
             size thresholds are the minimum and maximum collection
             radius, and the final threshold is 0.01 less than the 
-            maximum scale. destroy past max is true because we want
+            maximum scale. Destroy past max is true because we want
             the lasso to stop existing a little bit after it's collection
             zone. The view size is set because we want the lasso to 
             wrap the screen just like the player will.
@@ -301,9 +301,80 @@ func _ready() -> void:
         </program>
         <p>
             The lasso's location will start from the location that it's launched
-            from, and the start method will pass that location and direction so that it 
+            from, and the start method will accept that location and direction so that it 
             is launched from the front of the ship and go the direction that the 
             ship is pointed.
+        </p>
+        <program language="gdscript">
+func start(_transform: Transform2D) -> void:
+    transform = _transform
+    velocity = transform.x * speed
+    start_growth()
+        </program>
+        <p>
+            The lasso's has only a small size range where it can collect 
+            the crystal. This is indicated in the first two threshold values. 
+            In addition, there is a maximum distance between the center of the
+            lasso and the center of the crystal being collected in order for 
+            collection to occur. This is expressed in the <c>can_collect</c> 
+            method.
+        </p>
+        <program language="gdscript">
+func can_collect(prize_position: Vector2) -> bool:
+    return (thresholds[0] &lt;= current_scale and 
+            current_scale &lt;= thresholds[1] and 
+            prize_position.distance_to(position) &lt; min_collect_distance)
+        </program>
+        <p>
+            <c>_apply_growth()</c> is overriden for collector so that
+            the ring drawing gets bigger, but the scale is not changed
+            so that the collision area isn't changed either.
+        </p>
+        <program language="gdscript">
+func _apply_growth() -> void:
+    $RingVisual.update_scale(current_scale)
+        </program>
+        <p>
+            For the collector, in addition to growing, <c>_process()</c>
+            needs to update the location based on velocity in addition to
+            updating the size. So after calling super.process(), 
+            that's what is done.
+        </p>
+        <program language="gdscript">
+func process(delta: float) -> void:
+    super.process(delta)
+    # wrapping code
+    if position.x > view_size.x:
+        position.x = 0
+    if position.x &lt; 0:
+        position.x = view_size.x
+    if position.y > view_size.y:
+        position.y = 0
+    if position.y &lt; 0:
+        position.y = view_size.y
+
+    # update position
+    position += velocity * delta
+        </program>
+    </subsubsection>
+    <subsubsection>
+        <title>Initial Testing</title>
+        <p>
+            Now the script is ready. To test it on it's own,
+            add the following code to the end of <c>_ready()</c>
+            to see the lasso moving across the view diagonally down 
+            and to the right. Run the Collector scene. 
+            Then change any member values that 
+            you'd like to change the size, speed, color, or any
+            other part that you want to adjust to your liking.
+        </p>
+        
+        <program language="gdscript">
+start((Transform2D.IDENTITY).rotated(PI/4))
+        </program>
+        <p>
+            Once everything is adjusted. Remove the code, so 
+            that the ship can launch the lasso correctly.
         </p>
     </subsubsection>
       </subsection>
