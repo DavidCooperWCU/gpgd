@@ -458,6 +458,30 @@ start((Transform2D.IDENTITY).rotated(PI/4))
       </p>
     </introduction>
     <subsubsection>
+        <title>Prize Scene Setup</title>
+    <p>
+        Like the Collector, The root node for the Prize scene should be a GrowingArea.
+        Then add a CollisionShape2D and a Sprite2D. On the Sprite2D, you 
+        can drag one of the 3 crystals from the art folder as a placeholder.
+        Since, the picture will change based on the size threshold. It's not 
+        necessary to have an image, but it helps for the next step of
+        sizing the CircleShape2D around the image of the crystal. If you 
+        decide to scale the Sprite2D, make sure you do that before sizing the
+        collision shape. If not, then the collision won't match the image.
+    </p>
+</subsubsection>
+<subsubsection>
+        <title>Prize Script</title>
+    <p>
+        Attach a script to the Prize node. 
+    </p>
+</subsubsection>
+<subsubsection>
+        <title>Initial Testing</title>
+    <p>
+    </p>
+</subsubsection>
+<subsubsection>
         <title>Initial Testing</title>
     <p>
     </p>
