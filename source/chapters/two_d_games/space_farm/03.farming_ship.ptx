@@ -15,6 +15,56 @@
     <subsection xml:id="two-d-games-space-farm-farming-ship-scene">
       <title>The Player Scene</title>
       <p>
+        Make a new scene. Add a RigidBody2D as the root Node, then add
+        a CollisionPolygon2D and a Sprite2D similar to the collision scene 
+        template shown in <xref ref="first-2d-figure-collision-scene-template-d" />
+        except that we are using a CollisionPolygon2D instead of a CollisionShape2D. 
+        Rename the RigidBody2D Node to Player. Then save the scene.
+      </p>
+      <p>
+        For the Sprite2D add the ship image as the Texture. Then select the
+        CollisionPolygon2D and, in the Inspector, change the Build Mode to Segments.
+        Then, in the 2D view, zoom the view so that the ship is fully visible and 
+        mostly filling the window. Click on the top of the ship, and then work your way
+        around the edge of the ship as shown in <xref ref="farm-ship-collision-drawn-figure" />.
+        Make sure the scene looks like <xref ref="farm-ship-initial-scene-figure" />, then save the scene.
+      </p>
+      <p>
+        Next, in the inspector set the PhysicsMaterial in the Physics Material Override part 
+        of the RigidBody2D as shown in <xref ref="farm-ship-physics-figure"/> Then in the Project Settings under Physics 2D, set Default Gravity 
+        to <m>0.0 px/s^2</m> as shown in <xref ref="space-farm-gravity-figure"/>.
+      </p>
+      <figure>
+        <caption>Setting up the Player Scene</caption> 
+        <sidebyside>
+      <figure xml:id="farm-ship-initial-scene-figure">
+        <caption>Collision Scene Using CollisionPolygon2D</caption>
+      <image source="space-farm-ship-collision-scene.webp" width="25%">
+         <shortdescription>Scene Dock with an Area2D as the root with Sprite2D and CollisionPolygon2D as children.</shortdescription>
+     </image>
+        </figure>
+        <figure xml:id="farm-ship-collision-drawn-figure">
+        <caption>The Collision Segments around the ship.</caption>
+      <image source="farm-ship-collision.webp" width="25%">
+         <shortdescription>The ship image outlined with the points needed for the CollisionPolygon2D</shortdescription>
+     </image>
+        </figure>
+        <figure xml:id="farm-ship-physics-figure">
+        <caption>Adding the Physics Material Override.</caption>
+      <image source="space-farm-ship-physics-material.webp" width="25%">
+         <shortdescription>The Inspector is shown with the PhysicsMaterial menu item for RigidBody2D</shortdescription>
+     </image>
+        </figure>
+        <figure xml:id="space-farm-gravity-figure">
+        <caption>Override Default Gravity.</caption>
+      <image source="space-farm-global-gravity.webp" width="25%">
+         <shortdescription>Project settings are shown with default gravity to 0.0</shortdescription>
+     </image>
+        </figure>
+    </sidebyside>
+    </figure>
+      <p>
+        
       </p>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-farming-ship-input">
