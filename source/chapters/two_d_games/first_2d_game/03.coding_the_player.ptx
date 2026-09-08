@@ -82,7 +82,7 @@ var screen_size # Size of the game window.</code>
     <p>Click on <em>Project -&gt; Project Settings</em> to open the project settings window and
             click on the <em>Input Map</em> tab at the top. Type "move_right" in the top bar and
             click the "Add" button to add the <c>move_right</c> action.</p>
-    <figure>
+    <figure xml:id="input-map-add-action-figure">
       <caption>Input Map Add Action</caption>
       <image source="input-mapping-add-action.webp" width="75%">
          <shortdescription>The Project Settings window is in the Input Map Tab with move_right in the text box for the add button.</shortdescription>
