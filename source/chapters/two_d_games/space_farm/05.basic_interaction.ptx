@@ -3,21 +3,119 @@
     <title>Basic Interaction</title>
     <introduction>
     <p>
+        Now that the ship, lasso, and crystal all spawn, grow, and move together,
+        let's create some basic interaction code. Since the prize interacts with
+        both the collector and the ship, it is a good place to start for adding
+        interaction effects. The initial effects will be the crystal disappearing
+        on contact with the ship or collection by the lasso,
+        energy/points for collecting with the lasso, and damage for the ship when
+        colliding with the crystal.
     </p>
     </introduction>
     <subsection xml:id="two-d-games-space-farm-basic-interaction-collecting-prizes">
       <title>Collecting Prizes</title>
       <p>
+        The following changes are all to the prize script.
+        First, create a signal for when the prize is
+        collected with a value for the score/energy for collecting.
+    </p>
+    <program language="gdscript">
+signal collected(value: int)
+    </program>
+    <p>
+        Add a member variable that is an Array of the 
+        lassos (Collector Nodes) that
+        the prize is currently touching.
+    </p>
+    <program language="gdscript">
+var _touching_collectors: Array[Node] = []
+    </program>
+     <p>
+        At the end of <c>_process()</c> check to see
+        if a collector is able to collect the prize.
       </p>
+      <program language="gdscript">
+func _process(delta: float) -> void:
+    
+    # ... code for changing sprite image 
+    #     and prize value ...
+
+    # call the collection interaction
+    check_touching_collectors()
+    </program>
+
+    <p>
+        The <c>check_touching_collectors</c> function loops 
+        through the touching_collectors array and 
+        checks if any of them are able to collect based 
+        on the collection constraints. And if they are
+        then the prize is removed from the scene and
+        the collected energy is emitted.
+    </p>
+    <program language="gdscript">
+func check_touching_collectors() -> void:
+    for area in _touching_collectors:
+        var collector: Collector = area as Collector
+        if collector.can_collect(self.global_position):
+            emit_signal("collected",value)
+            queue_free()
+    </program>
+    <p>
+        There are two companion functions that put the collectors
+        into the touching_collectors array. These are _on_area_entered
+        which uses the collisionarea2D's area entered signal,
+    </p>
+    <program language="gdscript">
+func _on_area_entered(area: Area2D) -> void:
+    if area.is_in_group("collector"):
+        if area in _touching_collectors:
+            return
+        _touching_collectors.append(area)
+
+    </program>
+    <p>
+        and _on_area_exited, which uses the CollisionArea2D's area_exited
+        signal,
+    </p>
+    <program language="gdscript">
+func _on_area_exited(area: Area2D) -> void:
+    if area.is_in_group("collector"):
+        if area in _touching_collectors:
+            _touching_collectors.erase(area)
+    </program>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-basic-interaction-health-impacts">
       <title>Health Impacts</title>
       <p>
-      </p>
+        Create a signal for when the prize is hit by the 
+        ship, and the amount of damage that the ship takes.
+    </p>
+    <program language="gdscript">
+signal hit(value: int)
+    </program>
+      <p> 
+        Since the ship is a RigidBody2D, the body_entered
+        signal is used for when the ship makes contact with
+        a prize and both destroys the prize and damages the ship
+        using the hit signal.
+    </p>
+    <program language="gdscript">
+func _on_body_entered(body: Node2D) -> void:
+    if body.is_in_group("player"):
+        emit_signal("hit",value)
+        queue_free()
+    </program>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-basic-interaction-playtesting">
       <title>Play Testing</title>
       <p>
+        After adding the basic interaction, run the main scene and test if the 
+        distance for collection looks good. Make sure that the crystal disappears
+        both when the prize is collected and when the ship hits it.
+        Make sure the ship is disabled after hitting the right amount 
+        of crystals. Try changing values to see if game play improves.
+        Think about which values increase or decrease difficulty so that 
+        you can modify them as players get to higher levels.
       </p>
       </subsection>
     </section>

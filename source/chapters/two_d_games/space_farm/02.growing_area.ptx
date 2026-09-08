@@ -486,33 +486,12 @@ var med: Texture2D = load("res://art/med-prize.png")
 var large: Texture2D = load("res://art/large-prize.png")    
     </program>
     <p>
-        <!-- TODO move signals to basic interaction -->
-        Then create 2 signals. One for when the prize is
-        collected with a value for the score/energy for collecting,
-        and the other for when the prize is hit by the 
-        ship, and the amount of damage that the ship takes.
-    </p>
-    <program language="gdscript">
-signal collected(value: int)
-signal hit(value: int)
-    </program>
-    <!-- TODO finishe move signals-->
-    <p>
         Then there should be a member variable that keeps track
         of how much energy the crystal is holding.
     </p>
     <program language="gdscript">
 var value: int = 0
     </program>
-    <!--TODO: this should be part of basic interaction-->
-    <p>
-        The last member variable is an Array of the Nodes that
-        the prize is currently touching.
-    </p>
-    <program language="gdscript">
-var _touching_collectors: Array[Node] = []
-    </program>
-    <!-- TODO: end basic interaction-->
     <p>
         The ready process will call super's ready and then
         set the two scale thresholds to determine when to change from small to medium,
@@ -540,62 +519,7 @@ func _process(delta: float) -> void:
     else:
         $Sprite2D.texture = large
         value = 50
-    <!-- TODO move next line to basic interaction-->
-    check_touching_collectors()
     </program>
-
-    <p>
-        The check_touching_collectors function loops 
-        through the touching_collectors array and 
-        checks if any of them are able to collect based 
-        on the collection constraints. And if they are
-        then the prize is removed from the scene and
-        the collected energy is emitted.
-    </p>
-    <program language="gdscript">
-func check_touching_collectors() -> void:
-    for area in _touching_collectors:
-        var collector: Collector = area as Collector
-        if collector.can_collect(self.global_position):
-            emit_signal("collected",value)
-            queue_free()
-    </program>
-    <p>
-        There are two companion functions that put the collectors
-        into the touching_collectors array. These are _on_area_entered
-        which uses the collisionarea2D's area entered signal,
-    </p>
-    <program language="gdscript">
-func _on_area_entered(area: Area2D) -> void:
-    if area.is_in_group("collector"):
-        if area in _touching_collectors:
-            return
-        _touching_collectors.append(area)
-
-    </program>
-    <p>
-        and _on_area_exited, which uses the CollisionArea2D's area_exited
-        signal,
-    </p>
-    <program language="gdscript">
-func _on_area_exited(area: Area2D) -> void:
-    if area.is_in_group("collector"):
-        if area in _touching_collectors:
-            _touching_collectors.erase(area)
-    </program>
-    <p> 
-        Since the ship is a RigidBody2D, the body_entered
-        signal is used for when the ship makes contact with
-        a prize and both destroys the prize and damages the ship
-        using the hit signal.
-    </p>
-    <program language="gdscript">
-func _on_body_entered(body: Node2D) -> void:
-    if body.is_in_group("player"):
-        emit_signal("hit",value)
-        queue_free()
-    </program>
-    <!-- TODO end move last part of basic interaction-->
     <p>
         That concludes the visual part of the Prize script.
     </p>

@@ -3,6 +3,13 @@
     <title>Farming Ship - The Player</title>
     <introduction>
     <p>
+        The Player is a farming ship in space. For now, we are using a
+        green space ship image without any specific nod to farming. 
+        A future version may have a ship that has more visible farming 
+        specific parts. The farming ship will move around with thrusters,
+        and for now will have some automatic damper system that slows motion
+        to a stop after the thrusters stop and creates a maximum speed for the
+        ship's motion.
     </p>
     </introduction>
     <subsection xml:id="two-d-games-space-farm-farming-ship-scene">
