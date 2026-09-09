@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="two-d-games-space-farm">
     <title>Space Farm</title>
-    <introduction>
-    <p>Dodge The Creeps is a 2D game where the player and the
+    <introduction xml:id="two-d-games-space-farm-introduction">
+    <p>The previous game, Dodge The Creeps is a 2D game where the player and the
         enemies move. The player can't leave the screen, and
         the only interaction is touching the enemy, which ends 
         the game. In this next game, Space Farm, it is still a 2D 
@@ -11,12 +11,7 @@
         by a projectile, and your ship can destroy the resources on contact
         which damages the ship.
             </p>
-    <figure>
-      <caption>Example Game</caption>
-        <image source="dodge_preview.gif" width="25%" >
-         <shortdescription>An animation of the 2D game is shown with a score from 0 to 5 until Game Over.</shortdescription>
-     </image>
-    </figure>
+    
     <p>You will learn how to make a custom growing area class 
         that can be used by different Sprites in the game. You'll
         also learn about different ways to draw and change sprites,
@@ -36,13 +31,15 @@
       <li>Make a Growing Area 2D that gets bigger over time.</li>
       <li>Inherit the Growing Area 2D to make a space lasso.</li>
       <li>Inherit the Growing Area 2D to make a stationary crystal.</li>
+      <li>Make simple and more complex interactions.</li>
+      <li>Add and use multiple sound effects.</li>
       </ul>
     </p>
     <p>And more.</p>
     
     <observation xml:id="two-d-games-space-farm-prerequisites">
       <title>Prerequisites</title>
-      <p></p>
+      <p>This project builds on what you learned in the first 2D game.</p>
       </observation>
 
       </introduction>
@@ -51,9 +48,9 @@
 <xi:include href="03.farming_ship.ptx" />
 <xi:include href="04.main_scene.ptx" />
 <xi:include href="05.basic_interaction.ptx" />
-<xi:include href="06.sound_effects.ptx" />
+<!-- <xi:include href="06.sound_effects.ptx" />
 <xi:include href="07.hud.ptx" />
 <xi:include href="08.better_interaction.ptx" />
 <xi:include href="09.finishing_up.ptx" />
-<xi:include href="10.space_spice.ptx" />
+<xi:include href="10.space_spice.ptx" /> -->
   </chapter>

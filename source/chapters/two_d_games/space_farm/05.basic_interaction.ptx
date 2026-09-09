@@ -191,33 +191,74 @@ func collect() -&gt; void:
 
         <p>
             Now that the player has health, it is useful
-            to create a set of states for 
+            to create a set of states for when the Player is 
+            active vs. not active. The ship will have 3 states,
+            the initial state, the running state, and the wrecked 
+            state. These states can be specified by an enum member
+            variable.
         </p>
 
         <program language="gdscript">
-var health: int
-signal wrecked
+enum State {INIT, RUNNING, WRECKED}
+var state : State = State.INIT
         </program>
         <p>
-            Then let's add the take_damage method.
+            Then the <c>_ready()</c> method can update the state:
         </p>
 
         <program language="gdscript">
-func take_damage(amount: int) -&gt; void:
-    health -= amount
-    if health &lt; 0:
-        health = 0
+func _ready() -> void:
+    change_state(State.RUNNING)
+
+    ## leave the rest of the function as it was.
+        </program>
+        <p>
+            <c>change_state()</c> is a helper function that updates
+            the state enum, and the collision polygon's disabled state.
+        </p>
+        <program language="gdscript">
+func change_state(update : State):
+    match update:
+        State.INIT:
+            $CollisionPolygon2D.set_deferred("disabled",true)
+        State.RUNNING:
+            $CollisionPolygon2D.set_deferred("disabled",false)
+        State.WRECKED:
+            $CollisionPolygon2D.set_deferred("disabled",true)
+    state = update
+        </program>
+        <p>
+            The state is checked in get_input() and 
+            the input is only read if the state is RUNNING.
+        </p>
+        <program language="gdscript">
+func get_input() -> void:
+    
+    # after reseting member variables to 0
+    if state in [State.INIT,State.WRECKED]:
+        return
+    # before reading from Input
+        </program>
+        <p>
+            launch() shouldn't happen if it's not RUNNING:
+        </p>
+        <program language="gdscript">
+func launch() -> void:
+    if state != State.RUNNING:
+        return
+    # the rest of the launch function
+        </program>
+        <p>
+            in take_damage, when health is 0
+            the state should change to wrecked:
+        </p>
+        <program language="gdscript">
+func take_damage(amount: int) -> void:
+    
+    # code before this line stays the same
     if health == 0:
-        emit_signal("wrecked")
-        </program>
-        <p>
-            Next let's add the collect method.
-        </p>
-
-        <program language="gdscript">
-func collect() -&gt; void:
-    health += 1
-        </program>
+        change_state(State.WRECKED)
+        emit_signal("wrecked")       </program>
     </subsection>
 
     <subsection xml:id="two-d-games-space-farm-basic-interaction-playtesting">

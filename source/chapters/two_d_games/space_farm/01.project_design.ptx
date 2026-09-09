@@ -64,7 +64,10 @@
       
       <p>We are using pretty simple artwork. 1 image for the ship, and 3 images for the
         3 sizes of crystal. The lasso of the collector and flame for the rocket of the ship
-         will be drawn programmatically.
+         will be drawn programmatically. The <url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/art.zip">artwork link</url> has a zip of the 3 files.
+      </p>
+      <p>
+        After downloading the artwork, make a new project called Space Farm and copy the art directory to the project folder.
       </p>
       </subsection>
     </section>
