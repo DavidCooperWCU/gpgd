@@ -3,16 +3,100 @@
     <title>Main Scene</title>
     <introduction>
     <p>
+        The Main Scene holds a Player and a Timer for planting
+        the crystals. The Player spawns in the middle of the 
+        screen at the beginning of the game, and a new crystal
+        is planted at random time intervals in a random location 
+        anywhere on the screen.
     </p>
     </introduction>
     <subsection xml:id="two-d-games-space-farm-main-scene-nodes">
       <title>Adding the Nodes</title>
       <p>
+        The root node of the Main scene should be a Node, and then rename
+        it to Main. Add an instance of player as a child of Main, then
+        add a Timer and rename it PlantTimer. Then you are ready to make the 
+        script.
       </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-main-scene-script">
+      <title>Main Script</title>
+      <p>
+        The script will randomly plant crystals. To 
+        do this, the following member variables are needed.
+        A <c>PackedScene</c> called <c>crystal</c> will allow the
+        Prize to be instantiated. A <c>Vector2i</c> called view_size
+        will allow the player and crystals to spawn inside the visible 
+        area. One more member variable for score is added in anticipation
+        for when the score will be displayed.
+      </p>
+      <program language="gdscript">
+extends Node
+
+var view_size : Vector2i
+var crystal: PackedScene = load("res://prize.tscn")
+var score: int = 0
+   </program>
+    <p>
+        The next thing we need is a helper function to
+        update the view size.
+    </p>
+    <program language="gdscript">
+func update_view_size() -> void:
+    view_size = get_viewport().get_visible_rect().size
+    get_viewport().size_changed.connect(update_view_size)
+    </program>
+    <p>
+        The ready function will update the view size
+        position the player, and then plant a crystal.
+    </p>
+    <program language="gdscript">
+func _ready() -> void:
+    update_view_size()
+    $Player.position.x = view_size.x/2
+    $Player.position.y = view_size.y/2
+    plant_crystal()
+    </program>
+    <p>
+        The plant_crystal() helper method creates a Prize,
+        randomly places it on the screen, connects its signals to 
+        the appropriate methods, adds the prize as a child,
+        and then has the Plant timer start for a random time between
+        2 and 5 seconds.
+    </p>
+    <program language="gdscript">
+func plant_crystal() -> void:
+    var prize: Prize = crystal.instantiate()
+    prize.position = Vector2(randf() * view_size.x,
+                        randf() * view_size.y)
+    add_child(prize)
+    $PlantTimer.start(randf()*3+2)
+    </program>
+    <p> 
+        Next we need to connect the PlantTimer's timeout()
+        to the plant_crystal() method.
+    </p>
+    <p>
+        We need to change one more project setting. In the
+        Project Settings, Display, Window, Strecth. Set the 
+        Mode value to "canvas_items",and then we are finished
+        building the main scene.
+    </p>
+    
       </subsection>
       <subsection xml:id="two-d-games-space-farm-main-scene-play-testing">
       <title>Play Testing</title>
       <p>
+        Now, run the main scene, and look at the sizes of
+        each of the items on the screen. Change the scale 
+        of each to make sure that they are all about the 
+        same size when at the maximum size. Or you could 
+        make it so that the largest crystal is bigger than
+        the ship. The lasso should fit completely around 
+        the largest crystal before it disappears.
+      </p>
+      <p>Once you are finished play testing, go to the next 
+        section to make basic interactions for game play to work.
       </p>
       </subsection>
     </section>

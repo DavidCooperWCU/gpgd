@@ -252,11 +252,122 @@ func _on_collector_load_time_timeout() -> void:
       <subsection xml:id="two-d-games-space-farm-farming-ship-flames">
       <title>Visual Effect: Rocket Flames</title>
       <p>
+        The next step is to add an effect for when the ship is thrusting.
+        We'll make something like a rocket flame using a Particle2D Node.
+        Add a CPUParticle2D Node and name it Rocket. Then look at the inspector
+        and make the following changes to the flame. Keep in mind
+        that it won't look right until all of the settings are set, and
+        you may need to adjust the location and size of the flames based on
+        the scale of your Sprite2D.
       </p>
+      <table xml:id="ship-rocket-table">
+        <title>Rocket's CPUParticle2D Changes</title>
+        <tabular>
+            <row header="yes">
+                   <cell>Attribute</cell><cell>Value</cell>
+            </row>
+            <row>
+               <cell>Amount:</cell><cell>30</cell>
+            </row>
+            <row>
+                <cell>Lifetime:</cell><cell>0.1 sec</cell>
+            </row>
+            <row>
+                <cell>Local Coords:</cell><cell>On</cell>
+            </row>
+            <row>
+                <cell>Shape:</cell><cell>Rectangle</cell>
+            </row>
+            <row>
+                <cell>Rect Extents x:</cell><cell>1.0px</cell>
+            </row>
+            <row>
+                <cell>Rect Extents y:</cell><cell>3.0px</cell>
+            </row>
+            <row>
+                <cell>Direction x:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Direction y:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Direction Spread:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Gravity x:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Gravity y:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Curve pt1:</cell><cell>(0,1)</cell>
+            </row>
+            <row>
+                <cell>Curve pt2:</cell><cell>(1,0.27)</cell>
+            </row>
+            <row>
+                <cell>Transform Position x:</cell><cell>-19.0</cell>
+            </row>
+            <row>
+                <cell>Transform Rotation:</cell><cell><m>180.0^\circ</m></cell>     
+            </row>
+        </tabular>
+        
+        
+      </table>
+      <p>
+        There are 2 settings that are easier to describe with a visual.
+        Those are the Curve and the Color Ramp.
+        For the Curve see <xref ref="space-farm-ship-flame-curve-figure" />
+        to determine where to click the points to get pt. 1 and pt. 2 described
+        in the table above. For the Color Ramp first select the left slider
+        labeled 1 in <xref ref="space-farm-ship-flame-color-ramp-figure" />
+        and then click the part labeled 2, to select an orange color. Next select
+        the right slider labeled 2 in the same figure and then click the part labeled 2
+        to select a red color. Slide the slider until the flame colors look good to you.
+      </p>
+      <figure xml:id="space-farm-ship-flame-figure">
+        <caption>Flame settings</caption>
+        <sidebyside>
+            <figure xml:id="space-farm-ship-flame-curve-figure">
+                <caption>Curve Settings</caption>
+                <image source="space-farm-rocket-flame-curve.webp">
+                    <shortdescription>A curve from (0,1) to (1,0.27)</shortdescription>
+                </image>
+            </figure>
+            <figure xml:id="space-farm-ship-flame-color-ramp-figure">
+                <caption>Color Ramp Settings</caption>
+                <image source="space-farm-rocket-flame-color-ramp.webp">
+                    <shortdescription>The color ramp with orange and red values.</shortdescription>
+                </image>
+            </figure>
+        </sidebyside>
+      </figure>
+      <p>
+        After the flame looks like it's in the right spot,
+        add the following code as the first line of <c>get_input()</c>
+      </p>
+      <program language="gdscript">
+$Rocket.emitting = false
+    </program>
+    <p>
+        Then,
+        add the following code in the check for "thrust" input after setting 
+        the thrust in <c>get_input()</c>
+      </p>
+      <program language="gdscript">
+$Rocket.emitting = true
+    </program>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-farming-ship-playtesting">
       <title>Play Testing</title>
       <p>
+        Run the scene again to take a look. Make sure the
+        lasso shoots from the place you want it to, and that 
+        the flame is going from the right place only when thrusting. 
+        Make minor changes based on what you see. 
+        If the sizes aren't what you want. Please, wait to make changes until you are testing 
+        the main scene with all of the scenes together.
       </p>
       </subsection>
     </section>
