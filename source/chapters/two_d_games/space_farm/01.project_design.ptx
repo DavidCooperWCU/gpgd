@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="two-d-games-space-farm-01-project-design">
+    <title>Project Design</title>
+    <introduction>
+    <p>Before we get started, let's talk about the project design.</p>
+    <p>We are making a game that has 3 physical elements, 1. A ship that 
+        is propelled by rocket power, 2. A lasso that is launched from the
+        ship, grows, and collects crystals, and 3. A crystal that grows and
+        has 3 different growth states shown with different artwork.
+    </p>
+    <figure>
+        <caption>Space Farm Parts</caption>
+        <sidebyside>
+    <figure>
+      <caption>Farming Spaceship</caption>
+      <image source="farm-space-ship.webp" width="75%" >
+         <shortdescription>A spaceship with a rocket tail.</shortdescription>
+     </image>
+      </figure>
+      <figure>
+      <caption>Farming Lasso</caption>
+      <image source="farm-lasso.webp" width="75%" >
+         <shortdescription>A blue ring.</shortdescription>
+     </image>
+      </figure>
+      <figure>
+      <caption>Farming Crystal</caption>
+      <image source="farm-crystal.webp" width="75%" >
+         <shortdescription>A purple crystal.</shortdescription>
+     </image>
+      </figure>
+    </sidebyside>
+</figure>
+    <p>Both the lasso, and the crystal will inherit the 
+        GrowingArea2D class that we make.
+    </p>
+    <p>The hierarchy of scenes will look like this.</p>
+    <figure xml:id="space-farm-class-hierarchy">
+      <caption>Scene Hierarchy</caption>
+      <image source="space-farm-growing-area-hierarchy.webp" width="75%" >
+         <shortdescription>The project folder view is shown with default files.</shortdescription>
+     </image>
+      </figure>
+    <p>The GrowingArea2D has parameters to decide behavior
+        of the growth. First it has a starting scale and and maximum scale.
+        Then it has a growth rate and an optional growth curve for the growth rate.
+        Then it has settings for whether it should automatically start growing on
+        creation and if when it gets to the maximum size it should be removed from the
+        scene. The last three parameters are an array of size thresholds so that behavior 
+        can change based on different stages of growth, the current_scale, and whether or
+        not the area is currently growning.
+    </p>
+    <p>There are also 2 signals. One for indicating that the maximum size was reached,
+        and the other for the size changing.
+    </p>
+
+    
+    </introduction>
+    <subsection xml:id="two-d-games-space-farm-scenes">
+      <title>Organizing the project</title>
+      <p>In this project, we will make 4 independent scenes: <c>Player</c>, <c>Collector</c>, 
+                <c>Prize</c>, and <c>HUD</c>, which we will combine into the game's <c>Main</c> scene, and
+            the <c>Collector</c> and <c>Prize</c> scenes will inherit from the <c>GrowingArea</c> scene.</p>
+      
+      <p>We are using pretty simple artwork. 1 image for the ship, and 3 images for the
+        3 sizes of crystal. The lasso of the collector and flame for the rocket of the ship
+         will be drawn programmatically. The <url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/art.zip">artwork link</url> has a zip of the 3 files.
+      </p>
+      <p>
+        After downloading the artwork, make a new project called Space Farm and copy the art directory to the project folder.
+      </p>
+      </subsection>
+    </section>

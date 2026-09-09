@@ -1,0 +1,534 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="two-d-games-space-farm-02-growing-area">
+    <title>New Building Block: Growing Area (2D)</title>
+    <introduction>
+    <p>
+        With farming in mind, one of the major parts of farming is
+        waiting for plants to grow. In addition, the longer you wait, 
+        the bigger the plants get, and, in many cases, if you wait longer, 
+        you get more from your crop. In order to simulate the stages 
+        of plant growth, we want the growing area to have a way to change
+        its appearance after different amounts of time. We also want the 
+        score, and possibly the energy gained, to be different at the same
+        stages. To make collection a game of skill, we want the collecting 
+        tool to simulate a lasso, where the lasso will grow to the right size
+        and only collect when it is in a small range close to the ideal size.
+        For this when the ship launches the lasso, we want it to grow from a 
+        small size up to a size that is a little bigger than the ideal size 
+        before the lasso breaks apart and dissappears, but if it is able to
+        harvest a crystal, then the crystal is collected from the space.
+    </p>
+    <p>
+        Since there are 2 different elements that will grow, we look at the
+        similarities between the elements to see if we can make a common parent
+        class for them. Then the parent script can hold the common elements and
+        perform the common actions instead of needing to write the same behavior 
+        twice. We can then use the subclass to differentiate the behavior, such 
+        as how it looks, the fact that the crystals are stationary and the lassos
+        will move, and that lassos will disapear after they get to a certain size,
+        while the crystals will grow to a maximum size and only leave the space 
+        if they are collected. Lassos also are sourced from the location of the 
+        ship, while the crystals can grow anywhere.
+    </p>
+    <p>
+        The different stages of growth for crystals and the specific sizes of the
+        lasso for collection and disappearing can both be handled by a number of 
+        thresholds. Since there are multiple thresholds, this could be handled by
+        an array or multiple individual variables. For flexibility in the number
+        of thresholds, an array can prevent the creation of values that won't be 
+        used at the expense of the individual values needing an ad hoc naming scheme
+        or relying on the behavior of the code to determine what each threshold 
+        represents.  
+    </p>
+    <p> This section will go over the base growing area scene and its accompanying script
+        followed by the collector (for the lasso) and prize (for the crystal) scenes
+        along with the script changes needed for each of them.
+    </p>
+    </introduction>
+    <subsection xml:id="two-d-games-space-farm-growing-area-scene">
+      <title>The Growing Area Scene</title>
+      <introduction>
+      <p>
+        To make the Growing Area Scene, all that we need is a single 
+        <c>Area2D</c> Node as we see in 
+        <xref ref="space-farm-class-hierarchy" text="type-global-title"/>.
+        Then we can attach an empty script with
+      </p>
+    </introduction>
+    <subsubsection>
+        <title>Growing Area Member Variables</title>
+        <p>
+            The first set of member variables of concern are related to the
+            size of the area. When determining size, it is natural to think 
+            of changing the size values of a Node, but the <c>Node2D</c> class
+            doesn't have an intrinsic size. It just has a <c>Vector2</c> that scales
+            the size of its parts. If the aspect ratio is fixed, then the scale
+            for x and y should be the same. Since we don't have direct access to 
+            the size, the Growing Area has the benefit of abstraction where the 
+            scale can be used directly to determine growth rather than computing 
+            the size each time when applying growth.
+        </p>
+        <p>
+            So, all of the growth variables are in terms of scale, and there are 
+            three fixed values that are necessary for determining growth. The first
+            is the starting scale, the second is the maximum scale, and the third is
+            the growth rate (how much the scale changes per second). Godot has 
+            a <c>Curve</c> class for allowing a rate to change smoothly over time, 
+            so in addition to the 3 fixed parameters we will have an optional growth curve.
+        </p>
+        <program language="gdscript">
+var start_scale: float = 0.1
+var max_scale: float = 0.9
+var growth_rate: float = 0.03          # scale units per second
+@export var growth_curve: Curve        # optional easing; sampled 0-1 by (current/max)
+        </program>
+        <p>
+            In addition to the variables related to how much to grow, there are also
+            decisions about when growth starts, and what happens when growth stops.
+            We will use the <c>auto_start</c> member variable to determine if growth 
+            starts as soon as the growing area is in the scene. We use <c>destroy_past_max</c>
+            to determinine whether the growing area should free itself when it gets
+            to the maximum size.
+        </p>
+        <program language="gdscript">
+var auto_start: bool = true
+var destroy_past_max: bool = false
+        </program>
+        <p>
+            The above mentioned member variables will typically be fixed after 
+            instantiation of the member. However, there are a couple of member 
+            variables that will change over the lifetime of the <c>Node</c>. These 
+            are the current scale, and whether the area is currently growing.
+            There is already a <c>scale</c> value that reflects the current scale,
+            but since <c>scale</c> is a <c>Vector2</c>, we want to have a one diminsional
+            value that represents the overall scale where there is no room for ambiguity by
+            having 2 placeholders for the value. So, <c>current_scale</c> and all of the 
+            above fixed scale values are of type <c>float</c>, and not <c>Vector2</c>. 
+            This simplifies assignment, but requires that the <c>scale</c> value on the
+            growing area be determined by multiplying the <c>current_scale</c> by 
+            <c>Vector2.ONE</c> to convert it to a <c>Vector2</c>. 
+        </p>
+        <program language="gdscript">
+var current_scale: float
+var _growing: bool = false
+        </program>
+        <p>
+            There are 3 more parts of the growing area, that aren't directly used
+            by the growing area. Either they are used by potential observers of the 
+            areas or they are used by the subclasses of a growing area. The first is
+            the array of scale thresholds. This array is by default an empty array, but
+            can be overriden in a subclass to be values that make sense for its particular purpose.
+            The other 2 are signals. There is one signal to specify that growth occured and a 
+            second signal to specify that the maximum growth has been reached. These signals could
+            be used to determine sound or visual effects that originate from another source such as
+            the environment.
+        </p>
+        <program language="gdscript">
+var thresholds: Array[float] = []
+signal max_size_reached(source: GrowingArea)
+signal size_changed(scale: float)
+        </program>
+        <p>The next section will describe how the member variables are 
+            initialized and processed by default.
+        </p>
+    </subsubsection>
+    <subsubsection>
+        <title>Growing Area Methods</title>
+        <p>
+            The <c>_ready()</c> method sets the scale to the <c>start_scale</c>,
+            updates the <c>current_scale</c> to the <c>start_scale</c>, and
+            starts the growth.
+        </p>
+        <program language="gdscript">
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    current_scale = start_scale
+    scale = Vector2.ONE * current_scale
+    if auto_start:
+        start_growth()
+        </program>
+        <p>
+            The <c>_growing</c> parameter has 2 methods for starting and stopping growth.
+        </p>
+        <program language="gdscript">
+func start_growth() -> void:
+    _growing = true
+
+func stop_growth() -> void:
+    _growing = false
+        </program>
+        <p>
+            The <c>_process()</c> method runs the growth each step based on
+            the member variables. If <c>_growing</c> is false, then none of 
+            the code in <c>_process()</c> should happen since it's only related to the 
+            growth.
+        </p>
+        <program language="gdscript">
+func _process(delta: float) -> void:
+    if not _growing:
+        return
+</program>
+        <p>
+            A local variable <c>step</c> is used to determine how much the scale
+            will change by. The initial step size is based on the growth rate times
+            delta, and then if there is a growth curve, the curve is sampled based
+            on the ratio of current_scale to max_scale.
+        </p>
+        <program language="gdscript">
+func _process(delta: float) -> void:
+     
+    # ... after earlier code
+
+    var step: float = growth_rate * delta
+    if growth_curve:
+        step *= growth_curve.sample(clamp(current_scale / max_scale, 0.0, 1.0))
+</program>
+        <p>
+            The <c>current_scale</c> is the increased by the step size
+            but is not allowed to go above the max_scale, and when max
+            scale is reached the growth is stopped, a signal is sent,
+            and when specified, the node is removed from the scene.
+        </p>
+        <program language="gdscript">
+func _process(delta: float) -> void:
+     
+    # ... after earlier code
+
+    current_scale += step
+
+    if current_scale >= max_scale:
+        current_scale = max_scale
+        stop_growth()
+        emit_signal("max_size_reached",self)
+        if destroy_past_max:
+            queue_free()
+            return
+        </program>
+        <p>
+            The <c>_apply_growth()</c> method is called so that
+            the scale can be applied appropriately to the child nodes
+            of the child scenes by overriding the method. And then the
+            size changed signal is emitted so that it can be observed 
+            by the environment.
+        </p>
+<program language="gdscript">
+<code>
+func _process(delta: float) -> void:
+     
+    # ... after earlier code
+
+    _apply_growth()
+    emit_signal("size_changed", current_scale)
+</code>
+        </program>
+        <p>
+            That ends the <c>_process()</c> method.
+            <c>_apply_growth()</c> just updates the scale
+            member variable. 
+        </p>
+        <program language="gdscript">
+func _apply_growth() -> void:
+    scale = Vector2.ONE * current_scale
+        </program>
+        <p>
+            That completes the <c>growing_area.gd</c> script, but a scene that uses
+            growing area is needed to see an example.
+        </p>
+    </subsubsection>
+    </subsection>
+      <subsection xml:id="two-d-games-space-farm-collector-scene">
+      <title>Lasso: The Collector Scene</title>
+      <introduction>
+      <p>
+        The first <c>GrowingArea</c> that we will build is the lasso, 
+        our <c>Collector</c> scene. We call it a collector because it 
+        collects prizes. The collector will have a GrowingArea as a root
+        Node, and then a CollisionShape2D to detect collissions, and 
+        a Node2D that we'll rename to RingVisual to draw the growing 
+        lasso. <xref ref="space-farm-class-hierarchy" text="type-global-title"/>
+        has a picture of the scene structure for the collector.
+      </p>
+    </introduction>
+    <subsubsection>
+        <title>Scene Setup</title>
+        <p>
+            The CollectionShape2D should be set up with a CircleArea Shape
+            with a Radius of 10 pixels. The RingVisual Node2D should get it's own
+            script as described below.
+        </p>
+    </subsubsection>
+<subsubsection>
+        <title>RingVisual Scene and Script</title>
+        <p>
+            The RingVisual Scene is a Node2D that is just their so the
+            <c>_draw()</c> method can be overriden to use the canvas to 
+            draw a light blue (or a color of your choice) ring.
+        </p>
+        <p> The member variables related to the ring are
+            <c>band_width</c>, <c>band_color</c>, 
+            <c>point_count</c>, and for the size at scale 1.0,
+            <c>scale_one_radius</c>.  Here is how the script should 
+            start.
+        </p>
+        <program language="gdscript">
+extends Node2D
+class_name RingVisual
+
+var band_width: float = 4.0
+var band_color: Color = Color(0.1, 0.8, 1.0, 0.9)
+var point_count: int = 64
+
+const scale_one_radius: float = 150.0
+        </program>
+        <p> 
+            A final member variable is the radius, and when the
+            radius changed, we want to redraw, so we add a special 
+            setter method to make sure that any time the radius changes
+            the visual is updated.
+        </p>
+        <program language="gdscript">
+var radius: float = 0.0:
+    set(value):
+        radius = value
+        queue_redraw()
+        </program>
+        <p> 
+            The <c>_draw()</c> function can now use the member variables to
+            draw an arc that has a fixed width to draw the ring that represents 
+            the lasso of the collector. The following draw function should be added
+            to the RingVisual script.
+        </p>
+        <program language="gdscript">
+func _draw() -> void:
+    if radius &lt;= 0.0:
+        return
+    draw_arc(Vector2.ZERO, radius, 0.0, TAU, point_count, band_color, band_width, true)
+        </program>
+        <p> 
+            Finally, as the lasso grows, the scale of the ring needs to be
+            updated as follows:
+        </p>
+        <program language="gdscript">
+func update_scale(scale: float) -> void:
+    radius = scale_one_radius * scale
+        </program>
+        <p> 
+            Now that this script is complete, we will move on to
+            the parent node's script.
+        </p>
+    </subsubsection>
+        <subsubsection>
+        <title>Collector Script</title>
+        <p>
+            After adding the GrowingArea, and renaming it Collector,
+            make a new script to attach to it. The Collector, has four
+            member variables, a speed, a velocity, a reference to the 
+            current view_size, and a min_collection_distance, which 
+            determines how close the center of the collector needs to be 
+            from the center of the prize in order for it to be collected.
+        </p>
+        <program language="gdscript">
+extends GrowingArea
+class_name Collector
+
+var speed = 350
+var velocity: Vector2
+var view_size: Vector2i
+var min_collect_distance: float = 100.0
+        </program>
+        <p>
+            Since the default values for collectors is
+            different than the default values for <c>growing_area.gd</c>
+            the initial <c>auto_start</c> value false, and the
+            <c>start_scale</c> will be 0.07. 
+        </p>
+        <program language="gdscript">
+func _init() -> void:
+    auto_start = false
+    start_scale = 0.07
+        </program>
+        <p>
+            <c>_ready()</c> can set the other values such as 
+            the growth rate and the size thresholds. The first 2
+            size thresholds are the minimum and maximum collection
+            radius, and the final threshold is 0.01 less than the 
+            maximum scale. Destroy past max is true because we want
+            the lasso to stop existing a little bit after it's collection
+            zone. The view size is set because we want the lasso to 
+            wrap the screen just like the player will.
+        </p>
+        <program language="gdscript">
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    super._ready()
+    growth_rate = .4
+    thresholds = [.175,.185,.195]
+    max_scale = thresholds[2] + 0.01
+    destroy_past_max = true
+    view_size = get_viewport().get_visible_rect().size
+        </program>
+        <p>
+            The lasso's location will start from the location that it's launched
+            from, and the start method will accept that location and direction so that it 
+            is launched from the front of the ship and go the direction that the 
+            ship is pointed.
+        </p>
+        <program language="gdscript">
+func start(_transform: Transform2D) -> void:
+    transform = _transform
+    velocity = transform.x * speed
+    start_growth()
+        </program>
+        <p>
+            The lasso's has only a small size range where it can collect 
+            the crystal. This is indicated in the first two threshold values. 
+            In addition, there is a maximum distance between the center of the
+            lasso and the center of the crystal being collected in order for 
+            collection to occur. This is expressed in the <c>can_collect</c> 
+            method.
+        </p>
+        <program language="gdscript">
+func can_collect(prize_position: Vector2) -> bool:
+    return (thresholds[0] &lt;= current_scale and 
+            current_scale &lt;= thresholds[1] and 
+            prize_position.distance_to(position) &lt; min_collect_distance)
+        </program>
+        <p>
+            <c>_apply_growth()</c> is overriden for collector so that
+            the ring drawing gets bigger, but the scale is not changed
+            so that the collision area isn't changed either.
+        </p>
+        <program language="gdscript">
+func _apply_growth() -> void:
+    $RingVisual.update_scale(current_scale)
+        </program>
+        <p>
+            For the collector, in addition to growing, <c>_process()</c>
+            needs to update the location based on velocity in addition to
+            updating the size. So after calling super.process(), 
+            that's what is done.
+        </p>
+        <program language="gdscript">
+func process(delta: float) -> void:
+    super.process(delta)
+    # wrapping code
+    if position.x > view_size.x:
+        position.x = 0
+    if position.x &lt; 0:
+        position.x = view_size.x
+    if position.y > view_size.y:
+        position.y = 0
+    if position.y &lt; 0:
+        position.y = view_size.y
+
+    # update position
+    position += velocity * delta
+        </program>
+    </subsubsection>
+    <subsubsection>
+        <title>Initial Testing</title>
+        <p>
+            Now the script is ready. To test it on it's own,
+            add the following code to the end of <c>_ready()</c>
+            to see the lasso moving across the view diagonally down 
+            and to the right. Run the Collector scene. 
+            Then change any member values that 
+            you'd like to change the size, speed, color, or any
+            other part that you want to adjust to your liking.
+        </p>
+        
+        <program language="gdscript">
+start((Transform2D.IDENTITY).rotated(PI/4))
+        </program>
+        <p>
+            Once everything is adjusted. Remove the code, so 
+            that the ship can launch the lasso correctly.
+        </p>
+    </subsubsection>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-prize-scene">
+      <title>Energy Crystals: The Prize Scene</title>
+      <introduction>
+      <p>
+        Next we'll work our our Prize, the energy crystals. The crystals 
+        are stationary, they need a collision area, and they use a Sprite2D 
+        for the visual representation. <xref ref="space-farm-class-hierarchy" text="type-global-title"/>.
+        shows the Prize scene on the lower right. The Prize is a GrowingArea, and it has two children, 
+        CollisionShape2D and Sprite2D.
+      </p>
+    </introduction>
+    <subsubsection>
+        <title>Prize Scene Setup</title>
+    <p>
+        Like the Collector, The root node for the Prize scene should be a GrowingArea.
+        Then add a CollisionShape2D and a Sprite2D. On the Sprite2D, you 
+        can drag one of the 3 crystals from the art folder as a placeholder.
+        Since, the picture will change based on the size threshold. It's not 
+        necessary to have an image, but it helps for the next step of
+        sizing the CircleShape2D around the image of the crystal. If you 
+        decide to scale the Sprite2D, make sure you do that before sizing the
+        collision shape. If not, then the collision won't match the image.
+    </p>
+</subsubsection>
+<subsubsection>
+        <title>Prize Script</title>
+    <p>
+        Attach a script to the Prize node. Name it Prize and
+        create 3 member variables for the texture of the 
+        Sprite2D.
+    </p>
+    <program language="gdscript">
+extends GrowingArea
+class_name Prize
+
+var small: Texture2D = load("res://art/small-prize.png")
+var med: Texture2D = load("res://art/med-prize.png")
+var large: Texture2D = load("res://art/large-prize.png")    
+    </program>
+    <p>
+        Then there should be a member variable that keeps track
+        of how much energy the crystal is holding.
+    </p>
+    <program language="gdscript">
+var value: int = 0
+    </program>
+    <p>
+        The ready process will call super's ready and then
+        set the two scale thresholds to determine when to change from small to medium,
+        and when to change from medium to large.
+    </p>
+    <program language="gdscript">
+func _ready() -> void:
+    super._ready()
+    thresholds = [.3,.6]
+    </program>
+    <p>
+        process will use the thresholds to both determine the image used
+        when at the size and the value of energy/damage when at that size.
+    </p>
+    <program language="gdscript">
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+    super._process(delta)
+    if current_scale &lt; thresholds[0]:
+        $Sprite2D.texture = small
+        value = 10
+    elif current_scale &lt; thresholds[1]:
+        $Sprite2D.texture = med
+        value = 25
+    else:
+        $Sprite2D.texture = large
+        value = 50
+    </program>
+    <p>
+        That concludes the visual part of the Prize script.
+    </p>
+</subsubsection>
+<subsubsection>
+        <title>Initial Testing</title>
+    <p>
+        Run the prize scene and watch the crystals grow.
+    </p>
+</subsubsection>
+      </subsection>
+    </section>

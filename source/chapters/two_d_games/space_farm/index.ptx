@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="two-d-games-space-farm">
+    <title>Space Farm</title>
+    <introduction xml:id="two-d-games-space-farm-introduction">
+    <p>The previous game, Dodge The Creeps is a 2D game where the player and the
+        enemies move. The player can't leave the screen, and
+        the only interaction is touching the enemy, which ends 
+        the game. In this next game, Space Farm, it is still a 2D 
+        game where the space is fixed, but there are no walls or
+        enemies. Instead there are resources that can only be retreived
+        by a projectile, and your ship can destroy the resources on contact
+        which damages the ship.
+            </p>
+    
+    <p>You will learn how to make a custom growing area class 
+        that can be used by different Sprites in the game. You'll
+        also learn about different ways to draw and change sprites,
+        some more about physics processing, and adding more
+        heads up information for the player. 
+    </p>
+    
+    <p>The game is called "Space Farm". Your ship must move and avoid the
+            crystals while farming the biggest crystals you can by lassoing
+            them.</p>
+    <p>You will learn to:</p>
+    <p>
+    <ul>
+      <li>Create another complete 2D game with the Godot editor.</li>
+      <li>Structure a simple game project.</li>
+      <li>Move the player character and add a Particle generator to it.</li>
+      <li>Make a Growing Area 2D that gets bigger over time.</li>
+      <li>Inherit the Growing Area 2D to make a space lasso.</li>
+      <li>Inherit the Growing Area 2D to make a stationary crystal.</li>
+      <li>Make simple and more complex interactions.</li>
+      <li>Add and use multiple sound effects.</li>
+      </ul>
+    </p>
+    <p>And more.</p>
+    
+    <observation xml:id="two-d-games-space-farm-prerequisites">
+      <title>Prerequisites</title>
+      <p>This project builds on what you learned in the first 2D game.</p>
+      </observation>
+
+      </introduction>
+<xi:include href="01.project_design.ptx" />
+<xi:include href="02.growing_area.ptx" />
+<xi:include href="03.farming_ship.ptx" />
+<xi:include href="04.main_scene.ptx" />
+<xi:include href="05.basic_interaction.ptx" />
+<!-- <xi:include href="06.sound_effects.ptx" />
+<xi:include href="07.hud.ptx" />
+<xi:include href="08.better_interaction.ptx" />
+<xi:include href="09.finishing_up.ptx" />
+<xi:include href="10.space_spice.ptx" /> -->
+  </chapter>

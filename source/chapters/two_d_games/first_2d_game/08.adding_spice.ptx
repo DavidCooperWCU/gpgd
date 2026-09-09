@@ -97,7 +97,7 @@ that can interact through collision detection.</p>
          <shortdescription>Scene Dock with an RigidBody2D as the root with AnimatedSprite2D and CollisionShape2D as children.</shortdescription>
      </image>
         </figure>
-        <figure>
+        <figure xml:id="first-2d-figure-collision-scene-template-d">
         <caption>Global Physics Collision Static Scene Template</caption>
       <image source="gpcs_static_template.webp" width="25%">
          <shortdescription>Scene Dock with an RigidBody2D as the root with Sprite2D and CollisionShape2D as children.</shortdescription>

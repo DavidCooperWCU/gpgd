@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='utf-8'?>
+  <section xml:id="two-d-games-space-farm-03-farming-ship">
+    <title>Farming Ship - The Player</title>
+    <introduction>
+    <p>
+        The Player is a farming ship in space. For now, we are using a
+        green space ship image without any specific nod to farming. 
+        A future version may have a ship that has more visible farming 
+        specific parts. The farming ship will move around with thrusters,
+        and for now will have some automatic damper system that slows motion
+        to a stop after the thrusters stop and creates a maximum speed for the
+        ship's motion.
+    </p>
+    
+    </introduction>
+    <subsection xml:id="two-d-games-space-farm-farming-ship-scene">
+      <title>The Player Scene</title>
+      <p>
+        Make a new scene. Add a RigidBody2D as the root Node, then add
+        a CollisionPolygon2D and a Sprite2D similar to the collision scene 
+        template shown in <xref ref="first-2d-figure-collision-scene-template-d" />
+        except that we are using a CollisionPolygon2D instead of a CollisionShape2D. 
+        Rename the RigidBody2D Node to Player. Make sure the scene looks like 
+        <xref ref="farm-ship-initial-scene-figure" />, then save the scene.
+      </p>
+      <p>
+        For the Sprite2D add the ship image as the Texture. Then select the
+        CollisionPolygon2D and, in the Inspector, change the Build Mode to Segments.
+        Then, in the 2D view, zoom the view so that the ship is fully visible and 
+        mostly filling the window. Click on the top of the ship, and then work your way
+        around the edge of the ship as shown in <xref ref="farm-ship-collision-drawn-figure" />.
+        Save the scene.
+      </p>
+      <p>
+        Next, in the inspector set the PhysicsMaterial in the Physics Material Override part 
+        of the RigidBody2D as shown in <xref ref="farm-ship-physics-figure"/> Then in the Project Settings under Physics 2D, set Default Gravity 
+        to <m>0.0 px/s^2</m> as shown in <xref ref="space-farm-gravity-figure"/>.
+      </p>
+      <figure>
+        <caption>Setting up the Player Scene</caption> 
+        <sidebyside>
+      <figure xml:id="farm-ship-initial-scene-figure">
+        <caption>Collision Scene Using CollisionPolygon2D</caption>
+      <image source="space-farm-ship-collision-scene.webp" width="25%">
+         <shortdescription>Scene Dock with an Area2D as the root with Sprite2D and CollisionPolygon2D as children.</shortdescription>
+     </image>
+        </figure>
+        <figure xml:id="farm-ship-collision-drawn-figure">
+        <caption>The Collision Segments around the ship.</caption>
+      <image source="farm-ship-collision.webp" width="25%">
+         <shortdescription>The ship image outlined with the points needed for the CollisionPolygon2D</shortdescription>
+     </image>
+        </figure>
+        <figure xml:id="farm-ship-physics-figure">
+        <caption>Adding the Physics Material Override.</caption>
+      <image source="space-farm-ship-physics-material.webp" width="25%">
+         <shortdescription>The Inspector is shown with the PhysicsMaterial menu item for RigidBody2D</shortdescription>
+     </image>
+        </figure>
+        <figure xml:id="space-farm-gravity-figure">
+        <caption>Override Default Gravity.</caption>
+      <image source="space-farm-global-gravity.webp" width="25%">
+         <shortdescription>Project settings are shown with default gravity to 0.0</shortdescription>
+     </image>
+        </figure>
+    </sidebyside>
+    </figure>
+      <p>
+        
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-input">
+      <title>Player Input</title>
+      <p>
+        The player input should have four inputs "thrust","turn_left",
+        "turn_right", and "launch". Use the Input Map in the project settings
+        to do so. If you haven't done this before, then refer to 
+        <xref ref="input-map-add-action-figure" /> and the context that it's in.
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-motion">
+      <title>Player Motion</title>
+      <p> 
+        Now that the input is mapped, we can work on player motion. Create a new script
+        and add the following member variables a <c>Vector2</c> for <c>thrust</c>, three
+        <c>float</c> for thrust_power, rot_power, and rot_dir. A
+        <c>Vector2i</c> for the <c>view_size</c> that allows the ship to wrap.
+      </p>
+    <program language="gdscript">
+extends RigidBody2D
+
+var thrust : Vector2 = Vector2.ZERO
+var thrust_power: float = 500
+var rot_power: float = 8000
+var rot_dir: float = 0
+var view_size : Vector2i
+</program>
+    <p> 
+        Each time the player comes to view, it needs to setup a few things.
+        First, since we are using a CollisionPolygon2D, we need to set the 
+        inertia of the RigidBody2D so that it has a valid inertial value.
+        Then we need to update the view size so that we can handle wrapping,
+        and connect the viewport size_changed signal to the update_view_size()
+        member function.
+      </p>
+    <program language="gdscript">
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    inertia = 300;
+    update_view_size()
+    get_viewport().size_changed.connect(update_view_size)
+    </program>
+    <p> 
+        update_view_size() sets our local view size based on the visual area of the scene.
+      </p>
+    <program language="gdscript">
+func update_view_size() -> void:
+    view_size = get_viewport().get_visible_rect().size
+    </program>
+    <p> 
+        Since, RigidBody2D is moved by the physics process, 
+        motion is indirect. The <c>_process()</c> function can
+        read the input and change values that are used by the 
+        physics process, but input code shouldn't happen there.
+        The input function will first reset motion related values
+        to 0, and then use <c>Input</c> calls to update those same
+        motion related variables used in the physics process. 
+      </p>
+    <program language="gdscript">
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+    get_input()
+    
+func get_input() -> void:
+    thrust = Vector2.ZERO
+    rot_dir = 0
+    
+    if Input.is_action_pressed("thrust"):
+        thrust = transform.x * thrust_power
+    
+    rot_dir = Input.get_axis("rotate_left", "rotate_right")
+    </program>
+    <p> 
+        The physics process will update <c>constant_force</c> for translational
+        forces, and <c>constant_torque</c> for rotational forces.
+      </p>
+    <program language="gdscript">
+func _physics_process(delta: float) ->void:
+    # note: we are not updateing a value over time here
+    #       so delta is not used.
+    constant_force = thrust
+    constant_torque = rot_dir * rot_power
+    </program>
+    <p> 
+        If you run the scene at this point, the ship should 
+        move and turn based on input. However, it may be 
+        difficult to control because the thrust is moving it 
+        to the right instead of forward and the constant forces cause
+        constant accelleration, so things can go very fast and 
+        stay moving for a while. 
+    </p>
+    <p> To fix the direction, go to the 2D view, click on the
+        Sprite2D Node. Then click on the inspector and change 
+        the rotation in the Node2D Transform to 90 degrees.
+        When you do this, you'll notice that the collision shape
+        doesn't rotate with it. To fix that, click on the 
+        CollisionPolygon2D and change the rotation in the Node2D 
+        Transform to 90 degrees.
+    </p>
+    <p>You can make travel smoother by
+        adding Damp values for both Linear and Angular in RigidBody2D.
+        A Linear Damp of 1.0 and an angular damp of 5.0 will work
+        pretty well, but you are welcome to experiment with the Damp 
+        value that works best for you.
+      </p>
+      <p>
+        The other thing you might notice when testing the player scene is that
+        the player can leave the scene. Instead, we'd like the ship to 
+        wrap around when it gets to an edge. This can't be done in process or 
+        physics_process. Instead, it needs to happen in the 
+        <url href="https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html#class-rigidbody2d-private-method-integrate-forces">
+            <c>_integrate_forces()</c></url> member function inherited from
+        RigidBody2D.
+      </p>
+    <program language="gdscript">
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+    # wrap the ship location
+    var temp_transform : Transform2D = state.transform
+    temp_transform.origin.x = wrapf(temp_transform.origin.x, 0, view_size.x)
+    temp_transform.origin.y = wrapf(temp_transform.origin.y, 0, view_size.y)
+    state.transform = temp_transform
+    </program>
+    <p> 
+        Now that the player motion is worked out, we can add a launcher for
+        the lasso, and then add some visual effects for the rocket flame.
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-launcher">
+      <title>Adding the Launcher</title>
+      <p>
+        We want each lasso to be launched from the ship, but not necessarily 
+        the center of the ship, so we will add a Marker2D Node to the Player
+        and call it Launcher.
+        Then, in the 2D Mode, drag the Launcher along the x-axis to the front of the ship.
+        It's fine if it's a little bit in front of the ship. This Launcher will be used
+        as the starting transform for each lasso Collector. 
+      </p>
+      <p>
+        In addition to a Marker2D, we want to have a Timer to specify how long it 
+        takes to load the lasso onto the launcher, because that is the amount of time
+        the player will need to wait until they can launch again. So add a Timer and call
+        it CollectorLoadTime. Set the One Shot and Autostart to on in the inspector.
+      </p>
+      <p>
+        To support the timer functionality, we'll need two new member variables,
+        <c>can_launch</c> and <c>launch_rate</c>. We'll export the launch rate so 
+        that it's easy to change in the inspector.
+      </p>
+       <program language="gdscript">
+var can_launch: bool = true
+@export var launch_rate: float = 0.25
+    </program>
+    <p> 
+      Now we can add the launch function as follows.
+      We set can_launch to false, start the timer,
+      instantiate a new lasso, add the lasso to the scene,
+      and start the lasso growing from the launcher position.  
+    </p>
+    <program language="gdscript">
+func launch() -> void:
+    can_launch = false
+    $CollectorLoadTime.start()
+    var collector: Collector = collector_scene.instantiate()
+    get_tree().root.add_child(collector)
+    collector.start($Launcher.global_transform)
+    </program>
+    <p> 
+        This will make it so launch can only happen once, since there is
+        nothing to set can_launch to true. So, we need to connect the
+        timeout() signal from the CollectorLoadTime timer to a new function.
+    </p>
+    <program language="gdscript">
+func _on_collector_load_time_timeout() -> void:
+    can_launch = true
+    </program>
+    <p> 
+       Now run the scene, and the player can move around and
+       launch lassos. You may want to change the timing of how 
+       long it takes to load a new collector.
+    </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-flames">
+      <title>Visual Effect: Rocket Flames</title>
+      <p>
+        The next step is to add an effect for when the ship is thrusting.
+        We'll make something like a rocket flame using a Particle2D Node.
+        Add a CPUParticle2D Node and name it Rocket. Then look at the inspector
+        and make the following changes to the flame. Keep in mind
+        that it won't look right until all of the settings are set, and
+        you may need to adjust the location and size of the flames based on
+        the scale of your Sprite2D.
+      </p>
+      <table xml:id="ship-rocket-table">
+        <title>Rocket's CPUParticle2D Changes</title>
+        <tabular>
+            <row header="yes">
+                   <cell>Attribute</cell><cell>Value</cell>
+            </row>
+            <row>
+               <cell>Amount:</cell><cell>30</cell>
+            </row>
+            <row>
+                <cell>Lifetime:</cell><cell>0.1 sec</cell>
+            </row>
+            <row>
+                <cell>Local Coords:</cell><cell>On</cell>
+            </row>
+            <row>
+                <cell>Shape:</cell><cell>Rectangle</cell>
+            </row>
+            <row>
+                <cell>Rect Extents x:</cell><cell>1.0px</cell>
+            </row>
+            <row>
+                <cell>Rect Extents y:</cell><cell>3.0px</cell>
+            </row>
+            <row>
+                <cell>Direction x:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Direction y:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Direction Spread:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Gravity x:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Gravity y:</cell><cell>0.0</cell>
+            </row>
+            <row>
+                <cell>Curve pt1:</cell><cell>(0,1)</cell>
+            </row>
+            <row>
+                <cell>Curve pt2:</cell><cell>(1,0.27)</cell>
+            </row>
+            <row>
+                <cell>Transform Position x:</cell><cell>-19.0</cell>
+            </row>
+            <row>
+                <cell>Transform Rotation:</cell><cell><m>180.0^\circ</m></cell>     
+            </row>
+        </tabular>
+        
+        
+      </table>
+      <p>
+        There are 2 settings that are easier to describe with a visual.
+        Those are the Curve and the Color Ramp.
+        For the Curve see <xref ref="space-farm-ship-flame-curve-figure" />
+        to determine where to click the points to get pt. 1 and pt. 2 described
+        in the table above. For the Color Ramp first select the left slider
+        labeled 1 in <xref ref="space-farm-ship-flame-color-ramp-figure" />
+        and then click the part labeled 2, to select an orange color. Next select
+        the right slider labeled 2 in the same figure and then click the part labeled 2
+        to select a red color. Slide the slider until the flame colors look good to you.
+      </p>
+      <figure xml:id="space-farm-ship-flame-figure">
+        <caption>Flame settings</caption>
+        <sidebyside>
+            <figure xml:id="space-farm-ship-flame-curve-figure">
+                <caption>Curve Settings</caption>
+                <image source="space-farm-rocket-flame-curve.webp">
+                    <shortdescription>A curve from (0,1) to (1,0.27)</shortdescription>
+                </image>
+            </figure>
+            <figure xml:id="space-farm-ship-flame-color-ramp-figure">
+                <caption>Color Ramp Settings</caption>
+                <image source="space-farm-rocket-flame-color-ramp.webp">
+                    <shortdescription>The color ramp with orange and red values.</shortdescription>
+                </image>
+            </figure>
+        </sidebyside>
+      </figure>
+      <p>
+        After the flame looks like it's in the right spot,
+        add the following code as the first line of <c>get_input()</c>
+      </p>
+      <program language="gdscript">
+$Rocket.emitting = false
+    </program>
+    <p>
+        Then,
+        add the following code in the check for "thrust" input after setting 
+        the thrust in <c>get_input()</c>
+      </p>
+      <program language="gdscript">
+$Rocket.emitting = true
+    </program>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-farming-ship-playtesting">
+      <title>Play Testing</title>
+      <p>
+        Run the scene again to take a look. Make sure the
+        lasso shoots from the place you want it to, and that 
+        the flame is going from the right place only when thrusting. 
+        Make minor changes based on what you see. 
+        If the sizes aren't what you want. Please, wait to make changes until you are testing 
+        the main scene with all of the scenes together.
+      </p>
+      </subsection>
+    </section>
