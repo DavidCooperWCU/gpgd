@@ -242,6 +242,16 @@ func launch() -> void:
     <program language="gdscript">
 func _on_collector_load_time_timeout() -> void:
     can_launch = true
+    </program> 
+    <p> 
+        Add a call to launch based on the input as long as can_launch is true:
+    </p>
+    <program language="gdscript">
+func get_input() -> void:
+    
+    # after other input code
+    if Input.is_action_pressed("launch") and can_launch:
+        launch()
     </program>
     <p> 
        Now run the scene, and the player can move around and
@@ -300,10 +310,16 @@ func _on_collector_load_time_timeout() -> void:
                 <cell>Gravity y:</cell><cell>0.0</cell>
             </row>
             <row>
-                <cell>Curve pt1:</cell><cell>(0,1)</cell>
+                <cell>Initial Velocity Max:</cell><cell>400.0 px/s</cell>
             </row>
             <row>
-                <cell>Curve pt2:</cell><cell>(1,0.27)</cell>
+                <cell>Scale Amount Max:</cell><cell>10.0</cell>
+            </row>
+           <row>
+                <cell>Scale Amount Curve pt1:</cell><cell>(0,1)</cell>
+            </row>
+            <row>
+                <cell>Scale Amount Curve pt2:</cell><cell>(1,0.27)</cell>
             </row>
             <row>
                 <cell>Transform Position x:</cell><cell>-19.0</cell>

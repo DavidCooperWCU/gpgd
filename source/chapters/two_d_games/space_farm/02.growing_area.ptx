@@ -252,7 +252,7 @@ func _apply_growth() -> void:
     <subsubsection>
         <title>Scene Setup</title>
         <p>
-            The CollectionShape2D should be set up with a CircleArea Shape
+            The CollisionShape2D should be set up with a CircleArea Shape
             with a Radius of 10 pixels. The RingVisual Node2D should get it's own
             script as described below.
         </p>
