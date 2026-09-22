@@ -48,9 +48,9 @@
 <xi:include href="03.farming_ship.ptx" />
 <xi:include href="04.main_scene.ptx" />
 <xi:include href="05.basic_interaction.ptx" />
-<!-- <xi:include href="06.sound_effects.ptx" />
+<xi:include href="06.sound_effects.ptx" />
 <xi:include href="07.hud.ptx" />
 <xi:include href="08.better_interaction.ptx" />
 <xi:include href="09.finishing_up.ptx" />
-<xi:include href="10.space_spice.ptx" /> -->
+<xi:include href="10.space_spice.ptx" /> 
   </chapter>
