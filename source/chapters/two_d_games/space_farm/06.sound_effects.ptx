@@ -352,4 +352,15 @@ func play_damage(value: int) -> void:
     </p>
       </subsubsection>
       </subsection>
+      <subsection xml:id="two-d-games-space-farm-sound-effects-play-testing">
+      <title>Play Testing</title>
+      <p>
+        Now, run the main scene, and listen to the sounds and music. 
+        Change the volume of each AudioStreamPlayer so that no sound 
+        is overpowering another.
+      </p>
+      <p>Once you are finished play testing, go to the next 
+        section to add the heads up display.
+      </p>
+      </subsection>
     </section>

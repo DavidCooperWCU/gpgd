@@ -3,7 +3,7 @@
     <title>Heads Up Display (HUD)</title>
     <introduction>
     <p>Our game needs a User Interface (UI) to display things like
-            score, a "game over" message, and a restart button.</p>
+            score, a "game over" message, and a start button.</p>
     <p>Create a new scene, click the "Other Node" button and add a <url href="https://docs.godotengine.org/en/stable/classes/class_canvaslayer.html#class-canvaslayer">CanvasLayer</url> node named
             <c>HUD</c>. "HUD" stands for "heads-up display", an informational display that
             appears as an overlay on top of the game view.</p>
@@ -18,11 +18,18 @@
       <li>A message, such as "Game Over", "Get Ready!", "Level 1"</li>
       <li>A "Start" button to begin the game.</li>
       <li>The fuel available for the rocket.</li>
+       <li>The health of the ship.</li>
       </ul>
     </p>
     <p>The basic node for UI elements is <url href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</url>. To create our
             UI, we'll use two types of <url href="https://docs.godotengine.org/en/stable/classes/class_control.html#class-control">Control</url> nodes: <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> and <url href="https://docs.godotengine.org/en/stable/classes/class_button.html#class-button">Button</url>.</p>
-    <p>Create the following as children of the <c>HUD</c> node:</p>
+    <p>
+        We also will use three types of <url href="https://docs.godotengine.org/en/stable/classes/class_container.html#description">Container</url> to organize our Control elements. These are
+        <url href="https://docs.godotengine.org/en/stable/classes/class_margincontainer.html#class-margincontainer">MarginContainer</url>,
+        <url href="https://docs.godotengine.org/en/stable/classes/class_hboxcontainer.html#class-hboxcontainer">HBoxContainer</url>,
+        and <url href="https://docs.godotengine.org/en/stable/classes/class_vboxcontainer.html#class-vboxcontainer">VBoxContainer</url>.
+    </p>
+            <p>Create the following as children of the <c>HUD</c> node:</p>
     <p>
       <ul>
       <li>
@@ -46,62 +53,137 @@
 
     <p> The TopBar Node should have one child that is an
         <url href="https://docs.godotengine.org/en/stable/classes/class_hboxcontainer.html#hboxcontainer">HBoxContainer</url>
+    </p>
 
+    <p>Create the following as children of the <c>HBoxContainer</c> node:</p>
+    <p>
+      <ul>
+      <li>
+        <url href="https://docs.godotengine.org/en/stable/classes/class_label.html#class-label">Label</url> named <c>ScoreLabel</c>.</li>
+      <li>
+        <url href="https://docs.godotengine.org/en/stable/classes/class_textureprogressbar.html">TextureProgressBar</url> named <c>FuelGauge</c>.</li>
+      <li>
+        Do not make the Health bar yet.</li>
+      </ul>
+      
     </p>
 
     <p>Click on the <c>ScoreLabel</c> and type a number into the <c>Text</c> field in the
             Inspector. The default font for <c>Control</c> nodes is small and doesn't scale
-            well. There is a font file included in the game assets called
-            "Xolonium-Regular.ttf". To use this font, do the following:</p>
-    <p>Under "Theme Overrides &gt; Fonts", choose "Load" and select the "Xolonium-Regular.ttf" file.</p>
+            well. There is a font file in the<url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/fonts.zip">fonts</url>
+         zip file. Download, unzip the file, and add the fonts directory to your project.
+            There you will find "AutumnGifts-YVKv.ttf". To use this font, do the following:</p>
+    <p>Under "Theme Overrides &gt; Fonts", choose "Load" and select the "AutumnGifts-YVKv.ttf" file in fonts.</p>
     <figure>
       <caption>Load Custom Font Button</caption>
       <image source="custom_font_load_font.webp" width="25%">
          <shortdescription>In the Font option of Fonts, the Load option is surrounded by a yellow box in the Theme overrides of Control inspector</shortdescription>
      </image>
       </figure>
-    <p>The font size is still too small, increase it to <c>64</c> under "Theme Overrides &gt; Font Sizes".
-            Once you've done this with the <c>ScoreLabel</c>, repeat the changes for the <c>Message</c> and <c>StartButton</c> nodes.</p>
-    <figure>
-      <caption>Set Custom Font Size</caption>
-      <image source="custom_font_size.webp" width="25%" >
-         <shortdescription>Font Size is set to 64 in the Font Sizes of Theme Overrides.</shortdescription>
-     </image>
-      </figure>
-    <note>
-      <title>Note</title>
-      <p>
-        <term>Anchors:</term>
-        <c>Control</c> nodes have a position and size,
-                but they also have anchors. Anchors define the origin -
-                the reference point for the edges of the node.</p>
-      </note>
-    <p>Arrange the nodes as shown below.
+    <p>The font size is still too small, increase it to <c>40</c> under "Theme Overrides &gt; Font Sizes".
+            Once you've done this with the <c>ScoreLabel</c>, repeat the changes for the <c>Message</c> Node using font size <c>60</c> and <c>StartButton</c> node using font size <c>50</c>.</p>
+    
+    
+    <p>Arrange the nodes as described below.
             You can drag the nodes to place them manually, or for more precise placement,
             use "Anchor Presets".</p>
-    <figure>
-      <caption>Anchor Presets</caption>
-      <image source="ui_anchor.webp" width="75%" >
-         <shortdescription>The 2D view is shown with the anchor presets button surrounded in a yellow box and 16 presets shown below the button.</shortdescription>
-     </image>
-      </figure>
-    </introduction>
-    <subsection xml:id="two-d-games-space-farm-07-hud-scorelabel">
+     </introduction>
+    <subsection xml:id="two-d-games-space-farm-07-hud-topbar">
+      <title>TopBar</title>
+      <p>
+        Theme Overrides, Constants
+      <ol>
+        <li>Margin Left = 20.</li>
+        <li>Margin Right = 20.</li>
+        <li>Margin Top = 20.</li>
+        <li>Margin Bottom = 20.</li>
+        </ol>
+      </p>
+      </subsection>
+<subsection xml:id="two-d-games-space-farm-07-hud-scorelabel">
       <title>ScoreLabel</title>
       <p>
       <ol>
         <li>Add the text <c>0</c>.</li>
-        <li>Set the "Horizontal Alignment" and "Vertical Alignment" to <c>Center</c>.</li>
-        <li>Choose the "Anchor Preset" <c>Center Top</c>.</li>
+        <li>In "Container Sizing", "Horizontal", check the "Expand" box.</li>
         </ol>
       </p>
       </subsection>
-    <subsection xml:id="two-d-games-space-farm-07-hud-message">
+      <subsection xml:id="two-d-games-space-farm-07-hud-fuelgauge">
+      <title>FuelGauge</title>
+       <p>
+      <ol>
+        <li>Under "Range" set Max Value to <c>1.0</c> and Step to <c>0.05</c>.</li>
+        <li><p>Under "Textures" for "Under, 
+            <ol>
+                <li>make a "NoiseTexture2D"</li> 
+                <li>Width = <c>200</c> </li>
+                <li> Height = <c>29</c></li>
+                <li>Noise = "FastNoiseLite"</li>
+                <li>Noise Type = "Cellular"</li>
+                <li>Frequency = <c>0.3504</c></li>
+            </ol>
+        </p>
+        </li>
+        <li><p>Under "Textures" for "Over, 
+            <ol>
+                <li>load... "res://art/gauge_border.png"</li> 
+            </ol>
+        </p>
+        </li>     
+        <li><p>Under "Textures" for "Progress, 
+            <ol>
+                <li>make a "NoiseTexture2D"</li> 
+                <li>Width = <c>200</c> </li>
+                <li> Height = <c>27</c></li>
+                <li>Noise = "FastNoiseLite"</li>
+                <li>Noise Type = "Simplex"</li>
+                <li>Frequency = <c>0.0015</c></li>
+            </ol>
+        </p>
+        </li>
+        <li><p>Under "Tint", 
+            <ol>
+                <li>Under: R:0.81, G:0.75, B:0.92, A:1.00</li> 
+                <li>Over: R:0.86, G:0.73, B:0.91, A:1.00</li> 
+                <li>Progress: R:0.72, G:0.45, B:0.24, A:1.00</li> 
+            </ol>
+        </p>
+        </li>  
+        <li>Under "Container Sizing" set "Horizontal" to Expand and set "Vertical" to "Shrink Center" </li>        
+        </ol>
+      </p>
+      </subsection>
+      <subsection xml:id="two-d-games-space-farm-07-hud-healthbar">
+      <title>Health</title>
+      <p> To make Health, duplicate FuelGauge, rename the duplicate to "Health" and change the following
+      <ol>
+        
+        <li><p>Under "Tint", 
+            <ol>
+                <li>Progress: R:0.18, G:0.44, B:0.24, A:1.00</li> 
+            </ol>
+        </p>
+        </li>  
+        <li>Under "Container Sizing" set "Horizontal"  Expand to be unchecked </li>        
+        </ol>
+      </p>
+      </subsection>
+    <subsection xml:id="two-d-games-space-farm-07-hud-overlay">
+      <title>Overlay</title>
+      <p>
+      <ol>
+        <li>Set the "Anchors Preset" to <c>HCenter Wide</c>.</li>
+        <li>Set the "Theme Overrides",  "Constants", "Separation" to <c>100</c>, otherwise the labels will be stacked.</li>
+        </ol>
+      </p>
+      </subsection>
+       <subsection xml:id="two-d-games-space-farm-07-hud-message">
       <title>Message</title>
       <p>
       <ol>
-        <li>Add the text <c>Dodge the Creeps!</c>.</li>
-        <li>Set the "Horizontal Alignment" and "Vertical Alignment" to <c>Center</c>.</li>
+        <li>Add the text <c>Space Farm</c>.</li>
+        <li>Set the "Container Sizing", "Horizontal" to <c>Shrink Center</c>.</li>
         <li>Set the "Autowrap Mode" to <c>Word</c>, otherwise the label will stay on one line.</li>
         <li>Under "Control - Layout/Transform" set "Size X"  to <c>480</c> to use the entire width of the screen.</li>
         <li>Choose the "Anchor Preset" <c>Center</c>.</li>
@@ -113,10 +195,9 @@
       <p>
       <ol>
         <li>Add the text <c>Start</c>.</li>
-        <li>Under "Control - Layout/Transform", set "Size X" to <c>200</c> and "Size Y" to <c>100</c>
+        <li>Under "Control - Theme Overrides - Constants", set "Outline Size" to <c>10</c> and "H Separatoin" to <c>10</c>
                         to add a little bit more padding between the border and text.</li>
-        <li>Choose the "Anchor Preset" <c>Center Bottom</c>.</li>
-        <li>Under "Control - Layout/Transform", set "Position Y" to <c>580</c>.</li>
+        
         </ol>
       </p>
       <p>On the <c>MessageTimer</c>, set the <c>Wait Time</c> to <c>2</c> and set the <c>One Shot</c>
@@ -135,41 +216,40 @@ signal start_game</code>
                 such as "Get Ready", so we add the following code</p>
 
         <program language="gdscript">
-          <code>func show_message(text: String) -> void:
-    $Message.text = text
-    $Message.show()
-    $MessageTimer.start()</code>
+          <code>
+func show_message(text: String, time:float = 2.0)  -> void:
+    $Overlay/Message.text = text
+    $Overlay/Message.show()
+    if time > 0.0:
+        $MessageTimer.start(time)
+</code>
           </program>
 
 
       <p>We also need to process what happens when the player loses. The code below will show "Game Over" for 2 seconds, then return to the title screen and, after a brief pause, show the "Start" button.</p>
 
         <program language="gdscript">
-          <code>func show_game_over() -> void:
+          <code>
+func game_over_sequence() -> void:
     show_message("Game Over")
     # Wait until the MessageTimer has counted down.
     await $MessageTimer.timeout
 
-    $Message.text = "Dodge the Creeps!"
-    $Message.show()
+    show_message("Space Farm",0)
     # Make a one-shot timer and wait for it to finish.
     await get_tree().create_timer(1.0).timeout
-    $StartButton.show()</code>
+    $Overlay/StartButton.show() 
+</code>
           </program>
 
 
-      <note>
-        <title>Note</title>
-        <p>When you need to pause for a brief time, an alternative to using a
-                    Timer node is to use the SceneTree's <c>create_timer()</c> function. This
-                    can be very useful to add delays such as in the above code, where we
-                    want to wait some time before showing the "Start" button.</p>
-        </note>
+      
       <p>Add the code below to <c>HUD</c> to update the score</p>
 
         <program language="gdscript">
           <code>func update_score(score: int) -> void:
-    $ScoreLabel.text = str(score)</code>
+    $TopBar/HBoxContainer/ScoreLabel.text = str(score)
+</code>
           </program>
 
 
@@ -186,6 +266,20 @@ func _on_message_timer_timeout() -> void:
           </program>
 
 
+<p>Make <c>update_health()</c>  and  <c>update_fuel()</c>
+                with the following code:</p>
+
+        <program language="gdscript">
+          <code>func update_health(health_ratio: float) -> void:
+    $TopBar/HBoxContainer/Health.value=health_ratio
+
+func update_fuel(fuel_ratio: float) -> void:
+    $TopBar/HBoxContainer/FuelGauge.value=fuel_ratio
+</code>
+          </program>
+
+
+
       </subsection>
     <subsection xml:id="two-d-games-space-farm-07-hud-connecting-hud-to-main">
       <title>Connecting HUD to Main</title>
@@ -194,7 +288,7 @@ func _on_message_timer_timeout() -> void:
                 should look like this, so make sure you didn't miss anything:</p>
       <figure>
         <caption>Finished Main Scene</caption>
-      <image source="completed_main_scene.webp" width="25%">
+      <image source="completed_space_farm_main_scene.webp" width="25%">
          <shortdescription>The HUD is the only additional node in the Main scene from the previous picture.</shortdescription>
      </image>
         </figure>
