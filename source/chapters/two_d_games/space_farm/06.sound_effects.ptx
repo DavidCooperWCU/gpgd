@@ -11,7 +11,7 @@
         ship or the sound of the ship making contact with some other 
         object. This section will discuss background music and a 
         game over tune and then sound effects based on the interaction
-        with the environment. The <url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/sounds.zip">sounds link</url>
+        with the environment. The <url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/sound.zip">sounds link</url>
         has a zip of the sound files. Download these, unzip the file, and add the sound directory to your project.
     </p>
     </introduction>
