@@ -78,7 +78,7 @@ func plant_crystal() -> void:
     </p>
     <p>
         We need to change one more project setting. In the
-        Project Settings, Display, Window, Strecth. Set the 
+        Project Settings, Display, Window, Stretch. Set the 
         Mode value to "canvas_items",and then we are finished
         building the main scene.
     </p>

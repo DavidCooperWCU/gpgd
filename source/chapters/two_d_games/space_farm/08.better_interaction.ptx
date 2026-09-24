@@ -3,21 +3,199 @@
     <title>Improving Interaction</title>
     <introduction>
     <p>
+        With the current interaction, when a crystal is collected or damaged, it just disappears.
+        In the case of collection, it would make more sense if the collector brought the crystal
+        back to the ship. For damage, it would make more sense if the ship were deflected in addition
+        to the crystal disappearing, and perhaps the crystal should break apart before disappearing.
     </p>
     </introduction>
     <subsection xml:id="two-d-games-space-farm-better-interaction-boomerang-collection">
       <title>Boomerang Collection</title>
       <p>
+        For collection, we want the prize to be owned by the collector, and then we want both 
+        the collector and prize to shrink as the collector moves to the ship. Then once the
+        prize and ship collide, we want the prize to be collected and the collector to disappear.
       </p>
+      <paragraphs>
+        <title>Prize Changes</title>
+        <p>We start with the prize.gd script. Since the prize handles all of the basic interactions
+            we'll need to update the prize's collection steps. Since the prize will be moved from 
+            the main scene to the collector scene, we'll add a member variable for the collector that 
+            is holding the current prize, and also a member variable on collector of the prize 
+            that the collector is holding. First, in prize.gd we'll add the collector that collected the
+            prize as well as an indicator that the prize has been collected, so it is <c>inert</c> and 
+            can't be collected again or change it's Sprite2D or value through growth.
+        </p>
+        <program language="gdscript">
+            <code>
+        var collector: GrowingArea
+        var inert: bool = false
+            </code>
+        </program>
+        <p>
+            Next, we need to update the behavior for collection. Instead of sending a signal and freeing
+            itself, the prize needs to set inert to true, add the collector to it, and call collector.collect
+            so that the collector can do the rest of the work. So, we find the check for if the collector 
+            can collect in <c>check_touching_collectors()</c> of prize.gd and change all of the steps
+            in the case when the collector can collect.
+        </p>
+        <program language="gdscript">
+            <code>
+        if collector.can_collect(self.global_position):
+            inert = true
+            self.collector = collector
+            collector.collect(self)
+            </code>
+        </program>
+        <p>
+            Before adding the collect method to the collector, we need to make sure that all of relevant 
+            methods are disabled when inert is true. First, in <c>_process()</c> let the parent's _process
+            happen, but skip the rest
+        </p>
+        <program language="gdscript">
+            <code>
+func _process(delta: float) -> void:
+    super._process(delta)
+    ## add this code right after super._process()
+    if inert:
+        return
+     ## keep the rest of the code as it was
+            </code>
+        </program>
+        <p>
+            Next, change the first line in <c>_on_area_entered()</c> to make sure
+            inert is false in addition to the area being in the collector group.:
+        </p>
+        <program language="gdscript">
+            <code>
+func _on_area_entered(area: Area2D) -> void:
+    if not inert and area.is_in_group("collector"):
+            </code>
+        </program>
+        <p>
+            Next, change <c>_on_body_entered()</c> so that when it's not inert
+            it still emits the hit signal, but otherwise it should emit the 
+            collected signal, because that is when the collector has brought the 
+            prize to the ship. In addition, if the prize has a collector, then
+            that should be freed as well. The below is a wholesale change of the 
+            _on_body_entered method in prize.gd.
+        </p>
+        <program language="gdscript">
+            <code>
+func _on_body_entered(body: Node2D) -> void:
+    if body.is_in_group("player"):
+        if not inert:
+            emit_signal("hit",value)
+        else:
+            emit_signal("collected",value)
+        queue_free()
+        if collector != null:
+            collector.queue_free()
+            </code>
+        </program>
+      </paragraphs>
+      <paragraphs>
+        <title>Collector Changes</title>
+        <p>
+            Now, we go to the collector.gd script and add a prize member variable, and then create the 
+            collect method that is called by the prize as it's collected. In order for the collector to 
+            go back to the ship after it encircles a prize, it needs to know the location of the ship,
+            so a member variable for the ship as a source of the lasso is also needed.
+        </p>
+        <p>First the new member variables:
+        </p>
+        <program language="gdscript">
+            <code>
+var prize: GrowingArea
+var source: RigidBody2D
+            </code>
+            </program>
+             <p>
+                Next, the collect method takes the prize and assigns it as well as
+                changing the grow rates so that both the collector and 
+                prizes shrink to good sizes. In addition the hit stream needs to play 
+                based on the collect state signal instead of the player's collect method, 
+                and a separate collect stream and sound
+                will be played when the player actually collects the prize.
+                First we add <p>collect()</p> to the collector:
+        </p>
+        <program language="gdscript">
+            <code>
+func collect(prize: GrowingArea) -> void:
+    growth_rate = -0.2
+    self.prize = prize
+    if self.prize.current_scale &lt; self.prize.thresholds[0]:
+        self.prize.growth_rate = -0.1
+        emit_signal("collect_state",CollectState.HIT_SMALL)
+    elif self.prize.current_scale &lt; self.prize.thresholds[1]:
+        self.prize.growth_rate = -0.25
+        emit_signal("collect_state",CollectState.HIT_MED)
+    else:
+        self.prize.growth_rate = -0.4
+        emit_signal("collect_state",CollectState.HIT_LARGE)
+    
+    self.prize.start_growth()
+            </code>
+            </program>
+            </paragraphs>
+            <paragraphs>
+                <title>Player Changes</title>
+                <p>In the <c>launch()</c> method we need to assign the player 
+                    as the source for each collector, so after instantiating the collector
+                    add the following code:
+        </p>
+        <program language="gdscript">
+            <code>
+collector.source = self
+            </code>
+            </program>
+        
+             <p>Then we add playing the hit stream to the player's receive_signal method
+        </p>
+        <program language="gdscript">
+            <code>
+    elif coll_state in [Collector.CollectState.HIT_SMALL,
+                        Collector.CollectState.HIT_MED,
+                        Collector.CollectState.HIT_LARGE]:
+        $SoundEffect.stream = collectorHitStream
+        $SoundEffect.play()
+            </code>
+            </program>
+             <p>Then we add a prize collected stream as a member variable of player.gd
+        </p>
+        <program language="gdscript">
+            <code>
+var playerCollectedStream: AudioStream = load("res://sound/effects/prize_collected_quieter.ogg")
+            </code>
+            </program>
+             <p>Then in player.gd <c>collect()</c> change the sound effect stream to be the playerCollectedStream:
+        </p>
+        <program language="gdscript">
+            <code>
+    $SoundEffect.stream = playerCollectedStream
+            </code>
+        </program>
+      </paragraphs>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-better-interaction-bouncing-damage">
       <title>Damage Deflection</title>
       <p>
+        When the ship hits a crystal and it gets destroyed, we also want the ship to be deflected. For this
+        we cam use <c>apply_central_impulse</c> as shown below. Find the <c>_on_body_entered()</c>
+        method in prize.gd and after <c>emit_signal("hit",value)</c> put the following code 
+        at the same indentation level.
       </p>
+      <program language="gdscript">
+            <code>
+var rigid: RigidBody2D = body as RigidBody2D
+rigid.apply_central_impulse(-0.1*value*rigid.linear_velocity)
+            </code>
+        </program>
       </subsection>
       <subsection xml:id="two-d-games-space-farm-better-interaction-playtesting">
       <title>Play Testing</title>
       <p>
+        Now, test the upgraded interactions and make changes to any variables that will improve the experience.
       </p>
       </subsection>
     </section>

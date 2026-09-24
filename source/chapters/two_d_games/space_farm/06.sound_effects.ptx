@@ -33,9 +33,9 @@
         <xref ref="space-farm-background-music-inspector-dock" />.
       </p>
       <p>
-        In your main script, add <c>$MusicStream.play()</c> at the end of your <c>start_game()</c>
-        method, and add <c>$MusicStream.stop()</c> at the end of your <c>game_over()</c>
-        method.
+        In your main script, make a method called <c>start_game()</c> and add <c>$MusicStream.play()</c> 
+        to it. 
+       Then make a  <c>game_over()</c> method and add <c>$MusicStream.stop()</c> to it.
       </p>
       <p> 
         When the game ends, we want to have a short ending music play. To do that, make another
