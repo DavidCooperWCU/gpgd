@@ -350,7 +350,7 @@ func start_game() -> void:
 
         <program language="gdscript">
           <code>$HUD/TopBar/HBoxContainer/ScoreLabel.text = str(score)
-	</code>
+    </code>
           </program>
           <p>In the <c>plan_crystal()</c> method of main add an if statment that checks to see if game_on is true before
         starting the PlantTimer. (make sure it's indented correctly)</p>
@@ -358,7 +358,7 @@ func start_game() -> void:
         <program language="gdscript">
           <code>if game_on:
     $PlantTimer.start(randf()*3+2)
-	</code>
+    </code>
           </program>
 
 
@@ -370,15 +370,79 @@ func start_game() -> void:
       <p>If you play until "Game Over" and then start a new game, the prizes
                 from the previous game will still be on the screen. The Player will still be in the same position,
                 and it still won't be able to move. It would be better if the player could move and the crystals
-                all disappeared at the start of a new game. We just need a way to tell <em>all</em> the
-                prizes to remove themselves. We can do this with the "group" feature.</p>
+                all disappeared at the start of a new game. 
+      </p>
+    <paragraphs>
+        <title>Resetting the Player</title>
+            <p>
+             In the player.gd script, in order to reset the player, we want to set it's position
+             back to the center, set it's state to running, reset the health and fuel to max, and set can_launch to true.
+             Since, the Player is a RigidBody2D, we can only reset the player location in the
+             <c>_integrate_forces</c> method. So, we'll need to use an indicator for that part 
+             of resetting the player. We'll call it <c>reset_pos</c>.
+            </p>
+            <p>At the top of the player.gd script add the <c>reset_pos</c> member variable.
+            </p>
+            <program language="gdscript">
+          <code>
+var reset_pos: bool = false
+    </code>
+          </program>
+          <p>Then make a method called <c>_reset()</c> that will update everything described above
+            except for the position.
+            </p>
+            <program language="gdscript">
+          <code>
+func _reset() -> void:
+    change_state(State.RUNNING)
+    health = max_health
+    can_launch = true
+    reset_pos = true
+    </code>
+          </program>
+          <note>
+            <title>health and fuel</title>
+           <p>health is set to max_health instead of using a raw value (sometimes called a <term>magic number</term>), 
+            and fuel is not in the main method </p>
+            <p>
+                If you haven't already, add a member variable called max_health, and set it to
+                100, so that <c>_reset()</c> will work.
+            </p>
+            <p> 
+                To connect fuel to the main method, you can do something similar to the way 
+                health is connected to the HUD, but instead of taking damage, fuel should
+                be lost when thrusting (and possibly when turning to a lesser extent).
+                Fuel should be gained from collecting crystals. You may want the fuel to 
+                increase slowly as the crystal is converted to fuel, or you may just want to
+                make it so the fraction of the value of the crystal is used to increase fuel
+                instantly.
+            </p>
+            
+          </note>
+          <p>Then add the following to <c>_integrate_forces()</c> so that the position will be 
+            reset to the center. (Make sure it's indented correctly)
+            </p>
+            <program language="gdscript">
+          <code>
+if reset_pos:
+        state.transform.origin = view_size/2
+        reset_pos = false
+    </code>
+          </program>
+      </paragraphs>
+      
+      <paragraphs>
+        <title>Removing Prizes</title>
+                <p>We  need a way to tell <em>all</em> the
+                prizes to remove themselves. Recall from <xref ref="getting-started-first-2d-game-06-heads-up-display-removing-old-creeps"/> 
+                that we can do this with the "group" feature.</p>
       <p>In the <c>Prize</c> scene, select the root node and click the <c>Groups</c> tab next to the
                 <c>Signals</c> tab and the "+" button to open the "Create New Group" dialog.</p>
       
       <p>Name the group <c>prizes</c> and click "ok" to add a new scene group.
         Make sure to check the box next to the prizes group.
       Now all Prizes will be in the "prizes" group.</p>
-      <p>We can then add the following line to the <c>start_game()</c> function in <c>Main</c>:</p>
+      <p>Then add the following line to the <c>start_game()</c> function in <c>Main</c>:</p>
 
         <program language="gdscript">
           <code>get_tree().call_group("prizes", "queue_free")</code>
@@ -387,25 +451,40 @@ func start_game() -> void:
 
       <p>The <c>call_group()</c> function calls the named function on every node in a
                 group - in this case we are telling every prize to delete itself.</p>
-      <p></p>
+        </paragraphs>
+      <paragraphs>
+  <title>Adding Levels</title>
+      <p>
+        After playing for a while, you may find that just waiting for crystals to grow,
+         collecting crystals, and avoiding crystals can lack the element of surprize.
+         Adding levels is one way to mix things up. You can base the levels on score, 
+         counting how many of different size crystals were collected, etc.  
+      </p>
+      <p>
+        The levels could increase in difficulty, or there could be different patterns of 
+        how the crystals initially lay out. They could continue to spawn or you could just 
+        need to clear the crystals that are initially placed at the beginning of the level.
+      </p>
+      <p> To keep track of levels you can use a member variable in main. Then you can 
+        use <c>$HUD.show_message()</c> to indicate the level to the user at the beginning of
+        each level.
+      </p>
+      <p>If you want specific patterns for each level, you may want to make a function that
+        takes a level number and generates the locations of the initial crystals based on the 
+        number. You probably want to modify plant_crystal to optionally take a position
+        instead of randomly setting the position. In addition, you could have different spawning
+        behavior based on the level. For instance, the spawning could put a crystal in an 
+        initial position that was already collected.
+      </p>
+        
+      </paragraphs>
+      <p>
+        Once the game plays as you want it with the current features, move on to the next
+        section to create a more integrated interaction.
+      </p>
+  
       </subsection>
     
-    
-    <subsection xml:id="two-d-games-space-farm-hud-scene">
-      <title>The HUD Scene</title>
-      <p>
-      </p>
-      </subsection>
-      <subsection xml:id="two-d-games-space-farm-hud-script">
-      <title>HUD Script</title>
-      <p>
-      </p>
-      </subsection>
-
-      <subsection xml:id="two-d-games-space-farm-hud-levels">
-      <title>Adding Levels</title>
-      <p>
-      </p>
-      </subsection>
+ 
       
     </section>
