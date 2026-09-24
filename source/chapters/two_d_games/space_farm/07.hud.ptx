@@ -294,81 +294,100 @@ func update_fuel(fuel_ratio: float) -> void:
         </figure>
       <p>Now we need to connect the <c>HUD</c> functionality to our <c>Main</c> script. This
                 requires a few additions to the <c>Main</c> scene:</p>
-      <p>In the Signals tab, connect the HUD's <c>start_game</c> signal to the <c>new_game()</c>
-                function of the Main node by clicking the "Pick" button in the "Connect a Signal"
-                window and selecting the <c>new_game()</c> method or type "new_game" below "Receiver Method"
-                in the window. Verify that the green connection icon now appears next to
-                <c>func new_game()</c> in the script.</p>
-      <p>In <c>new_game()</c>, update the score display and show the "Get Ready" message:</p>
+      <p>We start with adding a boolean to tell us if we are running, so that if we are not
+        then we can stop (or not start) anything that happens while the game is running.
+      </p>
+      <program language="gdscript">
+          <code>
+            var game_on: bool = false
+          </code>
+        </program>
+      <p>Next, We'll change ready to hide the player, update the view size, connect
+        player wrecked to game_over, player health changed to the HUD's update health
+        method, and the HUD's start_game signal to a new start_game method as shown below:
+      </p>
 
         <program language="gdscript">
-          <code>$HUD.update_score(score)
-$HUD.show_message("Get Ready")</code>
+          <code>
+func _ready() -> void:
+    $Player.hide()
+    update_view_size()
+    $Player.wrecked.connect(game_over)
+    $Player.health_changed.connect($HUD.update_health)
+    $HUD.start_game.connect(start_game)
+          </code>
           </program>
 
 
-      <p>In <c>game_over()</c> we need to call the corresponding <c>HUD</c> function:</p>
+          <p>The game_over method in main will set game_on to false, then
+            call the $HUD's game_over_sequence(), before the code that's already there</p>
 
         <program language="gdscript">
-          <code>$HUD.show_game_over()</code>
+          <code>func game_over() -> void:
+    game_on = false
+    $HUD.game_over_sequence()
+          </code>
+        </program>
+      <p>The start_game method needs to set game_on to true, reset position the player in the center, 
+        show a message to get ready, reset the health value in the HUD, show the Player, and
+        start the Plant timer.
+      </p>
+
+        <program language="gdscript">
+          <code>
+func start_game() -> void:
+    game_on = true
+    $Player.position = view_size/2
+    $HUD.show_message("Get Ready...",1.0)
+    $HUD.update_health(1.0)
+    $Player.show()
+    $PlantTimer.start(1.0)
+          </code>
           </program>
 
 
-      <p>Finally, add this to <c>_on_score_timer_timeout()</c> to keep the display in sync
-                with the changing score:</p>
+      <p>At the end of the <c>collect(amount: int)</c> method of main add an updated score to the score label of the HUD:</p>
 
         <program language="gdscript">
-          <code>$HUD.update_score(score)</code>
+          <code>$HUD/TopBar/HBoxContainer/ScoreLabel.text = str(score)
+	</code>
+          </program>
+          <p>In the <c>plan_crystal()</c> method of main add an if statment that checks to see if game_on is true before
+        starting the PlantTimer. (make sure it's indented correctly)</p>
+
+        <program language="gdscript">
+          <code>if game_on:
+    $PlantTimer.start(randf()*3+2)
+	</code>
           </program>
 
 
-      <warning>
-        <title>Warning</title>
-        <p>Remember to remove the call to <c>new_game()</c> from
-                    <c>_ready()</c> if you haven't already, otherwise
-                    your game will start automatically.</p>
-        </warning>
+      
       <p>Now you're ready to play! Click the "Play the Project" button.</p>
       </subsection>
     <subsection xml:id="two-d-games-space-farm-07-hud-removing-old-creeps">
-      <title>Removing old creeps</title>
-      <p>If you play until "Game Over" and then start a new game right away, the creeps
-                from the previous game may still be on the screen. It would be better if they
+      <title>Play Testing</title>
+      <p>If you play until "Game Over" and then start a new game, the prizes
+                from the previous game will still be on the screen. The Player will still be in the same position,
+                and it still won't be able to move. It would be better if the player could move and the crystals
                 all disappeared at the start of a new game. We just need a way to tell <em>all</em> the
-                mobs to remove themselves. We can do this with the "group" feature.</p>
-      <p>In the <c>Mob</c> scene, select the root node and click the <c>Groups</c> tab next to the
+                prizes to remove themselves. We can do this with the "group" feature.</p>
+      <p>In the <c>Prize</c> scene, select the root node and click the <c>Groups</c> tab next to the
                 <c>Signals</c> tab and the "+" button to open the "Create New Group" dialog.</p>
-      <figure>
-        <caption>Create New Group Button</caption>
-      <image source="group_tab.webp" width="30%">
-         <shortdescription>The groups dock is shown with the new group button surrounded with a yellow box.</shortdescription>
-     </image>
-        </figure>
-      <p>Name the group <c>mobs</c> and click "ok" to add a new scene group.</p>
-      <figure>
-        <caption>Add Group Dialog</caption>
-      <image source="add_group_dialog.webp" width="40%">
-         <shortdescription>The Create New Group dialog is shown with mobs in the Name text box.</shortdescription>
-     </image>
-        </figure>
-      <p>Now all mobs will be in the "mobs" group.</p>
-      <figure>
-        <caption>Groups Tab</caption>
-      <image source="scene_group_mobs.webp" width="30%">
-         <shortdescription>The mobs group is shown under Scene Groups in the Groups tab.</shortdescription>
-     </image>
-        </figure>
-      <p>We can then add the following line to the <c>new_game()</c> function in <c>Main</c>:</p>
+      
+      <p>Name the group <c>prizes</c> and click "ok" to add a new scene group.
+        Make sure to check the box next to the prizes group.
+      Now all Prizes will be in the "prizes" group.</p>
+      <p>We can then add the following line to the <c>start_game()</c> function in <c>Main</c>:</p>
 
         <program language="gdscript">
-          <code>get_tree().call_group("mobs", "queue_free")</code>
+          <code>get_tree().call_group("prizes", "queue_free")</code>
           </program>
 
 
       <p>The <c>call_group()</c> function calls the named function on every node in a
-                group - in this case we are telling every mob to delete itself.</p>
-      <p>The game's mostly done at this point. In the next and last part, we'll polish it
-                a bit by adding a background, looping music, and some keyboard shortcuts.</p>
+                group - in this case we are telling every prize to delete itself.</p>
+      <p></p>
       </subsection>
     
     
