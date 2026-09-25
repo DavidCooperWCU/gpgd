@@ -263,11 +263,11 @@ func game_over_sequence() -> void:
 
         <program language="gdscript">
           <code>func _on_start_button_pressed() -> void:
-    $HUD.$StartButton.hide()
-    start_game.emit()
+    $Overlay/StartButton.hide()
+	start_game.emit()
 
 func _on_message_timer_timeout() -> void:
-    $HUD.$Message.hide()</code>
+    $Overlay/Message.hide()</code>
           </program>
 
 
