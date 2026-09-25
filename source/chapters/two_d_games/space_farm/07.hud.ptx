@@ -70,7 +70,7 @@
 
     <p>Click on the <c>ScoreLabel</c> and type a number into the <c>Text</c> field in the
             Inspector. The default font for <c>Control</c> nodes is small and doesn't scale
-            well. There is a font file in the<url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/fonts.zip">fonts</url>
+            well. There is a font file in the <url href="https://wcu-cs-cooperlab.github.io/Fall2026GameDev/book-assets/space-farm/fonts.zip">fonts</url>
          zip file. Download, unzip the file, and add the fonts directory to your project.
             There you will find "AutumnGifts-YVKv.ttf". To use this font, do the following:</p>
     <p>Under "Theme Overrides &gt; Fonts", choose "Load" and select the "AutumnGifts-YVKv.ttf" file in fonts.</p>
@@ -91,13 +91,19 @@
     <subsection xml:id="two-d-games-space-farm-07-hud-topbar">
       <title>TopBar</title>
       <p>
-        Theme Overrides, Constants
+        <ol>
+        <li>Set the "Anchors Preset" to <c>Top Wide</c>.</li>
+      
+        <li><p>Theme Overrides, Constants
       <ol>
         <li>Margin Left = 20.</li>
         <li>Margin Right = 20.</li>
         <li>Margin Top = 20.</li>
         <li>Margin Bottom = 20.</li>
         </ol>
+    </p>
+    </li>
+</ol>
       </p>
       </subsection>
 <subsection xml:id="two-d-games-space-farm-07-hud-scorelabel">
@@ -184,9 +190,6 @@
       <ol>
         <li>Add the text <c>Space Farm</c>.</li>
         <li>Set the "Container Sizing", "Horizontal" to <c>Shrink Center</c>.</li>
-        <li>Set the "Autowrap Mode" to <c>Word</c>, otherwise the label will stay on one line.</li>
-        <li>Under "Control - Layout/Transform" set "Size X"  to <c>480</c> to use the entire width of the screen.</li>
-        <li>Choose the "Anchor Preset" <c>Center</c>.</li>
         </ol>
       </p>
       </subsection>
@@ -195,8 +198,10 @@
       <p>
       <ol>
         <li>Add the text <c>Start</c>.</li>
-        <li>Under "Control - Theme Overrides - Constants", set "Outline Size" to <c>10</c> and "H Separatoin" to <c>10</c>
+        <li>Under "Control - Theme Overrides - Constants", set "Outline Size" to <c>10</c> and "H Separation" to <c>10</c>
                         to add a little bit more padding between the border and text.</li>
+        <li>Set the "Container Sizing", "Horizontal" to <c>Shrink Center</c>.</li>
+        
         
         </ol>
       </p>
@@ -258,11 +263,11 @@ func game_over_sequence() -> void:
 
         <program language="gdscript">
           <code>func _on_start_button_pressed() -> void:
-    $StartButton.hide()
+    $HUD.$StartButton.hide()
     start_game.emit()
 
 func _on_message_timer_timeout() -> void:
-    $Message.hide()</code>
+    $HUD.$Message.hide()</code>
           </program>
 
 
@@ -319,6 +324,35 @@ func _ready() -> void:
           </program>
 
 
+          <p>The health_changed signal needs to be added to the player and then fired when the health changes. First 
+            in player.gd add the signal
+          </p>
+
+        <program language="gdscript">
+          <code>
+signal health_changed(value)
+          </code>
+        </program>
+
+        <p>Then emit health_changed when the player takes damage. Add to the end of the <c>take_damage()</c> method:
+          </p>
+
+        <program language="gdscript">
+          <code>
+emit_signal("health_changed",health/float(max_health))
+          </code>
+        </program>
+        <note>
+            <title>health</title>
+           <p>max_health is used instead of using a raw value (sometimes called a <term>magic number</term>)</p>
+            <p>
+                If you haven't already, add a member variable called max_health, and set it to
+                100, so that the above code and the <c>_reset()</c> method below will work.
+            </p>
+            
+            
+          </note>
+
           <p>The game_over method in main will set game_on to false, then
             call the $HUD's game_over_sequence(), before the code that's already there</p>
 
@@ -330,7 +364,7 @@ func _ready() -> void:
         </program>
       <p>The start_game method needs to set game_on to true, reset position the player in the center, 
         show a message to get ready, reset the health value in the HUD, show the Player, and
-        start the Plant timer.
+        start the Plant timer,  before the code that's already there.
       </p>
 
         <program language="gdscript">
@@ -352,7 +386,7 @@ func start_game() -> void:
           <code>$HUD/TopBar/HBoxContainer/ScoreLabel.text = str(score)
     </code>
           </program>
-          <p>In the <c>plan_crystal()</c> method of main add an if statment that checks to see if game_on is true before
+          <p>In the <c>plant_crystal()</c> method of main add an if statment that checks to see if game_on is true before
         starting the PlantTimer. (make sure it's indented correctly)</p>
 
         <program language="gdscript">
@@ -401,13 +435,7 @@ func _reset() -> void:
     </code>
           </program>
           <note>
-            <title>health and fuel</title>
-           <p>health is set to max_health instead of using a raw value (sometimes called a <term>magic number</term>), 
-            and fuel is not in the main method </p>
-            <p>
-                If you haven't already, add a member variable called max_health, and set it to
-                100, so that <c>_reset()</c> will work.
-            </p>
+            <title>fuel</title>
             <p> 
                 To connect fuel to the main method, you can do something similar to the way 
                 health is connected to the HUD, but instead of taking damage, fuel should

@@ -84,7 +84,7 @@
         Now that the input is mapped, we can work on player motion. Create a new script
         and add the following member variables a <c>Vector2</c> for <c>thrust</c>, three
         <c>float</c> for thrust_power, rot_power, and rot_dir. A
-        <c>Vector2i</c> for the <c>view_size</c> that allows the ship to wrap.
+        <c>Vector2</c> for the <c>view_size</c> that allows the ship to wrap.
       </p>
     <program language="gdscript">
 extends RigidBody2D
@@ -93,7 +93,7 @@ var thrust : Vector2 = Vector2.ZERO
 var thrust_power: float = 500
 var rot_power: float = 8000
 var rot_dir: float = 0
-var view_size : Vector2i
+var view_size : Vector2
 </program>
     <p> 
         Each time the player comes to view, it needs to setup a few things.

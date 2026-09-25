@@ -173,6 +173,17 @@ func _on_max_size_reached(source: GrowingArea) -> void:
     for our current interaction. (When we do more complicated interactions, this will change.)
 </p>
 <p>
+    However, we do need to free the collector that collects the prize so that it doesn't reach
+    maximum size and have the free sound override the collection sound. To do this
+    open prize.gd, and edit the <c>check_touching_collectors()</c> method to add the following when
+    the collector can collect:
+</p>
+<program language="gdscript">
+    <code>
+collector.queue_free() 
+    </code>
+</program> 
+<p>
     Similarly, the player already has a <c>launch()</c> method, so the only signal we need so far is the 
     one carrying a MISS CollectState.
 </p>
