@@ -333,7 +333,7 @@ class_name Collector
 
 var speed = 350
 var velocity: Vector2
-var view_size: Vector2i
+var view_size: Vector2
 var min_collect_distance: float = 100.0
         </program>
         <p>

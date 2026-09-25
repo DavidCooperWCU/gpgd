@@ -25,7 +25,7 @@
         The script will randomly plant crystals. To 
         do this, the following member variables are needed.
         A <c>PackedScene</c> called <c>crystal</c> will allow the
-        Prize to be instantiated. A <c>Vector2i</c> called view_size
+        Prize to be instantiated. A <c>Vector2</c> called view_size
         will allow the player and crystals to spawn inside the visible 
         area. One more member variable for score is added in anticipation
         for when the score will be displayed.
@@ -33,7 +33,7 @@
       <program language="gdscript">
 extends Node
 
-var view_size : Vector2i
+var view_size : Vector2
 var crystal: PackedScene = load("res://prize.tscn")
 var score: int = 0
    </program>
