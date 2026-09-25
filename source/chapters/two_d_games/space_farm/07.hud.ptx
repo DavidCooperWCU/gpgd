@@ -264,7 +264,7 @@ func game_over_sequence() -> void:
         <program language="gdscript">
           <code>func _on_start_button_pressed() -> void:
     $Overlay/StartButton.hide()
-	start_game.emit()
+    start_game.emit()
 
 func _on_message_timer_timeout() -> void:
     $Overlay/Message.hide()</code>

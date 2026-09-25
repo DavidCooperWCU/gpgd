@@ -335,8 +335,8 @@ static var largeValue: int = 50
     </p>
      <program language="gdscript">
 func hit_object(damage: int) -> void:
-	play_damage(damage)
-	take_damage(damage)
+    play_damage(damage)
+    take_damage(damage)
       </program>
     <p>
          Then,
