@@ -3,17 +3,22 @@
     <title>Finishing Up</title>
     <introduction>
     <p>
+        The main thing that the game is still missing is a background. To add a background, 
+        open the main scene and add add a TextureRect. Move the texture rect to be the first child of Main, so that it is behind
+        Player and all of the other nodes. In the inspector load the art/hubble-background1152.png file for the Texture.
     </p>
     </introduction>
     <subsection xml:id="two-d-games-space-farm-finising-up-p1">
-      <title>Part 1</title>
+      <title>Final Playtesting Modifications</title>
       <p>
+        Run the main scene. Check to see if the player is visible enough. If not, try one of the other Ship files for the Player's Sprite2D. In addiiton, 
+        you could find a different ship for the player if you'd like. (Just make sure to change the collision polygon 2d's shape.)
+      </p>
+      <p>
+        While playing the game, experiment with different timing for how often plants spawn, how fast the ship thrusts and turns, and how far/big the 
+        collector should get.
       </p>
       </subsection>
-      <subsection xml:id="two-d-games-space-farm-finising-up-p2">
-      <title>Part 2</title>
-      <p>
-      </p>
-      </subsection>
+      
       
     </section>
