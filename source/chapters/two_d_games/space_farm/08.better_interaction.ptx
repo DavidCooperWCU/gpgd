@@ -117,7 +117,7 @@ var source: RigidBody2D
                 based on the collect state signal instead of the player's collect method, 
                 and a separate collect stream and sound
                 will be played when the player actually collects the prize.
-                First we add <p>collect()</p> to the collector:
+                First we add <c>collect()</c> to the collector:
         </p>
         <program language="gdscript">
             <code>
@@ -137,6 +137,47 @@ func collect(prize: GrowingArea) -> void:
     self.prize.start_growth()
             </code>
             </program>
+            <p>Next, we modify process to move the collector 
+                and the prize back to the ship. In <c>_process()</c>,
+                before updating the position, change the velocity 
+                of the collector conditionally:
+            </p>
+            <program language="gdscript">
+            <code>
+if self.prize != null:
+		velocity = (source.position-position).normalized() * speed/2
+            </code>
+            </program>
+            <p>To move the prize, In <c>_process()</c>,
+                after updating the position of the colllector, change the position 
+                of the prize to the position of the collector conditionally:
+            </p>
+            <program language="gdscript">
+            <code>
+if self.prize != null:
+		self.prize.position = position
+            </code>
+            </program>
+</paragraphs>
+            <paragraphs>
+                <title>Growing Area Changes</title>
+                <p>Since the Growing Area can shrink now. It's probably a good
+                    idea to have a minimum size for the area and use it to 
+                    stop growth when it reaches the minimum. Since there is 
+                    already a <c>start_scale</c>, we can use that as the minimum.
+                    Then we just need to change process so that when the scale
+                    is smaller than the start_scale it doesn't get smaller. In
+                    <c>_process()</c> after current scale modified based on the step 
+                    add the following instead of just testing for current_scale going 
+                    above the max scale:
+        </p>
+        <program language="gdscript">
+            <code>
+if current_scale &lt; start_scale:
+		current_scale = start_scale
+	elif current_scale >= max_scale:
+            </code>
+            </program>
             </paragraphs>
             <paragraphs>
                 <title>Player Changes</title>
@@ -150,7 +191,7 @@ collector.source = self
             </code>
             </program>
         
-             <p>Then we add playing the hit stream to the player's receive_signal method
+             <p>Then we add playing the hit stream to the player's receive_collect_state method
         </p>
         <program language="gdscript">
             <code>
