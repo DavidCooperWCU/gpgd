@@ -12,23 +12,38 @@
             monster's 3D model to the scene.</p>
     <figure>
       <caption>Dragging the Mob Asset</caption>
-      <image source="drag_drop_mob.webp" >
+      <image source="drag_drop_mob.webp" width="40%">
          <shortdescription>The mob.glb file is dragged on top of the Pivot that is a child of Mob.</shortdescription>
      </image>
       </figure>
     <p>You can rename the newly created <c>mob</c> node
             into <c>Character</c>.</p>
-    <p />
+    <figure>
+      <caption>Renaming the Mob Node</caption>
+      <image source="first_3d_mob_initial_three.webp"  width="40%">
+         <shortdescription>The first 3 nodes are shown.</shortdescription>
+     </image>
+      </figure>
     <p>We need a collision shape for our body to work. Right-click on the <c>Mob</c> node,
             the scene's root, and click <em>Add Child Node</em>.</p>
-    <p />
+     <figure>
+      <caption>Add Collision Shape</caption>
+      <image source="first_3d_mob_add_child.webp" width="40%">
+         <shortdescription>Add Child Node is surrounded in a yellow box.</shortdescription>
+     </image>
+      </figure>
     <p>Add a <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape3d.html#class-collisionshape3d">CollisionShape3D</url>.</p>
-    <p />
+    <figure>
+      <caption>Added CollisionShape3D</caption>
+      <image source="first_3d_mob_collision_shape.webp" width="40%">
+         <shortdescription>The Scene Dock is shown with CollisionShape3D.</shortdescription>
+     </image>
+      </figure>
     <p>In the <em>Inspector</em>, assign a <em>BoxShape3D</em> to the <em>Shape</em> property.</p>
     <figure>
       <caption>Adding Box Shape</caption>
-      <image source="08.create_box_shape3D.webp" >
-         <shortdescription>The Inspector Dock is shown with adding BoxShap3D as the Shape of the CollisionShape3D.</shortdescription>
+      <image source="08.create_box_shape3D.webp" width="40%">
+         <shortdescription>The Inspector Dock is shown with adding BoxShape3D as the Shape of the CollisionShape3D.</shortdescription>
      </image>
       </figure>
     <p>We should change its size to fit the 3D model better. You can do so
@@ -38,7 +53,12 @@
             corner, a collision will occur. If the box is a little too big compared to the
             3D model, you may die at a distance from the monster, and the game will feel
             unfair to the players.</p>
-    <p />
+    <figure>
+      <caption>3D View of Box Size</caption>
+      <image source="first_3d_mob_final_box.webp" width="90%">
+         <shortdescription>The  BoxShape3D is shown in two views</shortdescription>
+     </image>
+      </figure>
     <p>Notice that my box is taller than the monster. It is okay in this game because
             we're looking at the scene from above and using a fixed perspective. Collision
             shapes don't have to match the model exactly. It's the way the game feels when
@@ -69,9 +89,19 @@
       <p>Select the <c>Mob</c> node and add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url>. Another
                 box, pink this time, appears. When this box completely leaves the screen, the
                 node will emit a signal.</p>
-      <p />
+      <figure>
+      <caption>Visible On Screen Notifier</caption>
+      <image source="first_3d_mob_screen_notifier.webp" width="90%">
+         <shortdescription>VisibleOnScreenNotifier box is shown.</shortdescription>
+     </image>
+      </figure>
       <p>Resize it using the orange dots until it covers the entire 3D model.</p>
-      <p />
+      <figure>
+      <caption>Screen Notifier Box Resized</caption>
+      <image source="first_3d_mob_screen_notifier_resized.webp"  width="90%">
+         <shortdescription>VisibleOnScreenNotifier box is a different size.</shortdescription>
+     </image>
+      </figure>
       </introduction>
       <subsubsection xml:id="getting-started-first-3d-game-04-mob-scene-coding-the-mob-s-movement">
         <title>Coding the mob's movement</title>
@@ -80,7 +110,12 @@
                     the monster. We'll then code the randomized spawn mechanism in the <c>main.tscn</c> scene
                     and call the function from there.</p>
         <p>Attach a script to the <c>Mob</c>.</p>
-        <p />
+        <figure>
+      <caption>Attach Mob Script</caption>
+      <image source="first_3d_mob_script.webp"  width="40%">
+         <shortdescription>Attach Script is outlined in yellow.</shortdescription>
+     </image>
+      </figure>
         <p>Here's the movement code to start with. We define two properties, <c>min_speed</c>
                     and <c>max_speed</c>, to define a random speed range, which we will later use to define <c>CharacterBody3D.velocity</c>.</p>
 
@@ -149,10 +184,20 @@ func initialize(start_position: Vector3, player_position: Vector3) -> void:
                     connect our <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url> node's <c>screen_exited</c> signal to the <c>Mob</c>.</p>
         <p>Select the <url href="https://docs.godotengine.org/en/stable/classes/class_visibleonscreennotifier3d.html#class-visibleonscreennotifier3d">VisibleOnScreenNotifier3D</url> node and on the right side of the interface,
                     navigate to the <em>Signals</em> dock. Double-click the <c>screen_exited()</c> signal.</p>
-        <p />
+        <figure>
+      <caption>Signal Dock</caption>
+      <image source="first_3d_mob_node_dock.webp"  width="40%">
+         <shortdescription>screen_exited is outlined in yellow.</shortdescription>
+     </image>
+      </figure>
         <p>Connect the signal to the <c>Mob</c>
           </p>
-        <p />
+        <figure>
+      <caption>Connect Signal</caption>
+      <image source="first_3d_mob_connect_signal.webp"  width="40%">
+         <shortdescription>Mob is outlined in yellow.</shortdescription>
+     </image>
+      </figure>
         <p>This will add a new function for you in your mob script,
                     <c>_on_visible_on_screen_notifier_3d_screen_exited()</c>. From it, call the <c>queue_free()</c>
                     method. This function destroys the instance it's called on.</p>

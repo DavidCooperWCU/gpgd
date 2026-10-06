@@ -22,7 +22,12 @@
             it. In the popup, set the <em>Template</em> to <em>Empty</em> before pressing the <em>Create</em>
             button. We set it to <em>Empty</em> because we want to write our own code for
             player movement.</p>
-    <p />
+    <figure>
+      <caption>Attach Player Script</caption>
+      <image source="first_3d_player_movement_attach_player_script.webp" width="70%">
+         <shortdescription>The Attach Node Script menu has Template checked and Object:Empty surrounded by a yellow box.</shortdescription>
+     </image>
+      </figure>
     <p>Let's start with the class's properties. We're going to define a movement speed,
             a fall acceleration representing gravity, and a velocity we'll use to move the
             character.</p>
@@ -193,12 +198,22 @@ func _physics_process(delta: float) -> void:
                 see anything if your viewport doesn't have a camera pointing at something.</p>
       <p>Save your <c>Player</c> scene and open the <c>Main</c> scene. You can click on the <em>Main</em>
                 tab at the top of the editor to do so.</p>
-      <p />
+      <figure>
+      <caption>main scene tab</caption>
+      <image source="first_3d_player_movement_main_tab.webp" width="30%">
+         <shortdescription>The main tab is surrounded by a yellow box.</shortdescription>
+     </image>
+      </figure>
       <p>If you closed the scene before, head to the <em>FileSystem</em> dock and double-click
                 <c>main.tscn</c> to re-open it.</p>
       <p>To instantiate the <c>Player</c>, right-click on the <c>Main</c> node and select <em>Instantiate
                 Child Scene</em>.</p>
-      <p />
+      <figure>
+      <caption>context menu</caption>
+      <image source="first_3d_player_movement_context_menu.webp" width="60%">
+         <shortdescription>Instantiate Child Scene... is surrounded by a yellow box.</shortdescription>
+     </image>
+      </figure>
       <p>In the popup, double-click <c>player.tscn</c>. The character should appear in the
                 center of the viewport.</p>
       </introduction>
@@ -209,10 +224,20 @@ func _physics_process(delta: float) -> void:
                     <em>Add Child Node</em>. Create a new <url href="https://docs.godotengine.org/en/stable/classes/class_marker3d.html#class-marker3d">Marker3D</url>, and name it <c>CameraPivot</c>.
                     Select <c>CameraPivot</c> and add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_camera3d.html#class-camera3d">Camera3D</url> to it.
                     Your scene tree should look similar to this.</p>
-        <p />
+        <figure>
+      <caption>Main Scene Tree With Camera</caption>
+      <image source="first_3d_player_movement_camera_scene.webp" width="40%">
+         <shortdescription>Camera Pivot and Camera3D are in the Scene.</shortdescription>
+     </image>
+      </figure>
         <p>Notice the <em>Preview</em> checkbox that appears in the top-left of the 3D view when you
                     have the <em>Camera</em> selected. You can click it to preview the in-game camera projection.</p>
-        <p />
+        <figure>
+      <caption>Preview Checkbox</caption>
+      <image source="first_3d_player_movement_preview_checkbox.webp" width="20%">
+         <shortdescription>The preview checkbox is surrounded by a yellow box.</shortdescription>
+     </image>
+      </figure>
         <p>We're going to use the <em>Pivot</em> to rotate the camera as if it was on a crane.
                     Let's first split the 3D view to be able to freely navigate the scene and see
                     what the camera sees.</p>
@@ -222,23 +247,57 @@ func _physics_process(delta: float) -> void:
           <c>2</c> (<c>Cmd</c>
           <c />+<c />
           <c>2</c> on macOS).</p>
-        <p />
-        <p />
+        <figures>
+        <title>View menus</title>
+     
+          <figure>
+      <caption>Scene Toolbar</caption>
+      <image source="first_3d_player_movement_scene_toolbar.webp" >
+         <shortdescription>The view menu  is surrounded by a yellow box.</shortdescription>
+     </image>
+      </figure>
+        <figure>
+      <caption>Viewports Menu</caption>
+      <image source="first_3d_player_movement_viewports_menu.webp" width="40%">
+         <shortdescription>The 2 Viewports menu item is surrounded by a yellow box.</shortdescription>
+     </image>
+      </figure>
+    </figures>
         <p>On the bottom view, select your <url href="https://docs.godotengine.org/en/stable/classes/class_camera3d.html#class-camera3d">Camera3D</url> and turn on camera
                     Preview by clicking the checkbox.</p>
-        <p />
+        <figure>
+      <caption>Camera Preview Checked</caption>
+      <image source="first_3d_player_movement_camera_preview_checked.webp" width="20%">
+         <shortdescription>The camera preview checkbox is checked.</shortdescription>
+     </image>
+      </figure>
         <p>In the top view, make sure your <em>Camera3D</em> is selected and move the camera about
                     <c>19</c> units on the Z axis (drag the blue arrow).</p>
-        <p />
+        <figure>
+      <caption>Bottom View Camera Moved</caption>
+      <image source="first_3d_player_movement_camera_moved.png" >
+         <shortdescription>The preview checkbox is checked.</shortdescription>
+     </image>
+      </figure>
         <p>Here's where the magic happens. Select the <em>CameraPivot</em> and rotate it <c>-45</c>
                     degrees around the X axis (using the red circle). You'll see the camera move as
                     if it was attached to a crane.</p>
-        <p />
+        <figure>
+      <caption>Bottom View Pivot Rotated</caption>
+      <image source="first_3d_player_movement_pivot_moved.png" >
+         <shortdescription>The preview checkbox is checked.</shortdescription>
+     </image>
+      </figure>
         <p>You can run the scene by pressing <c>F6</c> (<c>Cmd</c>
           <c />+<c />
           <c>R</c> on macOS) and
                     press the arrow keys to move the character.</p>
-        <p />
+        <figure>
+      <caption>Perspective View Has space</caption>
+      <image source="first_3d_player_movement_perspective_view.png" >
+         <shortdescription>The preview checkbox is checked.</shortdescription>
+     </image>
+      </figure>
         <p>We can see some empty space around the character due to the perspective
                     projection. In this game, we're going to use an orthographic projection instead
                     to better frame the gameplay area and make it easier for the player to read
@@ -258,7 +317,12 @@ func _physics_process(delta: float) -> void:
                         <c>100</c>. Don't decrease this <em>Far</em> property too much, or objects in the
                         distance will start disappearing.</p>
           </note>
-        <p />
+        <figure>
+      <caption>Split View Orthogonal with Inspector</caption>
+      <image source="first_3d_player_movement_orthogonal_view.webp" >
+         <shortdescription>The projection is orthogonal, and 19 is highlighted in Size and in z position transform.</shortdescription>
+     </image>
+      </figure>
         <p>Test your scene and you should be able to move in all 8 directions and not glitch through the floor!</p>
         <p>Ultimately, we have both player movement and the view in place. Next, we will
                     work on the monsters.</p>
