@@ -15,15 +15,30 @@
       <p>Head back to the <c>player.tscn</c> scene and add a new child node <url href="https://docs.godotengine.org/en/stable/classes/class_area3d.html#class-area3d">Area3D</url>. Name it
                 <c>MobDetector</c>
                 Add a <url href="https://docs.godotengine.org/en/stable/classes/class_collisionshape3d.html#class-collisionshape3d">CollisionShape3D</url> node as a child of it.</p>
-      <p />
+      <figure>
+          <caption>Player Scene Dock: Mob Detector</caption>
+          <image source="first_3d_killing_mob_detector.webp" width="50%">
+         <shortdescription>Scene dock with mobdetector changes.</shortdescription>
+     </image>
+          </figure>
       <p>In the <em>Inspector</em>, assign a cylinder shape to it.</p>
-      <p />
+      <figure>
+          <caption>Inspector Dock: Cylinder Shape</caption>
+          <image source="first_3d_killing_cylinder.webp" width="50%">
+         <shortdescription>empty and CylinderShape3D are surrounded by yellow squares.</shortdescription>
+     </image>
+          </figure>
       <p>Here is a trick you can use to make the collisions only happen when the
                 player is on the ground or close to it. You can reduce the cylinder's
                 height and move it up to the top of the character. This way, when the
                 player jumps, the shape will be too high up for the enemies to collide
                 with it.</p>
-      <p />
+      <figure>
+          <caption>3D View: Cylinder Shape</caption>
+          <image source="first_3d_killing_cylinder_3d_view.png" width="80%">
+         <shortdescription>Cylinder is at top of player.</shortdescription>
+     </image>
+          </figure>
       <p>You also want the cylinder to be wider than the sphere. This way, the
                 player gets hit before colliding and being pushed on top of the
                 monster's collision box.</p>
@@ -33,12 +48,22 @@
                 cannot detect the area. The complementary <em>Monitoring</em> property allows
                 it to detect collisions. Then, remove the <em>Collision -&gt; Layer</em> and set
                 the mask to the "enemies" layer.</p>
-      <p />
+      <figure>
+          <caption>Inspector Dock: Mob Detector</caption>
+          <image source="first_3d_killing_mob_inspector.webp" width="40%">
+         <shortdescription>monitorable (unchecked), layer 1, and mask 1 and 2 are surrounded by yellow squares.</shortdescription>
+     </image>
+          </figure>
       <p>When areas detect a collision, they emit signals. We're going to connect
                 one to the <c>Player</c> node. Select <c>MobDetector</c> and go to the Signals dock, double-click the
                 <c>body_entered</c> signal and connect it to the <c>Player</c>
         </p>
-      <p />
+      <figure>
+          <caption>Signals Dock: body_entered</caption>
+          <image source="first_3d_killing_signal_body.webp" width="40%">
+         <shortdescription>Signal and body_entered are surrounded by yellow squares.</shortdescription>
+     </image>
+          </figure>
       <p>The <em>MobDetector</em> will emit <c>body_entered</c> when a <url href="https://docs.godotengine.org/en/stable/classes/class_characterbody3d.html#class-characterbody3d">CharacterBody3D</url> or a
                 <url href="https://docs.godotengine.org/en/stable/classes/class_rigidbody3d.html#class-rigidbody3d">RigidBody3D</url> node enters it. As it only masks the "enemies" physics
                 layers, it will only detect the <c>Mob</c> nodes.</p>
@@ -71,7 +96,12 @@ func _on_mob_detector_body_entered(body: Node3D) -> void:
                 reaction.</p>
       <p>Open <c>main.tscn</c>, select the <c>Player</c> node, and in the <em>Signals</em> dock,
                 connect its <c>hit</c> signal to the <c>Main</c> node.</p>
-      <p />
+      <figure>
+          <caption>Main Signals Dock: player hit</caption>
+          <image source="first_3d_killing_signal_player_hit.webp" width="40%">
+         <shortdescription>hit is  surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>Get the timer, and stop it, in the <c>_on_player_hit()</c> function.</p>
 
         <program language="gdscript">
