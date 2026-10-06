@@ -4,17 +4,32 @@
     <introduction>
     <p>In this part, we're going to spawn monsters along a path randomly. By the end,
             you will have monsters roaming the game board.</p>
-    <p />
+    <figure>
+          <caption>Monster Spawn Path</caption>
+          <image source="first_3d_spawning_path_preview.webp" >
+         <shortdescription>A diagram of the path at the 4 corners.</shortdescription>
+     </image>
+          </figure>
     <p>Double-click on <c>main.tscn</c> in the <em>FileSystem</em> dock to open the <c>Main</c> scene.</p>
     <p>Before drawing the path, we're going to change the game resolution. Our game has
             a default window size of <c>1152x648</c>. We're going to set it to <c>720x540</c>, a
             nice little box.</p>
     <p>Go to <em>Project -&gt; Project Settings</em>.</p>
-    <p />
+    <figure>
+          <caption>Project Settings menu item</caption>
+          <image source="first_3d_spawning_settings.webp" width="50%">
+         <shortdescription>Project Settings is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
     <p>If you still have <em>Input Map</em> open, switch to the <em>General</em> tab.</p>
     <p>In the left menu, navigate down to <em>Display -&gt; Window</em>. On the right, set the
             <em>Viewport Width</em> to <c>720</c> and the <em>Viewport Height</em> to <c>540</c>.</p>
-    <p />
+    <figure>
+          <caption>Window Settings </caption>
+          <image source="first_3d_spawning_window_settings.webp" >
+         <shortdescription>Window Values are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
     </introduction>
     <subsection xml:id="getting-started-first-3d-game-05-spawning-mobs-creating-the-spawn-path">
       <title>Creating the spawn path</title>
@@ -33,29 +48,64 @@
         <c>2</c> on macOS) to split the view into two.
                 Select the <url href="https://docs.godotengine.org/en/stable/classes/class_camera3d.html#class-camera3d">Camera3D</url> node and click the <em>Preview</em> checkbox in the bottom
                 viewport.</p>
-      <p />
+      <figure>
+          <caption>Camera Preview </caption>
+          <image source="first_3d_spawning_camera_preview.webp" >
+         <shortdescription>Window Values are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
       </introduction>
       <subsubsection xml:id="getting-started-first-3d-game-05-spawning-mobs-adding-placeholder-cylinders">
         <title>Adding placeholder cylinders</title>
         <p>Let's add the placeholder meshes. Add a new <url href="https://docs.godotengine.org/en/stable/classes/class_node3d.html#class-node3d">Node3D</url> as a child of the
                     <c>Main</c> node and name it <c>Cylinders</c>. We'll use it to group the cylinders. Select <c>Cylinders</c> and add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_meshinstance3d.html#class-meshinstance3d">MeshInstance3D</url>
           </p>
-        <p />
+        <figure>
+          <caption>Scene Dock  </caption>
+          <image source="first_3d_spawning_cylinders.webp" width="40%">
+         <shortdescription>All Nodes including MeshInstance3D are shown.</shortdescription>
+     </image>
+          </figure>
         <p>In the <em>Inspector</em>, assign a <em>CylinderMesh</em> to the <em>Mesh</em> property.</p>
-        <p />
+        <figure>
+          <caption>Inspector Dock  </caption>
+          <image source="first_3d_spawning_cylinder_mesh.webp" width="40%" >
+         <shortdescription>CylinderMesh is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>Set the top viewport to the top orthogonal view using the menu in the viewport's
                     top-left corner. Alternatively, you can press the keypad's 7 key.</p>
-        <p />
+        <figure>
+          <caption>View Menu  </caption>
+          <image source="first_3d_spawning_top_view.webp" width="50%">
+         <shortdescription>Top View is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>The grid may be distracting. You can toggle it by going to the <em>View</em>
                     menu in the toolbar and clicking <em>View Grid</em>.</p>
-        <p />
+        <figure>
+          <caption>Toggle View Grid  </caption>
+          <image source="first_3d_spawning_toggle_view_grid.webp" width="50%">
+         <shortdescription>View Grid is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>You now want to move the cylinder along the ground plane, looking at the camera
                     preview in the bottom viewport. I recommend using grid snap to do so. You can
                     toggle it by clicking the magnet icon in the toolbar or pressing Y.</p>
-        <p />
+        <figure>
+          <caption>Toggle Grid Snap </caption>
+          <image source="first_3d_spawning_toggle_grid_snap.webp" width="50%">
+         <shortdescription>Grid Snap Icon is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>Move the cylinder so it's right outside the camera's view in the top-left
                     corner.</p>
-        <p />
+        <figure>
+          <caption>Place First Cylinder </caption>
+          <image source="first_3d_spawning_first_cylinder.webp" >
+         <shortdescription>Cylinder is show outside the view</shortdescription>
+     </image>
+          </figure>
         <p>We're going to create copies of the mesh and place them around the game area.
                     Press <c>Ctrl</c>
           <c />+<c />
@@ -66,9 +116,19 @@
                     the blue Z axis until it's right outside the camera's preview.</p>
         <p>Select both cylinders by pressing the <c>Shift</c> key and clicking on the unselected
                     one and duplicate them.</p>
-        <p />
+        <figure>
+          <caption>Both Cylinders Selected</caption>
+          <image source="first_3d_spawning_both_selected.webp" >
+         <shortdescription>Two cylinders are show outside the view</shortdescription>
+     </image>
+          </figure>
         <p>Move them to the right by dragging the red X axis.</p>
-        <p />
+        <figure>
+          <caption>Four Cylinders </caption>
+          <image source="first_3d_spawning_four_cylinders.webp" >
+         <shortdescription>Four cylinders are show outside the view</shortdescription>
+     </image>
+          </figure>
         <p>They're a bit hard to see in white, aren't they? Let's make them stand out by
                     giving them a new material.</p>
         <p>In 3D, materials define a surface's visual properties like its color, how it
@@ -76,29 +136,54 @@
         <p>We can update all four cylinders at once. Select all the mesh instances in the
                     <em>Scene</em> dock. To do so, you can click on the first one and Shift click on the
                     last one.</p>
-        <p />
+        <figure>
+          <caption>All Cylinders </caption>
+          <image source="first_3d_spawning_all_cylinders.webp" width="40%">
+         <shortdescription>Four cylinders are show outside the view</shortdescription>
+     </image>
+          </figure>
         <p>In the <em>Inspector</em>, expand the <em>Material</em> section and assign a <url href="https://docs.godotengine.org/en/stable/classes/class_standardmaterial3d.html#class-standardmaterial3d">StandardMaterial3D</url> to slot <em>0</em>.</p>
-        <p />
+        <figure>
+          <caption>Material Selection </caption>
+          <image source="first_3d_spawning_material_selection.webp" width="50%">
+         <shortdescription>StandardMaterial3D is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>Click the sphere icon to open the material resource. You get a preview of the
                     material and a long list of sections filled with properties. You can use these
                     to create all sorts of surfaces, from metal to rock or water.</p>
         <p>Expand the <em>Albedo</em> section.</p>
         <figure>
           <caption>Edit the Albedo</caption>
-          <image source="albedo_section.webp" >
+          <image source="albedo_section.webp" width="50%">
          <shortdescription>The inspector is showing a Sphere material with a white color selected for the Albedo of the MeshInstance3D.</shortdescription>
      </image>
           </figure>
         <p>Set the color to something that contrasts with
                     the background, like a bright orange.</p>
-        <p />
-        <p>We can now use the cylinders as guides. Fold them in the <em>Scene</em> dock by
+        <figure>
+            <caption>Bright Cylinders</caption>
+          <image source="first_3d_spawning_bright_cylinders.webp" width="50%">
+          <shortdescription>f78b00 is in a yellow box for the Hex value</shortdescription>
+          </image>
+          </figure>
+       <p>We can now use the cylinders as guides. Fold them in the <em>Scene</em> dock by
                     clicking the grey arrow next to them. Moving forward, you can also toggle their
                     visibility by clicking the eye icon next to <em>Cylinders</em>.</p>
-        <p />
+        <figure>
+            <caption>Fold Cylinders</caption>
+          <image source="first_3d_spawning_cylinders_fold.webp" width="40%">
+          <shortdescription>fold and visibility icons are in a yellow box</shortdescription>
+          </image>
+          </figure>
         <p>Add a child node <url href="https://docs.godotengine.org/en/stable/classes/class_path3d.html#class-path3d">Path3D</url> to <c>Main</c> node. In the toolbar, four icons appear. Click
                     the <em>Add Point</em> tool, the icon with the green "+" sign.</p>
-        <p />
+        <figure>
+            <caption>Add Point Icon</caption>
+          <image source="first_3d_spawning_add_point.webp" width="40%">
+          <shortdescription>add point icon is in a yellow box</shortdescription>
+          </image>
+          </figure>
         <note>
           <title>Note</title>
           <p>You can hover any icon to see a tooltip describing the tool.</p>
@@ -106,13 +191,28 @@
         <p>Click in the center of each cylinder to create a point. Then, click the <em>Close
                     Curve</em> icon in the toolbar to close the path. If any point is a bit off, you can
                     click and drag on it to reposition it.</p>
-        <p />
+        <figure>
+            <caption>Close Curve Icon</caption>
+          <image source="first_3d_spawning_close_curve.webp" width="40%">
+          <shortdescription>close curve icon is in a yellow box</shortdescription>
+          </image>
+          </figure>
         <p>Your path should look like this.</p>
-        <p />
+        <figure>
+            <caption>Path Result</caption>
+          <image source="first_3d_spawning_path_result.webp">
+          <shortdescription>Path is shown</shortdescription>
+          </image>
+          </figure>
         <p>To sample random positions on it, we need a <url href="https://docs.godotengine.org/en/stable/classes/class_pathfollow3d.html#class-pathfollow3d">PathFollow3D</url> node. Add a
                     <url href="https://docs.godotengine.org/en/stable/classes/class_pathfollow3d.html#class-pathfollow3d">PathFollow3D</url> as a child of the <c>Path3D</c>. Rename the two nodes to <c>SpawnLocation</c> and
                     <c>SpawnPath</c>, respectively. It's more descriptive of what we'll use them for.</p>
-        <p />
+        <figure>
+            <caption>Spawn Nodes</caption>
+          <image source="first_3d_spawning_spawn_nodes.webp" width="40%">
+          <shortdescription>Spawn Nodes are shown</shortdescription>
+          </image>
+          </figure>
         <p>With that, we're ready to code the spawn mechanism.</p>
         </subsubsection>
       </subsection>
@@ -134,21 +234,46 @@
                 <c>mob.tscn</c> file to the <c>mob_scene</c> property above (otherwise it's null!)</p>
       <p>Head back to the 3D screen and select the <c>Main</c> node. Drag <c>mob.tscn</c> from
                 the <em>FileSystem</em> dock to the <em>Mob Scene</em> slot in the <em>Inspector</em>.</p>
-      <p />
+      <figure>
+            <caption>Main Inspector: Mob Scene</caption>
+          <image source="first_3d_spawning_mob_property.webp" width="40%">
+          <shortdescription>Spawn Nodes are shown</shortdescription>
+          </image>
+          </figure>
       <p>Add a new <url href="https://docs.godotengine.org/en/stable/classes/class_timer.html#class-timer">Timer</url> node as a child of <c>Main</c>. Name it <c>MobTimer</c>.</p>
-      <p />
+      <figure>
+            <caption>Mob Timer Node</caption>
+          <image source="first_3d_spawning_mob_timer.webp" width="40%">
+          <shortdescription>Mob Timer Node is shown</shortdescription>
+          </image>
+          </figure>
       <p>In the <em>Inspector</em>, set its <em>Wait Time</em> to <c>0.5</c> seconds and turn on
                 <em>Autostart</em> so it automatically starts when we run the game.</p>
-      <p />
+      <figure>
+            <caption>Mob Timer Properties</caption>
+          <image source="first_3d_spawning_mob_timer_properties.webp" width="40%">
+          <shortdescription>Wait Time and Autostart are shown surrounded by yellow box.</shortdescription>
+          </image>
+          </figure>
       <p>Timers emit a <c>timeout</c> signal every time they reach the end of their <em>Wait
                 Time</em>. By default, they restart automatically, emitting the signal in a cycle.
                 We can connect to this signal from the <em>Main</em> node to spawn monsters every
                 <c>0.5</c> seconds.</p>
       <p>With the <em>MobTimer</em> still selected, head to the <em>Signals</em> dock on the right, and
                 double-click the <c>timeout</c> signal.</p>
-      <p />
+      <figure>
+            <caption>Mob Timer Timout</caption>
+          <image source="first_3d_spawning_timeout.webp" width="40%">
+          <shortdescription>Signals and timeout() are shown surrounded by yellow box.</shortdescription>
+          </image>
+          </figure>
       <p>Connect it to the <em>Main</em> node.</p>
-      <p />
+       <figure>
+            <caption>Connection Dialog</caption>
+          <image source="first_3d_spawning_connect_to_main.webp" width="40%">
+          <shortdescription>Main and Connect are shown surrounded by yellow box.</shortdescription>
+          </image>
+          </figure>
       <p>This will take you back to the script, with a new empty
                 <c>_on_mob_timer_timeout()</c> function.</p>
       <p>Let's code the mob spawning logic. We're going to:</p>
@@ -225,7 +350,12 @@ func _on_mob_timer_timeout() -> void:
         <c />+<c />
         <c>R</c> on macOS). You should see
                 the monsters spawn and move in a straight line.</p>
-      <p />
+      <figure>
+            <caption>Spawn Result</caption>
+          <image source="first_3d_spawning_result.webp">
+          <shortdescription>Mobs are shown with Player in Scene.</shortdescription>
+          </image>
+          </figure>
       <p>For now, they bump and slide against one another when their paths cross. We'll
                 address this in the next part.</p>
       </subsection>

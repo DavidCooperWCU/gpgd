@@ -27,12 +27,22 @@
       <subsubsection xml:id="getting-started-first-3d-game-06-jump-and-squash-setting-layer-names">
         <title>Setting layer names</title>
         <p>Let's give our physics layers a name. Go to <em>Project -&gt; Project Settings</em>.</p>
-        <p />
+        <figure>
+          <caption>Project Settings menu item</caption>
+          <image source="first_3d_spawning_settings.webp" width="50%">
+         <shortdescription>Project Settings is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>In the left menu, navigate down to <em>Layer Names -&gt; 3D Physics</em>. You can see a
                     list of layers with a field next to each of them on the right. You can set their
                     names there. Name the first three layers <em>player</em>, <em>enemies</em>, and <em>world</em>,
                     respectively.</p>
-        <p />
+        <figure>
+          <caption>Project Settings: Layer Names</caption>
+          <image source="first_3d_jump_and_squash_physics.webp" width="50%">
+         <shortdescription>player, enemies, and world are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>Now, we can assign them to our physics nodes.</p>
         </subsubsection>
       <subsubsection xml:id="getting-started-first-3d-game-06-jump-and-squash-assigning-layers-and-masks">
@@ -40,28 +50,53 @@
         <p>In the <em>Main</em> scene, select the <c>Ground</c> node. In the <em>Inspector</em>, expand the
                     <em>Collision</em> section. There, you can see the node's layers and masks as a grid of
                     buttons.</p>
-        <p />
+        <figure>
+          <caption>Inspector Dock: Ground</caption>
+          <image source="first_3d_jump_and_squash_ground.webp" width="50%">
+         <shortdescription>collision is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>The ground is part of the world, so we want it to be part of the third layer.
                     Click the lit button to toggle <term>off</term> the first <em>Layer</em> and toggle <term>on</term> the third
                     one. Then, toggle <term>off</term> the <em>Mask</em> by clicking on it.</p>
-        <p />
+        <figure>
+          <caption>Inspector Dock: Collision Layer and Mask</caption>
+          <image source="first_3d_jump_and_squash_collision_layer.webp" width="50%">
+         <shortdescription>layer 1, 3 and Mask 1 are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>As mentioned before, the <em>Mask</em> property allows a node to listen to interaction
                     with other physics objects, but we don't need it to have collisions. <c>Ground</c> doesn't need to listen to anything; it's just there to prevent
                     creatures from falling.</p>
         <p>Note that you can click the "..." button on the right side of the properties to
                     see a list of named checkboxes.</p>
-        <p />
+        <figure>
+          <caption>Inspector Dock: Layer Checkboxes</caption>
+          <image source="first_3d_jump_and_squash_layer_checkboxes.webp" width="50%">
+         <shortdescription>layer 1, 3 and Mask 1 are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>Next up are the <c>Player</c> and the <c>Mob</c>. Open <c>player.tscn</c> by double-clicking
                     the file in the <em>FileSystem</em> dock.</p>
         <p>Select the <em>Player</em> node and set its <em>Collision -&gt; Mask</em> to both "enemies" and
                     "world". You can leave the default <em>Layer</em> property as it is, because the first layer is the
                     "player" layer.</p>
-        <p />
+        <figure>
+          <caption>Inspector Dock: Player Mask Changes</caption>
+          <image source="first_3d_jump_and_squash_masks.webp" width="50%">
+         <shortdescription> Mask 1,2, and 3 are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>Then, open the <em>Mob</em> scene by double-clicking on <c>mob.tscn</c> and select the
                     <c>Mob</c> node.</p>
         <p>Set its <em>Collision -&gt; Layer</em> to "enemies" and unset its <em>Collision -&gt; Mask</em>,
                     leaving the mask empty.</p>
-        <p />
+        <figure>
+          <caption>Inspector Dock: Mob Collision Changes</caption>
+          <image source="first_3d_jump_and_squash_mob_masks.webp" width="50%">
+         <shortdescription> Layer 1,2, and Mask 1 are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>These settings mean the monsters will move through one another. If you want the
                     monsters to collide with and slide against each other, turn <term>on</term> the "enemies"
                     mask.</p>
@@ -123,14 +158,34 @@
       <p>Open the scene <c>mob.tscn</c> again and select the <em>Mob</em> node. Go to the <em>Groups</em>
                 dock on the right to see a list of groups, which allows you to assign
                 tags to nodes. Click on the <em>+</em> button to open the <em>Create new Group</em> dialog.</p>
-      <p />
+      <figure>
+          <caption>Groups Dock: New Group</caption>
+          <image source="first_3d_jump_and_squash_groups.webp" width="50%">
+         <shortdescription> + is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
       <p>Enter "mob" in the <em>Name</em> field and click the <em>Ok</em> button.</p>
-      <p />
+      <figure>
+          <caption>Groups Dock: mob Group</caption>
+          <image source="first_3d_jump_and_squash_mob_group.webp" width="50%">
+         <shortdescription> mob and OK are surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
       <p>The "mob" group is now shown under the <em>Scene Groups</em> section.</p>
-      <p />
+      <figure>
+          <caption>Groups Dock: mob Group Selected</caption>
+          <image source="first_3d_jump_and_squash_mob_group_selected.webp" width="50%">
+         <shortdescription> mob checkbox is checked.</shortdescription>
+     </image>
+          </figure>
       <p>An icon appears in the <em>Scene</em> dock to indicate the node is part of at least one
                 group.</p>
-      <p />
+      <figure>
+          <caption>Mob Node: has group</caption>
+          <image source="first_3d_jump_and_squash_mob_has_group.webp" width="50%">
+         <shortdescription> group icon is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
       <p>We can now use the group from the code to distinguish collisions with monsters
                 from collisions with the floor.</p>
       </introduction>
