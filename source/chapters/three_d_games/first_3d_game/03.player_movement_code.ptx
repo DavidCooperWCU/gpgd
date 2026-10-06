@@ -247,8 +247,10 @@ func _physics_process(delta: float) -> void:
           <c>2</c> (<c>Cmd</c>
           <c />+<c />
           <c>2</c> on macOS).</p>
-        <figures>
-        <title>View menus</title>
+        <figure>
+        <caption>View menus</caption>
+     <sidebyside>
+        
      
           <figure>
       <caption>Scene Toolbar</caption>
@@ -262,7 +264,8 @@ func _physics_process(delta: float) -> void:
          <shortdescription>The 2 Viewports menu item is surrounded by a yellow box.</shortdescription>
      </image>
       </figure>
-    </figures>
+      </sidebyside>
+    </figure>
         <p>On the bottom view, select your <url href="https://docs.godotengine.org/en/stable/classes/class_camera3d.html#class-camera3d">Camera3D</url> and turn on camera
                     Preview by clicking the checkbox.</p>
         <figure>
