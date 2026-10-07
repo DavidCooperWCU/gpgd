@@ -5,7 +5,12 @@
     <p>In this final lesson, we'll use Godot's built-in animation tools to make our
             characters float and flap. You'll learn to design animations in the editor and
             use code to make your game feel alive.</p>
-    <p />
+     <figure>
+          <caption>The Finished Game</caption>
+          <image source="first_3d_animation_final_game.gif" width="70%">
+         <shortdescription>Score is visible in main scene while playing.</shortdescription>
+     </image>
+          </figure>
     <p>We'll start with an introduction to using the animation editor.</p>
     </introduction>
     <subsection xml:id="getting-started-first-3d-game-09-adding-animations-using-the-animation-editor">
@@ -14,33 +19,73 @@
                 the code to play and control them at runtime.</p>
       <p>Open the player scene, select the <c>Player</c> node, and add an <url href="https://docs.godotengine.org/en/stable/classes/class_animationplayer.html#class-animationplayer">AnimationPlayer</url> node.</p>
       <p>The <em>Animation</em> dock appears in the bottom panel.</p>
-      <p />
+      <figure>
+          <caption>Animation Dock</caption>
+          <image source="first_3d_animation_player_dock.webp" width="90%">
+         <shortdescription>An empty Animation Dock</shortdescription>
+     </image>
+          </figure>
       <p>It features a toolbar and the animation drop-down menu at the top, a track
                 editor in the middle that's currently empty, and filter, snap, and zoom options
                 at the bottom.</p>
       <p>Let's create an animation. Click on <em>Animation -&gt; New</em>.</p>
-      <p />
+      <figure>
+          <caption>New Animation</caption>
+          <image source="first_3d_animation_new.webp" width="90%">
+         <shortdescription>New is surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>Name the animation "float".</p>
-      <p />
+      <figure>
+          <caption>Name Animation</caption>
+          <image source="first_3d_animation_name.webp" width="40%">
+         <shortdescription>float is surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>Once you've created the animation, the timeline appears with numbers representing
                 time in seconds.</p>
-      <p />
+      <figure>
+          <caption>Timeline</caption>
+          <image source="first_3d_animation_timeline.webp" width="90%">
+         <shortdescription>The numbers 0 through 7 are surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>We want the animation to start playback automatically at the start of the game.
                 Also, it should loop.</p>
       <p>To do so, you can click the autoplay button () in the animation toolbar
                 and the looping arrows, respectively.</p>
-      <p />
+      <figure>
+          <caption>Timeline Autoplay and Looping</caption>
+          <image source="first_3d_animation_timeline_autoplay.webp" width="90%">
+         <shortdescription>The autoplay icon and looping icon are each surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>You can also pin the animation editor by clicking the pin icon in the top-right.
                 This prevents it from folding when you click on the viewport and deselect the
                 nodes.</p>
-      <p />
+      <figure>
+          <caption>Timeline Pin</caption>
+          <image source="first_3d_animation_timeline_pin.webp" width="30%">
+         <shortdescription>The pin icon is  surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>Set the animation duration to <c>1.2</c> seconds in the top-right of the dock.</p>
       <p>You should see the gray ribbon widen a bit. It shows you the start and end of
                 your animation and the vertical blue line is your time cursor.</p>
-      <p />
+      <figure>
+          <caption>Animation Duration</caption>
+          <image source="first_3d_animation_timeline_duration.webp" width="90%">
+         <shortdescription>The number 1.2 is  surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>You can click and drag the slider in the bottom-right to zoom in and out of the
                 timeline.</p>
-      <p />
+      <figure>
+          <caption>Timeline Zoom</caption>
+          <image source="first_3d_animation_timeline_zoom.webp" width="90%">
+         <shortdescription>The zoom slider bar is  surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       </subsection>
     <subsection xml:id="getting-started-first-3d-game-09-adding-animations-the-float-animation">
       <title>The float animation</title>
@@ -53,32 +98,67 @@
       <p>Let's insert our first keys. Here, we will animate both the position and the
                 rotation of the <c>Character</c> node.</p>
       <p>Select the <c>Character</c> and in the <em>Inspector</em> expand the <em>Transform</em> section. Click the key icon next to <em>Position</em>, and <em>Rotation</em>.</p>
-      <p />
+      <figure>
+          <caption>Character Inspector Node 3D Transform</caption>
+          <image source="first_3d_animation_keyframe.webp" width="40%">
+         <shortdescription>Each Key icon is  surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <figure>
         <caption>Create Reset Tracks</caption>
-      <image source="curves.webp" >
+      <image source="curves.webp" width="40%">
          <shortdescription>Confirmation dialog. the create Reset Tracks is selected and the create button is surrounded with a yellow box.</shortdescription>
      </image>
         </figure>
       <p>For this tutorial, just create RESET Track(s) which is the default choice</p>
       <p>Two tracks appear in the editor with a diamond icon representing each keyframe.</p>
-      <p />
+      <figure>
+          <caption>position and rotation tracks</caption>
+          <image source="first_3d_animation_two_tracks.webp" width="90%">
+         <shortdescription>position and rotation tracks are shown.</shortdescription>
+     </image>
+          </figure>
       <p>You can click and drag on the diamonds to move them in time. Move the
                 position key to <c>0.3</c> seconds and the rotation key to <c>0.1</c> seconds.</p>
-      <p />
+      <figure>
+          <caption>key is moved</caption>
+          <image source="first_3d_animation_moving_keys.webp" width="90%">
+         <shortdescription>a yellow square is around the position key and the rotation key.</shortdescription>
+     </image>
+          </figure>
       <p>Move the time cursor to <c>0.5</c> seconds by clicking and dragging on the gray
                 timeline, or by entering it into the input field.</p>
-      <p />
+      <figure>
+          <caption>Cursor is moved</caption>
+          <image source="first_3d_animation_time_05.webp" width="90%">
+         <shortdescription>The time 0.5 is surrounded by a yellow square.</shortdescription>
+     </image>
+          </figure>
       <p>In the <em>Inspector</em>, set the <em>Position</em>'s <em>Y</em> axis to <c>0.65</c> meters and the
                 <em>Rotation</em>' <em>X</em> axis to <c>8</c>.</p>
       <p>If you don't see the properties in the <em>Inspector</em> panel, first click on the
                 <c>Character</c> node again in the <em>Scene</em> dock.</p>
-      <p />
+      <figure>
+          <caption>Character Transform Inspector</caption>
+          <image source="first_3d_animation_second_key_values.webp" width="40%">
+         <shortdescription>a yellow square is around the position key and the rotation key.</shortdescription>
+     </image>
+          </figure>
       <p>Create a keyframe for both properties</p>
-      <p />
+      <figure>
+          <caption>Second Key Frames</caption>
+          <image source="first_3d_animation_second_keys_both.webp" width="90%">
+         <shortdescription>a yellow square is around the second position key and the second rotation key at time 0.5.</shortdescription>
+     </image>
+          </figure>
       <p>Now, move the position keyframe to <c>0.7</c>
                 seconds by dragging it on the timeline.</p>
-      <p />
+      <figure>
+          <caption>Second Position Key Frame Moved</caption>
+          <image source="first_3d_animation_second_keys.webp" width="90%">
+         <shortdescription>a yellow square is around the second position key at time 0.7.</shortdescription>
+     </image>
+          </figure>
       <note>
         <title>Note</title>
         <p>A lecture on the principles of animation is beyond the scope of this
@@ -90,34 +170,74 @@
       <p>Move the time cursor to the end of the animation, at <c>1.2</c> seconds. Set the Y
                 position to about <c>0.35</c> and the X rotation to <c>-9</c> degrees. Once again,
                 create a key for both properties.</p>
-      <p />
+      <figure>
+          <caption>Final Position Key Frames</caption>
+          <image source="first_3d_animation_final_keyframes.webp" width="90%">
+         <shortdescription>a yellow square is around the third position and rotation keys at time 1.2.</shortdescription>
+     </image>
+          </figure>
       <p>You can preview the result by clicking the play button or pressing <c>Shift</c>
         <c />+<c />
         <c>D</c>.
                 Click the stop button or press <c>S</c> to stop playback.</p>
-      <p />
+      <figure>
+          <caption>Play Button</caption>
+          <image source="first_3d_animation_play_button.webp" width="20%">
+         <shortdescription>a yellow square is around the play icon</shortdescription>
+     </image>
+          </figure>
       <p>You can see that the engine interpolates between your keyframes to produce a
                 continuous animation. At the moment, though, the motion feels very robotic. This
                 is because the default interpolation is linear, causing constant transitions,
                 unlike how living things move in the real world.</p>
       <p>We can control the transition between keyframes using easing curves.</p>
       <p>Click and drag around the first two keys in the timeline to box select them.</p>
-      <p />
+      <figure>
+          <caption>Box Select</caption>
+          <image source="first_3d_animation_box_select.webp" width="50%">
+         <shortdescription>a box is around two key frames</shortdescription>
+     </image>
+          </figure>
       <p>You can edit the properties of both keys simultaneously in the <em>Inspector</em>,
                 where you can see an <em>Easing</em> property.</p>
-      <p />
+      <figure>
+          <caption>Inspector Dock: Multitrack Key Edit</caption>
+          <image source="first_3d_animation_multitrack_edit.webp" width="50%">
+         <shortdescription>multitrack key edit</shortdescription>
+     </image>
+          </figure>
       <p>Click and drag on the curve, pulling it towards the left. This will make it
                 ease-out, that is to say, transition fast initially and slow down as the time
                 cursor reaches the next keyframe.</p>
-      <p />
+      <figure>
+          <caption>Inspector Dock: Multitrack Ease Out</caption>
+          <image source="first_3d_animation_multitrack_ease_out.webp" width="50%">
+         <shortdescription>multitrack ease out</shortdescription>
+     </image>
+          </figure>
       <p>Play the animation again to see the difference. The first half should already
                 feel a bit bouncier.</p>
       <p>Apply an ease-out to the second keyframe in the rotation track.</p>
-      <p />
+      <figure>
+          <caption>Inspector Dock: Rotation Ease Out</caption>
+          <image source="first_3d_animation_multitrack_rotation_ease_out.webp" width="50%">
+         <shortdescription>rotation ease out</shortdescription>
+     </image>
+          </figure>
       <p>Do the opposite for the second position keyframe, dragging it to the right.</p>
-      <p />
+      <figure>
+          <caption>Inspector Dock: Position Ease In</caption>
+          <image source="first_3d_animation_multitrack_position_ease_out.webp" width="50%">
+         <shortdescription>position ease In</shortdescription>
+     </image>
+          </figure>
       <p>Your animation should look something like this.</p>
-      <p />
+      <figure>
+          <caption>3D View: Player Animation</caption>
+          <image source="first_3d_animation_player_animation.gif" width="50%">
+         <shortdescription>player animation</shortdescription>
+     </image>
+          </figure>
       <note>
         <title>Note</title>
         <p>Animations update the properties of the animated nodes every frame,
@@ -136,7 +256,12 @@
         <p>We can use code to control the animation playback based on the player's input.
                     Let's change the animation speed when the character is moving.</p>
         <p>Open the <c>Player</c>'s script by clicking the script icon next to it.</p>
-        <p />
+        <figure>
+          <caption>Player Script</caption>
+          <image source="first_3d_animation_player_script.webp" width="20%">
+         <shortdescription>script icon is surrounded by a yellow box.</shortdescription>
+     </image>
+          </figure>
         <p>In <c>_physics_process()</c>, after the line where we check the <c>direction</c>
                     vector, add the following code.</p>
 
